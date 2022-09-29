@@ -8,3 +8,12 @@ com.github.polyrocketmatt.kmt.interval
 com.github.polyrocketmatt.kmt.interval.closed
 com.github.polyrocketmatt.kmt.interval.half
 com.github.polyrocketmatt.kmt.interval.open
+module:kmt-trigonometry
+com.github.polyrocketmatt.kmt.trigonometry
+module:kmt-vector
+com.github.polyrocketmatt.kmt.vector
+com.github.polyrocketmatt.kmt.vector.bl
+com.github.polyrocketmatt.kmt.vector.db
+com.github.polyrocketmatt.kmt.vector.fl
+com.github.polyrocketmatt.kmt.vector.it
+com.github.polyrocketmatt.kmt.vector.sh
