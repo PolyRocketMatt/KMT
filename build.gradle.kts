@@ -1,7 +1,7 @@
 val rootFolder = rootProject.buildDir
 
 group = "com.github.polyrocketmatt"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
 
 plugins {
     kotlin("jvm") version "1.7.10"

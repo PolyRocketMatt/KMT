@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.github.polyrocketmatt"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
 
 dependencies {
     testImplementation(kotlin("test"))
