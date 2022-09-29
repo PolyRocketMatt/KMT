@@ -16,8 +16,9 @@ KMT is split into several modules, each of which can be used independently. Curr
 are available:
 
 * `common` - Common mathematical operations
-* `vector` - Vector classes and operations 
 * `interval` - Interval classes and operations
+* `vector` - Vector classes and operations
+* `trigonometry` - Tabular trigonometric functions for faster computation
 * `functions` - Functions and their relative operations (algebraic operations, integration, differentiation)
 
 ## Documentation
