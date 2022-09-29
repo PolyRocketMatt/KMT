@@ -39,9 +39,7 @@ class Trigonometry {
         fun setPrecision(precision: Int) {
             PRECISION = precision
         }
-
     }
-
 }
 
 /**
@@ -129,7 +127,6 @@ object SIN {
      * @return The sine of the angle.
      */
     fun rad(angle: Short): Double = sinLookup((angle * (180.0f / Math.PI)).toInt())
-
 }
 
 /**
@@ -203,7 +200,6 @@ object COS {
      * @return The cosine of the angle.
      */
     fun rad(angle: Short): Double = SIN[angle * (180.0f / Math.PI)]
-
 }
 
 /**
@@ -277,5 +273,4 @@ object TAN {
      * @return The tangent of the angle.
      */
     fun rad(angle: Short): Double = SIN[angle * (180.0f / Math.PI)] / COS[angle * (180.0f / Math.PI)]
-
 }

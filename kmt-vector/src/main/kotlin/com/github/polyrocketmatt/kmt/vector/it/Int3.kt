@@ -129,14 +129,14 @@ data class Int3(var x: Int, var y: Int, var z: Int) : IntVector(), Swizzle3 {
     override fun div(): Int = x / y / z
     override fun normalized(): Float3 = Float3(x / length(), y / length(), z / length())
 
-    operator fun get(i:Int): Int = when(i) {
+    operator fun get(i: Int): Int = when (i) {
         0 -> x
         1 -> y
         2 -> z
         else -> throw IndexOutOfBoundsException()
     }
-    operator fun set(i:Int, value: Int) {
-        when(i) {
+    operator fun set(i: Int, value: Int) {
+        when (i) {
             0 -> x = value
             1 -> y = value
             2 -> z = value

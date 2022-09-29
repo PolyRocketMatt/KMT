@@ -62,7 +62,7 @@ abstract class DoubleVector : Vector<Double> {
      * expected to be within [0, 1].
      *
      * @return The smooth-stepped vector.
-    */
+     */
     abstract fun smoothStep(): DoubleVector
 
     /**
@@ -118,5 +118,4 @@ abstract class DoubleVector : Vector<Double> {
      * @return The vector as a boolean vector.
      */
     abstract fun asBoolean(): BooleanVector
-
 }

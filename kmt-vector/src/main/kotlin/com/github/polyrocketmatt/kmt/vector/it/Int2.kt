@@ -128,7 +128,7 @@ data class Int2(var x: Int, var y: Int) : IntVector(), Swizzle2 {
     override fun div(): Int = x / y
     override fun normalized(): Float2 = Float2(x / length(), y / length())
 
-    operator fun get(i: Int): Int = when(i) {
+    operator fun get(i: Int): Int = when (i) {
         0 -> x
         1 -> y
         else -> throw IndexOutOfBoundsException()

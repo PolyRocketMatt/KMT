@@ -129,14 +129,14 @@ data class Short3(var x: Short, var y: Short, var z: Short) : ShortVector(), Swi
     override fun div(): Short = (x / y / z).toShort()
     override fun normalized(): Float3 = Float3(x / length(), y / length(), z / length())
 
-    operator fun get(i:Int): Short = when(i) {
+    operator fun get(i: Int): Short = when (i) {
         0 -> x
         1 -> y
         2 -> z
         else -> throw IndexOutOfBoundsException()
     }
-    operator fun set(i:Int, value: Short) {
-        when(i) {
+    operator fun set(i: Int, value: Short) {
+        when (i) {
             0 -> x = value
             1 -> y = value
             2 -> z = value
@@ -225,5 +225,4 @@ data class Short3(var x: Short, var y: Short, var z: Short) : ShortVector(), Swi
     override fun xxx(): Short3 = Short3(x, x, x)
     override fun yyy(): Short3 = Short3(y, y, y)
     override fun zzz(): Short3 = Short3(z, z, z)
-
 }

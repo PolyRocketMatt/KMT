@@ -135,15 +135,15 @@ data class Double4(var x: Double, var y: Double, var z: Double, var w: Double) :
     override fun div(): Double = x / y / z / w
     override fun normalized(): Float4 = Double4(x / length(), y / length(), z / length(), w / length()).asFloat()
 
-    operator fun get(i: Int): Double = when(i) {
+    operator fun get(i: Int): Double = when (i) {
         0 -> x
         1 -> y
         2 -> z
         3 -> w
         else -> throw IndexOutOfBoundsException()
     }
-    operator fun set(i:Int, value: Double) {
-        when(i) {
+    operator fun set(i: Int, value: Double) {
+        when (i) {
             0 -> x = value
             1 -> y = value
             2 -> z = value

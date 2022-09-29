@@ -204,5 +204,4 @@ interface Vector<T> {
      * @return The tangent of all components of the vector.
      */
     abstract fun tan(): DoubleVector
-
 }

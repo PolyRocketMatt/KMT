@@ -63,5 +63,4 @@ abstract class IntVector : Vector<Int> {
      * @return The vector as a boolean vector.
      */
     abstract fun asBoolean(): BooleanVector
-
 }
