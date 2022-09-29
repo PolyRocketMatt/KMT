@@ -4,7 +4,5 @@ build
 gradle
 bin
 dokka
-kmt-common/build
-kmt-common/bin
-kmt-interval/build
-kmt-interval/bin
+*/build
+*/bin
