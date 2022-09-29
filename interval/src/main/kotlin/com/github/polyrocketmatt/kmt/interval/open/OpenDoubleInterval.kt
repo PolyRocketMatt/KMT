@@ -16,18 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.polyrocketmatt.kmt.common
+package com.github.polyrocketmatt.kmt.interval.open
+
+import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
 
 /**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a datatype.
+ * Represents an exclusive range (open interval) of double numbers between start and end.
+ *
+ * @param start The minimum value of the range.
+ * @param end The maximum value of the range.
+ * @param accuracy The accuracy of the range.
  */
-enum class DataType {
+class OpenDoubleInterval(private val start: Double, private val end: Double, accuracy: Double) : ClosedDoubleInterval(start, end, accuracy), OpenInterval<Double> {
 
-    DOUBLE,
-    FLOAT,
-    INT,
-    SHORT
+    override fun isIn(value: Double): Boolean = value > start && value < end
 }

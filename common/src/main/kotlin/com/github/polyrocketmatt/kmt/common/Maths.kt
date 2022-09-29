@@ -707,8 +707,8 @@ class Maths {
          */
         fun binomial(n: Int, k: Int) = when {
             n < 0 || k < 0 -> throw IllegalArgumentException("negative numbers not allowed")
-            n == k         -> 1L
-            else           -> {
+            n == k -> 1L
+            else -> {
                 val kReduced = min(k, n - k)
                 var result = 1L
                 var numerator = n
@@ -766,7 +766,5 @@ class Maths {
          *
          */
         fun gompertz(x: Double, shiftX: Double, shiftY: Double, asymptote: Double, growth: Double): Double = asymptote * exp(-exp(shiftX - growth * x)) + shiftY
-
     }
-
 }

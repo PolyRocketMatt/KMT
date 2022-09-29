@@ -30,7 +30,7 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
  * @param end The maximum value of the range.
  * @param accuracy The accuracy of the range.
  */
-open class ClosedDoubleInterval(private val start: Double, private val end: Double, accuracy: Double = 1.0): ClosedInterval<Double> {
+open class ClosedDoubleInterval(private val start: Double, private val end: Double, accuracy: Double = 1.0) : ClosedInterval<Double> {
 
     private val values: DoubleArray = DoubleArray((1.0 / accuracy).toInt() + 1)
 

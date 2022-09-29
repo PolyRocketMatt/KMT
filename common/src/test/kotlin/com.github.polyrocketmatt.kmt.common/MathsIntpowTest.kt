@@ -52,5 +52,4 @@ class MathsIntpowTest {
         assertEquals(0.0, 0.0.intPow(2))
         assertEquals(8.0, 2.0.intPow(3))
     }
-
 }

@@ -28,5 +28,4 @@ class MathsSmootherstepTest {
         assertEquals(0.0579, 0.2.smootherStep(), 0.001)
         assertEquals(0.5, 0.5.smootherStep())
     }
-
 }

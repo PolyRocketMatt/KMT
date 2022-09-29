@@ -49,5 +49,4 @@ class MathsSqrtTest {
         assertEquals(5.0f, 25.0.sqrt())
         assertThrows<IllegalArgumentException> { (-25.0).sqrt() }
     }
-
 }

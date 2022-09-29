@@ -16,18 +16,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.polyrocketmatt.kmt.common
+package com.github.polyrocketmatt.kmt.interval.open
+
+import com.github.polyrocketmatt.kmt.interval.closed.ClosedFloatInterval
 
 /**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a datatype.
+ * Represents an exclusive range (open interval) of floating-point numbers between start and end.
+ *
+ * @param start The minimum value of the range.
+ * @param end The maximum value of the range.
+ * @param accuracy The accuracy of the range.
  */
-enum class DataType {
+class OpenFloatInterval(private val start: Float, private val end: Float, accuracy: Float) : ClosedFloatInterval(start, end, accuracy), OpenInterval<Float> {
 
-    DOUBLE,
-    FLOAT,
-    INT,
-    SHORT
+    override fun isIn(value: Float): Boolean = value > start && value < end
 }

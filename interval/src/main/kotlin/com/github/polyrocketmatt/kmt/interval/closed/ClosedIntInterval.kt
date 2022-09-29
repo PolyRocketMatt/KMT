@@ -29,9 +29,9 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
  * @param start The minimum value of the range.
  * @param end The maximum value of the range.
  */
-open class ClosedIntInterval(private val start: Int, private val end: Int): ClosedInterval<Int> {
+open class ClosedIntInterval(private val start: Int, private val end: Int) : ClosedInterval<Int> {
 
-    private val values: IntArray = IntArray((end - start).fastAbs() + 1) { if (end > start ) it + start else it + end }
+    private val values: IntArray = IntArray((end - start).fastAbs() + 1) { if (end > start) it + start else it + end }
 
     open override fun isIn(value: Int): Boolean = value in start..end
 

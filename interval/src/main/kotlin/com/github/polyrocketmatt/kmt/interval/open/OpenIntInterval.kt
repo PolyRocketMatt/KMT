@@ -16,18 +16,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.polyrocketmatt.kmt.common
+package com.github.polyrocketmatt.kmt.interval.open
+
+import com.github.polyrocketmatt.kmt.interval.closed.ClosedIntInterval
 
 /**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a datatype.
+ * Represents an inclusive range (open interval) of integer numbers between start and end.
+ *
+ * @param start The minimum value of the range.
+ * @param end The maximum value of the range.
  */
-enum class DataType {
+class OpenIntInterval(private val start: Int, private val end: Int) : ClosedIntInterval(start, end), OpenInterval<Int> {
 
-    DOUBLE,
-    FLOAT,
-    INT,
-    SHORT
+    override fun isIn(value: Int): Boolean = value in (start + 1) until end
 }

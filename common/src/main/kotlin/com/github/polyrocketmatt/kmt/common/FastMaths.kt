@@ -159,5 +159,4 @@ class FastMath {
      * @return The rounded value of the value.
      */
     fun fastRound(value: Double): Int = if (value >= 0.0) (value + 0.5).toInt() else (value - 0.5).toInt()
-
 }

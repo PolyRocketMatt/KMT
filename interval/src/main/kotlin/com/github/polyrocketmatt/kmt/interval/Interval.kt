@@ -166,5 +166,4 @@ interface Interval<T> {
      * @return The interval as an iterable of type [T].
      */
     fun asIterable(): Iterable<T>
-
 }
