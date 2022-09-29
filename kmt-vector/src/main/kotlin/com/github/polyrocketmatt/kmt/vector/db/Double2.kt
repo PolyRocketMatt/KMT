@@ -133,13 +133,13 @@ data class Double2(var x: Double, var y: Double) : DoubleVector(), Swizzle2 {
     override fun div(): Double = x / y
     override fun normalized(): Float2 = Double2(x / length(), y / length()).asFloat()
 
-    operator fun get(i: Int): Double = when(i) {
+    operator fun get(i: Int): Double = when (i) {
         0 -> x
         1 -> y
         else -> throw IndexOutOfBoundsException()
     }
     operator fun set(i: Int, value: Double) {
-        when(i) {
+        when (i) {
             0 -> x = value
             1 -> y = value
             else -> throw IndexOutOfBoundsException()

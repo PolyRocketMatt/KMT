@@ -135,15 +135,15 @@ data class Float4(var x: Float, var y: Float, var z: Float, var w: Float) : Floa
     override fun div(): Float = x / y / z / w
     override fun normalized(): Float4 = Float4(x / length(), y / length(), z / length(), w / length())
 
-    operator fun get(i: Int): Float = when(i) {
+    operator fun get(i: Int): Float = when (i) {
         0 -> x
         1 -> y
         2 -> z
         3 -> w
         else -> throw IndexOutOfBoundsException()
     }
-    operator fun set(i:Int, value: Float) {
-        when(i) {
+    operator fun set(i: Int, value: Float) {
+        when (i) {
             0 -> x = value
             1 -> y = value
             2 -> z = value
@@ -290,5 +290,4 @@ data class Float4(var x: Float, var y: Float, var z: Float, var w: Float) : Floa
     override fun yyyy(): Float4 = Float4(y, y, y, y)
     override fun zzzz(): Float4 = Float4(z, z, z, z)
     override fun wwww(): Float4 = Float4(w, w, w, w)
-
 }

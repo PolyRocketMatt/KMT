@@ -33,5 +33,4 @@ interface Swizzle2 {
     fun xx(): Swizzle2
 
     fun yy(): Swizzle2
-
 }

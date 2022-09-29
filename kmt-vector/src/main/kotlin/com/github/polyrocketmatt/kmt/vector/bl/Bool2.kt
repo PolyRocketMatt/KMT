@@ -63,5 +63,5 @@ data class Bool2(var x: Boolean, var y: Boolean) : BooleanVector(), Swizzle2 {
     override fun xy(): Bool2 = Bool2(x, y)
     override fun yx(): Bool2 = Bool2(y, x)
     override fun xx(): Bool2 = Bool2(x, x)
-    override fun yy(): Bool2  = Bool2(y, y)
+    override fun yy(): Bool2 = Bool2(y, y)
 }

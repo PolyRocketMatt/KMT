@@ -128,7 +128,7 @@ data class Short2(var x: Short, var y: Short) : ShortVector(), Swizzle2 {
     override fun div(): Short = (x / y).toShort()
     override fun normalized(): Float2 = Float2(x / length(), y / length())
 
-    operator fun get(i: Int): Short = when(i) {
+    operator fun get(i: Int): Short = when (i) {
         0 -> x
         1 -> y
         else -> throw IndexOutOfBoundsException()

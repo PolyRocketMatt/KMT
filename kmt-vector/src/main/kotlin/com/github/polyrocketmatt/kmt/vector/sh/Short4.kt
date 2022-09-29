@@ -130,15 +130,15 @@ data class Short4(var x: Short, var y: Short, var z: Short, var w: Short) : Shor
     override fun div(): Short = (x / y / z / w).toShort()
     override fun normalized(): Float4 = Float4(x / length(), y / length(), z / length(), w / length())
 
-    operator fun get(i: Int): Short = when(i) {
+    operator fun get(i: Int): Short = when (i) {
         0 -> x
         1 -> y
         2 -> z
         3 -> w
         else -> throw IndexOutOfBoundsException()
     }
-    operator fun set(i:Int, value: Short) {
-        when(i) {
+    operator fun set(i: Int, value: Short) {
+        when (i) {
             0 -> x = value
             1 -> y = value
             2 -> z = value

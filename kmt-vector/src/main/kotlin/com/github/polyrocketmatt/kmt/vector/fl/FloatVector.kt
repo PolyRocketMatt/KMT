@@ -118,5 +118,4 @@ abstract class FloatVector : Vector<Float> {
      * @return The vector as a boolean vector.
      */
     abstract fun asBoolean(): BooleanVector
-
 }

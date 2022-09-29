@@ -55,5 +55,4 @@ interface Swizzle3 {
     fun yyy(): Swizzle3
 
     fun zzz(): Swizzle3
-
 }

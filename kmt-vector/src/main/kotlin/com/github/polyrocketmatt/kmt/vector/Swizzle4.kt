@@ -153,5 +153,4 @@ interface Swizzle4 {
     fun zzzz(): Swizzle4
 
     fun wwww(): Swizzle4
-
 }

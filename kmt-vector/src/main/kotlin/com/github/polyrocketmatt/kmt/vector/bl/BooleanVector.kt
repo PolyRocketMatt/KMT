@@ -46,5 +46,4 @@ abstract class BooleanVector : Vector<Boolean> {
      * @return The vector as a short vector.
      */
     abstract fun asShort(): ShortVector
-
 }

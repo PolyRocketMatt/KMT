@@ -130,15 +130,15 @@ data class Int4(var x: Int, var y: Int, var z: Int, var w: Int) : IntVector(), S
     override fun div(): Int = x / y / z / w
     override fun normalized(): Float4 = Float4(x / length(), y / length(), z / length(), w / length())
 
-    operator fun get(i: Int): Int = when(i) {
+    operator fun get(i: Int): Int = when (i) {
         0 -> x
         1 -> y
         2 -> z
         3 -> w
         else -> throw IndexOutOfBoundsException()
     }
-    operator fun set(i:Int, value: Int) {
-        when(i) {
+    operator fun set(i: Int, value: Int) {
+        when (i) {
             0 -> x = value
             1 -> y = value
             2 -> z = value
