@@ -24,3 +24,10 @@ jobs:
         gradle-version: 7.4.2
     - name: Generate Dokka documentation
       run: gradle wrapper --gradle-version 7.4.2 dokkaHtmlMultiModule
+    - name: Deploy API documentation to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: dokka
+        CLEAN: true
