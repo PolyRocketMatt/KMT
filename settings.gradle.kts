@@ -1,6 +1,8 @@
 rootProject.name = "KMT"
 include("kmt-common")
 include("kmt-interval")
+include("kmt-trigonometry")
+include("kmt-vector")
 
 plugins {
     id("com.gradle.enterprise") version("3.9")
