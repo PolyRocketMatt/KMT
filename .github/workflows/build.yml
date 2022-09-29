@@ -22,7 +22,5 @@ jobs:
       with:
         arguments: build
         gradle-version: 7.4.2
-    - name: Run Linter
-      run: ./gradlew ktlintFormat
     - name: Run build with Gradle Wrapper
       run: ./gradlew build
