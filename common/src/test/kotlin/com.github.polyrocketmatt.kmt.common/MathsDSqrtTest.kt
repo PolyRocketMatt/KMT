@@ -11,17 +11,9 @@ class MathsDSqrtTest {
      */
 
     @Test
-    fun testSqrtIntZero() {
-        assertEquals(0.0, 0.dsqrt())
-    }
-
-    @Test
     fun testSqrtInt() {
+        assertEquals(0.0, 0.dsqrt())
         assertEquals(5.0, 25.dsqrt())
-    }
-
-    @Test
-    fun testSqrtIntNegative() {
         assertThrows<IllegalArgumentException> { (-25).dsqrt() }
     }
 
@@ -30,17 +22,9 @@ class MathsDSqrtTest {
      */
 
     @Test
-    fun testSqrtShortZero() {
-        assertEquals(0.0, 0.toShort().dsqrt())
-    }
-
-    @Test
     fun testSqrtShort() {
+        assertEquals(0.0, 0.toShort().dsqrt())
         assertEquals(5.0, 25.toShort().dsqrt())
-    }
-
-    @Test
-    fun testSqrtShortNegative() {
         assertThrows<IllegalArgumentException> { (-25).toShort().dsqrt() }
     }
 
@@ -49,17 +33,9 @@ class MathsDSqrtTest {
      */
 
     @Test
-    fun testSqrtFloatZero() {
-        assertEquals(0.0, 0.0f.dsqrt())
-    }
-
-    @Test
     fun testSqrtFloat() {
+        assertEquals(0.0, 0.0f.dsqrt())
         assertEquals(5.0, 25.0f.dsqrt())
-    }
-
-    @Test
-    fun testSqrtFloatNegative() {
         assertThrows<IllegalArgumentException> { (-25.0f).dsqrt() }
     }
 
@@ -68,17 +44,9 @@ class MathsDSqrtTest {
      */
 
     @Test
-    fun testSqrtDoubleZero() {
-        assertEquals(0.0, 0.0.dsqrt())
-    }
-
-    @Test
     fun testSqrtDouble() {
+        assertEquals(0.0, 0.0.dsqrt())
         assertEquals(5.0, 25.0.dsqrt())
-    }
-
-    @Test
-    fun testSqrtDoubleNegative() {
         assertThrows<IllegalArgumentException> { (-25.0).dsqrt() }
     }
 
