@@ -23,4 +23,4 @@ jobs:
         arguments: build
         gradle-version: 7.4.2
     - name: Generate Dokka documentation
-      run: ./gradlew dokkaHtmlMultiModule
+      run: gradle wrapper --gradle-version 7.4.2 dokkaHtmlMultiModule
