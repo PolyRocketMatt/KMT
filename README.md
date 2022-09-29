@@ -19,7 +19,7 @@ are available:
 * `interval` - Interval classes and operations
 * `vector` - Vector classes and operations
 * `trigonometry` - Tabular trigonometric functions for faster computation
-* `functions` - Functions and their relative operations (algebraic operations, integration, differentiation)
+* `function` - Functions and their relative operations (algebraic operations, integration, differentiation)
 
 ## Documentation
 
