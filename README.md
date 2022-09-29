@@ -1,7 +1,9 @@
 # Kotlin Mathematical Toolkit
 
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
-[![Build Status](https://travis-ci.org/JLLeitschuh/ktlint-gradle.svg?branch=master)](https://travis-ci.org/JLLeitschuh/ktlint-gradle)
+[![Version](https://img.shields.io/badge/version-0.0.1-blue)]()
+[![Build Status](https://travis-ci.org/JLLeitschuh/ktlint-gradle.svg?branch=master)]()
+[![State](https://img.shields.io/badge/-alpha-red)]()
 
 KMT is a library for various mathematical operations in Kotlin. Its original purpose was to provide
 a modular library for mathematical tasks. While libraries such as KMath already exist, KMT provides
