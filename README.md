@@ -1,4 +1,4 @@
-# Kotlin Mathematical Toolkit
+# Kotlin Mathematical Toolkit (KMT)
 
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/)
 [![Version](https://img.shields.io/badge/version-0.0.1-blue)]()
