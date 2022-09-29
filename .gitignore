@@ -3,7 +3,7 @@
 build
 gradle
 bin
-common/build
-common/bin
+kmt-common/build
+kmt-common/bin
 interval/build
 interval/bin

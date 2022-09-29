@@ -8,7 +8,7 @@ version = "0.0.1"
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation(project(":common"))
+    implementation(project(":kmt-common"))
 }
 
 tasks.getByName<Test>("test") {
