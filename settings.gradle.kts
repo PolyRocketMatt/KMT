@@ -1,3 +1,3 @@
 rootProject.name = "KMT"
-include("common")
+include("kmt-common")
 include("interval")

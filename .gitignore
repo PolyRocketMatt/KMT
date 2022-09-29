@@ -5,3 +5,5 @@ gradle
 bin
 common/build
 common/bin
+interval/build
+interval/bin
