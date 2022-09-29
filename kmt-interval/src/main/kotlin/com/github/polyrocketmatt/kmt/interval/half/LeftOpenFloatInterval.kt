@@ -33,5 +33,4 @@ import com.github.polyrocketmatt.kmt.interval.closed.ClosedFloatInterval
 class LeftOpenFloatInterval(private val start: Float, private val end: Float, accuracy: Float) : ClosedFloatInterval(start, end, accuracy), HalfOpenInterval<Float> {
 
     override fun isIn(value: Float): Boolean = value > start && value <= end
-
 }

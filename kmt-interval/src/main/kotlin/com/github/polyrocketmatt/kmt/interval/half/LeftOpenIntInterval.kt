@@ -32,5 +32,4 @@ import com.github.polyrocketmatt.kmt.interval.closed.ClosedIntInterval
 class LeftOpenIntInterval(private val start: Int, private val end: Int) : ClosedIntInterval(start, end), HalfOpenInterval<Int> {
 
     override fun isIn(value: Int): Boolean = value in (start + 1)..end
-
 }
