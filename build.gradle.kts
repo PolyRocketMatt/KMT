@@ -1,4 +1,4 @@
-val rootFolder = rootProject.buildDir
+val rootFolder = rootProject.projectDir
 
 group = "com.github.polyrocketmatt"
 version = "0.0.1"
@@ -22,5 +22,5 @@ subprojects {
 }
 
 tasks.dokkaHtmlMultiModule.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
+    outputDirectory.set(rootFolder.resolve("dokka"))
 }
