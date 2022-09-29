@@ -17,8 +17,12 @@ jobs:
       uses: actions/checkout@v2
     - name: Make gradlew executable
       run: chmod +x ./gradlew
-    - name: Setup Gradle & Dokka
+    - name: Build and run tests
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: dokkaHtmlMultiModule
+        arguments: build
+        gradle-version: 7.4.2
+    - name: Generate Dokka documentation
+      run: ./gradlew dokkaHtmlMultiModule
+      with:
         gradle-version: 7.4.2
