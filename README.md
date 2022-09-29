@@ -20,6 +20,11 @@ are available:
 * `interval` - Interval classes and operations
 * `functions` - Functions and their relative operations (algebraic operations, integration, differentiation)
 
+## Documentation
+
+Documentation for KMT can be found [here](http://polyrocketmatt.me/KMT/). This documentation is generated
+using Dokka and is updated automatically upon each release.
+
 ## License
 
 KMT is licensed under the GNU General Public License (version 3). The relevant information for this license can be found [here](https://www.gnu.org/licenses/gpl-3.0.html).
