@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.*
-
 val rootFolder = rootProject.buildDir
 
 group = "com.github.polyrocketmatt"
