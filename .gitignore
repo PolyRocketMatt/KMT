@@ -5,5 +5,5 @@ gradle
 bin
 kmt-common/build
 kmt-common/bin
-interval/build
-interval/bin
+kmt-interval/build
+kmt-interval/bin
