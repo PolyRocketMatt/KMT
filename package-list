@@ -1,0 +1,10 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:kmt-common
+com.github.polyrocketmatt.kmt.common
+module:kmt-interval
+com.github.polyrocketmatt.kmt.interval
+com.github.polyrocketmatt.kmt.interval.closed
+com.github.polyrocketmatt.kmt.interval.half
+com.github.polyrocketmatt.kmt.interval.open

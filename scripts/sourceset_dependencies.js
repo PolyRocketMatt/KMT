@@ -1,0 +1,1 @@
+sourceset_dependencies = '{":kmt-common:dokkaHtmlPartial/main":[],":kmt-interval:dokkaHtmlPartial/main":[]}'
