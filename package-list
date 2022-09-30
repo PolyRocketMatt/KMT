@@ -3,6 +3,12 @@ $dokka.linkExtension:html
 
 module:kmt-common
 com.github.polyrocketmatt.kmt.common
+module:kmt-function
+com.github.polyrocketmatt.kmt.function
+com.github.polyrocketmatt.kmt.function.differentiable
+com.github.polyrocketmatt.kmt.function.integration
+com.github.polyrocketmatt.kmt.function.type
+com.github.polyrocketmatt.kmt.function.variate
 module:kmt-interval
 com.github.polyrocketmatt.kmt.interval
 com.github.polyrocketmatt.kmt.interval.closed
