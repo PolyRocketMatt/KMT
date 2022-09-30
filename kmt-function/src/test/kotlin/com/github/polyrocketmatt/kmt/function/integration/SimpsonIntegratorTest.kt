@@ -17,7 +17,6 @@ class SimpsonIntegratorTest {
         override fun evaluate(x: Int): Float = evaluate(x.toFloat())
 
         override fun evaluate(x: Short): Float = evaluate(x.toFloat())
-
     }
 
     private val function = TestFunction()
@@ -47,5 +46,4 @@ class SimpsonIntegratorTest {
 
     @Test
     fun testGaussianShortIntegratorSubdivided() = assertEquals(28.853, function.integrate(intervalSubdivided, SimpsonIntegrator.get(DataType.SHORT)).sum(), 0.001)
-
 }

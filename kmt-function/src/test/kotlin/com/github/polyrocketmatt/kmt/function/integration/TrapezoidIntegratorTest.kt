@@ -17,7 +17,6 @@ class TrapezoidIntegratorTest {
         override fun evaluate(x: Int): Float = evaluate(x.toFloat())
 
         override fun evaluate(x: Short): Float = evaluate(x.toFloat())
-
     }
 
     private val function = TestFunction()
@@ -47,5 +46,4 @@ class TrapezoidIntegratorTest {
 
     @Test
     fun testGaussianShortIntegratorSubdivided() = assertEquals(27.999, function.integrate(subdividedInterval, TrapezoidIntegrator.get(DataType.SHORT)).sum(), 0.001)
-
 }

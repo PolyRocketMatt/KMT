@@ -17,7 +17,6 @@ class GaussianIntegratorTest {
         override fun evaluate(x: Int): Float = evaluate(x.toFloat())
 
         override fun evaluate(x: Short): Float = evaluate(x.toFloat())
-
     }
 
     private val function = TestFunction()
@@ -95,5 +94,4 @@ class GaussianIntegratorTest {
         assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.SHORT)).sum(), 0.0001)
         assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.SHORT)).sum(), 0.0001)
     }
-
 }

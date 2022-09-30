@@ -51,7 +51,6 @@ private class DoubleTrapezoidIntegrator : TrapezoidIntegrator<Double>() {
 
         return buffer.toTypedArray()
     }
-
 }
 
 private class FloatTrapezoidIntegrator : TrapezoidIntegrator<Float>() {
@@ -71,7 +70,6 @@ private class FloatTrapezoidIntegrator : TrapezoidIntegrator<Float>() {
 
         return buffer.toTypedArray()
     }
-
 }
 
 private class IntTrapezoidIntegrator : TrapezoidIntegrator<Int>() {
@@ -91,7 +89,6 @@ private class IntTrapezoidIntegrator : TrapezoidIntegrator<Int>() {
 
         return buffer.toTypedArray()
     }
-
 }
 
 private class ShortTrapezoidIntegrator : TrapezoidIntegrator<Short>() {
@@ -111,5 +108,4 @@ private class ShortTrapezoidIntegrator : TrapezoidIntegrator<Short>() {
 
         return buffer.toTypedArray()
     }
-
 }

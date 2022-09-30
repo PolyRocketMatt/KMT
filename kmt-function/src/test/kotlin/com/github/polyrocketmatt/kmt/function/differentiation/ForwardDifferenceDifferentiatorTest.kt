@@ -17,7 +17,6 @@ class ForwardDifferenceDifferentiatorTest {
         override fun evaluate(x: Int): Float = evaluate(x.toFloat())
 
         override fun evaluate(x: Short): Float = evaluate(x.toFloat())
-
     }
 
     private val function = TestFunction()
@@ -137,5 +136,4 @@ class ForwardDifferenceDifferentiatorTest {
         assertEquals(10, derivatives.size)
         derivatives.forEachIndexed { i, actual -> testValueWithTolerance(expected[i], actual, 0.001) }
     }
-
 }
