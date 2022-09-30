@@ -44,15 +44,13 @@ abstract class ForwardDifferenceDifferentiator<T> : Differentiator<T> {
          * @return A forward-difference differentiator for a univariate function of the given datatype.
          */
         @Suppress("UNCHECKED_CAST")
-        fun <T> get(type: DataType): ForwardDifferenceDifferentiator<T> = when(type) {
+        fun <T> get(type: DataType): ForwardDifferenceDifferentiator<T> = when (type) {
             DataType.DOUBLE -> DoubleForwardDifferenceDifferentiator() as ForwardDifferenceDifferentiator<T>
             DataType.FLOAT -> FloatForwardDifferenceDifferentiator() as ForwardDifferenceDifferentiator<T>
             DataType.INT -> IntForwardDifferenceDifferentiator() as ForwardDifferenceDifferentiator<T>
             DataType.SHORT -> ShortForwardDifferenceDifferentiator() as ForwardDifferenceDifferentiator<T>
         }
-
     }
-
 }
 
 private class DoubleForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Double>() {

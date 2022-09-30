@@ -61,5 +61,4 @@ abstract class Multivariate<T>(arity: Int) : Function<T>(arity) {
      * @return The output of the function.
      */
     abstract fun evaluate(vararg x: Short): T
-
 }

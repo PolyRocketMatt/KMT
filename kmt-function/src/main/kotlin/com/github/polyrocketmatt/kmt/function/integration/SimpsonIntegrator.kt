@@ -43,15 +43,13 @@ abstract class SimpsonIntegrator<T> : Integrator<T> {
          * @return A Simpson quadrature for a univariate function of the given datatype.
          */
         @Suppress("UNCHECKED_CAST")
-        fun <T> get(type: DataType): SimpsonIntegrator<T> = when(type) {
+        fun <T> get(type: DataType): SimpsonIntegrator<T> = when (type) {
             DataType.DOUBLE -> DoubleSimpsonIntegrator() as SimpsonIntegrator<T>
             DataType.FLOAT -> FloatSimpsonIntegrator() as SimpsonIntegrator<T>
             DataType.INT -> IntSimpsonIntegrator() as SimpsonIntegrator<T>
             DataType.SHORT -> ShortSimpsonIntegrator() as SimpsonIntegrator<T>
         }
-
     }
-
 }
 
 private class DoubleSimpsonIntegrator : SimpsonIntegrator<Double>() {
@@ -73,7 +71,6 @@ private class DoubleSimpsonIntegrator : SimpsonIntegrator<Double>() {
 
         return buffer.toTypedArray()
     }
-
 }
 
 private class FloatSimpsonIntegrator : SimpsonIntegrator<Float>() {
@@ -95,7 +92,6 @@ private class FloatSimpsonIntegrator : SimpsonIntegrator<Float>() {
 
         return buffer.toTypedArray()
     }
-
 }
 
 private class IntSimpsonIntegrator : SimpsonIntegrator<Int>() {
@@ -117,7 +113,6 @@ private class IntSimpsonIntegrator : SimpsonIntegrator<Int>() {
 
         return buffer.toTypedArray()
     }
-
 }
 
 private class ShortSimpsonIntegrator : SimpsonIntegrator<Short>() {
@@ -139,5 +134,4 @@ private class ShortSimpsonIntegrator : SimpsonIntegrator<Short>() {
 
         return buffer.toTypedArray()
     }
-
 }

@@ -40,5 +40,4 @@ interface Integrator<T> {
      * @return The numerically integrated values of the function in the given interval
      */
     fun integrate(function: Univariate<T>, interval: Interval<Double>): Array<Double>
-
 }

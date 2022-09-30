@@ -87,15 +87,13 @@ abstract class GaussianIntegrator<T>(val rule: GaussianQuadratureRule) : Integra
          * @return A Gaussian quadrature for a univariate function of the given datatype.
          */
         @Suppress("UNCHECKED_CAST")
-        fun <T> get(rule: GaussianQuadratureRule, type: DataType): GaussianIntegrator<T> = when(type) {
+        fun <T> get(rule: GaussianQuadratureRule, type: DataType): GaussianIntegrator<T> = when (type) {
             DataType.DOUBLE -> DoubleGaussianIntegrator(rule) as GaussianIntegrator<T>
             DataType.FLOAT -> FloatGaussianIntegrator(rule) as GaussianIntegrator<T>
             DataType.INT -> IntGaussianIntegrator(rule) as GaussianIntegrator<T>
             DataType.SHORT -> ShortGaussianIntegrator(rule) as GaussianIntegrator<T>
         }
-
     }
-
 }
 
 private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIntegrator<Double>(rule) {
@@ -116,7 +114,6 @@ private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianI
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
     }
-
 }
 
 private class FloatGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIntegrator<Float>(rule) {
@@ -136,7 +133,6 @@ private class FloatGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIn
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
     }
-
 }
 
 private class IntGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIntegrator<Int>(rule) {
@@ -156,7 +152,6 @@ private class IntGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianInte
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
     }
-
 }
 
 private class ShortGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIntegrator<Short>(rule) {
@@ -176,5 +171,4 @@ private class ShortGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIn
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
     }
-
 }

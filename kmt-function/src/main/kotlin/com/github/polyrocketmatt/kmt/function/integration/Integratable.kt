@@ -39,5 +39,4 @@ interface Integratable<T> {
      * @return An array containing the result of the numerical integration.
      */
     fun integrate(interval: Interval<Double>, integrator: Integrator<T>): Array<Double>
-
 }

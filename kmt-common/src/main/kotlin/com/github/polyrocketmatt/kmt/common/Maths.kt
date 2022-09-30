@@ -18,7 +18,6 @@
 
 package com.github.polyrocketmatt.kmt.common
 
-import kotlin.math.exp
 import kotlin.math.min
 
 /**
@@ -674,6 +673,5 @@ class Maths {
          * @return This if value ∈ [min, max], min if this < min and max if this > max.
          */
         fun clip(value: Double, min: Double, max: Double) = if (value < min) min else if (value > max) max else value
-
     }
 }

@@ -19,7 +19,6 @@ abstract class PolynomialFunction<T>(internal vararg val coefficients: T) : Univ
     override fun evaluate(x: Int): T = evaluate(x.toDouble())
 
     override fun evaluate(x: Short): T = evaluate(x.toDouble())
-
 }
 
 /**
@@ -30,5 +29,4 @@ abstract class PolynomialFunction<T>(internal vararg val coefficients: T) : Univ
 class SimplePolynomial(vararg coefficients: Double) : PolynomialFunction<Double>(* coefficients.toTypedArray()) {
 
     override fun evaluate(x: Double): Double = coefficients.reduceIndexed { index, acc, c -> acc + c * x.intPow(index) }
-
 }

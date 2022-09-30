@@ -39,5 +39,4 @@ interface Differentiable<T> {
      * @return An array containing the result of the numerical differentiation.
      */
     fun differentiate(interval: Interval<Double>, differentiator: Differentiator<T>): Array<Double>
-
 }
