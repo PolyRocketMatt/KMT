@@ -410,28 +410,6 @@ fun Float.clip(min: Float, max: Float) = if (this < min) min else if (this > max
 fun Double.clip(min: Double, max: Double) = if (this < min) min else if (this > max) max else this
 
 /**
- * Compute the value on the sigmoid function given by the function parameters.
- *
- * @param shiftX Horizontal displacement along X-axis.
- * @param shiftY Vertical displacement along Y-axis.
- * @param growth Growth rate (y-scaling).
- * @return The result of the sigmoid function on the input.
- */
-fun Float.sigmoid(shiftX: Float, shiftY: Float, growth: Float): Float = 1.0f / (1.0f + exp(-(growth * (this + shiftX)))) + shiftY
-
-/**
- * Compute the value on the gompertz function given by the function parameters.
- *
- * @param shiftX Horizontal displacement along X-axis.
- * @param shiftY Vertical displacement along Y-axis.
- * @param asymptote Horizontal asymptote when x -> infinity.
- * @param growth Growth rate (y-scaling).
- * @return The result of the sigmoid function on the input.
- *
- */
-fun Float.gompertz(shiftX: Float, shiftY: Float, asymptote: Float, growth: Float): Float = asymptote * exp(-exp(shiftX - growth * this)) + shiftY
-
-/**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
@@ -697,74 +675,5 @@ class Maths {
          */
         fun clip(value: Double, min: Double, max: Double) = if (value < min) min else if (value > max) max else value
 
-        /**
-         * Compute the binomial coefficient of (n, k)^t. This is also
-         * the combination of k out of n.
-         *
-         * @param n An integer.
-         * @param k An integer.
-         * @return k out of n.
-         */
-        fun binomial(n: Int, k: Int) = when {
-            n < 0 || k < 0 -> throw IllegalArgumentException("negative numbers not allowed")
-            n == k -> 1L
-            else -> {
-                val kReduced = min(k, n - k)
-                var result = 1L
-                var numerator = n
-                var denominator = 1
-                while (denominator <= kReduced)
-                    result = result * numerator-- / denominator++
-                result
-            }
-        }.toInt()
-
-        /**
-         * Compute the value on the sigmoid function given by the function parameters.
-         *
-         * @param x The evaluation point on the X-axis.
-         * @param shiftX Horizontal displacement along X-axis.
-         * @param shiftY Vertical displacement along Y-axis.
-         * @param growth Growth rate (y-scaling).
-         * @return The result of the sigmoid function on the input.
-         */
-        fun sigmoid(x: Float, shiftX: Float, shiftY: Float, growth: Float): Float = 1.0f / (1.0f + exp(-(growth * (x + shiftX)))) + shiftY
-
-        /**
-         * Compute the value on the sigmoid function given by the function parameters.
-         *
-         * @param x The evaluation point on the X-axis.
-         * @param shiftX Horizontal displacement along X-axis.
-         * @param shiftY Vertical displacement along Y-axis.
-         * @param growth Growth rate (y-scaling).
-         * @return The result of the sigmoid function on the input.
-         */
-        fun sigmoid(x: Double, shiftX: Double, shiftY: Double, growth: Double): Double = 1.0 / (1.0 + exp(-(growth * (x + shiftX)))) + shiftY
-
-        /**
-         * Compute the value on the gompertz function given by the function parameters.
-         *
-         * @param x The evaluation point on the X-axis.
-         * @param shiftX Horizontal displacement along X-axis.
-         * @param shiftY Vertical displacement along Y-axis.
-         * @param asymptote Horizontal asymptote when x -> infinity.
-         * @param growth Growth rate (y-scaling).
-         * @return The result of the sigmoid function on the input.
-         *
-         */
-        fun gompertz(x: Float, shiftX: Float, shiftY: Float, asymptote: Float, growth: Float): Float = asymptote * exp(-exp(shiftX - growth * x)) + shiftY
-
-        /**
-         * Compute the value on the gompertz function given by the function parameters.
-         *
-         * @param x The evaluation point on the X-axis.
-         * @param shiftX Horizontal displacement along X-axis.
-         * @param shiftY Vertical displacement along Y-axis.
-         * @param asymptote Horizontal asymptote when x -> infinity.
-         * @param growth Growth rate (y-scaling).
-         * @return The result of the sigmoid function on the input.
-         *
-         */
-        fun gompertz(x: Double, shiftX: Double, shiftY: Double, asymptote: Double, growth: Double): Double = asymptote * exp(-exp(shiftX - growth * x)) + shiftY
     }
 }
