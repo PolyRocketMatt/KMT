@@ -18,3 +18,4 @@ gradleEnterprise {
         }
     }
 }
+include("kmt-matrix")
