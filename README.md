@@ -24,8 +24,8 @@ are available:
 
 ## Documentation
 
-Documentation for KMT can be found [here](http://polyrocketmatt.me/KMT/). This documentation is generated
-using Dokka and is updated automatically upon each release.
+Documentation for KMT can be found [here](http://polyrocketmatt.me/KMT/). Documentation is generated
+using [Dokka](https://github.com/Kotlin/dokka) and is updated automatically upon each release.
 
 ## License
 
