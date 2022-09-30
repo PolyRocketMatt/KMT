@@ -25,6 +25,6 @@ package com.github.polyrocketmatt.kmt.function
  * Represents a function that takes arguments.
  *
  * @param T The type of the output of the function.
- * @property arity The arity of the function.
+ * @param arity The arity of the function.
  */
 open class Function<T>(private val arity: Int)
