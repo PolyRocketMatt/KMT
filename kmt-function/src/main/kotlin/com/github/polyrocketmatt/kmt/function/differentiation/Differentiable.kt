@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.polyrocketmatt.kmt.function.differentiable
+package com.github.polyrocketmatt.kmt.function.differentiation
 
 import com.github.polyrocketmatt.kmt.interval.Interval
 

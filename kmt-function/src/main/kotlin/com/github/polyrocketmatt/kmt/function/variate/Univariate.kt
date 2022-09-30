@@ -19,8 +19,8 @@
 package com.github.polyrocketmatt.kmt.function.variate
 
 import com.github.polyrocketmatt.kmt.function.Function
-import com.github.polyrocketmatt.kmt.function.differentiable.Differentiable
-import com.github.polyrocketmatt.kmt.function.differentiable.Differentiator
+import com.github.polyrocketmatt.kmt.function.differentiation.Differentiable
+import com.github.polyrocketmatt.kmt.function.differentiation.Differentiator
 import com.github.polyrocketmatt.kmt.function.integration.Integratable
 import com.github.polyrocketmatt.kmt.function.integration.Integrator
 import com.github.polyrocketmatt.kmt.interval.Interval

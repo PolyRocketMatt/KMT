@@ -14,6 +14,11 @@ import com.github.polyrocketmatt.kmt.function.variate.Univariate
  */
 abstract class PolynomialFunction<T>(internal vararg val coefficients: T) : Univariate<T>() {
 
+    operator fun get(x: Double) = evaluate(x)
+    operator fun get(x: Float) = evaluate(x)
+    operator fun get(x: Int) = evaluate(x)
+    operator fun get(x: Short) = evaluate(x)
+
     override fun evaluate(x: Float): T = evaluate(x.toDouble())
 
     override fun evaluate(x: Int): T = evaluate(x.toDouble())
