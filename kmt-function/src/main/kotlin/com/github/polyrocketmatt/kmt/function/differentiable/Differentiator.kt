@@ -40,5 +40,4 @@ interface Differentiator<T> {
      * @return The derivatives of the function in the given interval.
      */
     fun differentiate(function: Univariate<T>, interval: Interval<Double>): Array<Double>
-
 }

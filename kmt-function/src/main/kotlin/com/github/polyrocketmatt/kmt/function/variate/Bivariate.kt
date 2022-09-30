@@ -65,5 +65,4 @@ abstract class Bivariate<T> : Function<T>(2) {
      * @return The output of the function.
      */
     abstract fun evaluate(x: Short, y: Short): T
-
 }
