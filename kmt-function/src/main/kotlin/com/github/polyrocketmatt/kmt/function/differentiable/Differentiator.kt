@@ -19,11 +19,26 @@
 package com.github.polyrocketmatt.kmt.function.differentiable
 
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
-import com.github.polyrocketmatt.kmt.range.Range
+import com.github.polyrocketmatt.kmt.interval.Interval
 
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Represents a method for numerical differentiation.
+ *
+ * @param T The type of the output of the function.
+ */
 @FunctionalInterface
 interface Differentiator<T> {
 
-    fun differentiate(function: Univariate<T>, range: Range<Double>): Array<Double>
+    /**
+     * Differentiate the given function in the given interval.
+     *
+     * @param function The function to differentiate.
+     * @param interval The interval to differentiate the function in.
+     * @return The derivatives of the function in the given interval.
+     */
+    fun differentiate(function: Univariate<T>, interval: Interval<Double>): Array<Double>
 
 }

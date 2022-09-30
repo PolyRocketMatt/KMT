@@ -18,35 +18,51 @@
 
 package com.github.polyrocketmatt.kmt.function.integration
 
+import com.github.polyrocketmatt.kmt.common.DataType
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
-import com.github.polyrocketmatt.kmt.range.Range
-import com.github.polyrocketmatt.kmt.utils.DataType
+import com.github.polyrocketmatt.kmt.interval.Interval
 
-interface SimpsonIntegrator<T> : Integrator<T> {
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Implementation of the Simpson's quadrature method for numerical integration on
+ * a univariate function of type [T].
+ *
+ * @param T The type of the output of the function.
+ */
+abstract class SimpsonIntegrator<T> : Integrator<T> {
 
     companion object {
 
+        /**
+         * Get a Simpson quadrature for a univariate function given a datatype.
+         *
+         * @param T The type of the output of the function.
+         * @param type The datatype of the function.
+         * @return A Simpson quadrature for a univariate function of the given datatype.
+         */
         @Suppress("UNCHECKED_CAST")
         fun <T> get(type: DataType): SimpsonIntegrator<T> = when(type) {
-            DataType.DOUBLE -> DoubleSimpsonIntegrator as SimpsonIntegrator<T>
-            DataType.FLOAT -> FloatSimpsonIntegrator as SimpsonIntegrator<T>
-            DataType.INT -> IntSimpsonIntegrator as SimpsonIntegrator<T>
-            DataType.SHORT -> ShortSimpsonIntegrator as SimpsonIntegrator<T>
+            DataType.DOUBLE -> DoubleSimpsonIntegrator() as SimpsonIntegrator<T>
+            DataType.FLOAT -> FloatSimpsonIntegrator() as SimpsonIntegrator<T>
+            DataType.INT -> IntSimpsonIntegrator() as SimpsonIntegrator<T>
+            DataType.SHORT -> ShortSimpsonIntegrator() as SimpsonIntegrator<T>
         }
 
     }
 
 }
 
-private object DoubleSimpsonIntegrator : SimpsonIntegrator<Double> {
+private class DoubleSimpsonIntegrator : SimpsonIntegrator<Double>() {
 
-    override fun integrate(function: Univariate<Double>, range: Range<Double>): Array<Double> {
-        if (range.count() < 2)
+    override fun integrate(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
+        if (interval.count() < 2)
             throw IllegalArgumentException("Range must have at least 2 elements to integrate")
-        val buffer = DoubleArray(range.count() - 1)
-        for (i in 0 until range.count() - 1) {
-            val a = range[i]
-            val b = range[i + 1]
+        val buffer = DoubleArray(interval.count() - 1)
+        for (i in 0 until interval.count() - 1) {
+            val a = interval[i]
+            val b = interval[i + 1]
             val factor = (b - a) / 6.0f
             val fA = function.evaluate(a)
             val fB = function.evaluate(b)
@@ -60,15 +76,15 @@ private object DoubleSimpsonIntegrator : SimpsonIntegrator<Double> {
 
 }
 
-private object FloatSimpsonIntegrator : SimpsonIntegrator<Float> {
+private class FloatSimpsonIntegrator : SimpsonIntegrator<Float>() {
 
-    override fun integrate(function: Univariate<Float>, range: Range<Double>): Array<Double> {
-        if (range.count() < 2)
+    override fun integrate(function: Univariate<Float>, interval: Interval<Double>): Array<Double> {
+        if (interval.count() < 2)
             throw IllegalArgumentException("Range must have at least 2 elements to integrate")
-        val buffer = DoubleArray(range.count() - 1)
-        for (i in 0 until range.count() - 1) {
-            val a = range[i]
-            val b = range[i + 1]
+        val buffer = DoubleArray(interval.count() - 1)
+        for (i in 0 until interval.count() - 1) {
+            val a = interval[i]
+            val b = interval[i + 1]
             val factor = (b - a) / 6.0f
             val fA = function.evaluate(a)
             val fB = function.evaluate(b)
@@ -82,15 +98,15 @@ private object FloatSimpsonIntegrator : SimpsonIntegrator<Float> {
 
 }
 
-private object IntSimpsonIntegrator : SimpsonIntegrator<Int> {
+private class IntSimpsonIntegrator : SimpsonIntegrator<Int>() {
 
-    override fun integrate(function: Univariate<Int>, range: Range<Double>): Array<Double> {
-        if (range.count() < 2)
+    override fun integrate(function: Univariate<Int>, interval: Interval<Double>): Array<Double> {
+        if (interval.count() < 2)
             throw IllegalArgumentException("Range must have at least 2 elements to integrate")
-        val buffer = DoubleArray(range.count() - 1)
-        for (i in 0 until range.count() - 1) {
-            val a = range[i]
-            val b = range[i + 1]
+        val buffer = DoubleArray(interval.count() - 1)
+        for (i in 0 until interval.count() - 1) {
+            val a = interval[i]
+            val b = interval[i + 1]
             val factor = (b - a) / 6.0f
             val fA = function.evaluate(a)
             val fB = function.evaluate(b)
@@ -104,15 +120,15 @@ private object IntSimpsonIntegrator : SimpsonIntegrator<Int> {
 
 }
 
-private object ShortSimpsonIntegrator : SimpsonIntegrator<Short> {
+private class ShortSimpsonIntegrator : SimpsonIntegrator<Short>() {
 
-    override fun integrate(function: Univariate<Short>, range: Range<Double>): Array<Double> {
-        if (range.count() < 2)
+    override fun integrate(function: Univariate<Short>, interval: Interval<Double>): Array<Double> {
+        if (interval.count() < 2)
             throw IllegalArgumentException("Range must have at least 2 elements to integrate")
-        val buffer = DoubleArray(range.count() - 1)
-        for (i in 0 until range.count() - 1) {
-            val a = range[i]
-            val b = range[i + 1]
+        val buffer = DoubleArray(interval.count() - 1)
+        for (i in 0 until interval.count() - 1) {
+            val a = interval[i]
+            val b = interval[i + 1]
             val factor = (b - a) / 6.0f
             val fA = function.evaluate(a)
             val fB = function.evaluate(b)

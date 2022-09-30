@@ -18,36 +18,52 @@
 
 package com.github.polyrocketmatt.kmt.function.differentiable
 
+import com.github.polyrocketmatt.kmt.common.DataType
+import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
-import com.github.polyrocketmatt.kmt.range.Range
-import com.github.polyrocketmatt.kmt.utils.DataType
-import com.github.polyrocketmatt.kmt.utils.fastAbs
+import com.github.polyrocketmatt.kmt.interval.Interval
 
-interface ForwardDifferenceDifferentiator<T> : Differentiator<T> {
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Implementation of forward-difference method for numerical differentiation on
+ * a univariate function of type [T].
+ *
+ * @param T The type of the output of the function.
+ */
+abstract class ForwardDifferenceDifferentiator<T> : Differentiator<T> {
 
     companion object {
 
+        /**
+         * Get a forward-difference differentiator for a univariate function given a datatype.
+         *
+         * @param T The type of the output of the function.
+         * @param type The datatype of the function.
+         * @return A forward-difference differentiator for a univariate function of the given datatype.
+         */
         @Suppress("UNCHECKED_CAST")
         fun <T> get(type: DataType): ForwardDifferenceDifferentiator<T> = when(type) {
-            DataType.DOUBLE -> DoubleForwardDifferenceDifferentiator as ForwardDifferenceDifferentiator<T>
-            DataType.FLOAT -> FloatForwardDifferenceDifferentiator as ForwardDifferenceDifferentiator<T>
-            DataType.INT -> IntForwardDifferenceDifferentiator as ForwardDifferenceDifferentiator<T>
-            DataType.SHORT -> ShortForwardDifferenceDifferentiator as ForwardDifferenceDifferentiator<T>
+            DataType.DOUBLE -> DoubleForwardDifferenceDifferentiator() as ForwardDifferenceDifferentiator<T>
+            DataType.FLOAT -> FloatForwardDifferenceDifferentiator() as ForwardDifferenceDifferentiator<T>
+            DataType.INT -> IntForwardDifferenceDifferentiator() as ForwardDifferenceDifferentiator<T>
+            DataType.SHORT -> ShortForwardDifferenceDifferentiator() as ForwardDifferenceDifferentiator<T>
         }
 
     }
 
 }
 
-private object DoubleForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Double> {
+private class DoubleForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Double>() {
 
-    override fun differentiate(function: Univariate<Double>, range: Range<Double>): Array<Double> {
-        if (range.count() < 2)
+    override fun differentiate(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
+        if (interval.count() < 2)
             throw IllegalArgumentException("Range must have at least 2 elements to differentiate using forward-divided differences")
-        val buffer = DoubleArray(range.count() - 1)
-        for (i in 0 until range.count() - 1) {
-            val a = range[i]
-            val b = range[i + 1]
+        val buffer = DoubleArray(interval.count() - 1)
+        for (i in 0 until interval.count() - 1) {
+            val a = interval[i]
+            val b = interval[i + 1]
             val diff = (b - a).fastAbs()
 
             buffer[i] = (function.evaluate(b) - function.evaluate(a)) / diff
@@ -56,15 +72,15 @@ private object DoubleForwardDifferenceDifferentiator : ForwardDifferenceDifferen
     }
 }
 
-private object FloatForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Float> {
+private class FloatForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Float>() {
 
-    override fun differentiate(function: Univariate<Float>, range: Range<Double>): Array<Double> {
-        if (range.count() < 2)
+    override fun differentiate(function: Univariate<Float>, interval: Interval<Double>): Array<Double> {
+        if (interval.count() < 2)
             throw IllegalArgumentException("Range must have at least 2 elements to differentiate using forward-divided differences")
-        val buffer = DoubleArray(range.count() - 1)
-        for (i in 0 until range.count() - 1) {
-            val a = range[i]
-            val b = range[i + 1]
+        val buffer = DoubleArray(interval.count() - 1)
+        for (i in 0 until interval.count() - 1) {
+            val a = interval[i]
+            val b = interval[i + 1]
             val diff = (b - a).fastAbs()
 
             buffer[i] = (function.evaluate(b) - function.evaluate(a)) / diff
@@ -73,15 +89,15 @@ private object FloatForwardDifferenceDifferentiator : ForwardDifferenceDifferent
     }
 }
 
-private object IntForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Int> {
+private class IntForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Int>() {
 
-    override fun differentiate(function: Univariate<Int>, range: Range<Double>): Array<Double> {
-        if (range.count() < 2)
+    override fun differentiate(function: Univariate<Int>, interval: Interval<Double>): Array<Double> {
+        if (interval.count() < 2)
             throw IllegalArgumentException("Range must have at least 2 elements to differentiate using forward-divided differences")
-        val buffer = DoubleArray(range.count() - 1)
-        for (i in 0 until range.count() - 1) {
-            val a = range[i]
-            val b = range[i + 1]
+        val buffer = DoubleArray(interval.count() - 1)
+        for (i in 0 until interval.count() - 1) {
+            val a = interval[i]
+            val b = interval[i + 1]
             val diff = (b - a).fastAbs()
 
             buffer[i] = (function.evaluate(b) - function.evaluate(a)) / diff
@@ -90,15 +106,15 @@ private object IntForwardDifferenceDifferentiator : ForwardDifferenceDifferentia
     }
 }
 
-private object ShortForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Short> {
+private class ShortForwardDifferenceDifferentiator : ForwardDifferenceDifferentiator<Short>() {
 
-    override fun differentiate(function: Univariate<Short>, range: Range<Double>): Array<Double> {
-        if (range.count() < 2)
+    override fun differentiate(function: Univariate<Short>, interval: Interval<Double>): Array<Double> {
+        if (interval.count() < 2)
             throw IllegalArgumentException("Range must have at least 2 elements to differentiate using forward-divided differences")
-        val buffer = DoubleArray(range.count() - 1)
-        for (i in 0 until range.count() - 1) {
-            val a = range[i]
-            val b = range[i + 1]
+        val buffer = DoubleArray(interval.count() - 1)
+        for (i in 0 until interval.count() - 1) {
+            val a = interval[i]
+            val b = interval[i + 1]
             val diff = (b - a).fastAbs()
 
             buffer[i] = (function.evaluate(b) - function.evaluate(a)) / diff
