@@ -47,20 +47,37 @@ abstract class GaussianIntegrator<T>(val rule: GaussianQuadratureRule) : Integra
     }
 
     companion object {
-        internal val ONE_POINT_WEIGHTS = doubleArrayOf(2.0)
-        internal val ONE_POINT_POINTS = doubleArrayOf(0.0)
+        private val ONE_POINT_WEIGHTS = doubleArrayOf(2.0)
+        private val ONE_POINT_POINTS = doubleArrayOf(0.0)
 
-        internal val TWO_POINT_WEIGHTS = doubleArrayOf(1.0, 1.0)
-        internal val TWO_POINT_POINTS = doubleArrayOf(-0.5773502691896257, 0.5773502691896257)
+        private val TWO_POINT_WEIGHTS = doubleArrayOf(1.0, 1.0)
+        private val TWO_POINT_POINTS = doubleArrayOf(-0.5773502691896257, 0.5773502691896257)
 
-        internal val THREE_POINT_WEIGHTS = doubleArrayOf(0.8888888888888888, 0.5555555555555556, 0.5555555555555556)
-        internal val THREE_POINT_POINTS = doubleArrayOf(0.0, -0.7745966692414834, 0.7745966692414834)
+        private val THREE_POINT_WEIGHTS = doubleArrayOf(0.8888888888888888, 0.5555555555555556, 0.5555555555555556)
+        private val THREE_POINT_POINTS = doubleArrayOf(0.0, -0.7745966692414834, 0.7745966692414834)
 
-        internal val FOUR_POINT_WEIGHTS = doubleArrayOf(0.6521451548625461, 0.6521451548625461, 0.3478548451374538, 0.3478548451374538)
-        internal val FOUR_POINT_POINTS = doubleArrayOf(-0.3399810435848563, 0.3399810435848563, -0.8611363115940526, 0.8611363115940526)
+        private val FOUR_POINT_WEIGHTS = doubleArrayOf(0.6521451548625461, 0.6521451548625461, 0.3478548451374538, 0.3478548451374538)
+        private val FOUR_POINT_POINTS = doubleArrayOf(-0.3399810435848563, 0.3399810435848563, -0.8611363115940526, 0.8611363115940526)
 
-        internal val FIVE_POINT_WEIGHTS = doubleArrayOf(0.5688888888888889, 0.4786286704993665, 0.4786286704993665, 0.23692688505618908, 0.23692688505618908)
-        internal val FIVE_POINT_POINTS = doubleArrayOf(0.0, -0.5384693101056831, 0.5384693101056831, -0.906179845938664, 0.906179845938664)
+        private val FIVE_POINT_WEIGHTS = doubleArrayOf(0.5688888888888889, 0.4786286704993665, 0.4786286704993665, 0.23692688505618908, 0.23692688505618908)
+        private val FIVE_POINT_POINTS = doubleArrayOf(0.0, -0.5384693101056831, 0.5384693101056831, -0.906179845938664, 0.906179845938664)
+
+        internal fun constructQuadrature(rule: GaussianQuadratureRule): Pair<DoubleArray, DoubleArray> = Pair(
+            when (rule) {
+                GaussianQuadratureRule.ONE_POINT -> ONE_POINT_WEIGHTS
+                GaussianQuadratureRule.TWO_POINT -> TWO_POINT_WEIGHTS
+                GaussianQuadratureRule.THREE_POINT -> THREE_POINT_WEIGHTS
+                GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_WEIGHTS
+                GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_WEIGHTS
+            },
+            when (rule) {
+                GaussianQuadratureRule.ONE_POINT -> ONE_POINT_POINTS
+                GaussianQuadratureRule.TWO_POINT -> TWO_POINT_POINTS
+                GaussianQuadratureRule.THREE_POINT -> THREE_POINT_POINTS
+                GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_POINTS
+                GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_POINTS
+            }
+        )
 
         /**
          * Get a Gaussian quadrature for a univariate function given a datatype.
@@ -91,22 +108,10 @@ private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianI
 
         val factor = (max - min) / 2.0
         val offset = (max + min) / 2.0
-        val weights = when (rule) {
-            GaussianQuadratureRule.ONE_POINT -> ONE_POINT_WEIGHTS
-            GaussianQuadratureRule.TWO_POINT -> TWO_POINT_WEIGHTS
-            GaussianQuadratureRule.THREE_POINT -> THREE_POINT_WEIGHTS
-            GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_WEIGHTS
-            GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_WEIGHTS
-        }
-        val points = when (rule) {
-            GaussianQuadratureRule.ONE_POINT -> ONE_POINT_POINTS
-            GaussianQuadratureRule.TWO_POINT -> TWO_POINT_POINTS
-            GaussianQuadratureRule.THREE_POINT -> THREE_POINT_POINTS
-            GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_POINTS
-            GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_POINTS
-        }
+        val quadrature = constructQuadrature(rule)
+        val weights = quadrature.first
+        val points = quadrature.second
         val result = DoubleArray(rule.n)
-
         for (i in 0 until rule.n)
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
@@ -121,25 +126,12 @@ private class FloatGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIn
         val max = interval.max()
         if (min == max)
             throw IllegalArgumentException("Range must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
-
         val factor = (max - min) / 2.0
         val offset = (max + min) / 2.0
-        val weights = when (rule) {
-            GaussianQuadratureRule.ONE_POINT -> ONE_POINT_WEIGHTS
-            GaussianQuadratureRule.TWO_POINT -> TWO_POINT_WEIGHTS
-            GaussianQuadratureRule.THREE_POINT -> THREE_POINT_WEIGHTS
-            GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_WEIGHTS
-            GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_WEIGHTS
-        }
-        val points = when (rule) {
-            GaussianQuadratureRule.ONE_POINT -> ONE_POINT_POINTS
-            GaussianQuadratureRule.TWO_POINT -> TWO_POINT_POINTS
-            GaussianQuadratureRule.THREE_POINT -> THREE_POINT_POINTS
-            GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_POINTS
-            GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_POINTS
-        }
+        val quadrature = constructQuadrature(rule)
+        val weights = quadrature.first
+        val points = quadrature.second
         val result = DoubleArray(rule.n)
-
         for (i in 0 until rule.n)
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
@@ -154,25 +146,12 @@ private class IntGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianInte
         val max = interval.max()
         if (min == max)
             throw IllegalArgumentException("Range must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
-
         val factor = (max - min) / 2.0
         val offset = (max + min) / 2.0
-        val weights = when (rule) {
-            GaussianQuadratureRule.ONE_POINT -> ONE_POINT_WEIGHTS
-            GaussianQuadratureRule.TWO_POINT -> TWO_POINT_WEIGHTS
-            GaussianQuadratureRule.THREE_POINT -> THREE_POINT_WEIGHTS
-            GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_WEIGHTS
-            GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_WEIGHTS
-        }
-        val points = when (rule) {
-            GaussianQuadratureRule.ONE_POINT -> ONE_POINT_POINTS
-            GaussianQuadratureRule.TWO_POINT -> TWO_POINT_POINTS
-            GaussianQuadratureRule.THREE_POINT -> THREE_POINT_POINTS
-            GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_POINTS
-            GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_POINTS
-        }
+        val quadrature = constructQuadrature(rule)
+        val weights = quadrature.first
+        val points = quadrature.second
         val result = DoubleArray(rule.n)
-
         for (i in 0 until rule.n)
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
@@ -187,25 +166,12 @@ private class ShortGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIn
         val max = interval.max()
         if (min == max)
             throw IllegalArgumentException("Range must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
-
         val factor = (max - min) / 2.0
         val offset = (max + min) / 2.0
-        val weights = when (rule) {
-            GaussianQuadratureRule.ONE_POINT -> ONE_POINT_WEIGHTS
-            GaussianQuadratureRule.TWO_POINT -> TWO_POINT_WEIGHTS
-            GaussianQuadratureRule.THREE_POINT -> THREE_POINT_WEIGHTS
-            GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_WEIGHTS
-            GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_WEIGHTS
-        }
-        val points = when (rule) {
-            GaussianQuadratureRule.ONE_POINT -> ONE_POINT_POINTS
-            GaussianQuadratureRule.TWO_POINT -> TWO_POINT_POINTS
-            GaussianQuadratureRule.THREE_POINT -> THREE_POINT_POINTS
-            GaussianQuadratureRule.FOUR_POINT -> FOUR_POINT_POINTS
-            GaussianQuadratureRule.FIVE_POINT -> FIVE_POINT_POINTS
-        }
+        val quadrature = constructQuadrature(rule)
+        val weights = quadrature.first
+        val points = quadrature.second
         val result = DoubleArray(rule.n)
-
         for (i in 0 until rule.n)
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
