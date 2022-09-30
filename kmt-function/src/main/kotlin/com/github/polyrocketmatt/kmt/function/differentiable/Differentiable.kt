@@ -18,11 +18,26 @@
 
 package com.github.polyrocketmatt.kmt.function.differentiable
 
-import com.github.polyrocketmatt.kmt.range.Range
+import com.github.polyrocketmatt.kmt.interval.Interval
 
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Represents a function that is differentiable.
+ *
+ * @param T The type of the output of the function.
+ */
 @FunctionalInterface
 interface Differentiable<T> {
 
-    fun differentiate(range: Range<Double>, differentiator: Differentiator<T>): Array<Double>
+    /**
+     * Differentiate the function over the given interval with the provided differentiator.
+     *
+     * @param interval The [Interval] over which the function should be differentiated.
+     * @param differentiator The [Differentiator] that should be used to differentiate the function.
+     * @return An array containing the result of the numerical differentiation.
+     */
+    fun differentiate(interval: Interval<Double>, differentiator: Differentiator<T>): Array<Double>
 
 }

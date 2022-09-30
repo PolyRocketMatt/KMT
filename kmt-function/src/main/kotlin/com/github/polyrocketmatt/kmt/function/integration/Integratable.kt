@@ -24,7 +24,7 @@ import com.github.polyrocketmatt.kmt.interval.Interval
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a function that is integratable over a given [Interval].
+ * Represents a function that is integratable.
  *
  * @param T The type of the output of the function.
  */

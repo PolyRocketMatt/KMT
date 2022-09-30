@@ -20,11 +20,50 @@ package com.github.polyrocketmatt.kmt.function.variate
 
 import com.github.polyrocketmatt.kmt.function.Function
 
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Represents a bi-variate function (arity 2) that is evaluable.
+ *
+ * @param T The type of the output of the function.
+ */
 abstract class Bivariate<T> : Function<T>(2) {
 
+    /**
+     * Evaluates the function at the given inputs.
+     *
+     * @param x The first input to evaluate the function at.
+     * @param y The second input to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(x: Double, y: Double): T
+
+    /**
+     * Evaluates the function at the given inputs.
+     *
+     * @param x The first input to evaluate the function at.
+     * @param y The second input to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(x: Float, y: Float): T
+
+    /**
+     * Evaluates the function at the given inputs.
+     *
+     * @param x The first input to evaluate the function at.
+     * @param y The second input to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(x: Int, y: Int): T
+
+    /**
+     * Evaluates the function at the given inputs.
+     *
+     * @param x The first input to evaluate the function at.
+     * @param y The second input to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(x: Short, y: Short): T
 
 }

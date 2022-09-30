@@ -22,7 +22,7 @@ package com.github.polyrocketmatt.kmt.function
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a function that takes [arity] arguments.
+ * Represents a function that takes arguments.
  *
  * @param T The type of the output of the function.
  * @property arity The arity of the function.

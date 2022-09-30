@@ -20,11 +20,46 @@ package com.github.polyrocketmatt.kmt.function.variate
 
 import com.github.polyrocketmatt.kmt.function.Function
 
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Represents a multi-variate function (arity n) that is evaluable.
+ *
+ * @param T The type of the output of the function.
+ */
 abstract class Multivariate<T>(arity: Int) : Function<T>(arity) {
 
+    /**
+     * Evaluates the function at the given inputs.
+     *
+     * @param x The inputs to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(vararg x: Double): T
+
+    /**
+     * Evaluates the function at the given inputs.
+     *
+     * @param x The inputs to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(vararg x: Float): T
+
+    /**
+     * Evaluates the function at the given inputs.
+     *
+     * @param x The inputs to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(vararg x: Int): T
+
+    /**
+     * Evaluates the function at the given inputs.
+     *
+     * @param x The inputs to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(vararg x: Short): T
 
 }

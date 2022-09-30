@@ -29,8 +29,7 @@ import com.github.polyrocketmatt.kmt.interval.Interval
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a univariate function (arity 1) that can be evaluated,
- * integrated and differentiated.
+ * Represents a uni-variate function (arity 1) that is evaluable, [Integratable] and [Differentiable].
  *
  * @param T The type of the output of the function.
  */
@@ -70,6 +69,6 @@ abstract class Univariate<T> : Function<T>(1), Integratable<T>, Differentiable<T
 
     override fun integrate(interval: Interval<Double>, integrator: Integrator<T>): Array<Double> = integrator.integrate(this, interval)
 
-    override fun differentiate(range: Interval<Double>, differentiator: Differentiator<T>): Array<Double> = differentiator.differentiate(this, range)
+    override fun differentiate(interval: Interval<Double>, differentiator: Differentiator<T>): Array<Double> = differentiator.differentiate(this, interval)
 
 }
