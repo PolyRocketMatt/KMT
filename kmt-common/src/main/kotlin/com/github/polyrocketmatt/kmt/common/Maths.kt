@@ -696,7 +696,7 @@ class Maths {
          * @return This if value ∈ [min, max], min if this < min and max if this > max.
          */
         fun clip(value: Double, min: Double, max: Double) = if (value < min) min else if (value > max) max else value
-
+        
         /**
          * Compute the binomial coefficient of (n, k)^t. This is also
          * the combination of k out of n.

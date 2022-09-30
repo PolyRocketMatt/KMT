@@ -23,17 +23,53 @@ import com.github.polyrocketmatt.kmt.function.differentiable.Differentiable
 import com.github.polyrocketmatt.kmt.function.differentiable.Differentiator
 import com.github.polyrocketmatt.kmt.function.integration.Integratable
 import com.github.polyrocketmatt.kmt.function.integration.Integrator
-import com.github.polyrocketmatt.kmt.range.Range
+import com.github.polyrocketmatt.kmt.interval.Interval
 
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Represents a univariate function (arity 1) that can be evaluated,
+ * integrated and differentiated.
+ *
+ * @param T The type of the output of the function.
+ */
 abstract class Univariate<T> : Function<T>(1), Integratable<T>, Differentiable<T> {
 
+    /**
+     * Evaluates the function at the given input.
+     *
+     * @param x The input to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(x: Double): T
+
+    /**
+     * Evaluates the function at the given input.
+     *
+     * @param x The input to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(x: Float): T
+
+    /**
+     * Evaluates the function at the given input.
+     *
+     * @param x The input to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(x: Int): T
+
+    /**
+     * Evaluates the function at the given input.
+     *
+     * @param x The input to evaluate the function at.
+     * @return The output of the function.
+     */
     abstract fun evaluate(x: Short): T
 
-    override fun integrate(range: Range<Double>, integrator: Integrator<T>): Array<Double> = integrator.integrate(this, range)
+    override fun integrate(interval: Interval<Double>, integrator: Integrator<T>): Array<Double> = integrator.integrate(this, interval)
 
-    override fun differentiate(range: Range<Double>, differentiator: Differentiator<T>): Array<Double> = differentiator.differentiate(this, range)
+    override fun differentiate(range: Interval<Double>, differentiator: Differentiator<T>): Array<Double> = differentiator.differentiate(this, range)
 
 }
