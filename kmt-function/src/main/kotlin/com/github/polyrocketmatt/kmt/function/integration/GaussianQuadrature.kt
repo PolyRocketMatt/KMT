@@ -22,6 +22,7 @@ import com.github.polyrocketmatt.kmt.common.DataType
 import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
 import com.github.polyrocketmatt.kmt.interval.Interval
+import com.github.polyrocketmatt.kmt.interval.half.HalfOpenInterval
 import kotlin.math.pow
 
 /**
@@ -33,7 +34,7 @@ import kotlin.math.pow
  *
  * @param T The type of the output of the function.
  */
-abstract class GaussianQuadrature<T>(val rule: GaussianQuadratureRule) : Quadrature<T> {
+abstract class GaussianQuadrature<T>(val rule: GaussianQuadratureRule, val weightFunction: WeightFunction) : Quadrature<T> {
 
     /**
      * Enum class containing the different Gaussian quadrature rules.
@@ -48,16 +49,20 @@ abstract class GaussianQuadrature<T>(val rule: GaussianQuadratureRule) : Quadrat
         FIVE_POINT(5)
     }
 
+    /**
+     * Enum class containing the different weight functions for the Gaussian
+     * quadrature.
+     *
+     * @param function The weight function.
+     * @param min The lower bound of the interval on which integration is performed.
+     * @param max The upper bound of the interval on which integration is performed.
+     */
     //  TODO: Make use of KMT-Common exp function
-    enum class WeightType(val function: (DoubleArray) -> Double, val min: Double, val max: Double) {
+    enum class WeightFunction(val function: (DoubleArray) -> Double, val min: Double, val max: Double) {
         LEGENDRE({ 1.0 }, -1.0, 1.0),
-        CHEBYSHEV_FIRST({ 1.0 / (1.0 - it[0] * it[0]).dsqrt()}, -1.0, 1.0),
-        CHEBYSHEV_SECOND({ (1.0 - it[0] * it[0]).dsqrt() }, -1.0, 1.0),
-        LAGUERRE({ it[0].pow(it[1]) * kotlin.math.exp(-it[0]) }, 0.0, Double.POSITIVE_INFINITY),
+        LAGUERRE({ it[0].pow(-it[1]) * kotlin.math.exp(-it[0]) }, 0.0, Double.POSITIVE_INFINITY),
         HERMITE({ kotlin.math.exp(-(it[0] * it[0])) }, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY),
         JACOBI({ (1.0 - it[0]).pow(it[1]) * (1.0 + it[0]).pow(it[2]) }, -1.0, 1.0),
-        LOBATTO({ 1.0 }, -1.0, 1.0),
-        KONROD({ 1.0 }, -1.0, 1.0)
     }
 
     companion object {
@@ -97,27 +102,26 @@ abstract class GaussianQuadrature<T>(val rule: GaussianQuadratureRule) : Quadrat
          * Get a Gaussian quadrature for a univariate function given a datatype.
          *
          * @param T The type of the output of the function.
+         * @param rule The quadrature rule to use.
+         * @param weightFunction The weight function to use.
          * @param type The datatype of the function.
          * @return A Gaussian quadrature for a univariate function of the given datatype.
          */
         @Suppress("UNCHECKED_CAST")
-        fun <T> get(rule: GaussianQuadratureRule, type: DataType): GaussianQuadrature<T> = when (type) {
-            DataType.DOUBLE -> DoubleGaussianIntegrator(rule) as GaussianQuadrature<T>
-            DataType.FLOAT -> FloatGaussianIntegrator(rule) as GaussianQuadrature<T>
-            DataType.INT -> IntGaussianIntegrator(rule) as GaussianQuadrature<T>
-            DataType.SHORT -> ShortGaussianIntegrator(rule) as GaussianQuadrature<T>
+        fun <T> get(rule: GaussianQuadratureRule, weightFunction: WeightFunction, type: DataType): GaussianQuadrature<T> = when (type) {
+            DataType.DOUBLE -> DoubleGaussianIntegrator(rule, weightFunction) as GaussianQuadrature<T>
+            DataType.FLOAT -> FloatGaussianIntegrator(rule, weightFunction) as GaussianQuadrature<T>
+            DataType.INT -> IntGaussianIntegrator(rule, weightFunction) as GaussianQuadrature<T>
+            DataType.SHORT -> ShortGaussianIntegrator(rule, weightFunction) as GaussianQuadrature<T>
         }
     }
 }
 
-private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuadrature<Double>(rule) {
+private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule, weightFunction: WeightFunction) : GaussianQuadrature<Double>(rule, weightFunction) {
 
-    override fun integrate(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
+    private fun legendre(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
         val min = interval.min()
         val max = interval.max()
-        if (min == max)
-            throw IllegalArgumentException("Range must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
-
         val factor = (max - min) / 2.0
         val offset = (max + min) / 2.0
         val quadrature = constructQuadrature(rule)
@@ -128,15 +132,42 @@ private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQ
             result[i] = factor * weights[i] * function.evaluate(points[i] * factor + offset)
         return result.toTypedArray()
     }
+
+    private fun laguerre(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
+        val max = interval.max()
+        if (interval !is HalfOpenInterval<Double>)
+            throw IllegalArgumentException("Interval must be half open to integrate using Gauss-Laguerre quadrature")
+        if (max != Double.POSITIVE_INFINITY)
+            throw IllegalArgumentException("Interval must have a maximum value of infinity to integrate using Gauss-Laguerre quadrature")
+
+        val quadrature = constructQuadrature(rule)
+        val weights = quadrature.first
+        val points = quadrature.second
+        val result = DoubleArray(rule.n)
+        for (i in 0 until rule.n)
+            result[i] = weights[i] * weightFunction.function(doubleArrayOf(points[i], 3.0)) * function.evaluate(points[i])
+        return result.toTypedArray()
+    }
+
+    override fun integrate(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
+        if (interval.min() == interval.max())
+            return arrayOf(0.0)
+
+        return when (weightFunction) {
+            WeightFunction.LEGENDRE         -> legendre(function, interval)
+            WeightFunction.LAGUERRE         -> laguerre(function, interval)
+            else                            -> throw IllegalArgumentException("Weight function not supported")
+        }
+    }
 }
 
-private class FloatGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuadrature<Float>(rule) {
+private class FloatGaussianIntegrator(rule: GaussianQuadratureRule, weightFunction: WeightFunction) : GaussianQuadrature<Float>(rule, weightFunction) {
 
     override fun integrate(function: Univariate<Float>, interval: Interval<Double>): Array<Double> {
         val min = interval.min()
         val max = interval.max()
         if (min == max)
-            throw IllegalArgumentException("Range must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
+            throw IllegalArgumentException("Interval must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
         val factor = (max - min) / 2.0
         val offset = (max + min) / 2.0
         val quadrature = constructQuadrature(rule)
@@ -149,13 +180,13 @@ private class FloatGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQu
     }
 }
 
-private class IntGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuadrature<Int>(rule) {
+private class IntGaussianIntegrator(rule: GaussianQuadratureRule, weightFunction: WeightFunction) : GaussianQuadrature<Int>(rule, weightFunction) {
 
     override fun integrate(function: Univariate<Int>, interval: Interval<Double>): Array<Double> {
         val min = interval.min()
         val max = interval.max()
         if (min == max)
-            throw IllegalArgumentException("Range must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
+            throw IllegalArgumentException("Interval must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
         val factor = (max - min) / 2.0
         val offset = (max + min) / 2.0
         val quadrature = constructQuadrature(rule)
@@ -168,13 +199,13 @@ private class IntGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuad
     }
 }
 
-private class ShortGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuadrature<Short>(rule) {
+private class ShortGaussianIntegrator(rule: GaussianQuadratureRule, weightFunction: WeightFunction) : GaussianQuadrature<Short>(rule, weightFunction) {
 
     override fun integrate(function: Univariate<Short>, interval: Interval<Double>): Array<Double> {
         val min = interval.min()
         val max = interval.max()
         if (min == max)
-            throw IllegalArgumentException("Range must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
+            throw IllegalArgumentException("Interval must have a minimum and maximum value that are not equal to integrate using gaussian quadrature")
         val factor = (max - min) / 2.0
         val offset = (max + min) / 2.0
         val quadrature = constructQuadrature(rule)
