@@ -25,73 +25,73 @@ class GaussianIntegratorTest {
 
     @Test
     fun testGaussianDoubleIntegrator() {
-        assertEquals(24.0, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.ONE_POINT, DataType.DOUBLE)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.TWO_POINT, DataType.DOUBLE)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.THREE_POINT, DataType.DOUBLE)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.DOUBLE)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(24.0, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.ONE_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.TWO_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.THREE_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.DOUBLE)).sum(), 0.0001)
     }
 
     @Test
     fun testGaussianFloatIntegrator() {
-        assertEquals(24.0, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.ONE_POINT, DataType.FLOAT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.TWO_POINT, DataType.FLOAT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.THREE_POINT, DataType.FLOAT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.FLOAT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(24.0, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.ONE_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.TWO_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.THREE_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.FLOAT)).sum(), 0.0001)
     }
 
     @Test
     fun testGaussianIntIntegrator() {
-        assertEquals(24.0, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.ONE_POINT, DataType.INT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.TWO_POINT, DataType.INT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.THREE_POINT, DataType.INT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.INT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(24.0, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.ONE_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.TWO_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.THREE_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.INT)).sum(), 0.0001)
     }
 
     @Test
     fun testGaussianShortIntegrator() {
-        assertEquals(24.0, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.ONE_POINT, DataType.SHORT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.TWO_POINT, DataType.SHORT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.THREE_POINT, DataType.SHORT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.SHORT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(interval, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(24.0, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.ONE_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.TWO_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.THREE_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(interval, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.SHORT)).sum(), 0.0001)
     }
 
     @Test
     fun testGaussianDoubleIntegratorSubdivided() {
-        assertEquals(24.0, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.ONE_POINT, DataType.DOUBLE)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.TWO_POINT, DataType.DOUBLE)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.THREE_POINT, DataType.DOUBLE)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.DOUBLE)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(24.0, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.ONE_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.TWO_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.THREE_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.DOUBLE)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.DOUBLE)).sum(), 0.0001)
     }
 
     @Test
     fun testGaussianFloatIntegratorSubdivided() {
-        assertEquals(24.0, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.ONE_POINT, DataType.FLOAT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.TWO_POINT, DataType.FLOAT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.THREE_POINT, DataType.FLOAT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.FLOAT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(24.0, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.ONE_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.TWO_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.THREE_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.FLOAT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.FLOAT)).sum(), 0.0001)
     }
 
     @Test
     fun testGaussianIntIntegratorSubdivided() {
-        assertEquals(24.0, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.ONE_POINT, DataType.INT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.TWO_POINT, DataType.INT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.THREE_POINT, DataType.INT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.INT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(24.0, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.ONE_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.TWO_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.THREE_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.INT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.INT)).sum(), 0.0001)
     }
 
     @Test
     fun testGaussianShortIntegratorSubdivided() {
-        assertEquals(24.0, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.ONE_POINT, DataType.SHORT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.TWO_POINT, DataType.SHORT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.THREE_POINT, DataType.SHORT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FOUR_POINT, DataType.SHORT)).sum(), 0.0001)
-        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianIntegrator.get(GaussianIntegrator.GaussianQuadratureRule.FIVE_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(24.0, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.ONE_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.TWO_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.THREE_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.SHORT)).sum(), 0.0001)
+        assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.SHORT)).sum(), 0.0001)
     }
 }

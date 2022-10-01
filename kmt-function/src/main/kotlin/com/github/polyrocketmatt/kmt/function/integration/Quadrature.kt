@@ -30,7 +30,7 @@ import com.github.polyrocketmatt.kmt.interval.Interval
  * @param T The type of the output of the function.
  */
 @FunctionalInterface
-interface Integrator<T> {
+interface Quadrature<T> {
 
     /**
      * Integrate the given function in the given interval.

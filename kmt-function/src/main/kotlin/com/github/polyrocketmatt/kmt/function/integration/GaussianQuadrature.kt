@@ -31,7 +31,7 @@ import com.github.polyrocketmatt.kmt.interval.Interval
  *
  * @param T The type of the output of the function.
  */
-abstract class GaussianIntegrator<T>(val rule: GaussianQuadratureRule) : Integrator<T> {
+abstract class GaussianQuadrature<T>(val rule: GaussianQuadratureRule) : Quadrature<T> {
 
     /**
      * Enum class containing the different Gaussian quadrature rules.
@@ -87,16 +87,16 @@ abstract class GaussianIntegrator<T>(val rule: GaussianQuadratureRule) : Integra
          * @return A Gaussian quadrature for a univariate function of the given datatype.
          */
         @Suppress("UNCHECKED_CAST")
-        fun <T> get(rule: GaussianQuadratureRule, type: DataType): GaussianIntegrator<T> = when (type) {
-            DataType.DOUBLE -> DoubleGaussianIntegrator(rule) as GaussianIntegrator<T>
-            DataType.FLOAT -> FloatGaussianIntegrator(rule) as GaussianIntegrator<T>
-            DataType.INT -> IntGaussianIntegrator(rule) as GaussianIntegrator<T>
-            DataType.SHORT -> ShortGaussianIntegrator(rule) as GaussianIntegrator<T>
+        fun <T> get(rule: GaussianQuadratureRule, type: DataType): GaussianQuadrature<T> = when (type) {
+            DataType.DOUBLE -> DoubleGaussianIntegrator(rule) as GaussianQuadrature<T>
+            DataType.FLOAT -> FloatGaussianIntegrator(rule) as GaussianQuadrature<T>
+            DataType.INT -> IntGaussianIntegrator(rule) as GaussianQuadrature<T>
+            DataType.SHORT -> ShortGaussianIntegrator(rule) as GaussianQuadrature<T>
         }
     }
 }
 
-private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIntegrator<Double>(rule) {
+private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuadrature<Double>(rule) {
 
     override fun integrate(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
         val min = interval.min()
@@ -116,7 +116,7 @@ private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianI
     }
 }
 
-private class FloatGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIntegrator<Float>(rule) {
+private class FloatGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuadrature<Float>(rule) {
 
     override fun integrate(function: Univariate<Float>, interval: Interval<Double>): Array<Double> {
         val min = interval.min()
@@ -135,7 +135,7 @@ private class FloatGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIn
     }
 }
 
-private class IntGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIntegrator<Int>(rule) {
+private class IntGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuadrature<Int>(rule) {
 
     override fun integrate(function: Univariate<Int>, interval: Interval<Double>): Array<Double> {
         val min = interval.min()
@@ -154,7 +154,7 @@ private class IntGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianInte
     }
 }
 
-private class ShortGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianIntegrator<Short>(rule) {
+private class ShortGaussianIntegrator(rule: GaussianQuadratureRule) : GaussianQuadrature<Short>(rule) {
 
     override fun integrate(function: Univariate<Short>, interval: Interval<Double>): Array<Double> {
         val min = interval.min()

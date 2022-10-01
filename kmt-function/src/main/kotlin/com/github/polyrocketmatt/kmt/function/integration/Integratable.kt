@@ -35,8 +35,8 @@ interface Integratable<T> {
      * Integrate the function over the given interval with the provided integrator.
      *
      * @param interval The [Interval] over which the function should be integrated.
-     * @param integrator The [Integrator] that should be used to integrate the function.
+     * @param integrator The [Quadrature] that should be used to integrate the function.
      * @return An array containing the result of the numerical integration.
      */
-    fun integrate(interval: Interval<Double>, integrator: Integrator<T>): Array<Double>
+    fun integrate(interval: Interval<Double>, integrator: Quadrature<T>): Array<Double>
 }

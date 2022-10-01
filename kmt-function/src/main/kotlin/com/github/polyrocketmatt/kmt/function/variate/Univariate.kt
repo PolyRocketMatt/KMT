@@ -22,7 +22,7 @@ import com.github.polyrocketmatt.kmt.function.Function
 import com.github.polyrocketmatt.kmt.function.differentiation.Differentiable
 import com.github.polyrocketmatt.kmt.function.differentiation.Differentiator
 import com.github.polyrocketmatt.kmt.function.integration.Integratable
-import com.github.polyrocketmatt.kmt.function.integration.Integrator
+import com.github.polyrocketmatt.kmt.function.integration.Quadrature
 import com.github.polyrocketmatt.kmt.interval.Interval
 
 /**
@@ -67,7 +67,7 @@ abstract class Univariate<T> : Function<T>(1), Integratable<T>, Differentiable<T
      */
     abstract fun evaluate(x: Short): T
 
-    override fun integrate(interval: Interval<Double>, integrator: Integrator<T>): Array<Double> = integrator.integrate(this, interval)
+    override fun integrate(interval: Interval<Double>, integrator: Quadrature<T>): Array<Double> = integrator.integrate(this, interval)
 
     override fun differentiate(interval: Interval<Double>, differentiator: Differentiator<T>): Array<Double> = differentiator.differentiate(this, interval)
 }
