@@ -20,7 +20,6 @@ are available:
 * [`vector`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Vector) - Vector classes and operations
 * [`trigonometry`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Trigonometry) - Tabular trigonometric functions for faster computation
 * [`function`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Function) - Functions and their relative operations (algebraic operations, integration, differentiation)
-* [`matrix`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Matrix) - Provides more readable wrappers for Multik arrays
 
 ## Documentation
 
