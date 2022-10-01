@@ -10,6 +10,8 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
     implementation(project(":kmt-vector"))
+    implementation("org.jetbrains.kotlinx:multik-core:0.2.0")
+    implementation("org.jetbrains.kotlinx:multik-kotlin:0.2.0")
 }
 
 tasks.getByName<Test>("test") {
