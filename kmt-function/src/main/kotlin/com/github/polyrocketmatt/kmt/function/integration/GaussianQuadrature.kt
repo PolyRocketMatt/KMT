@@ -54,15 +54,13 @@ abstract class GaussianQuadrature<T>(val rule: GaussianQuadratureRule, val weigh
      * quadrature.
      *
      * @param function The weight function.
-     * @param min The lower bound of the interval on which integration is performed.
-     * @param max The upper bound of the interval on which integration is performed.
      */
     //  TODO: Make use of KMT-Common exp function
-    enum class WeightFunction(val function: (DoubleArray) -> Double, val min: Double, val max: Double) {
-        LEGENDRE({ 1.0 }, -1.0, 1.0),
-        LAGUERRE({ it[0].pow(-it[1]) * kotlin.math.exp(-it[0]) }, 0.0, Double.POSITIVE_INFINITY),
-        HERMITE({ kotlin.math.exp(-(it[0] * it[0])) }, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY),
-        JACOBI({ (1.0 - it[0]).pow(it[1]) * (1.0 + it[0]).pow(it[2]) }, -1.0, 1.0),
+    enum class WeightFunction(val function: (DoubleArray) -> Double) {
+        LEGENDRE({ 1.0 }),
+        LAGUERRE({ if (it[0] == 0.0) 0.0 else it[0].pow(it[1]) * kotlin.math.exp(-it[0]) }),
+        HERMITE({ kotlin.math.exp(-(it[0] * it[0])) }),
+        JACOBI({ (1.0 - it[0]).pow(it[1]) * (1.0 + it[0]).pow(it[2]) }),
     }
 
     companion object {
@@ -137,15 +135,20 @@ private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule, weightFunct
         val max = interval.max()
         if (interval !is HalfOpenInterval<Double>)
             throw IllegalArgumentException("Interval must be half open to integrate using Gauss-Laguerre quadrature")
-        if (max != Double.POSITIVE_INFINITY)
+        if (max != Double.MAX_VALUE)
             throw IllegalArgumentException("Interval must have a maximum value of infinity to integrate using Gauss-Laguerre quadrature")
 
         val quadrature = constructQuadrature(rule)
         val weights = quadrature.first
         val points = quadrature.second
         val result = DoubleArray(rule.n)
-        for (i in 0 until rule.n)
-            result[i] = weights[i] * weightFunction.function(doubleArrayOf(points[i], 3.0)) * function.evaluate(points[i])
+        for (i in 0 until rule.n) {
+            val point = points[i]
+            val weight = weights[i]
+            val value = weights[i] * weightFunction.function(doubleArrayOf(points[i], 3.0)) * function.evaluate(points[i])
+
+            result[i] = value
+        }
         return result.toTypedArray()
     }
 
