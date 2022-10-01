@@ -19,7 +19,6 @@
 package com.github.polyrocketmatt.kmt.function.integration
 
 import com.github.polyrocketmatt.kmt.common.DataType
-import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
 import com.github.polyrocketmatt.kmt.interval.Interval
 import com.github.polyrocketmatt.kmt.interval.half.HalfOpenInterval
@@ -157,9 +156,9 @@ private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule, weightFunct
             return arrayOf(0.0)
 
         return when (weightFunction) {
-            WeightFunction.LEGENDRE         -> legendre(function, interval)
-            WeightFunction.LAGUERRE         -> laguerre(function, interval)
-            else                            -> throw IllegalArgumentException("Weight function not supported")
+            WeightFunction.LEGENDRE -> legendre(function, interval)
+            WeightFunction.LAGUERRE -> laguerre(function, interval)
+            else -> throw IllegalArgumentException("Weight function not supported")
         }
     }
 }

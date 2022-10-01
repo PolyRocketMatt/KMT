@@ -33,5 +33,4 @@ import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
 class LeftOpenDoubleInterval(private val start: Double, private val end: Double, accuracy: Double) : ClosedDoubleInterval(start, end, accuracy), HalfOpenInterval<Double> {
 
     override fun isIn(value: Double): Boolean = value > start && value <= end
-
 }

@@ -15,7 +15,6 @@ class Func : Univariate<Double>() {
     override fun evaluate(x: Int): Double = evaluate(x.toDouble())
 
     override fun evaluate(x: Short): Double = evaluate(x.toDouble())
-
 }
 
 fun main() {
