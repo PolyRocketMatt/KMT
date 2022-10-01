@@ -3,6 +3,7 @@ $dokka.linkExtension:html
 
 module:kmt-common
 com.github.polyrocketmatt.kmt.common
+com.github.polyrocketmatt.kmt.common.annotation
 module:kmt-function
 com.github.polyrocketmatt.kmt.function
 com.github.polyrocketmatt.kmt.function.differentiation
