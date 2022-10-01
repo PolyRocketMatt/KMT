@@ -24,7 +24,7 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents an inclusive range (closed interval) of floating point numbers between start and end.
+ * Represents a closed interval of floating point numbers between start and end.
  *
  * @param start The minimum value of the range.
  * @param end The maximum value of the range.
