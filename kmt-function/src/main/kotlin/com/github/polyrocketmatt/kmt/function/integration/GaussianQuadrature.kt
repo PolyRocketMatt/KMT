@@ -19,8 +19,10 @@
 package com.github.polyrocketmatt.kmt.function.integration
 
 import com.github.polyrocketmatt.kmt.common.DataType
+import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
 import com.github.polyrocketmatt.kmt.interval.Interval
+import kotlin.math.pow
 
 /**
  * @author Matthias Kovacic
@@ -44,6 +46,18 @@ abstract class GaussianQuadrature<T>(val rule: GaussianQuadratureRule) : Quadrat
         THREE_POINT(3),
         FOUR_POINT(4),
         FIVE_POINT(5)
+    }
+
+    //  TODO: Make use of KMT-Common exp function
+    enum class WeightType(val function: (DoubleArray) -> Double, val min: Double, val max: Double) {
+        LEGENDRE({ 1.0 }, -1.0, 1.0),
+        CHEBYSHEV_FIRST({ 1.0 / (1.0 - it[0] * it[0]).dsqrt()}, -1.0, 1.0),
+        CHEBYSHEV_SECOND({ (1.0 - it[0] * it[0]).dsqrt() }, -1.0, 1.0),
+        LAGUERRE({ it[0].pow(it[1]) * kotlin.math.exp(-it[0]) }, 0.0, Double.POSITIVE_INFINITY),
+        HERMITE({ kotlin.math.exp(-(it[0] * it[0])) }, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY),
+        JACOBI({ (1.0 - it[0]).pow(it[1]) * (1.0 + it[0]).pow(it[2]) }, -1.0, 1.0),
+        LOBATTO({ 1.0 }, -1.0, 1.0),
+        KONROD({ 1.0 }, -1.0, 1.0)
     }
 
     companion object {
