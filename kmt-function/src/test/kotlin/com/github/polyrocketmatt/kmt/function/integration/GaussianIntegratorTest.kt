@@ -1,13 +1,8 @@
 package com.github.polyrocketmatt.kmt.function.integration
 
-import com.github.polyrocketmatt.kmt.common.DataType
-import com.github.polyrocketmatt.kmt.function.variate.Univariate
-import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
-import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
-
 class GaussianIntegratorTest {
 
+    /*
     private class TestFunction : Univariate<Float>() {
 
         override fun evaluate(x: Double): Float = evaluate(x.toFloat())
@@ -94,4 +89,6 @@ class GaussianIntegratorTest {
         assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FOUR_POINT, DataType.SHORT)).sum(), 0.0001)
         assertEquals(29.3333, function.integrate(intervalSubdivided, GaussianQuadrature.get(GaussianQuadrature.GaussianQuadratureRule.FIVE_POINT, DataType.SHORT)).sum(), 0.0001)
     }
+
+     */
 }
