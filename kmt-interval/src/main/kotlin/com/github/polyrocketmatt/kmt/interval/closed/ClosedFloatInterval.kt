@@ -24,17 +24,22 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents an inclusive range (closed interval) of floating point numbers between start and end.
+ * Represents a closed interval of floating point numbers between start and end.
  *
  * @param start The minimum value of the range.
  * @param end The maximum value of the range.
  * @param accuracy The accuracy of the range.
  */
-open class ClosedFloatInterval(private val start: Float, private val end: Float, accuracy: Float = 1.0f) : ClosedInterval<Float> {
+open class ClosedFloatInterval(private var start: Float, private var end: Float, accuracy: Float = 1.0f) : ClosedInterval<Float> {
 
     private val values: FloatArray = FloatArray((1.0f / accuracy).toInt() + 1)
 
     init {
+        if (start == Float.NEGATIVE_INFINITY)
+            start = -Float.MAX_VALUE
+        if (end == Float.POSITIVE_INFINITY)
+            end = Float.MAX_VALUE
+
         val tMin = if (start < end) start else end
         val diff = (end - start).fastAbs()
         val step = diff / (1.0f / accuracy)

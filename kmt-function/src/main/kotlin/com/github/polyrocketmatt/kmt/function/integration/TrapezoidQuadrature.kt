@@ -13,7 +13,7 @@ import com.github.polyrocketmatt.kmt.interval.Interval
  *
  * @param T The type of the output of the function.
  */
-abstract class TrapezoidIntegrator<T> : Integrator<T> {
+abstract class TrapezoidQuadrature<T> : Quadrature<T> {
 
     companion object {
 
@@ -25,16 +25,16 @@ abstract class TrapezoidIntegrator<T> : Integrator<T> {
          * @return A trapezoid quadrature for a univariate function of the given datatype.
          */
         @Suppress("UNCHECKED_CAST")
-        fun <T> get(type: DataType): TrapezoidIntegrator<T> = when (type) {
-            DataType.DOUBLE -> DoubleTrapezoidIntegrator() as TrapezoidIntegrator<T>
-            DataType.FLOAT -> FloatTrapezoidIntegrator() as TrapezoidIntegrator<T>
-            DataType.INT -> IntTrapezoidIntegrator() as TrapezoidIntegrator<T>
-            DataType.SHORT -> ShortTrapezoidIntegrator() as TrapezoidIntegrator<T>
+        fun <T> get(type: DataType): TrapezoidQuadrature<T> = when (type) {
+            DataType.DOUBLE -> DoubleTrapezoidIntegrator() as TrapezoidQuadrature<T>
+            DataType.FLOAT -> FloatTrapezoidIntegrator() as TrapezoidQuadrature<T>
+            DataType.INT -> IntTrapezoidIntegrator() as TrapezoidQuadrature<T>
+            DataType.SHORT -> ShortTrapezoidIntegrator() as TrapezoidQuadrature<T>
         }
     }
 }
 
-private class DoubleTrapezoidIntegrator : TrapezoidIntegrator<Double>() {
+private class DoubleTrapezoidIntegrator : TrapezoidQuadrature<Double>() {
 
     override fun integrate(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
         if (interval.count() < 2)
@@ -53,7 +53,7 @@ private class DoubleTrapezoidIntegrator : TrapezoidIntegrator<Double>() {
     }
 }
 
-private class FloatTrapezoidIntegrator : TrapezoidIntegrator<Float>() {
+private class FloatTrapezoidIntegrator : TrapezoidQuadrature<Float>() {
 
     override fun integrate(function: Univariate<Float>, interval: Interval<Double>): Array<Double> {
         if (interval.count() < 2)
@@ -72,7 +72,7 @@ private class FloatTrapezoidIntegrator : TrapezoidIntegrator<Float>() {
     }
 }
 
-private class IntTrapezoidIntegrator : TrapezoidIntegrator<Int>() {
+private class IntTrapezoidIntegrator : TrapezoidQuadrature<Int>() {
 
     override fun integrate(function: Univariate<Int>, interval: Interval<Double>): Array<Double> {
         if (interval.count() < 2)
@@ -91,7 +91,7 @@ private class IntTrapezoidIntegrator : TrapezoidIntegrator<Int>() {
     }
 }
 
-private class ShortTrapezoidIntegrator : TrapezoidIntegrator<Short>() {
+private class ShortTrapezoidIntegrator : TrapezoidQuadrature<Short>() {
 
     override fun integrate(function: Univariate<Short>, interval: Interval<Double>): Array<Double> {
         if (interval.count() < 2)

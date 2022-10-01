@@ -31,7 +31,7 @@ import com.github.polyrocketmatt.kmt.interval.Interval
  *
  * @param T The type of the output of the function.
  */
-abstract class SimpsonIntegrator<T> : Integrator<T> {
+abstract class SimpsonQuadrature<T> : Quadrature<T> {
 
     companion object {
 
@@ -43,16 +43,16 @@ abstract class SimpsonIntegrator<T> : Integrator<T> {
          * @return A Simpson quadrature for a univariate function of the given datatype.
          */
         @Suppress("UNCHECKED_CAST")
-        fun <T> get(type: DataType): SimpsonIntegrator<T> = when (type) {
-            DataType.DOUBLE -> DoubleSimpsonIntegrator() as SimpsonIntegrator<T>
-            DataType.FLOAT -> FloatSimpsonIntegrator() as SimpsonIntegrator<T>
-            DataType.INT -> IntSimpsonIntegrator() as SimpsonIntegrator<T>
-            DataType.SHORT -> ShortSimpsonIntegrator() as SimpsonIntegrator<T>
+        fun <T> get(type: DataType): SimpsonQuadrature<T> = when (type) {
+            DataType.DOUBLE -> DoubleSimpsonIntegrator() as SimpsonQuadrature<T>
+            DataType.FLOAT -> FloatSimpsonIntegrator() as SimpsonQuadrature<T>
+            DataType.INT -> IntSimpsonIntegrator() as SimpsonQuadrature<T>
+            DataType.SHORT -> ShortSimpsonIntegrator() as SimpsonQuadrature<T>
         }
     }
 }
 
-private class DoubleSimpsonIntegrator : SimpsonIntegrator<Double>() {
+private class DoubleSimpsonIntegrator : SimpsonQuadrature<Double>() {
 
     override fun integrate(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
         if (interval.count() < 2)
@@ -73,7 +73,7 @@ private class DoubleSimpsonIntegrator : SimpsonIntegrator<Double>() {
     }
 }
 
-private class FloatSimpsonIntegrator : SimpsonIntegrator<Float>() {
+private class FloatSimpsonIntegrator : SimpsonQuadrature<Float>() {
 
     override fun integrate(function: Univariate<Float>, interval: Interval<Double>): Array<Double> {
         if (interval.count() < 2)
@@ -94,7 +94,7 @@ private class FloatSimpsonIntegrator : SimpsonIntegrator<Float>() {
     }
 }
 
-private class IntSimpsonIntegrator : SimpsonIntegrator<Int>() {
+private class IntSimpsonIntegrator : SimpsonQuadrature<Int>() {
 
     override fun integrate(function: Univariate<Int>, interval: Interval<Double>): Array<Double> {
         if (interval.count() < 2)
@@ -115,7 +115,7 @@ private class IntSimpsonIntegrator : SimpsonIntegrator<Int>() {
     }
 }
 
-private class ShortSimpsonIntegrator : SimpsonIntegrator<Short>() {
+private class ShortSimpsonIntegrator : SimpsonQuadrature<Short>() {
 
     override fun integrate(function: Univariate<Short>, interval: Interval<Double>): Array<Double> {
         if (interval.count() < 2)

@@ -24,26 +24,26 @@ class SimpsonIntegratorTest {
     private val intervalSubdivided = ClosedDoubleInterval(0.0, 4.0, 0.1)
 
     @Test
-    fun testGaussianDoubleIntegrator() = assertEquals(29.333, function.integrate(interval, SimpsonIntegrator.get(DataType.DOUBLE)).sum(), 0.001)
+    fun testGaussianDoubleIntegrator() = assertEquals(29.333, function.integrate(interval, SimpsonQuadrature.get(DataType.DOUBLE)).sum(), 0.001)
 
     @Test
-    fun testGaussianFloatIntegrator() = assertEquals(29.333, function.integrate(interval, SimpsonIntegrator.get(DataType.FLOAT)).sum(), 0.001)
+    fun testGaussianFloatIntegrator() = assertEquals(29.333, function.integrate(interval, SimpsonQuadrature.get(DataType.FLOAT)).sum(), 0.001)
 
     @Test
-    fun testGaussianIntIntegrator() = assertEquals(29.333, function.integrate(interval, SimpsonIntegrator.get(DataType.INT)).sum(), 0.001)
+    fun testGaussianIntIntegrator() = assertEquals(29.333, function.integrate(interval, SimpsonQuadrature.get(DataType.INT)).sum(), 0.001)
 
     @Test
-    fun testGaussianShortIntegrator() = assertEquals(29.333, function.integrate(interval, SimpsonIntegrator.get(DataType.SHORT)).sum(), 0.001)
+    fun testGaussianShortIntegrator() = assertEquals(29.333, function.integrate(interval, SimpsonQuadrature.get(DataType.SHORT)).sum(), 0.001)
 
     @Test
-    fun testGaussianDoubleIntegratorSubdivided() = assertEquals(29.333, function.integrate(intervalSubdivided, SimpsonIntegrator.get(DataType.DOUBLE)).sum(), 0.001)
+    fun testGaussianDoubleIntegratorSubdivided() = assertEquals(29.333, function.integrate(intervalSubdivided, SimpsonQuadrature.get(DataType.DOUBLE)).sum(), 0.001)
 
     @Test
-    fun testGaussianFloatIntegratorSubdivided() = assertEquals(29.333, function.integrate(intervalSubdivided, SimpsonIntegrator.get(DataType.FLOAT)).sum(), 0.001)
+    fun testGaussianFloatIntegratorSubdivided() = assertEquals(29.333, function.integrate(intervalSubdivided, SimpsonQuadrature.get(DataType.FLOAT)).sum(), 0.001)
 
     @Test
-    fun testGaussianIntIntegratorSubdivided() = assertEquals(28.853, function.integrate(intervalSubdivided, SimpsonIntegrator.get(DataType.INT)).sum(), 0.001)
+    fun testGaussianIntIntegratorSubdivided() = assertEquals(28.853, function.integrate(intervalSubdivided, SimpsonQuadrature.get(DataType.INT)).sum(), 0.001)
 
     @Test
-    fun testGaussianShortIntegratorSubdivided() = assertEquals(28.853, function.integrate(intervalSubdivided, SimpsonIntegrator.get(DataType.SHORT)).sum(), 0.001)
+    fun testGaussianShortIntegratorSubdivided() = assertEquals(28.853, function.integrate(intervalSubdivided, SimpsonQuadrature.get(DataType.SHORT)).sum(), 0.001)
 }

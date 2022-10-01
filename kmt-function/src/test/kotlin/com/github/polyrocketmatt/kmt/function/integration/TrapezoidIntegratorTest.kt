@@ -24,26 +24,26 @@ class TrapezoidIntegratorTest {
     private val subdividedInterval = ClosedDoubleInterval(0.0, 4.0, 0.1)
 
     @Test
-    fun testGaussianDoubleIntegrator() = assertEquals(40.0, function.integrate(interval, TrapezoidIntegrator.get(DataType.DOUBLE)).sum(), 0.001)
+    fun testGaussianDoubleIntegrator() = assertEquals(40.0, function.integrate(interval, TrapezoidQuadrature.get(DataType.DOUBLE)).sum(), 0.001)
 
     @Test
-    fun testGaussianFloatIntegrator() = assertEquals(40.0, function.integrate(interval, TrapezoidIntegrator.get(DataType.FLOAT)).sum(), 0.001)
+    fun testGaussianFloatIntegrator() = assertEquals(40.0, function.integrate(interval, TrapezoidQuadrature.get(DataType.FLOAT)).sum(), 0.001)
 
     @Test
-    fun testGaussianIntIntegrator() = assertEquals(40.0, function.integrate(interval, TrapezoidIntegrator.get(DataType.INT)).sum(), 0.001)
+    fun testGaussianIntIntegrator() = assertEquals(40.0, function.integrate(interval, TrapezoidQuadrature.get(DataType.INT)).sum(), 0.001)
 
     @Test
-    fun testGaussianShortIntegrator() = assertEquals(40.0, function.integrate(interval, TrapezoidIntegrator.get(DataType.SHORT)).sum(), 0.001)
+    fun testGaussianShortIntegrator() = assertEquals(40.0, function.integrate(interval, TrapezoidQuadrature.get(DataType.SHORT)).sum(), 0.001)
 
     @Test
-    fun testGaussianDoubleIntegratorSubdivided() = assertEquals(29.439, function.integrate(subdividedInterval, TrapezoidIntegrator.get(DataType.DOUBLE)).sum(), 0.001)
+    fun testGaussianDoubleIntegratorSubdivided() = assertEquals(29.439, function.integrate(subdividedInterval, TrapezoidQuadrature.get(DataType.DOUBLE)).sum(), 0.001)
 
     @Test
-    fun testGaussianFloatIntegratorSubdivided() = assertEquals(29.439, function.integrate(subdividedInterval, TrapezoidIntegrator.get(DataType.FLOAT)).sum(), 0.001)
+    fun testGaussianFloatIntegratorSubdivided() = assertEquals(29.439, function.integrate(subdividedInterval, TrapezoidQuadrature.get(DataType.FLOAT)).sum(), 0.001)
 
     @Test
-    fun testGaussianIntIntegratorSubdivided() = assertEquals(27.999, function.integrate(subdividedInterval, TrapezoidIntegrator.get(DataType.INT)).sum(), 0.001)
+    fun testGaussianIntIntegratorSubdivided() = assertEquals(27.999, function.integrate(subdividedInterval, TrapezoidQuadrature.get(DataType.INT)).sum(), 0.001)
 
     @Test
-    fun testGaussianShortIntegratorSubdivided() = assertEquals(27.999, function.integrate(subdividedInterval, TrapezoidIntegrator.get(DataType.SHORT)).sum(), 0.001)
+    fun testGaussianShortIntegratorSubdivided() = assertEquals(27.999, function.integrate(subdividedInterval, TrapezoidQuadrature.get(DataType.SHORT)).sum(), 0.001)
 }
