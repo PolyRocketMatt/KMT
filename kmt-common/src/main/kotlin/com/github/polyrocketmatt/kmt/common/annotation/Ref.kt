@@ -5,6 +5,7 @@ package com.github.polyrocketmatt.kmt.common.annotation
  *
  * @param reference: the reference referred to
  */
+@Repeatable
 @Retention(AnnotationRetention.RUNTIME)
 @Target(
     AnnotationTarget.VALUE_PARAMETER,

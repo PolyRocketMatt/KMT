@@ -130,34 +130,12 @@ private class DoubleGaussianIntegrator(rule: GaussianQuadratureRule, weightFunct
         return result.toTypedArray()
     }
 
-    private fun laguerre(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
-        val max = interval.max()
-        if (interval !is HalfOpenInterval<Double>)
-            throw IllegalArgumentException("Interval must be half open to integrate using Gauss-Laguerre quadrature")
-        if (max != Double.MAX_VALUE)
-            throw IllegalArgumentException("Interval must have a maximum value of infinity to integrate using Gauss-Laguerre quadrature")
-
-        val quadrature = constructQuadrature(rule)
-        val weights = quadrature.first
-        val points = quadrature.second
-        val result = DoubleArray(rule.n)
-        for (i in 0 until rule.n) {
-            val point = points[i]
-            val weight = weights[i]
-            val value = weights[i] * weightFunction.function(doubleArrayOf(points[i], 3.0)) * function.evaluate(points[i])
-
-            result[i] = value
-        }
-        return result.toTypedArray()
-    }
-
     override fun integrate(function: Univariate<Double>, interval: Interval<Double>): Array<Double> {
         if (interval.min() == interval.max())
             return arrayOf(0.0)
 
         return when (weightFunction) {
             WeightFunction.LEGENDRE -> legendre(function, interval)
-            WeightFunction.LAGUERRE -> laguerre(function, interval)
             else -> throw IllegalArgumentException("Weight function not supported")
         }
     }

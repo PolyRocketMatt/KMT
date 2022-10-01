@@ -9,7 +9,7 @@ version = "0.0.1"
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
-    implementation(project(":kmt-vector"))
+    implementation(project(":kmt-interval"))
 }
 
 tasks.getByName<Test>("test") {
