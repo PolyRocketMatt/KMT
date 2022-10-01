@@ -24,17 +24,22 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents an inclusive range (closed interval) of double numbers between start and end.
+ * Represents a closed interval of double numbers between start and end.
  *
  * @param start The minimum value of the range.
  * @param end The maximum value of the range.
  * @param accuracy The accuracy of the range.
  */
-open class ClosedDoubleInterval(private val start: Double, private val end: Double, accuracy: Double = 1.0) : ClosedInterval<Double> {
+open class ClosedDoubleInterval(private var start: Double, private var end: Double, accuracy: Double = 1.0) : ClosedInterval<Double> {
 
     private val values: DoubleArray = DoubleArray((1.0 / accuracy).toInt() + 1)
 
     init {
+        if (start == Double.NEGATIVE_INFINITY)
+            start = -Double.MAX_VALUE
+        if (end == Double.POSITIVE_INFINITY)
+            end = Double.MAX_VALUE
+
         val tMin = if (start < end) start else end
         val diff = (end - start).fastAbs()
         val step = diff / (1.0 / accuracy)

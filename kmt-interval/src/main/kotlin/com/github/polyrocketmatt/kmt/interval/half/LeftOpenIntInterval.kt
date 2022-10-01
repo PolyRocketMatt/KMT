@@ -24,7 +24,7 @@ import com.github.polyrocketmatt.kmt.interval.closed.ClosedIntInterval
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents an exclusive range (open interval) of integer numbers between start and end.
+ * Represents a left half-open interval of integer numbers between start and end.
  *
  * @param start The minimum value of the range.
  * @param end The maximum value of the range.
