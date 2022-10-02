@@ -18,7 +18,31 @@
 
 package com.github.polyrocketmatt.kmt.common
 
-import kotlin.math.min
+import kotlin.math.round
+
+/**
+ * Round a double to the specified number of decimal places.
+ *
+ * @param n The number of decimal places to round to.
+ * @return The rounded double.
+ */
+fun Double.decimals(n: Int): Double {
+    var multiplier = 1.0
+    repeat(n) { multiplier *= 10 }
+    return round(this * multiplier) / multiplier
+}
+
+/**
+ * Round a floating-point number to the specified number of decimal places.
+ *
+ * @param n The number of decimal places to round to.
+ * @return The rounded floating-point number.
+ */
+fun Float.decimals(n: Int): Float {
+    var multiplier = 1.0f
+    repeat(n) { multiplier *= 10 }
+    return round(this * multiplier) / multiplier
+}
 
 /**
  * Check if the given integer is within a range.

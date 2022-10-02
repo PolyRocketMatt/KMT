@@ -9,29 +9,21 @@ import com.github.polyrocketmatt.kmt.function.variate.Univariate
  *
  * Represents a polynomial function.
  *
- * @param T The type of the output of the function.
  * @param coefficients The coefficients of the polynomial.
  */
-abstract class PolynomialFunction<T>(internal vararg val coefficients: T) : Univariate<T>() {
+class PolynomialFunction(private vararg val coefficients: Double) : Univariate<Double>() {
 
-    operator fun get(x: Double) = evaluate(x)
-    operator fun get(x: Float) = evaluate(x)
-    operator fun get(x: Int) = evaluate(x)
-    operator fun get(x: Short) = evaluate(x)
+    constructor(vararg coefficients: Float) : this(*coefficients.map { it.toDouble() }.toDoubleArray())
+    constructor(vararg coefficients: Int) : this(*coefficients.map { it.toDouble() }.toDoubleArray())
+    constructor(vararg coefficients: Short) : this(*coefficients.map { it.toDouble() }.toDoubleArray())
 
-    override fun evaluate(x: Float): T = evaluate(x.toDouble())
+    operator fun get(x: Double): Double = coefficients.foldIndexed(0.0) { index, acc, coefficient -> acc + coefficient * x.intPow(index) }
 
-    override fun evaluate(x: Int): T = evaluate(x.toDouble())
+    override fun evaluate(x: Double): Double = get(x)
 
-    override fun evaluate(x: Short): T = evaluate(x.toDouble())
-}
+    override fun evaluate(x: Float): Double = get(x.toDouble())
 
-/**
- * Polynomial function that operates on doubles.
- *
- * @param coefficients The coefficients of the polynomial.
- */
-class SimplePolynomial(vararg coefficients: Double) : PolynomialFunction<Double>(* coefficients.toTypedArray()) {
+    override fun evaluate(x: Int): Double = get(x.toDouble())
 
-    override fun evaluate(x: Double): Double = coefficients.reduceIndexed { index, acc, c -> acc + c * x.intPow(index) }
+    override fun evaluate(x: Short): Double = get(x.toDouble())
 }

@@ -18,7 +18,10 @@
 
 package com.github.polyrocketmatt.kmt.interval.closed
 
+import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.common.fastAbs
+import com.github.polyrocketmatt.kmt.common.utils.decimalPlaces
+import kotlin.math.roundToInt
 
 /**
  * @author Matthias Kovacic
@@ -32,9 +35,10 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
  */
 open class ClosedFloatInterval(private var start: Float, private var end: Float, accuracy: Float = 1.0f) : ClosedInterval<Float> {
 
-    private val values: FloatArray = FloatArray((1.0f / accuracy).toInt() + 1)
+    private val values: FloatArray = FloatArray((1.0 / accuracy.toDouble()).roundToInt() + 1)
 
     init {
+        val decimals = accuracy.decimalPlaces()
         if (start == Float.NEGATIVE_INFINITY)
             start = -Float.MAX_VALUE
         if (end == Float.POSITIVE_INFINITY)
@@ -46,7 +50,7 @@ open class ClosedFloatInterval(private var start: Float, private var end: Float,
         var i = 0.0f
         var idx = 0
         while (i <= diff) {
-            values[idx] = i + tMin
+            values[idx] = (i + tMin).decimals(decimals)
             idx++
             i += step
         }
