@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
+import com.github.polyrocketmatt.kmt.common.storage.Tuple4
 import com.github.polyrocketmatt.kmt.vector.Swizzle4
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.Double4
@@ -9,7 +10,7 @@ import com.github.polyrocketmatt.kmt.vector.it.Int4
 import com.github.polyrocketmatt.kmt.vector.sh.Short4
 import java.lang.UnsupportedOperationException
 
-data class Bool4(internal var x: Boolean, internal var y: Boolean, internal var z: Boolean, internal var w: Boolean) : BooleanVector(), Swizzle4 {
+class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) : Tuple4<Boolean>(arrayOf(x, y, z, w)), BooleanVector, Swizzle4 {
 
     constructor() : this(false, false, false, false)
     constructor(other: Bool4) : this(other.x, other.y, other.z, other.w)

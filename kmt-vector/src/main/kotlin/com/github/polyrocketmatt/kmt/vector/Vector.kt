@@ -174,7 +174,7 @@ interface Vector<T> {
      * @return A boolean vector where each component is true if the
      * corresponding component of this vector is within the range.
      */
-    abstract fun isIn(min: T, max: T): Vector<Boolean>
+    fun isIn(min: T, max: T): Vector<Boolean>
 
     /**
      * Raises the given vector's components to the n-th integer power.
@@ -182,26 +182,26 @@ interface Vector<T> {
      * @param n The exponent.
      * @return The vector where each component is raised to the n-th power.
      */
-    abstract fun intPow(n: Int): Vector<T>
+    fun intPow(n: Int): Vector<T>
 
     /**
      * Get the sine of all components of the vector.
      *
      * @return The sine of all components of the vector.
      */
-    abstract fun sin(): DoubleVector
+    fun sin(): DoubleVector
 
     /**
      * Get the cosine of all components of the vector.
      *
      * @return The cosine of all components of the vector.
      */
-    abstract fun cos(): DoubleVector
+    fun cos(): DoubleVector
 
     /**
      * Get the tangent of all components of the vector.
      *
      * @return The tangent of all components of the vector.
      */
-    abstract fun tan(): DoubleVector
+    fun tan(): DoubleVector
 }
