@@ -39,13 +39,6 @@ abstract class MemoryStorage<T> : ImmutableMemoryStorage<T> {
     abstract override fun asIntArray(): IntArray
     abstract override fun asShortArray(): ShortArray
 
-    override fun plusAssign(other: ImmutableMemoryStorage<T>) {
-        when {
-            this is BooleanMemoryStorage && other is BooleanMemoryStorage -> this += other
-            this::class == other::class -> this += other
-        }
-    }
-
 }
 
 class BooleanMemoryStorage(override val data: BooleanArray) : MemoryStorage<Boolean>() {
