@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
+import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.vector.Swizzle2
 import com.github.polyrocketmatt.kmt.vector.Vector
@@ -65,4 +66,6 @@ class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVec
     override fun yx(): Bool2 = Bool2(y, x)
     override fun xx(): Bool2 = Bool2(x, x)
     override fun yy(): Bool2 = Bool2(y, y)
+
+    override fun copyOf(): Bool2 = Bool2(x, y)
 }

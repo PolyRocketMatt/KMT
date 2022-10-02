@@ -77,4 +77,6 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
     override fun xxx(): Bool3 = Bool3(x, x, x)
     override fun yyy(): Bool3 = Bool3(y, y, y)
     override fun zzz(): Bool3 = Bool3(z, z, z)
+
+    override fun copyOf(): Bool3 = Bool3(x, y, z)
 }

@@ -126,4 +126,6 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) : Tuple4<Boolean>(ar
     override fun yyyy(): Bool4 = Bool4(y, y, y, y)
     override fun zzzz(): Bool4 = Bool4(z, z, z, z)
     override fun wwww(): Bool4 = Bool4(w, w, w, w)
+
+    override fun copyOf(): Bool4 = Bool4(x, y, z, w)
 }

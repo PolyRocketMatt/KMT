@@ -225,4 +225,6 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
     override fun xxx(): Double3 = Double3(x, x, x)
     override fun yyy(): Double3 = Double3(y, y, y)
     override fun zzz(): Double3 = Double3(z, z, z)
+
+    override fun copyOf(): Double3 = Double3(x, y, z)
 }

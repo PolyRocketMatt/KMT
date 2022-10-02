@@ -27,6 +27,7 @@ import com.github.polyrocketmatt.kmt.common.lerp
 import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
+import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
@@ -94,7 +95,8 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
     operator fun times(other: Short2) = Float2(x * other.x, y * other.y)
     operator fun div(other: Short2) = Float2(x / other.x, y / other.y)
 
-    operator fun plusAssign(other: Float2) { x += other.x; y += other.y }
+    operator fun plusAssign(other: Float2) {
+        println("PLUS > $other"); x += other.x; y += other.y }
     operator fun minusAssign(other: Float2) { x -= other.x; y -= other.y }
     operator fun timesAssign(other: Float2) { x *= other.x; y *= other.y }
     operator fun divAssign(other: Float2) { x /= other.x; y /= other.y }
@@ -199,4 +201,6 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
     override fun yx(): Float2 = Float2(y, x)
     override fun xx(): Float2 = Float2(x, x)
     override fun yy(): Float2 = Float2(y, y)
+
+    override fun copyOf(): Float2 = Float2(x, y)
 }

@@ -27,6 +27,7 @@ import com.github.polyrocketmatt.kmt.common.lerp
 import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
+import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
@@ -274,4 +275,6 @@ class Double4(x: Double, y: Double, z: Double, w: Double) : Tuple4<Double>(array
     override fun yyyy(): Double4 = Double4(y, y, y, y)
     override fun zzzz(): Double4 = Double4(z, z, z, z)
     override fun wwww(): Double4 = Double4(w, w, w, w)
+
+    override fun copyOf(): Double4 = Double4(x, y, z, w)
 }
