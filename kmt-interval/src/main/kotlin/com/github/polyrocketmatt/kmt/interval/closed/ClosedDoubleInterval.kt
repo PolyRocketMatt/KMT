@@ -21,8 +21,6 @@ package com.github.polyrocketmatt.kmt.interval.closed
 import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.utils.decimalPlaces
-import java.text.DecimalFormat
-import kotlin.math.abs
 
 /**
  * @author Matthias Kovacic

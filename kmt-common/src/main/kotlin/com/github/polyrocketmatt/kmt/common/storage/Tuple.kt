@@ -82,7 +82,6 @@ open class Tuple2<T>(data: Array<T>) : Tuple<T>(data) {
             field = value
             data[1] = value
         }
-
 }
 
 /**
@@ -112,7 +111,6 @@ open class Tuple3<T>(data: Array<T>) : Tuple<T>(data) {
             field = value
             data[2] = value
         }
-
 }
 
 /**
@@ -147,5 +145,4 @@ open class Tuple4<T>(data: Array<T>) : Tuple<T>(data) {
             field = value
             data[3] = value
         }
-
 }

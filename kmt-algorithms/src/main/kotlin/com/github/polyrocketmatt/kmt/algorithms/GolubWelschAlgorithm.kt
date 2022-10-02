@@ -1,7 +1,5 @@
 package com.github.polyrocketmatt.kmt.algorithms
 
-import com.github.polyrocketmatt.kmt.common.dsqrt
-
 private class GolubWelschAlgorithm(
     val alpha: Double,
     val degree: Int
@@ -17,10 +15,8 @@ private class GolubWelschAlgorithm(
     companion object {
 
         fun with(alpha: Double, degree: Int) = GolubWelschAlgorithm(alpha, degree)
-
     }
 
     //  TODO: Use kmt-matrix library
     override fun run(): Double = throw NotImplementedError("Not implemented yet")
-
 }

@@ -27,7 +27,6 @@ import com.github.polyrocketmatt.kmt.common.lerp
 import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
-import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
@@ -230,5 +229,4 @@ class Float3(x: Float, y: Float, z: Float) : Tuple3<Float>(arrayOf(x, y, z)), Fl
     override fun zzz(): Float3 = Float3(z, z, z)
 
     override fun copyOf(): Float3 = Float3(x, y, z)
-
 }

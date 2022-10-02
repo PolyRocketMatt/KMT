@@ -19,7 +19,6 @@
 package com.github.polyrocketmatt.kmt.function.variate
 
 import com.github.polyrocketmatt.kmt.function.Function
-import com.github.polyrocketmatt.kmt.interval.Interval
 
 /**
  * @author Matthias Kovacic

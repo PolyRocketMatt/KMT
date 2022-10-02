@@ -6,5 +6,4 @@ import com.github.polyrocketmatt.kmt.interval.closed.ClosedInterval
 interface HalfOpenInterval<T> : Interval<T> {
 
     fun withoutEdge(): ClosedInterval<T>
-
 }

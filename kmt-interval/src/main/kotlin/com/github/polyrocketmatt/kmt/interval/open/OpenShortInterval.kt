@@ -34,5 +34,4 @@ class OpenShortInterval(private val start: Short, private val end: Short) : Clos
     override fun isIn(value: Short): Boolean = value in (start + 1) until end
 
     override fun withoutEdge(): ClosedShortInterval = ClosedShortInterval((start + 1).toShort(), (end - 1).toShort())
-
 }

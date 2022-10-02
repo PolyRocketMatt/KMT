@@ -4,5 +4,4 @@ package com.github.polyrocketmatt.kmt.algorithms
 interface Algorithm<T> {
 
     fun run(): Any
-
 }

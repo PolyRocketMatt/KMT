@@ -73,5 +73,4 @@ class PolynomialFunction(private vararg val coefficients: Double) : Univariate<D
             newCoefficients[i] = coefficients.getOrElse(i) { 0.0 } / other.coefficients.getOrElse(i) { 0.0 }
         return PolynomialFunction(*newCoefficients)
     }
-
 }

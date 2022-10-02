@@ -22,7 +22,6 @@ import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
-import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN

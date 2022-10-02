@@ -22,7 +22,6 @@ import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
-import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
@@ -214,5 +213,4 @@ class Short3(x: Short, y: Short, z: Short) : Tuple3<Short>(arrayOf(x, y, z)), Sh
     override fun zzz(): Short3 = Short3(z, z, z)
 
     override fun copyOf(): Short3 = Short3(x, y, z)
-
 }

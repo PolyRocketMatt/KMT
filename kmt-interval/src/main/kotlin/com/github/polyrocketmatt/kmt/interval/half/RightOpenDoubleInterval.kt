@@ -35,5 +35,4 @@ class RightOpenDoubleInterval(private val start: Double, private val end: Double
     override fun isIn(value: Double): Boolean = value >= start && value < end
 
     override fun withoutEdge(): ClosedDoubleInterval = ClosedDoubleInterval(start, end - accuracy, accuracy)
-
 }

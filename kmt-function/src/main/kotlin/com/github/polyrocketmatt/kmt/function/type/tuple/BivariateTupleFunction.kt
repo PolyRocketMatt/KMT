@@ -71,5 +71,4 @@ abstract class BivariateTupleFunction<T> : TupleFunction<T>(2) {
      * @return The output of the function.
      */
     abstract fun evaluate(x: Short, y: Short): Tuple<T>
-
 }

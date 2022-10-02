@@ -1,6 +1,5 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
-import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.vector.Swizzle2
 import com.github.polyrocketmatt.kmt.vector.Vector

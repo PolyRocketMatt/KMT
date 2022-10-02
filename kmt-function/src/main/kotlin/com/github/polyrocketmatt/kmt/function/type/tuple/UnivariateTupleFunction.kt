@@ -32,9 +32,9 @@ abstract class UnivariateTupleFunction<T> : TupleFunction<T>(1) {
 
     override operator fun get(x: Double): Tuple<T> = evaluate(x)
 
-    override fun get(x: Double, y: Double): Tuple<T>  = throw UnsupportedOperationException("Univariate functions do not support two arguments")
+    override fun get(x: Double, y: Double): Tuple<T> = throw UnsupportedOperationException("Univariate functions do not support two arguments")
 
-    override fun get(vararg x: Double): Tuple<T>  = throw UnsupportedOperationException("Univariate functions do not support multiple arguments")
+    override fun get(vararg x: Double): Tuple<T> = throw UnsupportedOperationException("Univariate functions do not support multiple arguments")
 
     /**
      * Evaluates the function at the given input.
@@ -67,5 +67,4 @@ abstract class UnivariateTupleFunction<T> : TupleFunction<T>(1) {
      * @return The output of the function.
      */
     abstract fun evaluate(x: Short): Tuple<T>
-
 }

@@ -100,7 +100,6 @@ interface MutableMemoryStorage<T> : Iterable<T> {
     operator fun minusAssign(other: MutableMemoryStorage<T>)
     operator fun timesAssign(other: MutableMemoryStorage<T>)
     operator fun divAssign(other: MutableMemoryStorage<T>)
-
 }
 
 abstract class MemoryStorage<T> : MutableMemoryStorage<T> {
@@ -114,7 +113,6 @@ abstract class MemoryStorage<T> : MutableMemoryStorage<T> {
     abstract override fun asFloatArray(): FloatArray
     abstract override fun asIntArray(): IntArray
     abstract override fun asShortArray(): ShortArray
-
 }
 
 class BooleanMemoryStorage(override val data: BooleanArray) : MemoryStorage<Boolean>() {
@@ -155,7 +153,6 @@ class BooleanMemoryStorage(override val data: BooleanArray) : MemoryStorage<Bool
     override fun divAssign(other: MutableMemoryStorage<Boolean>) = throw UnsupportedOperationException("Division is not supported for BooleanMemoryStorage")
 
     override fun toString(): String = data.contentToString()
-
 }
 
 class DoubleMemoryStorage(override val data: DoubleArray) : MemoryStorage<Double>() {
@@ -202,7 +199,6 @@ class DoubleMemoryStorage(override val data: DoubleArray) : MemoryStorage<Double
     }
 
     override fun toString(): String = data.contentToString()
-
 }
 
 class FloatMemoryStorage(override val data: FloatArray) : MemoryStorage<Float>() {
@@ -249,7 +245,6 @@ class FloatMemoryStorage(override val data: FloatArray) : MemoryStorage<Float>()
     }
 
     override fun toString(): String = data.contentToString()
-
 }
 
 class IntMemoryStorage(override val data: IntArray) : MemoryStorage<Int>() {
@@ -296,7 +291,6 @@ class IntMemoryStorage(override val data: IntArray) : MemoryStorage<Int>() {
     }
 
     override fun toString(): String = data.contentToString()
-
 }
 
 class ShortMemoryStorage(override val data: ShortArray) : MemoryStorage<Short>() {
@@ -343,5 +337,4 @@ class ShortMemoryStorage(override val data: ShortArray) : MemoryStorage<Short>()
     }
 
     override fun toString(): String = data.contentToString()
-
 }

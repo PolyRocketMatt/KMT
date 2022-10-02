@@ -35,5 +35,4 @@ class LeftOpenFloatInterval(private val start: Float, private val end: Float, pr
     override fun isIn(value: Float): Boolean = value > start && value <= end
 
     override fun withoutEdge(): ClosedFloatInterval = ClosedFloatInterval(start + accuracy, end, accuracy)
-
 }

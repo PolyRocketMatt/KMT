@@ -34,5 +34,4 @@ class RightOpenIntInterval(private val start: Int, private val end: Int) : Close
     override fun isIn(value: Int): Boolean = value in start until end
 
     override fun withoutEdge(): ClosedIntInterval = ClosedIntInterval(start, end - 1)
-
 }

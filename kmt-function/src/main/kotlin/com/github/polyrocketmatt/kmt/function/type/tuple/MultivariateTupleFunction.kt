@@ -67,5 +67,4 @@ abstract class MultivariateTupleFunction<T>(arity: Int) : TupleFunction<T>(arity
      * @return The output of the function.
      */
     abstract fun evaluate(vararg x: Short): Tuple<T>
-
 }
