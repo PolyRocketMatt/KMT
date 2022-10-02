@@ -27,6 +27,7 @@ import com.github.polyrocketmatt.kmt.common.lerp
 import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
+import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -67,7 +68,7 @@ operator fun Short.div(other: Float2): Float2 = Float2(this / other.x, this / ot
  * @param x The x component of the vector.
  * @param y The y component of the vector.
  */
-data class Float2(var x: Float, var y: Float) : FloatVector(), Swizzle2 {
+class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Swizzle2 {
 
     constructor() : this(0f, 0f)
     constructor(other: Float2) : this(other.x, other.y)
@@ -133,19 +134,6 @@ data class Float2(var x: Float, var y: Float) : FloatVector(), Swizzle2 {
     override fun product(): Float = x * y
     override fun div(): Float = x / y
     override fun normalized(): Float2 = Float2(x / length(), y / length())
-
-    operator fun get(i: Int): Float = when (i) {
-        0 -> x
-        1 -> y
-        else -> throw IndexOutOfBoundsException()
-    }
-    operator fun set(i: Int, value: Float) {
-        when (i) {
-            0 -> x = value
-            1 -> y = value
-            else -> throw IndexOutOfBoundsException()
-        }
-    }
 
     override fun dist(other: Vector<Float>): Float {
         if (other is Float2) {

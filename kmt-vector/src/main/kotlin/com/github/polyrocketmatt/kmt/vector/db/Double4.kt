@@ -27,6 +27,7 @@ import com.github.polyrocketmatt.kmt.common.lerp
 import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
+import com.github.polyrocketmatt.kmt.common.storage.Tuple4
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -68,7 +69,7 @@ operator fun Short.div(other: Double4): Double4 = Double4(this / other.x, this /
  * @param z The z component of the vector.
  * @param w The w component of the vector.
  */
-data class Double4(var x: Double, var y: Double, var z: Double, var w: Double) : DoubleVector(), Swizzle4 {
+class Double4(x: Double, y: Double, z: Double, w: Double) : Tuple4<Double>(arrayOf(x, y, z, w)), DoubleVector, Swizzle4 {
 
     constructor() : this(0.0, 0.0, 0.0, 0.0)
     constructor(other: Double4) : this(other.x, other.y, other.z, other.w)
@@ -134,23 +135,6 @@ data class Double4(var x: Double, var y: Double, var z: Double, var w: Double) :
     override fun product(): Double = x * y * z * w
     override fun div(): Double = x / y / z / w
     override fun normalized(): Float4 = Double4(x / length(), y / length(), z / length(), w / length()).asFloat()
-
-    operator fun get(i: Int): Double = when (i) {
-        0 -> x
-        1 -> y
-        2 -> z
-        3 -> w
-        else -> throw IndexOutOfBoundsException()
-    }
-    operator fun set(i: Int, value: Double) {
-        when (i) {
-            0 -> x = value
-            1 -> y = value
-            2 -> z = value
-            3 -> w = value
-            else -> throw IndexOutOfBoundsException()
-        }
-    }
 
     override fun dist(other: Vector<Double>): Float {
         if (other is Double4) {

@@ -22,6 +22,7 @@ import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
+import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -61,7 +62,7 @@ operator fun Short.div(other: Short2): Short2 = Int2(this / other.x, this / othe
  * @param x The x component of the vector.
  * @param y The y component of the vector.
  */
-data class Short2(var x: Short, var y: Short) : ShortVector(), Swizzle2 {
+class Short2(x: Short, y: Short) : Tuple2<Short>(arrayOf(x, y)), ShortVector, Swizzle2 {
 
     constructor() : this(0, 0)
     constructor(other: Short2) : this(other.x, other.y)
@@ -127,19 +128,6 @@ data class Short2(var x: Short, var y: Short) : ShortVector(), Swizzle2 {
     override fun product(): Short = (x * y).toShort()
     override fun div(): Short = (x / y).toShort()
     override fun normalized(): Float2 = Float2(x / length(), y / length())
-
-    operator fun get(i: Int): Short = when (i) {
-        0 -> x
-        1 -> y
-        else -> throw IndexOutOfBoundsException()
-    }
-    operator fun set(i: Int, value: Short) {
-        when (i) {
-            0 -> x = value
-            1 -> y = value
-            else -> throw IndexOutOfBoundsException()
-        }
-    }
 
     override fun dist(other: Vector<Short>): Float {
         if (other is Short2) {

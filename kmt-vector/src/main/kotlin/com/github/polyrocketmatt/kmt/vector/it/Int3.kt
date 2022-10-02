@@ -22,6 +22,7 @@ import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
+import com.github.polyrocketmatt.kmt.common.storage.Tuple3
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -62,7 +63,7 @@ operator fun Short.div(other: Int3): Int3 = Int3(this / other.x, this / other.y,
  * @param y The y component of the vector.
  * @param z The z component of the vector.
  */
-data class Int3(var x: Int, var y: Int, var z: Int) : IntVector(), Swizzle3 {
+class Int3(x: Int, y: Int, z: Int) : Tuple3<Int>(arrayOf(x, y, z)), IntVector, Swizzle3 {
 
     constructor() : this(0, 0, 0)
     constructor(other: Int3) : this(other.x, other.y, other.z)
@@ -128,21 +129,6 @@ data class Int3(var x: Int, var y: Int, var z: Int) : IntVector(), Swizzle3 {
     override fun product(): Int = x * y * z
     override fun div(): Int = x / y / z
     override fun normalized(): Float3 = Float3(x / length(), y / length(), z / length())
-
-    operator fun get(i: Int): Int = when (i) {
-        0 -> x
-        1 -> y
-        2 -> z
-        else -> throw IndexOutOfBoundsException()
-    }
-    operator fun set(i: Int, value: Int) {
-        when (i) {
-            0 -> x = value
-            1 -> y = value
-            2 -> z = value
-            else -> throw IndexOutOfBoundsException()
-        }
-    }
 
     override fun dist(other: Vector<Int>): Float {
         if (other is Int3) {

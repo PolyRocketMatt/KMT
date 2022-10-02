@@ -15,7 +15,7 @@ fun BooleanVector.short() = this.asShort()
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a mutable, n-dimensional vector of booleans.
+ * Represents an n-dimensional vector of booleans.
  */
 interface BooleanVector : Vector<Boolean> {
 
