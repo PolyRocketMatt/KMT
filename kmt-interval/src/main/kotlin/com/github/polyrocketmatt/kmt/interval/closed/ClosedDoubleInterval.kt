@@ -23,6 +23,16 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.utils.decimalPlaces
 
 /**
+ * Creates a closed interval from the given double to another double
+ * with the provided accuracy.
+ *
+ * @param other The other double to create the interval with.
+ * @param accuracy The accuracy of the interval.
+ * @return A closed interval from this double to the other double.
+ */
+fun Double.rangeTo(other: Double, accuracy: Double = 0.001): ClosedDoubleInterval = ClosedDoubleInterval(this, other, accuracy)
+
+/**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
