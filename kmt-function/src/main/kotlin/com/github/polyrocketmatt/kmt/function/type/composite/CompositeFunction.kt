@@ -16,28 +16,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.polyrocketmatt.kmt.function.differentiation
+package com.github.polyrocketmatt.kmt.function.type.composite
 
-import com.github.polyrocketmatt.kmt.function.variate.Univariate
-import com.github.polyrocketmatt.kmt.interval.Interval
+import com.github.polyrocketmatt.kmt.function.Function
+import kotlin.math.max
 
 /**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a method for numerical differentiation.
+ * Represents a composite function of two functions (f o g).
  *
- * @param T The type of the output of the function.
+ * @param f The first function.
+ * @param g The second function.
  */
-@FunctionalInterface
-interface Differentiator<T> {
+class CompositeFunction(private val f: Function<Double>, private val g: Function<Double>) : Function<Double>(max(f.arity, g.arity)) {
 
-    /**
-     * Differentiate the given function in the given interval.
-     *
-     * @param function The function to differentiate.
-     * @param interval The interval to differentiate the function in.
-     * @return The derivatives of the function in the given interval.
-     */
-    fun differentiate(function: Univariate<T>, interval: Interval<Double>): Array<Double>
+    override fun get(x: Double): Double = f[g[x]]
+
+    override fun get(x: Double, y: Double): Double = f[g[x, y]]
+
+    override fun get(vararg x: Double): Double = f[g.get(*x)]
 }

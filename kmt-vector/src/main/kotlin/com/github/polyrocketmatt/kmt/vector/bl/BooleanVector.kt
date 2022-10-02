@@ -15,35 +15,35 @@ fun BooleanVector.short() = this.asShort()
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a mutable, n-dimensional vector of booleans.
+ * Represents an n-dimensional vector of booleans.
  */
-abstract class BooleanVector : Vector<Boolean> {
+interface BooleanVector : Vector<Boolean> {
 
     /**
      * Get the vector as a floating point vector.
      *
      * @return The vector as a floating point vector.
      */
-    abstract fun asFloat(): FloatVector
+    fun asFloat(): FloatVector
 
     /**
      * Get the vector as a double vector.
      *
      * @return The vector as a double vector.
      */
-    abstract fun asDouble(): DoubleVector
+    fun asDouble(): DoubleVector
 
     /**
      * Get the vector as an integer vector.
      *
      * @return The vector as an integer vector.
      */
-    abstract fun asInt(): IntVector
+    fun asInt(): IntVector
 
     /**
      * Get the vector as a short vector.
      *
      * @return The vector as a short vector.
      */
-    abstract fun asShort(): ShortVector
+    fun asShort(): ShortVector
 }

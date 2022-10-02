@@ -16,27 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.polyrocketmatt.kmt.function.differentiation
+package com.github.polyrocketmatt.kmt.function.type.tuple
 
-import com.github.polyrocketmatt.kmt.interval.Interval
+import com.github.polyrocketmatt.kmt.common.storage.Tuple
+import com.github.polyrocketmatt.kmt.function.Function
 
 /**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a function that is differentiable.
+ * Represents a mathematical function that returns tuples.
  *
  * @param T The type of the output of the function.
+ * @param arity The arity of the function.
  */
-@FunctionalInterface
-interface Differentiable<T> {
-
-    /**
-     * Differentiate the function over the given interval with the provided differentiator.
-     *
-     * @param interval The [Interval] over which the function should be differentiated.
-     * @param differentiator The [Differentiator] that should be used to differentiate the function.
-     * @return An array containing the result of the numerical differentiation.
-     */
-    fun differentiate(interval: Interval<Double>, differentiator: Differentiator<T>): Array<Double>
-}
+abstract class TupleFunction<T>(arity: Int) : Function<Tuple<T>>(arity)

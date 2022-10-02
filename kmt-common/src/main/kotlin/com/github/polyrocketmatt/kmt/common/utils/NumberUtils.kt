@@ -16,27 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.polyrocketmatt.kmt.function.integration
+package com.github.polyrocketmatt.kmt.common.utils
 
-import com.github.polyrocketmatt.kmt.interval.Interval
+import java.text.DecimalFormatSymbols
 
 /**
- * @author Matthias Kovacic
- * @since 0.0.1
+ * Get the amount of decimal places of a number.
  *
- * Represents a function that is integratable.
- *
- * @param T The type of the output of the function.
+ * @return The amount of decimal places.
  */
-@FunctionalInterface
-interface Integratable<T> {
+fun Double.decimalPlaces(): Int {
+    val str = this.toString()
+    val parts = str.split(DecimalFormatSymbols.getInstance().groupingSeparator)
+    return if (parts.size == 2) parts[1].length else 0
+}
 
-    /**
-     * Integrate the function over the given interval with the provided integrator.
-     *
-     * @param interval The [Interval] over which the function should be integrated.
-     * @param integrator The [Quadrature] that should be used to integrate the function.
-     * @return An array containing the result of the numerical integration.
-     */
-    fun integrate(interval: Interval<Double>, integrator: Quadrature<T>): Array<Double>
+/**
+ * Get the amount of decimal places of a number.
+ *
+ * @return The amount of decimal places.
+ */
+fun Float.decimalPlaces(): Int {
+    val str = this.toString()
+    val parts = str.split(DecimalFormatSymbols.getInstance().groupingSeparator)
+    return if (parts.size == 2) parts[1].length else 0
 }

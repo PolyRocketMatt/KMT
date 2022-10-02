@@ -32,35 +32,35 @@ fun IntVector.short() = this.asShort()
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a mutable, n-dimensional vector of integers.
+ * Represents an n-dimensional vector of integers.
  */
-abstract class IntVector : Vector<Int> {
+interface IntVector : Vector<Int> {
 
     /**
      * Get the vector as a floating point vector.
      *
      * @return The vector as a floating point vector.
      */
-    abstract fun asFloat(): FloatVector
+    fun asFloat(): FloatVector
 
     /**
      * Get the vector as a double vector.
      *
      * @return The vector as a double vector.
      */
-    abstract fun asDouble(): DoubleVector
+    fun asDouble(): DoubleVector
 
     /**
      * Get the vector as a short vector.
      *
      * @return The vector as a short vector.
      */
-    abstract fun asShort(): ShortVector
+    fun asShort(): ShortVector
 
     /**
      * Get the vector as a boolean vector.
      *
      * @return The vector as a boolean vector.
      */
-    abstract fun asBoolean(): BooleanVector
+    fun asBoolean(): BooleanVector
 }

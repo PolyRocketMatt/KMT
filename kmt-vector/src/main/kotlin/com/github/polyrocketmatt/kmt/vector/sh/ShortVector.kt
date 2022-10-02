@@ -34,33 +34,33 @@ fun ShortVector.int() = this.asInt()
  *
  * Represents a mutable, n-dimensional vector of shorts.
  */
-abstract class ShortVector : Vector<Short> {
+interface ShortVector : Vector<Short> {
 
     /**
      * Get the vector as a floating point vector.
      *
      * @return The vector as a floating point vector.
      */
-    abstract fun asFloat(): FloatVector
+    fun asFloat(): FloatVector
 
     /**
      * Get the vector as a double vector.
      *
      * @return The vector as a double vector.
      */
-    abstract fun asDouble(): DoubleVector
+    fun asDouble(): DoubleVector
 
     /**
      * Get the vector as an integer vector.
      *
      * @return The vector as an integer vector.
      */
-    abstract fun asInt(): IntVector
+    fun asInt(): IntVector
 
     /**
      * Get the vector as a boolean vector.
      *
      * @return The vector as a boolean vector.
      */
-    abstract fun asBoolean(): BooleanVector
+    fun asBoolean(): BooleanVector
 }

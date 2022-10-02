@@ -30,7 +30,9 @@ import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
  * @param end The maximum value of the range.
  * @param accuracy The accuracy of the range.
  */
-class LeftOpenDoubleInterval(private val start: Double, private val end: Double, accuracy: Double) : ClosedDoubleInterval(start, end, accuracy), HalfOpenInterval<Double> {
+class LeftOpenDoubleInterval(private val start: Double, private val end: Double, private val accuracy: Double) : ClosedDoubleInterval(start, end, accuracy), HalfOpenInterval<Double> {
 
     override fun isIn(value: Double): Boolean = value > start && value <= end
+
+    override fun withoutEdge(): ClosedDoubleInterval = ClosedDoubleInterval(start + accuracy, end, accuracy)
 }

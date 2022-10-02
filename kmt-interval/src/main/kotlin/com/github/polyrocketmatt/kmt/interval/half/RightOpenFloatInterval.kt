@@ -30,7 +30,9 @@ import com.github.polyrocketmatt.kmt.interval.closed.ClosedFloatInterval
  * @param end The maximum value of the range.
  * @param accuracy The accuracy of the range.
  */
-class RightOpenFloatInterval(private val start: Float, private val end: Float, accuracy: Float) : ClosedFloatInterval(start, end, accuracy), HalfOpenInterval<Float> {
+class RightOpenFloatInterval(private val start: Float, private val end: Float, private val accuracy: Float) : ClosedFloatInterval(start, end, accuracy), HalfOpenInterval<Float> {
 
     override fun isIn(value: Float): Boolean = value >= start && value < end
+
+    override fun withoutEdge(): ClosedFloatInterval = ClosedFloatInterval(start, end - accuracy, accuracy)
 }

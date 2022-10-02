@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
+import com.github.polyrocketmatt.kmt.common.storage.Tuple3
 import com.github.polyrocketmatt.kmt.vector.Swizzle3
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.Double3
@@ -9,7 +10,7 @@ import com.github.polyrocketmatt.kmt.vector.it.Int3
 import com.github.polyrocketmatt.kmt.vector.sh.Short3
 import java.lang.UnsupportedOperationException
 
-data class Bool3(var x: Boolean, var y: Boolean, var z: Boolean) : BooleanVector(), Swizzle3 {
+class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, z)), BooleanVector, Swizzle3 {
 
     constructor() : this(false, false, false)
     constructor(other: Bool3) : this(other.x, other.y, other.z)
@@ -76,4 +77,6 @@ data class Bool3(var x: Boolean, var y: Boolean, var z: Boolean) : BooleanVector
     override fun xxx(): Bool3 = Bool3(x, x, x)
     override fun yyy(): Bool3 = Bool3(y, y, y)
     override fun zzz(): Bool3 = Bool3(z, z, z)
+
+    override fun copyOf(): Bool3 = Bool3(x, y, z)
 }

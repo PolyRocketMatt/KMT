@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
+import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.vector.Swizzle2
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.Double2
@@ -8,7 +9,7 @@ import com.github.polyrocketmatt.kmt.vector.fl.Float2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
 
-data class Bool2(var x: Boolean, var y: Boolean) : BooleanVector(), Swizzle2 {
+class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVector, Swizzle2 {
 
     constructor() : this(false, false)
     constructor(other: Bool2) : this(other.x, other.y)
@@ -64,4 +65,6 @@ data class Bool2(var x: Boolean, var y: Boolean) : BooleanVector(), Swizzle2 {
     override fun yx(): Bool2 = Bool2(y, x)
     override fun xx(): Bool2 = Bool2(x, x)
     override fun yy(): Bool2 = Bool2(y, y)
+
+    override fun copyOf(): Bool2 = Bool2(x, y)
 }

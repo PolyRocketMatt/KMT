@@ -32,30 +32,30 @@ fun FloatVector.short() = this.asShort()
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a mutable, n-dimensional vector of floating-point numbers.
+ * Represents an n-dimensional vector of floating-point numbers.
  */
-abstract class FloatVector : Vector<Float> {
+interface FloatVector : Vector<Float> {
 
     /**
      * Get a vector with floored components.
      *
      * @return A vector with floored components.
      */
-    abstract fun floor(): IntVector
+    fun floor(): IntVector
 
     /**
      * Get a vector with ceiled components.
      *
      * @return A vector with ceiled components.
      */
-    abstract fun ceil(): IntVector
+    fun ceil(): IntVector
 
     /**
      * Get a vector with fractional components.
      *
      * @return A vector with fractional components.
      */
-    abstract fun fract(): FloatVector
+    fun fract(): FloatVector
 
     /**
      * SmoothStep function for a double vector's components which are
@@ -63,7 +63,7 @@ abstract class FloatVector : Vector<Float> {
      *
      * @return The smooth-stepped vector.
      */
-    abstract fun smoothStep(): FloatVector
+    fun smoothStep(): FloatVector
 
     /**
      * SmootherStep function for a double vector's components which are
@@ -71,7 +71,7 @@ abstract class FloatVector : Vector<Float> {
      *
      * @return The smoother-stepped vector.
      */
-    abstract fun smootherStep(): FloatVector
+    fun smootherStep(): FloatVector
 
     /**
      * Linearly interpolate a vector's components to be within [a, b].
@@ -80,7 +80,7 @@ abstract class FloatVector : Vector<Float> {
      * @param max The upper bound.
      * @return The linearly interpolated vector.
      */
-    abstract fun lerp(min: Float, max: Float): FloatVector
+    fun lerp(min: Float, max: Float): FloatVector
 
     /**
      * Clip a vector with components to be within [a, b].
@@ -89,33 +89,33 @@ abstract class FloatVector : Vector<Float> {
      * @param max The upper bound.
      * @return The clipped vector.
      */
-    abstract fun clip(min: Float, max: Float): FloatVector
+    fun clip(min: Float, max: Float): FloatVector
 
     /**
      * Get the vector as a double vector.
      *
      * @return The vector as a double vector.
      */
-    abstract fun asDouble(): DoubleVector
+    fun asDouble(): DoubleVector
 
     /**
      * Get the vector as an integer vector.
      *
      * @return The vector as an integer vector.
      */
-    abstract fun asInt(): IntVector
+    fun asInt(): IntVector
 
     /**
      * Get the vector as a short vector.
      *
      * @return The vector as a short vector.
      */
-    abstract fun asShort(): ShortVector
+    fun asShort(): ShortVector
 
     /**
      * Get the vector as a boolean vector.
      *
      * @return The vector as a boolean vector.
      */
-    abstract fun asBoolean(): BooleanVector
+    fun asBoolean(): BooleanVector
 }

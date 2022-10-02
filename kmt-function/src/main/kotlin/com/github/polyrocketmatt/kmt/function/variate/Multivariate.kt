@@ -24,11 +24,17 @@ import com.github.polyrocketmatt.kmt.function.Function
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a multi-variate function (arity n) that is evaluable.
+ * Represents a multi-variate function (arity n).
  *
  * @param T The type of the output of the function.
  */
 abstract class Multivariate<T>(arity: Int) : Function<T>(arity) {
+
+    override operator fun get(x: Double): T = throw UnsupportedOperationException("Multivariate functions do not support single argument")
+
+    override fun get(x: Double, y: Double): T = throw UnsupportedOperationException("Multivariate functions do not support two arguments")
+
+    override fun get(vararg x: Double): T = evaluate(*x)
 
     /**
      * Evaluates the function at the given inputs.

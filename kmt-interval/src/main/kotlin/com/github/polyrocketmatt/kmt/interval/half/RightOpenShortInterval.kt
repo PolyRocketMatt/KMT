@@ -32,4 +32,6 @@ import com.github.polyrocketmatt.kmt.interval.closed.ClosedShortInterval
 class RightOpenShortInterval(private val start: Short, private val end: Short) : ClosedShortInterval(start, end), HalfOpenInterval<Short> {
 
     override fun isIn(value: Short): Boolean = value in start until end
+
+    override fun withoutEdge(): ClosedShortInterval = ClosedShortInterval(start, (end - 1).toShort())
 }

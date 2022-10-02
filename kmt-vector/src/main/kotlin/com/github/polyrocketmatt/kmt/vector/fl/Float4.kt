@@ -27,6 +27,7 @@ import com.github.polyrocketmatt.kmt.common.lerp
 import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
+import com.github.polyrocketmatt.kmt.common.storage.Tuple4
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -68,7 +69,7 @@ operator fun Short.div(other: Float4): Float4 = Float4(this / other.x, this / ot
  * @param z The z component of the vector.
  * @param w The w component of the vector.
  */
-data class Float4(var x: Float, var y: Float, var z: Float, var w: Float) : FloatVector(), Swizzle4 {
+class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, y, z, w)), FloatVector, Swizzle4 {
 
     constructor() : this(0.0f, 0.0f, 0.0f, 0.0f)
     constructor(other: Float4) : this(other.x, other.y, other.z, other.w)
@@ -134,23 +135,6 @@ data class Float4(var x: Float, var y: Float, var z: Float, var w: Float) : Floa
     override fun product(): Float = x * y * z * w
     override fun div(): Float = x / y / z / w
     override fun normalized(): Float4 = Float4(x / length(), y / length(), z / length(), w / length())
-
-    operator fun get(i: Int): Float = when (i) {
-        0 -> x
-        1 -> y
-        2 -> z
-        3 -> w
-        else -> throw IndexOutOfBoundsException()
-    }
-    operator fun set(i: Int, value: Float) {
-        when (i) {
-            0 -> x = value
-            1 -> y = value
-            2 -> z = value
-            3 -> w = value
-            else -> throw IndexOutOfBoundsException()
-        }
-    }
 
     override fun dist(other: Vector<Float>): Float {
         if (other is Float4) {
@@ -290,4 +274,6 @@ data class Float4(var x: Float, var y: Float, var z: Float, var w: Float) : Floa
     override fun yyyy(): Float4 = Float4(y, y, y, y)
     override fun zzzz(): Float4 = Float4(z, z, z, z)
     override fun wwww(): Float4 = Float4(w, w, w, w)
+
+    override fun copyOf(): Float4 = Float4(x, y, z, w)
 }

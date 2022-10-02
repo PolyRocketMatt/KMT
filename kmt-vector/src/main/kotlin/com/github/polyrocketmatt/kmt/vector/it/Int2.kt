@@ -22,6 +22,7 @@ import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
+import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -61,7 +62,7 @@ operator fun Short.div(other: Int2): Int2 = Int2(this / other.x, this / other.y)
  * @param x The x component of the vector.
  * @param y The y component of the vector.
  */
-data class Int2(var x: Int, var y: Int) : IntVector(), Swizzle2 {
+class Int2(x: Int, y: Int) : Tuple2<Int>(arrayOf(x, y)), IntVector, Swizzle2 {
 
     constructor() : this(0, 0)
     constructor(other: Int2) : this(other.x, other.y)
@@ -128,19 +129,6 @@ data class Int2(var x: Int, var y: Int) : IntVector(), Swizzle2 {
     override fun div(): Int = x / y
     override fun normalized(): Float2 = Float2(x / length(), y / length())
 
-    operator fun get(i: Int): Int = when (i) {
-        0 -> x
-        1 -> y
-        else -> throw IndexOutOfBoundsException()
-    }
-    operator fun set(i: Int, value: Int) {
-        when (i) {
-            0 -> x = value
-            1 -> y = value
-            else -> throw IndexOutOfBoundsException()
-        }
-    }
-
     override fun dist(other: Vector<Int>): Float {
         if (other is Int2) {
             val dx = x - other.x
@@ -196,4 +184,6 @@ data class Int2(var x: Int, var y: Int) : IntVector(), Swizzle2 {
     override fun yx(): Int2 = Int2(y, x)
     override fun xx(): Int2 = Int2(x, x)
     override fun yy(): Int2 = Int2(y, y)
+
+    override fun copyOf(): Int2 = Int2(x, y)
 }

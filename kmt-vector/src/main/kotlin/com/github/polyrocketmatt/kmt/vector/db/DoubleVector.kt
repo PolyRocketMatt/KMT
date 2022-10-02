@@ -32,30 +32,30 @@ fun DoubleVector.short() = this.asShort()
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a mutable, n-dimensional vector of doubles.
+ * Represents an n-dimensional vector of doubles.
  */
-abstract class DoubleVector : Vector<Double> {
+interface DoubleVector : Vector<Double> {
 
     /**
      * Get a vector with floored components.
      *
      * @return A vector with floored components.
      */
-    abstract fun floor(): IntVector
+    fun floor(): IntVector
 
     /**
      * Get a vector with ceiled components.
      *
      * @return A vector with ceiled components.
      */
-    abstract fun ceil(): IntVector
+    fun ceil(): IntVector
 
     /**
      * Get a vector with fractional components.
      *
      * @return A vector with fractional components.
      */
-    abstract fun fract(): DoubleVector
+    fun fract(): DoubleVector
 
     /**
      * SmoothStep function for a double vector's components which are
@@ -63,7 +63,7 @@ abstract class DoubleVector : Vector<Double> {
      *
      * @return The smooth-stepped vector.
      */
-    abstract fun smoothStep(): DoubleVector
+    fun smoothStep(): DoubleVector
 
     /**
      * SmootherStep function for a double vector's components which are
@@ -71,7 +71,7 @@ abstract class DoubleVector : Vector<Double> {
      *
      * @return The smoother-stepped vector.
      */
-    abstract fun smootherStep(): DoubleVector
+    fun smootherStep(): DoubleVector
 
     /**
      * Linearly interpolate a vector's components to be within [a, b].
@@ -80,7 +80,7 @@ abstract class DoubleVector : Vector<Double> {
      * @param max The upper bound.
      * @return The linearly interpolated vector.
      */
-    abstract fun lerp(min: Double, max: Double): DoubleVector
+    fun lerp(min: Double, max: Double): DoubleVector
 
     /**
      * Clip a vector with components to be within [a, b].
@@ -89,33 +89,33 @@ abstract class DoubleVector : Vector<Double> {
      * @param max The upper bound.
      * @return The clipped vector.
      */
-    abstract fun clip(min: Double, max: Double): DoubleVector
+    fun clip(min: Double, max: Double): DoubleVector
 
     /**
      * Get the vector as a floating point vector.
      *
      * @return The vector as a floating point vector.
      */
-    abstract fun asFloat(): FloatVector
+    fun asFloat(): FloatVector
 
     /**
      * Get the vector as an integer vector.
      *
      * @return The vector as an integer vector.
      */
-    abstract fun asInt(): IntVector
+    fun asInt(): IntVector
 
     /**
      * Get the vector as a short vector.
      *
      * @return The vector as a short vector.
      */
-    abstract fun asShort(): ShortVector
+    fun asShort(): ShortVector
 
     /**
      * Get the vector as a boolean vector.
      *
      * @return The vector as a boolean vector.
      */
-    abstract fun asBoolean(): BooleanVector
+    fun asBoolean(): BooleanVector
 }

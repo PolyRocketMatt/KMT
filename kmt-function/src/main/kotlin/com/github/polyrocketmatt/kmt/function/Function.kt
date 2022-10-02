@@ -22,9 +22,14 @@ package com.github.polyrocketmatt.kmt.function
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a function that takes arguments.
+ * Represents a mathematical function.
  *
  * @param T The type of the output of the function.
  * @param arity The arity of the function.
  */
-open class Function<T>(private val arity: Int)
+open class Function<T>(val arity: Int) {
+
+    open operator fun get(x: Double): T = throw UnsupportedOperationException("Function is not defined for $x")
+    open operator fun get(x: Double, y: Double): T = throw UnsupportedOperationException("Function is not defined for $x,$y")
+    open operator fun get(vararg x: Double): T = throw UnsupportedOperationException("Function is not defined for ${x.size} arguments")
+}

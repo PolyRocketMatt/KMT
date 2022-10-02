@@ -18,7 +18,9 @@
 
 package com.github.polyrocketmatt.kmt.interval.closed
 
+import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.common.fastAbs
+import com.github.polyrocketmatt.kmt.common.utils.decimalPlaces
 
 /**
  * @author Matthias Kovacic
@@ -35,6 +37,7 @@ open class ClosedDoubleInterval(private var start: Double, private var end: Doub
     private val values: DoubleArray = DoubleArray((1.0 / accuracy).toInt() + 1)
 
     init {
+        val decimals = accuracy.decimalPlaces()
         if (start == Double.NEGATIVE_INFINITY)
             start = -Double.MAX_VALUE
         if (end == Double.POSITIVE_INFINITY)
@@ -46,7 +49,7 @@ open class ClosedDoubleInterval(private var start: Double, private var end: Doub
         var i = 0.0
         var idx = 0
         while (i <= diff) {
-            values[idx] = i + tMin
+            values[idx] = (i + tMin).decimals(decimals)
             idx++
             i += step
         }
