@@ -19,21 +19,17 @@
 package com.github.polyrocketmatt.kmt.function.variate
 
 import com.github.polyrocketmatt.kmt.function.Function
-import com.github.polyrocketmatt.kmt.function.differentiation.Differentiable
-import com.github.polyrocketmatt.kmt.function.differentiation.Differentiator
-import com.github.polyrocketmatt.kmt.function.integration.Integratable
-import com.github.polyrocketmatt.kmt.function.integration.Quadrature
 import com.github.polyrocketmatt.kmt.interval.Interval
 
 /**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a uni-variate function (arity 1) that is evaluable, [Integratable] and [Differentiable].
+ * Represents a uni-variate function (arity 1).
  *
  * @param T The type of the output of the function.
  */
-abstract class Univariate<T> : Function<T>(1), Integratable<T>, Differentiable<T> {
+abstract class Univariate<T> : Function<T>(1) {
 
     override operator fun get(x: Double): T = evaluate(x)
 
@@ -72,8 +68,4 @@ abstract class Univariate<T> : Function<T>(1), Integratable<T>, Differentiable<T
      * @return The output of the function.
      */
     abstract fun evaluate(x: Short): T
-
-    override fun integrate(interval: Interval<Double>, integrator: Quadrature<T>): Array<Double> = integrator.integrate(this, interval)
-
-    override fun differentiate(interval: Interval<Double>, differentiator: Differentiator<T>): Array<Double> = differentiator.differentiate(this, interval)
 }

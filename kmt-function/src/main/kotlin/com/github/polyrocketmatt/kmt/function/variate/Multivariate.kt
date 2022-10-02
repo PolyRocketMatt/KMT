@@ -24,7 +24,7 @@ import com.github.polyrocketmatt.kmt.function.Function
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a multi-variate function (arity n) that is evaluable.
+ * Represents a multi-variate function (arity n).
  *
  * @param T The type of the output of the function.
  */

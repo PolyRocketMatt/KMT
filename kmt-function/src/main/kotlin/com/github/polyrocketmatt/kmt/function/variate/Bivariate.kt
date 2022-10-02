@@ -24,7 +24,7 @@ import com.github.polyrocketmatt.kmt.function.Function
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Represents a bi-variate function (arity 2) that is evaluable.
+ * Represents a bi-variate function (arity 2).
  *
  * @param T The type of the output of the function.
  */
