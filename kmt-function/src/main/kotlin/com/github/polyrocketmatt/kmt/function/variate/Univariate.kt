@@ -35,6 +35,12 @@ import com.github.polyrocketmatt.kmt.interval.Interval
  */
 abstract class Univariate<T> : Function<T>(1), Integratable<T>, Differentiable<T> {
 
+    override operator fun get(x: Double): T = evaluate(x)
+
+    override fun get(x: Double, y: Double): T = throw UnsupportedOperationException("Univariate functions do not support two arguments")
+
+    override fun get(vararg x: Double): T = throw UnsupportedOperationException("Univariate functions do not support multiple arguments")
+
     /**
      * Evaluates the function at the given input.
      *

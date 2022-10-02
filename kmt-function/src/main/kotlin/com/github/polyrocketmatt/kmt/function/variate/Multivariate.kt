@@ -30,6 +30,12 @@ import com.github.polyrocketmatt.kmt.function.Function
  */
 abstract class Multivariate<T>(arity: Int) : Function<T>(arity) {
 
+    override operator fun get(x: Double): T = throw UnsupportedOperationException("Multivariate functions do not support single argument")
+
+    override fun get(x: Double, y: Double): T = throw UnsupportedOperationException("Multivariate functions do not support two arguments")
+
+    override fun get(vararg x: Double): T = evaluate(*x)
+
     /**
      * Evaluates the function at the given inputs.
      *

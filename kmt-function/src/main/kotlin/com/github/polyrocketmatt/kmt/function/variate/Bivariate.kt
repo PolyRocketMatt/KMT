@@ -30,6 +30,12 @@ import com.github.polyrocketmatt.kmt.function.Function
  */
 abstract class Bivariate<T> : Function<T>(2) {
 
+    override operator fun get(x: Double): T = throw UnsupportedOperationException("Bivariate functions do not support single argument")
+
+    override fun get(x: Double, y: Double): T = evaluate(x, y)
+
+    override fun get(vararg x: Double): T = throw UnsupportedOperationException("Univariate functions do not support multiple arguments")
+
     /**
      * Evaluates the function at the given inputs.
      *
