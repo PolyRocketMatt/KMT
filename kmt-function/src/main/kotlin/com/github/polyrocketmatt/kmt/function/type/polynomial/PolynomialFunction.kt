@@ -19,6 +19,7 @@
 package com.github.polyrocketmatt.kmt.function.type.polynomial
 
 import com.github.polyrocketmatt.kmt.common.intPow
+import com.github.polyrocketmatt.kmt.function.differentiation.ExactDifferentiation
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
 import kotlin.math.max
 
@@ -30,7 +31,7 @@ import kotlin.math.max
  *
  * @param coefficients The coefficients of the polynomial.
  */
-class PolynomialFunction(private vararg val coefficients: Double) : Univariate<Double>() {
+class PolynomialFunction(private vararg val coefficients: Double) : Univariate<Double>(), ExactDifferentiation<Double> {
 
     constructor(vararg coefficients: Float) : this(*coefficients.map { it.toDouble() }.toDoubleArray())
     constructor(vararg coefficients: Int) : this(*coefficients.map { it.toDouble() }.toDoubleArray())
@@ -73,4 +74,6 @@ class PolynomialFunction(private vararg val coefficients: Double) : Univariate<D
             newCoefficients[i] = coefficients.getOrElse(i) { 0.0 } / other.coefficients.getOrElse(i) { 0.0 }
         return PolynomialFunction(*newCoefficients)
     }
+
+    override fun derivative(): Univariate<Double> = PolynomialFunction(*(coefficients.drop(1).toDoubleArray()))
 }

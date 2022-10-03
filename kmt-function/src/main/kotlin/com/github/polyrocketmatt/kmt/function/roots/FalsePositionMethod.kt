@@ -28,9 +28,11 @@ fun Function<Double>.falsePosition(interval: Interval<Double>, steps: Int = 1000
     for (i in 0 until steps) {
         c = (a * get(b) - b * get(a)) / (get(b) - get(a))
 
-        if (get(c).fastAbs() <= ROOT_EPSILON)
+        if (get(c).fastAbs() <= ROOT_EPSILON) {
+            println("False position method found root after $i steps")
+
             return c
-        else if (get(c) * get(a) < 0)
+        } else if (get(c) * get(a) < 0)
             b = c
         else
             a = c
