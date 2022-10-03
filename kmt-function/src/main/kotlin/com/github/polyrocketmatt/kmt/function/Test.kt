@@ -21,15 +21,8 @@ fun main() {
 
      */
 
-    val polynomial = LegendrePolynomial(5)
-
-    println("Coefficients: ${polynomial.coefficients.contentToString()}")
-
-    /*
-    val tuples = GaussianQuadrature.rootsAndWeights(2)
+    val tuples = GaussianQuadrature.rootsAndWeights(5)
 
     tuples.forEach { println(it) }
-
-     */
 
 }

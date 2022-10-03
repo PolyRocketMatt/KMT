@@ -39,6 +39,7 @@ private const val ROOT_EPSILON = 1e-12
  */
 @JvmName("bisectionDouble")
 fun Function<Double>.bisection(interval: Interval<Double>, steps: Int = 10000): Double {
+    val prod = get(interval.min()) * get(interval.max())
     if (get(interval.min()) * get(interval.max()) >= 0.0)
         throw IllegalArgumentException("The interval must evaluate to opposite signs at the endpoints")
     var a = interval.min()
@@ -47,11 +48,8 @@ fun Function<Double>.bisection(interval: Interval<Double>, steps: Int = 10000): 
     var i = 0
     while ((b - a) >= INTERVAL_EPSILON && i < steps) {
         c = (a + b) / 2.0
-        if (get(c).fastAbs() <= ROOT_EPSILON) {
-            println("Bisection method found root after $i steps")
-
+        if (get(c).fastAbs() <= ROOT_EPSILON)
             return c
-        }
         if (get(c) * get(a) < 0.0)
             b = c
         else

@@ -25,10 +25,11 @@ class LegendrePolynomial(n: Int): Univariate<Double>(), ExactDifferentiation<Dou
                 for (i in 0 until n)
                     coefficients[i + 1] += p1factor * p1.coefficients[i]
 
+                //  TODO: This is numerically unstable, find a better way to do this
                 for (i in 0 until n - 1)
                     coefficients[i] -= p2factor * p2.coefficients[i]
 
-                //  Round to 8 decimals max
+                //  Round to 8 decimals max after computing the coefficients to reduce numerical errors
                 for (i in 0 until n + 1)
                     coefficients[i] = coefficients[i].decimals(8)
             }

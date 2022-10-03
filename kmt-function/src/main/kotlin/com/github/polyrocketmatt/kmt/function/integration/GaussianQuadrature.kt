@@ -1,17 +1,15 @@
 package com.github.polyrocketmatt.kmt.function.integration
 
 import com.github.polyrocketmatt.kmt.common.annotation.Ref
+import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.function.roots.bisection
+import com.github.polyrocketmatt.kmt.function.type.polynomial.LegendrePolynomial
 import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
 import com.github.polyrocketmatt.kmt.vector.db.Double2
+import java.math.RoundingMode
 
 @Ref("https://www.bragitoff.com/2018/02/determining-roots-legendre-polynomials-weights-gaussian-quadrature-c-program/")
 abstract class GaussianQuadrature<T> : Quadrature<T> {
-
-    enum class Type {
-        GAUSS_LEGENDRE,
-        GAUSS_LAGUERRE
-    }
 
     companion object {
 
@@ -19,7 +17,7 @@ abstract class GaussianQuadrature<T> : Quadrature<T> {
             val h = (b - a) / step
             var x: Double
             var sum = 0.0
-            for (j in 1 until n) {
+            for (j in 1 until step) {
                 x = a + j * h
                 sum += if (j % 2 == 0)
                     2 * lagrange(i, n - 1, points, x)
@@ -29,7 +27,6 @@ abstract class GaussianQuadrature<T> : Quadrature<T> {
 
             val fA = lagrange(i, n - 1, points, a)
             val fB = lagrange(i, n - 1, points, b)
-
             return (h / 3.0) * (fA + fB + sum)
         }
 
@@ -41,30 +38,31 @@ abstract class GaussianQuadrature<T> : Quadrature<T> {
             return product
         }
 
-        /*
         fun rootsAndWeights(n: Int): Array<Double2> {
-            val polynomial = LegendreNPolynomial(n)
-            val step = 0.0001
+            val polynomial = LegendrePolynomial(n)
+            val step = 0.05
             val tuples = Array(n) { Double2() }
             var x = -1.0
             var idx = 0
             while (x <= 1.0) {
+                var root = Double.MIN_VALUE
                 try {
-                    tuples[idx++][0] = polynomial.bisection(ClosedDoubleInterval(x, x + step), 100000)
+                    val left = polynomial[x]
+                    val right = polynomial[x + step]
+                    root = polynomial.bisection(ClosedDoubleInterval(x, x + step), 100000)
                 } catch (_: Exception) {}
+                if (root != Double.MIN_VALUE) {
+                    tuples[idx++][0] = root.decimals(8)
+                    root = Double.MIN_VALUE
+                }
                 x += step
             }
-
-            tuples[0][0] = -0.5773502691896257
-            tuples[1][0] = 0.5773502691896257
 
             for (i in 0 until n)
                 tuples[i][1] = simpson(i, n, tuples.map { it[0] }.toDoubleArray(), -1.0, 1.0, 1000000)
 
             return tuples
         }
-
-         */
 
     }
 
