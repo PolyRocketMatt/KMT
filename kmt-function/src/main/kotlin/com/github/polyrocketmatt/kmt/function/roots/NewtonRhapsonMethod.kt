@@ -2,7 +2,7 @@ package com.github.polyrocketmatt.kmt.function.roots
 
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.function.Function
-import com.github.polyrocketmatt.kmt.function.differentiation.ExactDifferentiation
+import com.github.polyrocketmatt.kmt.function.differentiation.Differentiable
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
@@ -21,7 +21,7 @@ private const val ROOT_EPSILON = 1e-12
 @JvmName("falsePositionDouble")
 @Suppress("UNCHECKED_CAST")
 fun Function<Double>.newtonRhapson(guess: Double, steps: Int = 10000): Double {
-    if (this !is ExactDifferentiation<*>)
+    if (this !is Differentiable<*>)
         throw IllegalStateException("Function must be exactly differentiable to use Newton-Rhapson method")
     val derivative = this.derivative() as Function<Double>
     var x = guess
@@ -54,7 +54,7 @@ fun Function<Double>.newtonRhapson(guess: Double, steps: Int = 10000): Double {
 @JvmName("falsePositionDouble")
 @Suppress("UNCHECKED_CAST")
 fun Function<Float>.newtonRhapson(guess: Float, steps: Int = 10000): Double {
-    if (this !is ExactDifferentiation<*>)
+    if (this !is Differentiable<*>)
         throw IllegalStateException("Function must be exactly differentiable to use Newton-Rhapson method")
     val derivative = this.derivative() as Function<Double>
     var x = guess.toDouble()

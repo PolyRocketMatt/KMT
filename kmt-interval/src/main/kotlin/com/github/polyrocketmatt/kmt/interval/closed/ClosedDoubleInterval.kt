@@ -49,9 +49,9 @@ open class ClosedDoubleInterval(private var start: Double, private var end: Doub
     init {
         val decimals = accuracy.decimalPlaces()
         if (start == Double.NEGATIVE_INFINITY)
-            start = -Double.MAX_VALUE
+            start = -Double.MAX_VALUE + 1
         if (end == Double.POSITIVE_INFINITY)
-            end = Double.MAX_VALUE
+            end = Double.MAX_VALUE - 1
 
         val tMin = if (start < end) start else end
         val diff = (end - start).fastAbs()

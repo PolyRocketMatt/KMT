@@ -1,15 +1,20 @@
-package com.github.polyrocketmatt.kmt.function.integration
+package com.github.polyrocketmatt.kmt.function.integration.quadratures
 
 import com.github.polyrocketmatt.kmt.common.annotation.Ref
 import com.github.polyrocketmatt.kmt.common.decimals
+import com.github.polyrocketmatt.kmt.function.Function
 import com.github.polyrocketmatt.kmt.function.roots.bisection
 import com.github.polyrocketmatt.kmt.function.type.polynomial.LegendrePolynomial
+import com.github.polyrocketmatt.kmt.interval.Interval
 import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
 import com.github.polyrocketmatt.kmt.vector.db.Double2
-import java.math.RoundingMode
 
 @Ref("https://www.bragitoff.com/2018/02/determining-roots-legendre-polynomials-weights-gaussian-quadrature-c-program/")
-abstract class GaussianQuadrature<T> : Quadrature<T> {
+class GaussianQuadrature<T>(private val n: Int, private val type: Type, private vararg val parameters: Double) : Quadrature<T> {
+
+    enum class Type {
+        LEGENDRE,
+    }
 
     companion object {
 
@@ -64,6 +69,27 @@ abstract class GaussianQuadrature<T> : Quadrature<T> {
             return tuples
         }
 
+        private fun legendre(min: Double, max: Double, roots: DoubleArray, weights: DoubleArray, function: Function<Double>): DoubleArray {
+            val factor = (max - min) / 2
+            val term = (max + min) / 2
+            return DoubleArray(roots.size) { factor * (weights[it] * function[factor * roots[it] + term]) }
+        }
+
+    }
+
+    override fun integrate(interval: Interval<Double>, function: Function<T>): DoubleArray = integrate(n, type, function, interval)
+
+    private fun <T> integrate(n: Int, type: Type, function: Function<T>, interval: Interval<Double>): DoubleArray {
+        val accurateFunction = function.accurate()
+        val rootsAndWeights = rootsAndWeights(n)
+        val roots = rootsAndWeights.map { it[0] }.toDoubleArray()
+        val weights = rootsAndWeights.map { it[1] }.toDoubleArray()
+        val min = interval.min()
+        val max = interval.max()
+
+        return when (type) {
+            Type.LEGENDRE -> legendre(min, max, roots, weights, accurateFunction)
+        }
     }
 
 }

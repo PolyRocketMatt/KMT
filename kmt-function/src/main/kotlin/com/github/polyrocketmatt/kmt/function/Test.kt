@@ -1,28 +1,79 @@
 package com.github.polyrocketmatt.kmt.function
 
-import com.github.polyrocketmatt.kmt.common.decimals
-import com.github.polyrocketmatt.kmt.function.integration.GaussianQuadrature
-import com.github.polyrocketmatt.kmt.function.roots.bisection
-import com.github.polyrocketmatt.kmt.function.roots.falsePosition
-import com.github.polyrocketmatt.kmt.function.roots.newtonRhapson
-import com.github.polyrocketmatt.kmt.function.type.polynomial.LegendrePolynomial
-import com.github.polyrocketmatt.kmt.function.type.polynomial.PolynomialFunction
-import com.github.polyrocketmatt.kmt.interval.closed.rangeTo
+import com.github.polyrocketmatt.kmt.function.node.ConstantNode
+import com.github.polyrocketmatt.kmt.function.node.VariableNode
+import com.github.polyrocketmatt.kmt.function.integration.Integrable
+import com.github.polyrocketmatt.kmt.function.integration.quadratures.Quadrature
+import com.github.polyrocketmatt.kmt.function.integration.quadratures.SimpsonQuadrature
+import com.github.polyrocketmatt.kmt.function.node.ArithmeticNode
+import com.github.polyrocketmatt.kmt.function.node.LogarithmNode
+import com.github.polyrocketmatt.kmt.function.node.NegateNode
+import com.github.polyrocketmatt.kmt.function.node.PowerNode
+import com.github.polyrocketmatt.kmt.function.variate.Univariate
+import com.github.polyrocketmatt.kmt.interval.Interval
+import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
+import com.github.polyrocketmatt.kmt.trigonometry.SIN
+import com.github.polyrocketmatt.kmt.trigonometry.Trigonometry
+import kotlin.math.log
+
+class Func : Univariate<Double>(), Integrable<Double> {
+
+    override fun get(x: Double): Double = x + (x * x)
+
+    override fun accurate(): Function<Double> = this
+
+    override fun evaluate(x: Double): Double = get(x)
+
+    override fun evaluate(x: Float): Double = evaluate(x.toDouble())
+
+    override fun evaluate(x: Int): Double = evaluate(x.toDouble())
+
+    override fun evaluate(x: Short): Double = evaluate(x.toDouble())
+
+    override fun integrate(interval: Interval<Double>, quadrature: Quadrature<Double>): DoubleArray = quadrature.integrate(interval, this)
+}
 
 fun main() {
     /*
-    val function = PolynomialFunction(-2.0, 4.9015, 0.0, 4.918, 17.183)
+    val simpleNode = ConstantNode(5.0)
+    val varNode = VariableNode()
+    val powNode = PowerNode(varNode, ConstantNode(2.0))
+    val func = (varNode * simpleNode) + powNode
+    val deriv = func.differentiate()
+    val simple = deriv.simplify()
 
-    println(function[0.0])
-    println(function[1.0])
-    try { println(function.bisection((-10.01891).rangeTo(5.2820), 100000000).decimals(3)) } catch (e: Exception) { println("Could not find root with Bisection") }
-    try { println(function.falsePosition((-10.01891).rangeTo(5.2820), 10000).decimals(3)) } catch (e: Exception) { println("Could not find root with False Position") }
-    try { println(function.newtonRhapson(-.5, 10000).decimals(3)) } catch (e: Exception) { println("Could not find root with Newton-Rhapson") }
+    println(func)
+    println("-------------------------")
+    println(deriv)
+    println("-------------------------")
+    println(simple)
 
      */
 
-    val tuples = GaussianQuadrature.rootsAndWeights(5)
+    val test1 = LogarithmNode(ArithmeticNode(ConstantNode(2.0), VariableNode(), ArithmeticNode.Operator.MULTIPLY), VariableNode())
 
-    tuples.forEach { println(it) }
+    println(test1[5.0])
+    println("-------------------------")
+    println(test1.differentiate()[5.0])
 
+
+    println("\n\n")
+
+    val test2 = PowerNode(VariableNode(), ArithmeticNode(VariableNode(), ConstantNode(1.0), ArithmeticNode.Operator.ADD))
+
+    println(test2[5.0])
+    println("-------------------------")
+    println(test2.differentiate()[5.0])
+
+
+    println("\n\n")
+
+    val test3 = NegateNode(ArithmeticNode(VariableNode(), ConstantNode(1.0), ArithmeticNode.Operator.ADD))
+
+    println(test3[5.0])
+    println("-------------------------")
+    println(test3.differentiate()[5.0])
+
+
+    println("\n\n")
 }
