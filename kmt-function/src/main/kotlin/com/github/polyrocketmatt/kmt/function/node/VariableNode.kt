@@ -1,6 +1,6 @@
 package com.github.polyrocketmatt.kmt.function.node
 
-class VariableNode() : Node() {
+class VariableNode : Node() {
 
     override fun get(x: Double): Double = x
 
@@ -20,9 +20,7 @@ class VariableNode() : Node() {
 
     override fun differentiate(): Node = ConstantNode(1.0)
 
-    override fun integrate(): Node {
-        TODO("Not yet implemented")
-    }
+    override fun integrate(): Node = ArithmeticNode(PowerNode(this, ConstantNode(2.0)), ConstantNode(2.0), ArithmeticNode.Operator.DIVIDE)
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "VariableNode(x)"
 

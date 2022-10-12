@@ -32,9 +32,7 @@ class ConstantNode(internal val value: Double) : Node() {
 
     override fun differentiate(): Node = ConstantNode(0.0)
 
-    override fun integrate(): Node {
-        TODO("Not yet implemented")
-    }
+    override fun integrate(): Node = ArithmeticNode(ConstantNode(value), VariableNode(), ArithmeticNode.Operator.MULTIPLY)
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "ConstantNode($value)"
 

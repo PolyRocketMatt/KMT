@@ -46,7 +46,10 @@ class LogarithmNode(internal val base: Node, internal val of: Node) : Node() {
     }
 
     override fun integrate(): Node {
-        TODO("Not yet implemented")
+        val nominator = LogarithmNode(ConstantNode(Math.E), of.simplify())
+        val denominator = LogarithmNode(ConstantNode(Math.E), base.simplify())
+
+        return ArithmeticNode(nominator, denominator, ArithmeticNode.Operator.DIVIDE).integrate()
     }
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "LogarithmNode()\n" +

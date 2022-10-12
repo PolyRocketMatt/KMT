@@ -44,7 +44,15 @@ class PowerNode(internal val base: Node, internal val exponent: Node) : Node() {
     }
 
     override fun integrate(): Node {
-        TODO("Not yet implemented")
+        return if (exponent is ConstantNode)
+            ArithmeticNode(
+                PowerNode(base, ConstantNode(exponent.value + 1)),
+                ConstantNode(exponent.value + 1),
+                ArithmeticNode.Operator.DIVIDE
+            )
+        else if (base is ConstantNode)
+            ArithmeticNode(this, LogarithmNode(ConstantNode(Math.E), base), ArithmeticNode.Operator.DIVIDE)
+        else throw UnsupportedOperationException("Cannot integrate a non-constant exponent")
     }
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "PowerNode()\n" +

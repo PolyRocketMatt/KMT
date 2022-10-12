@@ -14,6 +14,7 @@ import com.github.polyrocketmatt.kmt.interval.Interval
 import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.Trigonometry
+import com.sun.source.util.Plugin
 import kotlin.math.log
 
 class Func : Univariate<Double>(), Integrable<Double> {
@@ -50,6 +51,8 @@ fun main() {
 
      */
 
+
+    /*
     val test1 = LogarithmNode(ArithmeticNode(ConstantNode(2.0), VariableNode(), ArithmeticNode.Operator.MULTIPLY), VariableNode())
 
     println(test1[5.0])
@@ -76,4 +79,35 @@ fun main() {
 
 
     println("\n\n")
+
+    val left = ArithmeticNode(
+        PowerNode(
+            VariableNode(),
+            ConstantNode(2.0)
+        ),
+        VariableNode(),
+        ArithmeticNode.Operator.ADD
+    )
+    val right = ArithmeticNode(
+        PowerNode(
+            VariableNode(),
+            ConstantNode(3.0)
+        ),
+        ConstantNode(1.0),
+        ArithmeticNode.Operator.ADD
+    )
+    val test4 = ArithmeticNode(left, right, ArithmeticNode.Operator.MULTIPLY)
+
+    println(test4[1.0])
+    println("-------------------------")
+    //println(test4.integrate()[1.0])
+
+    println(test4.integrate())
+
+     */
+
+
+    val func = LogarithmNode(ArithmeticNode(ConstantNode(2.0), VariableNode(), ArithmeticNode.Operator.MULTIPLY), VariableNode())
+
+    println(func.integrate())
 }
