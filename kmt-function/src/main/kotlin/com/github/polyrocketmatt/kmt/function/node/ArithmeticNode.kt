@@ -135,39 +135,6 @@ class ArithmeticNode(internal val left: Node, internal val right: Node, internal
         }
     }
 
-    private fun isLinear(node: Node): Boolean {
-        if (node !is ArithmeticNode)
-            return false
-        val left = node.left
-        val right = node.right
-
-        if (left is ConstantNode &&
-                right is ArithmeticNode &&
-                right.operator == Operator.MULTIPLY &&
-                right.left is ConstantNode &&
-                right.right is VariableNode)
-            return true
-        if (left is ConstantNode &&
-                right is ArithmeticNode &&
-                right.operator == Operator.MULTIPLY &&
-                right.left is VariableNode &&
-                right.right is ConstantNode)
-            return true
-        if (right is ConstantNode &&
-                left is ArithmeticNode &&
-                left.operator == Operator.MULTIPLY &&
-                left.left is ConstantNode &&
-                left.right is VariableNode)
-            return true
-        if (right is ConstantNode &&
-                left is ArithmeticNode &&
-                left.operator == Operator.MULTIPLY &&
-                left.left is VariableNode &&
-                left.right is ConstantNode)
-            return true
-        return false
-    }
-
     override fun string(indent: Int): String = "    ".repeat(indent) + "ArithmeticNode($operator)\n" +
             left.string(indent + 1) + "\n" +
             right.string(indent + 1)
