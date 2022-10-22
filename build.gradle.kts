@@ -69,28 +69,6 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 }
 
-tasks.register<Exec>("deploy") {
-    dependsOn(tasks.jar)
-
-    println("Generating Checksums")
-    apply(plugin = "org.gradle.crypto.checksum")
-
-    val deployGroup = findProperty("kmt.group") as String
-    val deployVersion = findProperty("kmt.version") as String
-
-    println("Deploying to PolyRocketMatt's Warehouse")
-    println("Group: $deployGroup")
-    println("Version: $deployVersion")
-    commandLine("cmd",
-        "/c",
-        "${rootFolder}\\deploy.bat",
-        deployGroup.replace(".", "\\"),
-        "KMT",
-        deployVersion,
-        deployGroup
-    )
-}
-
 tasks.jar {
     dependsOn(mergedJar)
     from({

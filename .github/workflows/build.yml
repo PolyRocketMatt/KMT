@@ -2,43 +2,23 @@ name: Gradle Build Project
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "main", "dev" ]
+    branches: [ "dev" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  build-gradle-project:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout project sources
-      uses: actions/checkout@v2
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
-      with:
-        arguments: build
-        gradle-version: 7.4.2
-    - name: "Determine tag"
-      run: "echo \"RELEASE_TAG=${GITHUB_REF#refs/tags/}\" >> $GITHUB_ENV"
-    - name: "Create release"
-      uses: "actions/github-script@v5"
-      with:
-        github-token: "${{ secrets.GITHUB_TOKEN }}"
-        script: |
-          try {
-            await github.rest.repos.createRelease({
-              draft: false,
-              generate_release_notes: true,
-              name: process.env.RELEASE_TAG,
-              owner: context.repo.owner,
-              prerelease: false,
-              repo: context.repo.repo,
-              tag_name: process.env.RELEASE_TAG,
-            });
-          } catch (error) {
-            core.setFailed(error.message);
-          }
+      - name: Checkout project sources
+        uses: actions/checkout@v2
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+          gradle-version: 7.4.2
