@@ -10,9 +10,14 @@ com.github.polyrocketmatt.kmt.common.storage
 com.github.polyrocketmatt.kmt.common.utils
 module:kmt-function
 com.github.polyrocketmatt.kmt.function
+com.github.polyrocketmatt.kmt.function.differentiation
+com.github.polyrocketmatt.kmt.function.integration
+com.github.polyrocketmatt.kmt.function.integration.quadratures
+com.github.polyrocketmatt.kmt.function.node
+com.github.polyrocketmatt.kmt.function.roots
+com.github.polyrocketmatt.kmt.function.type
 com.github.polyrocketmatt.kmt.function.type.composite
 com.github.polyrocketmatt.kmt.function.type.polynomial
-com.github.polyrocketmatt.kmt.function.type.recursive
 com.github.polyrocketmatt.kmt.function.type.tuple
 com.github.polyrocketmatt.kmt.function.variate
 module:kmt-interval
