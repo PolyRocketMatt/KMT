@@ -1,8 +1,6 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 
-module:kmt-algorithms
-com.github.polyrocketmatt.kmt.algorithms
 module:kmt-common
 com.github.polyrocketmatt.kmt.common
 com.github.polyrocketmatt.kmt.common.annotation
