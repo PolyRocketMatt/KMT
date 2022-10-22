@@ -50,5 +50,10 @@ jobs:
         asset_path: ./build/libs/KMT-${{ steps.version_ext.outputs.kmt-version }}.jar
         asset_name: KMT-${{ steps.version_ext.outputs.kmt-version }}.jar
         asset_content_type: application/java-archive
+    - name: Publish to GithubPackages
+      run: gradle wrapper --gradle-version 7.4.2 publish
+      env:
+        GITHUB_USER: PolyRocketMatt
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 

@@ -77,7 +77,6 @@ publishing {
             version = findProperty("kmt.version") as String? ?: "0.0.1"
 
             from(components["java"])
-            //artifact(tasks["jar"])
 
             pom {
                 name.set("Kotlin Mathematical Toolkit")
