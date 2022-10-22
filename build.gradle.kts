@@ -1,5 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Locale
+
 
 val rootFolder = rootProject.projectDir
 val mergedJar by configurations.creating<Configuration> {
