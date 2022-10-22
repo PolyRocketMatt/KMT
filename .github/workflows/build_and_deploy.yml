@@ -37,8 +37,8 @@ jobs:
       with:
         draft: false
         prerelease: false
-        tag_name: ${{ steps.version_ext.outputs.version }}
-        release_name: ${{ steps.version_ext.outputs.version }}
+        tag_name: ${{ steps.version_ext.outputs.kmt-version }}
+        release_name: ${{ steps.version_ext.outputs.kmt-version }}
         body_path: ./CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
