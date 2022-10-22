@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.util.Locale
 
 val rootFolder = rootProject.projectDir
 val mergedJar by configurations.creating<Configuration> {
@@ -70,11 +71,12 @@ dependencies {
 }
 
 tasks.register<Exec>("versioning") {
-    commandLine("cmd", "/c", "version.bat", version as String)
+    val isWindows = System.getenv("os.name").toLowerCase(Locale.ROOT).contains("windows")
+    if (isWindows)
+        commandLine("cmd", "/c", "version.bat", version as String)
 }
 
 tasks.jar {
-    dependsOn("versioning")
     dependsOn(mergedJar)
     from({
         mergedJar
