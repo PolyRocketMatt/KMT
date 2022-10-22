@@ -25,6 +25,78 @@ are available:
 Documentation for KMT can be found [here](http://polyrocketmatt.me/KMT/). Documentation is generated
 using [Dokka](https://github.com/Kotlin/dokka) and is updated automatically upon each release.
 
+## Usage
+
+- ```VERSION``` is the version of the module you want to use. The latest version is 0.0.7-SNAPSHOT
+- ```USERNAME``` is your GitHub username
+- ```TOKEN``` is a GitHub personal access token with the `read:packages` scope
+
+Currently only the complete library is offered. In the future, individual modules will be available.
+
+### Maven 
+
+To use KMT in a Maven project, add the following to your `pom.xml`:
+
+```xml
+<repositories>
+    <!-- Repository -->
+    <repository>
+        <id>ID</id>
+        <url>https://maven.pkg.github.com/PolyRocketMatt/KMT</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <!-- Dependency -->
+    <dependency>
+        <groupId>com.github.polyrocketmatt</groupId>
+        <artifactId>kmt</artifactId>
+        <version>VERSION</version>
+    </dependency>
+</dependencies>
+        
+<!-- Distribution -->
+<distributionManagement>
+   <repository>
+     <id>github</id>
+     <name>GitHub PolyRocketMatt Apache Maven Packages</name>
+     <url>https://maven.pkg.github.com/PolyRocketMatt/KMT</url>
+   </repository>
+</distributionManagement>
+
+<!-- Necessary to access public packages hosted on GitHub -->
+<servers>
+    <server>
+        <id>github</id>
+        <username>USERNAME</username>
+        <password>TOKEN</password>
+    </server>
+</servers>
+```
+
+### Gradle
+
+To use KMT in a Gradle project, add the following to your `build.gradle`:
+
+```groovy
+repositories {
+    // Repository
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/PolyRocketMatt/KMT")
+        credentials {
+            username = USERNAME
+            password = TOKEN
+        }
+    }
+}
+
+dependencies {
+    // Dependency
+    implementation 'com.github.polyrocketmatt:kmt:VERSION'
+}
+```
+
 ## License
 
 KMT is licensed under the GNU General Public License (version 3). The relevant information for this license can be found [here](https://www.gnu.org/licenses/gpl-3.0.html).
