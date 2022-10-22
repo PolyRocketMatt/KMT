@@ -77,6 +77,7 @@ tasks.register<Exec>("versioning") {
 }
 
 tasks.jar {
+    dependsOn("versioning")
     dependsOn(mergedJar)
     from({
         mergedJar
