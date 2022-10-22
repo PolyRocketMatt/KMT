@@ -31,14 +31,14 @@ jobs:
     - name: Check release
       run: echo ${{ steps.version_ext.outputs.kmt-version }}
 
-    #- name: Release
-      #  uses: actions/create-release@v1
-      #  id: create_release
-        #  with:
-        #    draft: false
-        #    prerelease: false
-        #    tag_name: ${{ steps.version_ext.outputs.version }}
-        #    release_name: ${{ steps.version_ext.outputs.version }}
-      #    body_path: ./CHANGELOG.md
-        #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Release
+      uses: actions/create-release@v1
+      id: create_release
+      with:
+        draft: false
+        prerelease: false
+        tag_name: ${{ steps.version_ext.outputs.version }}
+        release_name: ${{ steps.version_ext.outputs.version }}
+        body_path: ./CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
