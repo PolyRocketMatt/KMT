@@ -5,8 +5,8 @@ val mergedJar by configurations.creating<Configuration> {
     isVisible = false
 }
 
-group = "com.github.polyrocketmatt"
-version = "0.0.1"
+group = properties["kmt.group"] as String
+version = properties["kmt.version"] as String
 
 plugins {
     id("maven-publish")
@@ -15,33 +15,13 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
 }
 
-repositories {
-    /*
-    maven {
-        url = uri("https://maven.pkg.jetbrains.space/polyrocketmatt/p/kmtlibrary/kmt-pkg")
-        credentials {
-            username = properties["space.user"] as String
-            password = properties["space.token"] as String
-        }
-    }
-
-     */
-}
-
 allprojects {
     repositories {
         mavenCentral()
     }
-}
 
-dependencies {
-    mergedJar(project(":kmt-algorithms"))
-    mergedJar(project(":kmt-common"))
-    mergedJar(project(":kmt-function"))
-    mergedJar(project(":kmt-interval"))
-    mergedJar(project(":kmt-matrix"))
-    mergedJar(project(":kmt-trigonometry"))
-    mergedJar(project(":kmt-vector"))
+    group = properties["kmt.group"] as String
+    version = properties["kmt.version"] as String
 }
 
 subprojects {
@@ -75,9 +55,9 @@ tasks.dokkaHtmlMultiModule.configure {
     outputDirectory.set(rootFolder.resolve("dokka"))
 }
 
+/*
 tasks.jar {
     dependsOn(mergedJar)
-
     from({
         mergedJar
             .filter { it.name.endsWith("jar") && it.path.contains(rootDir.path) }
@@ -87,3 +67,5 @@ tasks.jar {
             }
     })
 }
+
+ */
