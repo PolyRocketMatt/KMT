@@ -5,8 +5,8 @@ val mergedJar by configurations.creating<Configuration> {
     isVisible = false
 }
 
-group = properties["kmt.group"] as String
-version = properties["kmt.version"] as String
+group = "com.github.polyrocketmatt"
+version = "0.0.2"
 
 plugins {
     id("maven-publish")
@@ -19,9 +19,6 @@ allprojects {
     repositories {
         mavenCentral()
     }
-
-    group = properties["kmt.group"] as String
-    version = properties["kmt.version"] as String
 }
 
 subprojects {
