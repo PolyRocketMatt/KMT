@@ -70,12 +70,6 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 }
 
-tasks.register<Exec>("versioning") {
-    val isWindows = System.getenv("os.name").toLowerCase(Locale.ROOT).contains("windows")
-    if (isWindows)
-        commandLine("cmd", "/c", "version.bat", version as String)
-}
-
 tasks.jar {
     dependsOn("versioning")
     dependsOn(mergedJar)
