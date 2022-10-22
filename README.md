@@ -1,7 +1,7 @@
 # Kotlin Mathematical Toolkit (KMT)
 
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg?style=for-the-badge)](https://ktlint.github.io/)
-[![Version](https://img.shields.io/badge/version-0.0.1-blue?style=for-the-badge)]()
+[![Version](https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FPolyRocketMatt%2FKMT%2Fmain%2Fversion.json&style=for-the-badge)]()
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)]()
 [![State](https://img.shields.io/badge/state-alpha-red?style=for-the-badge)]()
 
