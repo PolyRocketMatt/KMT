@@ -22,16 +22,22 @@ jobs:
       with:
         arguments: build
         gradle-version: 7.4.2
-    - name: "Test"
-      run: "ls -a"
-    - name: release
+    - name: Extract version
+      id: version_ext
+      uses: christian-draeger/read-properties@1.1.1
+      with:
+        path: 'gradle.properties'
+        version: 'kmt.version'
+    - name: Check release
+      run: echo ${{ steps.version_ext.outputs.version }}
+    - name: Release
       uses: actions/create-release@v1
       id: create_release
       with:
         draft: false
         prerelease: false
         tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
+        release_name: ${{ steps.version_ext.outputs.version }}
         body_path: ./CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
