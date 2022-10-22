@@ -83,7 +83,7 @@ repositories {
     // Repository
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/PolyRocketMatt/KMT")
+        url = "https://maven.pkg.github.com/PolyRocketMatt/KMT"
         credentials {
             username = USERNAME
             password = TOKEN
