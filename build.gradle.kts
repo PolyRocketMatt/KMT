@@ -69,7 +69,16 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 }
 
+tasks.register<Exec>("versioning") {
+    commandLine("cmd", "/c", "version.bat", version as String)
+}
+
+tasks.build {
+    dependsOn("versioning")
+}
+
 tasks.jar {
+    dependsOn("versioning")
     dependsOn(mergedJar)
     from({
         mergedJar
