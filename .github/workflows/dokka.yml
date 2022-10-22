@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-gradle-project:
+  dokka:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project sources
