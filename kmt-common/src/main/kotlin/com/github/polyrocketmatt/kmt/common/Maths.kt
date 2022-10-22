@@ -18,7 +18,10 @@
 
 package com.github.polyrocketmatt.kmt.common
 
+import java.math.BigInteger
 import kotlin.math.round
+fun summation() {}
+fun product() {}
 
 /**
  * Round a double to the specified number of decimal places.
@@ -327,6 +330,24 @@ fun Double.intPow(n: Int): Double {
         res
     }
 }
+
+fun Int.factorial(): BigInteger {
+    if (this < 0)
+        throw IllegalArgumentException("Cannot take the factorial of a negative number!")
+    if (this == 0)
+        return BigInteger.ONE
+
+    var factorial = BigInteger.ONE
+    for (i in 0 until this)
+        factorial = factorial.multiply(BigInteger.valueOf((i + 1).toLong()))
+    return factorial
+}
+
+//  TODO: Implement Gamma function
+fun Float.factorial(n: Int) = NotImplementedError("Not implemented yet!")
+
+//  TODO: Implement Gamma function
+fun Double.factorial(n: Int) = NotImplementedError("Not implemented yet!")
 
 /**
  * SmoothStep function for a floating point value that is

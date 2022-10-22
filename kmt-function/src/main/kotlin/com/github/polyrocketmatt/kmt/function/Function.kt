@@ -32,4 +32,6 @@ open class Function<T>(val arity: Int) {
     open operator fun get(x: Double): T = throw UnsupportedOperationException("Function is not defined for $x")
     open operator fun get(x: Double, y: Double): T = throw UnsupportedOperationException("Function is not defined for $x,$y")
     open operator fun get(vararg x: Double): T = throw UnsupportedOperationException("Function is not defined for ${x.size} arguments")
+
+    internal open fun accurate(): Function<Double> = throw UnsupportedOperationException("Accurate function is not defined")
 }

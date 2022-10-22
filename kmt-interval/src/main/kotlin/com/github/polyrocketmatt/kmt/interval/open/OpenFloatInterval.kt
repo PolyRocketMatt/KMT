@@ -21,6 +21,16 @@ package com.github.polyrocketmatt.kmt.interval.open
 import com.github.polyrocketmatt.kmt.interval.closed.ClosedFloatInterval
 
 /**
+ * Creates an open interval from the given floating-point number to another floating-point number
+ * with the provided accuracy.
+ *
+ * @param other The other floating-point number to create the interval with.
+ * @param accuracy The accuracy of the interval.
+ * @return An open interval from this floating-point number to the other floating-point number.
+ */
+fun Float.rangeTo(other: Float, accuracy: Float = 0.001f): OpenFloatInterval = OpenFloatInterval(this, other, accuracy)
+
+/**
  * @author Matthias Kovacic
  * @since 0.0.1
  *

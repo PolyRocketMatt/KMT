@@ -24,6 +24,16 @@ import com.github.polyrocketmatt.kmt.common.utils.decimalPlaces
 import kotlin.math.roundToInt
 
 /**
+ * Creates a closed interval from the given floating-point number to another floating-point number
+ * with the provided accuracy.
+ *
+ * @param other The other floating-point number to create the interval with.
+ * @param accuracy The accuracy of the interval.
+ * @return A closed interval from this floating-point number to the other floating-point number.
+ */
+fun Float.rangeTo(other: Float, accuracy: Float = 0.001f): ClosedFloatInterval = ClosedFloatInterval(this, other, accuracy)
+
+/**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
