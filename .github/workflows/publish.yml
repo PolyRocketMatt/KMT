@@ -1,0 +1,29 @@
+name: Publish
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-gradle-project:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project sources
+      uses: actions/checkout@v2
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+    - name: Build and run tests
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: build
+        gradle-version: 7.4.2
+    - name: Publish to GithubPackages
+      run: gradle wrapper --gradle-version 7.4.2 publish
+      env:
+        GITHUB_USER: PolyRocketMatt
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
