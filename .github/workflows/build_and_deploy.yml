@@ -36,7 +36,7 @@ jobs:
       with:
         draft: false
         prerelease: false
-        tag_name: ${{ github.ref }}
+        tag_name: ${{ steps.version_ext.outputs.version }}
         release_name: ${{ steps.version_ext.outputs.version }}
         body_path: ./CHANGELOG.md
       env:
