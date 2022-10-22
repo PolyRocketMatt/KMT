@@ -1,6 +1,7 @@
 .gradle
 .idea
 build
+gradle
 bin
 dokka
 */build

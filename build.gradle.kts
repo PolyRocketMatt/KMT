@@ -40,7 +40,6 @@ subprojects {
     apply(plugin = "kotlin")
     apply(plugin = "org.jetbrains.dokka")
     apply(plugin = "maven-publish")
-
 }
 
 tasks.dokkaHtmlMultiModule.configure {
