@@ -7,3 +7,4 @@ dokka
 */build
 */bin
 deploy.bat
+hashsum.bat

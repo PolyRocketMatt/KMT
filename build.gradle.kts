@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 val rootFolder = rootProject.projectDir
 val mergedJar by configurations.creating<Configuration> {
     isCanBeConsumed = false
@@ -22,6 +24,7 @@ plugins {
     kotlin("jvm") version "1.7.10"
     id("org.jetbrains.dokka") version "1.7.10"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
+    id("org.gradle.crypto.checksum") version "1.4.0"
 }
 
 subprojects {
@@ -63,10 +66,14 @@ dependencies {
     mergedJar(project(":kmt-matrix"))
     mergedJar(project(":kmt-trigonometry"))
     mergedJar(project(":kmt-vector"))
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.register<Exec>("deploy") {
     dependsOn(tasks.jar)
+
+    println("Generating Checksums")
+    apply(plugin = "org.gradle.crypto.checksum")
 
     val deployGroup = findProperty("kmt.group") as String
     val deployVersion = findProperty("kmt.version") as String
@@ -79,7 +86,8 @@ tasks.register<Exec>("deploy") {
         "${rootFolder}\\deploy.bat",
         deployGroup.replace(".", "\\"),
         "KMT",
-        deployVersion
+        deployVersion,
+        deployGroup
     )
 }
 
@@ -93,4 +101,15 @@ tasks.jar {
                 zipTree(it)
             }
     })
+}
+repositories {
+    mavenCentral()
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
 }
