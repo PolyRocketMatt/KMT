@@ -5,20 +5,23 @@ val mergedJar by configurations.creating<Configuration> {
     isVisible = false
 }
 
-group = "com.github.polyrocketmatt"
-version = "0.0.2"
+group = findProperty("kmt.group") ?: "com.github.polyrocketmatt"
+version = findProperty("kmt.version") ?: "0.0.1"
+
+allprojects {
+    group = "com.github.polyrocketmatt"
+    version = findProperty("kmt.version") ?: "0.0.1"
+
+    repositories {
+        mavenCentral()
+    }
+}
 
 plugins {
     id("maven-publish")
     kotlin("jvm") version "1.7.10"
     id("org.jetbrains.dokka") version "1.7.10"
     id("org.jlleitschuh.gradle.ktlint") version "11.0.0"
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-    }
 }
 
 subprojects {
@@ -52,7 +55,35 @@ tasks.dokkaHtmlMultiModule.configure {
     outputDirectory.set(rootFolder.resolve("dokka"))
 }
 
-/*
+dependencies {
+    mergedJar(project(":kmt-algorithms"))
+    mergedJar(project(":kmt-common"))
+    mergedJar(project(":kmt-function"))
+    mergedJar(project(":kmt-interval"))
+    mergedJar(project(":kmt-matrix"))
+    mergedJar(project(":kmt-trigonometry"))
+    mergedJar(project(":kmt-vector"))
+}
+
+tasks.register<Exec>("deploy") {
+    val deployGroup = findProperty("kmt.group") as String
+    val deployVersion = findProperty("kmt.version") as String
+
+    println("Deploying to PolyRocketMatt's Warehouse")
+    println("Group: $deployGroup")
+    println("Version: $deployVersion")
+    commandLine("cmd",
+        "/c",
+        "${rootFolder}\\deploy.bat",
+        deployGroup.replace(".", "\\"),
+        "KMT",
+        deployVersion
+    )
+
+    //commandLine("C:\\Users\\Matthias Kovacic\\Desktop\\KMT\\KMT\\deploy.bat")
+    //commandLine 'sh', './myScript.sh'
+}
+
 tasks.jar {
     dependsOn(mergedJar)
     from({
@@ -64,5 +95,3 @@ tasks.jar {
             }
     })
 }
-
- */

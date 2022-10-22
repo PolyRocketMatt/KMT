@@ -6,3 +6,4 @@ bin
 dokka
 */build
 */bin
+deploy.bat

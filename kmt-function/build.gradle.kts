@@ -3,8 +3,8 @@ plugins {
     `java-library`
 }
 
-group = "com.github.polyrocketmatt"
-version = "0.0.2"
+group = findProperty("kmt.group") ?: "com.github.polyrocketmatt"
+version = findProperty("kmt.version") ?: "0.0.1"
 
 dependencies {
     testImplementation(kotlin("test"))
