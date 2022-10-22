@@ -66,6 +66,8 @@ dependencies {
 }
 
 tasks.register<Exec>("deploy") {
+    dependsOn(tasks.jar)
+
     val deployGroup = findProperty("kmt.group") as String
     val deployVersion = findProperty("kmt.version") as String
 
@@ -79,9 +81,6 @@ tasks.register<Exec>("deploy") {
         "KMT",
         deployVersion
     )
-
-    //commandLine("C:\\Users\\Matthias Kovacic\\Desktop\\KMT\\KMT\\deploy.bat")
-    //commandLine 'sh', './myScript.sh'
 }
 
 tasks.jar {
