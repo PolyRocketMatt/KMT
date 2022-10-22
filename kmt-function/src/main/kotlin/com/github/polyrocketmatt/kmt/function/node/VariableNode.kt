@@ -23,5 +23,4 @@ class VariableNode : Node() {
     override fun integrate(): Node = ArithmeticNode(PowerNode(this, ConstantNode(2.0)), ConstantNode(2.0), ArithmeticNode.Operator.DIVIDE)
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "VariableNode(x)"
-
 }

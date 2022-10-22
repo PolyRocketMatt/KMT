@@ -20,13 +20,7 @@ package com.github.polyrocketmatt.kmt.function.type.polynomial
 
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.function.differentiation.Differentiable
-import com.github.polyrocketmatt.kmt.function.node.ArithmeticNode
-import com.github.polyrocketmatt.kmt.function.node.ConstantNode
-import com.github.polyrocketmatt.kmt.function.node.Node
-import com.github.polyrocketmatt.kmt.function.node.PowerNode
-import com.github.polyrocketmatt.kmt.function.node.VariableNode
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
-import org.jetbrains.kotlinx.multik.ndarray.operations.Arith
 import kotlin.math.max
 
 /**
@@ -82,5 +76,4 @@ class PolynomialFunction(private vararg val coefficients: Double) : Univariate<D
     }
 
     override fun derivative(): Univariate<Double> = PolynomialFunction(*(coefficients.drop(1).toDoubleArray()))
-
 }

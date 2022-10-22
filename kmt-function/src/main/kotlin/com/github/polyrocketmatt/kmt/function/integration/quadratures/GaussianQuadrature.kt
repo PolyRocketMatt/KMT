@@ -74,7 +74,6 @@ class GaussianQuadrature<T>(private val n: Int, private val type: Type, private 
             val term = (max + min) / 2
             return DoubleArray(roots.size) { factor * (weights[it] * function[factor * roots[it] + term]) }
         }
-
     }
 
     override fun integrate(interval: Interval<Double>, function: Function<T>): DoubleArray = integrate(n, type, function, interval)
@@ -91,5 +90,4 @@ class GaussianQuadrature<T>(private val n: Int, private val type: Type, private 
             Type.LEGENDRE -> legendre(min, max, roots, weights, accurateFunction)
         }
     }
-
 }

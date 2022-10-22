@@ -6,5 +6,4 @@ class DoubleUtils {
         const val D_POS_INF = Double.POSITIVE_INFINITY
         const val D_NEG_INF = Double.NEGATIVE_INFINITY
     }
-
 }

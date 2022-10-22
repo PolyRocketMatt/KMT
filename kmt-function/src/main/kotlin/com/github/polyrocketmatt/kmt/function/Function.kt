@@ -34,5 +34,4 @@ open class Function<T>(val arity: Int) {
     open operator fun get(vararg x: Double): T = throw UnsupportedOperationException("Function is not defined for ${x.size} arguments")
 
     internal open fun accurate(): Function<Double> = throw UnsupportedOperationException("Accurate function is not defined")
-
 }

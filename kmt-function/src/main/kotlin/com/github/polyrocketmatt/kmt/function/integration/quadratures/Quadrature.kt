@@ -7,5 +7,4 @@ import com.github.polyrocketmatt.kmt.interval.Interval
 interface Quadrature<T> {
 
     fun integrate(interval: Interval<Double>, function: Function<T>): DoubleArray
-
 }

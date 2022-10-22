@@ -4,7 +4,7 @@ import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.function.differentiation.Differentiable
 import com.github.polyrocketmatt.kmt.function.variate.Univariate
 
-class LegendrePolynomial(n: Int): Univariate<Double>(), Differentiable<Double> {
+class LegendrePolynomial(n: Int) : Univariate<Double>(), Differentiable<Double> {
 
     val coefficients = DoubleArray(n + 1)
     private val function: PolynomialFunction

@@ -21,5 +21,4 @@ abstract class Node : DifferentiableNode, IntegrableNode {
     abstract fun string(indent: Int = 0): String
 
     override fun toString(): String = string()
-
 }

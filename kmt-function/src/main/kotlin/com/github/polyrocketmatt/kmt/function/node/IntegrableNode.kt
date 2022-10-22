@@ -4,5 +4,4 @@ package com.github.polyrocketmatt.kmt.function.node
 interface IntegrableNode {
 
     fun integrate(): Node
-
 }

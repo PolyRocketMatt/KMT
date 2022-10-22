@@ -23,6 +23,5 @@ class NegateNode(internal val node: Node) : Node() {
     override fun integrate(): Node = ArithmeticNode(ConstantNode(-1.0), node.integrate(), ArithmeticNode.Operator.MULTIPLY)
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "NegateNode()\n" +
-            node.string(indent + 1)
-
+        node.string(indent + 1)
 }

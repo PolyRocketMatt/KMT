@@ -6,22 +6,22 @@ class ConstantNode(internal val value: Double) : Node() {
 
     override fun plus(other: Node): Node = when (other) {
         is ConstantNode -> ConstantNode(this.value + other.value)
-        else                        -> ArithmeticNode(this, other, ArithmeticNode.Operator.ADD)
+        else -> ArithmeticNode(this, other, ArithmeticNode.Operator.ADD)
     }
 
     override fun minus(other: Node): Node = when (other) {
         is ConstantNode -> ConstantNode(this.value - other.value)
-        else                        -> ArithmeticNode(this, other, ArithmeticNode.Operator.SUBTRACT)
+        else -> ArithmeticNode(this, other, ArithmeticNode.Operator.SUBTRACT)
     }
 
     override fun times(other: Node): Node = when (other) {
         is ConstantNode -> ConstantNode(this.value * other.value)
-        else                        -> ArithmeticNode(this, other, ArithmeticNode.Operator.MULTIPLY)
+        else -> ArithmeticNode(this, other, ArithmeticNode.Operator.MULTIPLY)
     }
 
     override fun div(other: Node): Node = when (other) {
         is ConstantNode -> ConstantNode(this.value / other.value)
-        else                        -> ArithmeticNode(this, other, ArithmeticNode.Operator.DIVIDE)
+        else -> ArithmeticNode(this, other, ArithmeticNode.Operator.DIVIDE)
     }
 
     override fun unaryMinus(): Node = ConstantNode(-value)
@@ -35,5 +35,4 @@ class ConstantNode(internal val value: Double) : Node() {
     override fun integrate(): Node = ArithmeticNode(ConstantNode(value), VariableNode(), ArithmeticNode.Operator.MULTIPLY)
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "ConstantNode($value)"
-
 }

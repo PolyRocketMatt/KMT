@@ -6,5 +6,4 @@ import com.github.polyrocketmatt.kmt.function.Function
 interface Differentiable<T> {
 
     fun derivative(): Function<T>
-
 }

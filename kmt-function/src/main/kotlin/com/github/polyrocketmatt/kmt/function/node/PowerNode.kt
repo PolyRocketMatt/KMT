@@ -28,10 +28,10 @@ class PowerNode(internal val base: Node, internal val exponent: Node) : Node() {
 
     override fun differentiate(): Node = when (exponent) {
         //  Power rule
-        is ConstantNode         -> ConstantNode(exponent.value) * PowerNode(base, ConstantNode(exponent.value - 1)).simplify()
+        is ConstantNode -> ConstantNode(exponent.value) * PowerNode(base, ConstantNode(exponent.value - 1)).simplify()
 
         //  Logarithmic Differentiation
-        else                    -> {
+        else -> {
             //  Logarithm Function
             val function = ArithmeticNode(
                 LogarithmNode(ConstantNode(Math.E), base),
@@ -56,7 +56,6 @@ class PowerNode(internal val base: Node, internal val exponent: Node) : Node() {
     }
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "PowerNode()\n" +
-            base.string(indent + 1) + "\n" +
-            exponent.string(indent + 1)
-
+        base.string(indent + 1) + "\n" +
+        exponent.string(indent + 1)
 }

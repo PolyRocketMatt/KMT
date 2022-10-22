@@ -274,3 +274,76 @@ object TAN {
      */
     fun rad(angle: Short): Double = SIN[angle * (180.0f / Math.PI)] / COS[angle * (180.0f / Math.PI)]
 }
+
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Tangent-table for fast tangent calculation.
+ */
+object COT {
+
+    /**
+     * Get the tangent of the angle in radians.
+     *
+     * @param angle The angle in degrees.
+     * @return The tangent of the angle.
+     */
+    operator fun get(angle: Double): Double = COS[angle] / SIN[angle]
+
+    /**
+     * Get the tangent of the angle in radians.
+     *
+     * @param angle The angle in degrees.
+     * @return The tangent of the angle.
+     */
+    operator fun get(angle: Float): Double = SIN[angle] / COS[angle]
+
+    /**
+     * Get the tangent of the angle in radians.
+     *
+     * @param angle The angle in degrees.
+     * @return The tangent of the angle.
+     */
+    operator fun get(angle: Int): Double = COS[angle] / SIN[angle]
+
+    /**
+     * Get the tangent of the angle in radians.
+     *
+     * @param angle The angle in degrees.
+     * @return The tangent of the angle.
+     */
+    operator fun get(angle: Short): Double = COS[angle] / SIN[angle]
+
+    /**
+     * Get the tangent of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The tangent of the angle.
+     */
+    fun rad(angle: Double): Double = COS[angle * (180.0f / Math.PI)] / SIN[angle * (180.0f / Math.PI)]
+
+    /**
+     * Get the tangent of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The tangent of the angle.
+     */
+    fun rad(angle: Float): Double = COS[angle * (180.0f / Math.PI)] / SIN[angle * (180.0f / Math.PI)]
+
+    /**
+     * Get the tangent of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The tangent of the angle.
+     */
+    fun rad(angle: Int): Double = COS[angle * (180.0f / Math.PI)] / SIN[angle * (180.0f / Math.PI)]
+
+    /**
+     * Get the tangent of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The tangent of the angle.
+     */
+    fun rad(angle: Short): Double = SIN[angle * (180.0f / Math.PI)] / COS[angle * (180.0f / Math.PI)]
+}

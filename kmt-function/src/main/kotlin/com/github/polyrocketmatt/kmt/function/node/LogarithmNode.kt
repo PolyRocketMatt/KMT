@@ -1,6 +1,5 @@
 package com.github.polyrocketmatt.kmt.function.node
 
-import org.jetbrains.kotlinx.multik.ndarray.operations.Arith
 import kotlin.math.log
 
 class LogarithmNode(internal val base: Node, internal val of: Node) : Node() {
@@ -53,6 +52,6 @@ class LogarithmNode(internal val base: Node, internal val of: Node) : Node() {
     }
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "LogarithmNode()\n" +
-            base.string(indent + 1) + "\n" +
-            of.string(indent + 1)
+        base.string(indent + 1) + "\n" +
+        of.string(indent + 1)
 }

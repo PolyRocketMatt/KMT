@@ -6,5 +6,4 @@ class FloatUtils {
         const val F_POS_INF = Float.POSITIVE_INFINITY
         const val F_NEG_INF = Float.NEGATIVE_INFINITY
     }
-
 }

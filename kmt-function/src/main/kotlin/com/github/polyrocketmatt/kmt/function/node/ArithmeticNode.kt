@@ -17,7 +17,7 @@ class ArithmeticNode(internal val left: Node, internal val right: Node, internal
 
     override fun minus(other: Node): Node = ArithmeticNode(this, other, Operator.SUBTRACT)
 
-        override fun times(other: Node): Node = ArithmeticNode(this, other, Operator.MULTIPLY)
+    override fun times(other: Node): Node = ArithmeticNode(this, other, Operator.MULTIPLY)
 
     override fun div(other: Node): Node = ArithmeticNode(this, other, Operator.DIVIDE)
 
@@ -136,7 +136,6 @@ class ArithmeticNode(internal val left: Node, internal val right: Node, internal
     }
 
     override fun string(indent: Int): String = "    ".repeat(indent) + "ArithmeticNode($operator)\n" +
-            left.string(indent + 1) + "\n" +
-            right.string(indent + 1)
-
+        left.string(indent + 1) + "\n" +
+        right.string(indent + 1)
 }
