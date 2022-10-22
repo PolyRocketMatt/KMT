@@ -30,7 +30,6 @@ jobs:
         properties: 'kmt.version'
     - name: Check release
       run: echo ${{ steps.version_ext.outputs.kmt-version }}
-
     - name: Release
       uses: actions/create-release@v1
       id: create_release
@@ -42,3 +41,14 @@ jobs:
         body_path: ./CHANGELOG.md
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/libs/KMT-${{ steps.version_ext.outputs.kmt-version }}.jar
+        asset_name: KMT-${{ steps.version_ext.outputs.kmt-version }}.jar
+        asset_content_type: application/java-archive
+
+
