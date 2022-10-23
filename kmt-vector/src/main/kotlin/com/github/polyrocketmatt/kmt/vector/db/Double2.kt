@@ -217,9 +217,11 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
 
     override fun copyOf(): Double2 = Double2(x, y)
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
     override fun get(i: Int): Double = data[i]
     override fun get(row: Int, col: Int): Double = throw UnsupportedOperationException("Double2 is considered a vector")
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
     override fun set(i: Int, value: Double) = when (i) {
         0 -> x = value
         1 -> y = value

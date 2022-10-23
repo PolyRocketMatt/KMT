@@ -203,9 +203,11 @@ class Short2(x: Short, y: Short) : Tuple2<Short>(arrayOf(x, y)), ShortVector, Sw
 
     override fun copyOf(): Short2 = Short2(x, y)
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
     override fun get(i: Int): Short = data[i]
     override fun get(row: Int, col: Int): Short = throw UnsupportedOperationException("Short2 is considered a vector")
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
     override fun set(i: Int, value: Short) = when (i) {
         0 -> x = value
         1 -> y = value

@@ -106,9 +106,11 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
 
     override fun copyOf(): Bool3 = Bool3(x, y, z)
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
     override fun get(i: Int): Boolean = data[i]
     override fun get(row: Int, col: Int): Boolean = throw UnsupportedOperationException("Bool3 is considered a vector")
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
     override fun set(i: Int, value: Boolean) = when (i) {
         0 -> x = value
         1 -> y = value

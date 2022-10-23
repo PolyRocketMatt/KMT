@@ -204,9 +204,11 @@ class Int2(x: Int, y: Int) : Tuple2<Int>(arrayOf(x, y)), IntVector, Swizzle2 {
 
     override fun copyOf(): Int2 = Int2(x, y)
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
     override fun get(i: Int): Int = data[i]
     override fun get(row: Int, col: Int): Int = throw UnsupportedOperationException("Int2 is considered a vector")
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
     override fun set(i: Int, value: Int) = when (i) {
         0 -> x = value
         1 -> y = value

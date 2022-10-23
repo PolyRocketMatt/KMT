@@ -279,9 +279,11 @@ class Int4(x: Int, y: Int, z: Int, w: Int) : Tuple4<Int>(arrayOf(x, y, z, w)), I
 
     override fun copyOf(): Int4 = Int4(x, y, z, w)
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
     override fun get(i: Int): Int = data[i]
     override fun get(row: Int, col: Int): Int = throw UnsupportedOperationException("Int4 is considered a vector")
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
     override fun set(i: Int, value: Int) = when (i) {
         0 -> x = value
         1 -> y = value

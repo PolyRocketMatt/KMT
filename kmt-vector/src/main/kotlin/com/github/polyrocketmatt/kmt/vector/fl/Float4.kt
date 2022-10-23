@@ -293,9 +293,11 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
 
     override fun copyOf(): Float4 = Float4(x, y, z, w)
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
     override fun get(i: Int): Float = data[i]
     override fun get(row: Int, col: Int): Float = throw UnsupportedOperationException("Float4 is considered a vector")
 
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
     override fun set(i: Int, value: Float) = when (i) {
         0 -> x = value
         1 -> y = value
