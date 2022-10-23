@@ -49,4 +49,41 @@ class FloatMatrixTest {
         assertContentEquals(floatArrayOf(0f, 1f, 2f, 3f, 4f, 5f), array)
     }
 
+    @Test
+    fun testIdentityMatrix() {
+        val identity = FloatMatrix.identity(intArrayOf(2, 2))
+        val expected = FloatMatrix(2, intArrayOf(2, 2), floatArrayOf(
+            1f, 0f,
+            0f, 1f
+        ))
+
+        assertEquals(expected, identity)
+    }
+
+    @Test
+    fun testIdentityMatrixNonSquare() {
+        val identityA = FloatMatrix.identity(intArrayOf(2, 3))
+        val expectedA = FloatMatrix(2, intArrayOf(2, 3), floatArrayOf(
+            1f, 0f, 0f,
+            0f, 1f, 0f
+        ))
+
+        val identityB = FloatMatrix.identity(intArrayOf(4, 2))
+        val expectedB = FloatMatrix(2, intArrayOf(4, 2), floatArrayOf(
+            1f, 0f,
+            0f, 1f,
+            0f, 0f,
+            0f, 0f
+        ))
+
+        assertEquals(expectedA, identityA)
+        assertEquals(expectedB, identityB)
+    }
+
+    @Test
+    fun testInvalidDimensionIdentity() {
+        assertThrows<IllegalArgumentException> { FloatMatrix.identity(intArrayOf(2, 2, 2)) }
+        assertThrows<IllegalArgumentException> { FloatMatrix.identity(intArrayOf(2)) }
+    }
+
 }

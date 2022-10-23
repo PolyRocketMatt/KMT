@@ -18,8 +18,53 @@
 
 package com.github.polyrocketmatt.kmt.trigonometry
 
+import com.github.polyrocketmatt.kmt.common.decimals
+import com.github.polyrocketmatt.kmt.trigonometry.Trigonometry.Companion.DECIMALS
 import com.github.polyrocketmatt.kmt.trigonometry.Trigonometry.Companion.PRECISION
+import com.github.polyrocketmatt.kmt.trigonometry.Trigonometry.Companion.RAD_TO_DEG
 import kotlin.math.sin
+
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.8
+ *
+ * Represents a trigonometric base function.
+ */
+interface TrigonometricBaseFunction {
+
+    /**
+     * Calculates the trigonometric function of the given angle in radians.
+     *
+     * @param angle the angle in radians
+     * @return the result of the trigonometric function
+     */
+    operator fun get(angle: Double): Double
+
+    /**
+     * Calculates the trigonometric function of the given angle in radians.
+     *
+     * @param angle the angle in radians
+     * @return the result of the trigonometric function
+     */
+    operator fun get(angle: Float): Double
+
+    /**
+     * Calculates the trigonometric function of the given angle in radians.
+     *
+     * @param angle the angle in radians
+     * @return the result of the trigonometric function
+     */
+    operator fun get(angle: Int): Double
+
+    /**
+     * Calculates the trigonometric function of the given angle in radians.
+     *
+     * @param angle the angle in radians
+     * @return the result of the trigonometric function
+     */
+    operator fun get(angle: Short): Double
+
+}
 
 class Trigonometry {
 
@@ -30,6 +75,14 @@ class Trigonometry {
                 field = value
                 SIN.recompute()
             }
+
+        internal var DECIMALS = 8
+            set(value) {
+                field = value
+                SIN.recompute()
+            }
+
+        internal const val RAD_TO_DEG = 180.0 / Math.PI
 
         /**
          * Set the precision for the trigonometry tables.
@@ -48,9 +101,10 @@ class Trigonometry {
  *
  * Sine-table for fast sine calculation.
  */
-object SIN {
+object SIN : TrigonometricBaseFunction {
 
     private val modulus: Int = 360 * PRECISION
+    private val multiplier: Double = PRECISION * RAD_TO_DEG
     private val table: DoubleArray = DoubleArray(modulus)
 
     init {
@@ -59,42 +113,18 @@ object SIN {
 
     internal fun recompute() {
         for (i in 0 until modulus)
-            table[i] = sin(i * Math.PI / (PRECISION * 180.0f))
+            table[i] = sin(i * Math.PI / (PRECISION * 180.0f)).decimals(DECIMALS)
     }
 
     private fun sinLookup(i: Int): Double = if (i >= 0) table[i % modulus] else -table[-i % modulus]
 
     /**
-     * Get the sine of the angle in degrees.
+     * Get the sine of the angle in radians.
      *
-     * @param angle The angle in degrees.
+     * @param angle The angle in radians.
      * @return The sine of the angle.
      */
-    operator fun get(angle: Double): Double = sinLookup((angle * PRECISION + 0.5).toInt())
-
-    /**
-     * Get the sine of the angle in degrees.
-     *
-     * @param angle The angle in degrees.
-     * @return The sine of the angle.
-     */
-    operator fun get(angle: Float): Double = sinLookup((angle * PRECISION + 0.5).toInt())
-
-    /**
-     * Get the sine of the angle in degrees.
-     *
-     * @param angle The angle in degrees.
-     * @return The sine of the angle.
-     */
-    operator fun get(angle: Int): Double = sinLookup((angle * PRECISION + 0.5).toInt())
-
-    /**
-     * Get the sine of the angle in degrees.
-     *
-     * @param angle The angle in degrees.
-     * @return The sine of the angle.
-     */
-    operator fun get(angle: Short): Double = sinLookup((angle * PRECISION + 0.5).toInt())
+    override operator fun get(angle: Double): Double = sinLookup((angle * multiplier + 0.5).toInt())
 
     /**
      * Get the sine of the angle in radians.
@@ -102,7 +132,7 @@ object SIN {
      * @param angle The angle in radians.
      * @return The sine of the angle.
      */
-    fun rad(angle: Double): Double = sinLookup((angle * (180.0f / Math.PI)).toInt())
+    override operator fun get(angle: Float): Double = sinLookup((angle * multiplier + 0.5).toInt())
 
     /**
      * Get the sine of the angle in radians.
@@ -110,7 +140,7 @@ object SIN {
      * @param angle The angle in radians.
      * @return The sine of the angle.
      */
-    fun rad(angle: Float): Double = sinLookup((angle * (180.0f / Math.PI)).toInt())
+    override operator fun get(angle: Int): Double = sinLookup((angle * multiplier + 0.5).toInt())
 
     /**
      * Get the sine of the angle in radians.
@@ -118,15 +148,8 @@ object SIN {
      * @param angle The angle in radians.
      * @return The sine of the angle.
      */
-    fun rad(angle: Int): Double = sinLookup((angle * (180.0f / Math.PI)).toInt())
+    override operator fun get(angle: Short): Double = sinLookup((angle * multiplier + 0.5).toInt())
 
-    /**
-     * Get the sine of the angle in radians.
-     *
-     * @param angle The angle in radians.
-     * @return The sine of the angle.
-     */
-    fun rad(angle: Short): Double = sinLookup((angle * (180.0f / Math.PI)).toInt())
 }
 
 /**
@@ -135,39 +158,7 @@ object SIN {
  *
  * Cosine-table for fast cosine calculation.
  */
-object COS {
-
-    /**
-     * Get the cosine of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The cosine of the angle.
-     */
-    operator fun get(angle: Double): Double = SIN[angle + 90.0]
-
-    /**
-     * Get the cosine of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The cosine of the angle.
-     */
-    operator fun get(angle: Float): Double = SIN[angle + 90.0]
-
-    /**
-     * Get the cosine of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The cosine of the angle.
-     */
-    operator fun get(angle: Int): Double = SIN[angle + 90.0]
-
-    /**
-     * Get the cosine of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The cosine of the angle.
-     */
-    operator fun get(angle: Short): Double = SIN[angle + 90.0]
+object COS : TrigonometricBaseFunction {
 
     /**
      * Get the cosine of the angle in radians.
@@ -175,7 +166,7 @@ object COS {
      * @param angle The angle in radians.
      * @return The cosine of the angle.
      */
-    fun rad(angle: Double): Double = SIN[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Double): Double = SIN[angle + 90.0]
 
     /**
      * Get the cosine of the angle in radians.
@@ -183,7 +174,7 @@ object COS {
      * @param angle The angle in radians.
      * @return The cosine of the angle.
      */
-    fun rad(angle: Float): Double = SIN[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Float): Double = SIN[angle + 90.0]
 
     /**
      * Get the cosine of the angle in radians.
@@ -191,7 +182,7 @@ object COS {
      * @param angle The angle in radians.
      * @return The cosine of the angle.
      */
-    fun rad(angle: Int): Double = SIN[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Int): Double = SIN[angle + 90]
 
     /**
      * Get the cosine of the angle in radians.
@@ -199,7 +190,8 @@ object COS {
      * @param angle The angle in radians.
      * @return The cosine of the angle.
      */
-    fun rad(angle: Short): Double = SIN[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Short): Double = SIN[angle + 90]
+
 }
 
 /**
@@ -208,39 +200,7 @@ object COS {
  *
  * Tangent-table for fast tangent calculation.
  */
-object TAN {
-
-    /**
-     * Get the tangent of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The tangent of the angle.
-     */
-    operator fun get(angle: Double): Double = SIN[angle] / COS[angle]
-
-    /**
-     * Get the tangent of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The tangent of the angle.
-     */
-    operator fun get(angle: Float): Double = SIN[angle] / COS[angle]
-
-    /**
-     * Get the tangent of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The tangent of the angle.
-     */
-    operator fun get(angle: Int): Double = SIN[angle] / COS[angle]
-
-    /**
-     * Get the tangent of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The tangent of the angle.
-     */
-    operator fun get(angle: Short): Double = SIN[angle] / COS[angle]
+object TAN : TrigonometricBaseFunction {
 
     /**
      * Get the tangent of the angle in radians.
@@ -248,7 +208,7 @@ object TAN {
      * @param angle The angle in radians.
      * @return The tangent of the angle.
      */
-    fun rad(angle: Double): Double = SIN[angle * (180.0f / Math.PI)] / COS[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Double): Double = SIN[angle] / SIN[angle + 90.0]
 
     /**
      * Get the tangent of the angle in radians.
@@ -256,7 +216,7 @@ object TAN {
      * @param angle The angle in radians.
      * @return The tangent of the angle.
      */
-    fun rad(angle: Float): Double = SIN[angle * (180.0f / Math.PI)] / COS[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Float): Double = SIN[angle] / SIN[angle + 90.0]
 
     /**
      * Get the tangent of the angle in radians.
@@ -264,7 +224,7 @@ object TAN {
      * @param angle The angle in radians.
      * @return The tangent of the angle.
      */
-    fun rad(angle: Int): Double = SIN[angle * (180.0f / Math.PI)] / COS[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Int): Double = SIN[angle] / SIN[angle + 90.0]
 
     /**
      * Get the tangent of the angle in radians.
@@ -272,78 +232,132 @@ object TAN {
      * @param angle The angle in radians.
      * @return The tangent of the angle.
      */
-    fun rad(angle: Short): Double = SIN[angle * (180.0f / Math.PI)] / COS[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Short): Double = SIN[angle] / SIN[angle + 90.0]
+
 }
 
 /**
  * @author Matthias Kovacic
  * @since 0.0.1
  *
- * Tangent-table for fast tangent calculation.
+ * Cotangent-table for fast cotangent calculation.
  */
-object COT {
+object COT : TrigonometricBaseFunction {
 
     /**
-     * Get the tangent of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The tangent of the angle.
-     */
-    operator fun get(angle: Double): Double = COS[angle] / SIN[angle]
-
-    /**
-     * Get the tangent of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The tangent of the angle.
-     */
-    operator fun get(angle: Float): Double = SIN[angle] / COS[angle]
-
-    /**
-     * Get the tangent of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The tangent of the angle.
-     */
-    operator fun get(angle: Int): Double = COS[angle] / SIN[angle]
-
-    /**
-     * Get the tangent of the angle in radians.
-     *
-     * @param angle The angle in degrees.
-     * @return The tangent of the angle.
-     */
-    operator fun get(angle: Short): Double = COS[angle] / SIN[angle]
-
-    /**
-     * Get the tangent of the angle in radians.
+     * Get the cotangent of the angle in radians.
      *
      * @param angle The angle in radians.
-     * @return The tangent of the angle.
+     * @return The cotangent of the angle.
      */
-    fun rad(angle: Double): Double = COS[angle * (180.0f / Math.PI)] / SIN[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Double): Double = SIN[angle + 90.0] / SIN[angle]
 
     /**
-     * Get the tangent of the angle in radians.
+     * Get the cotangent of the angle in radians.
      *
      * @param angle The angle in radians.
-     * @return The tangent of the angle.
+     * @return The cotangent of the angle.
      */
-    fun rad(angle: Float): Double = COS[angle * (180.0f / Math.PI)] / SIN[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Float): Double = SIN[angle + 90.0] / SIN[angle]
 
     /**
-     * Get the tangent of the angle in radians.
+     * Get the cotangent of the angle in radians.
      *
      * @param angle The angle in radians.
-     * @return The tangent of the angle.
+     * @return The cotangent of the angle.
      */
-    fun rad(angle: Int): Double = COS[angle * (180.0f / Math.PI)] / SIN[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Int): Double = SIN[angle + 90.0] / SIN[angle]
 
     /**
-     * Get the tangent of the angle in radians.
+     * Get the cotangent of the angle in radians.
      *
      * @param angle The angle in radians.
-     * @return The tangent of the angle.
+     * @return The cotangent of the angle.
      */
-    fun rad(angle: Short): Double = SIN[angle * (180.0f / Math.PI)] / COS[angle * (180.0f / Math.PI)]
+    override operator fun get(angle: Short): Double = SIN[angle + 90.0] / SIN[angle]
+
+}
+
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Secant-table for fast secant calculation.
+ */
+object SEC : TrigonometricBaseFunction {
+
+    /**
+     * Get the secant of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The secant of the angle.
+     */
+    override operator fun get(angle: Double): Double = 1.0 / SIN[angle + 90.0]
+
+    /**
+     * Get the secant of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The secant of the angle.
+     */
+    override operator fun get(angle: Float): Double = 1.0 / SIN[angle + 90.0]
+
+    /**
+     * Get the secant of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The secant of the angle.
+     */
+    override operator fun get(angle: Int): Double = 1.0 / SIN[angle + 90.0]
+
+    /**
+     * Get the secant of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The secant of the angle.
+     */
+    override operator fun get(angle: Short): Double = 1.0 / SIN[angle + 90.0]
+
+}
+
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.1
+ *
+ * Cosecant-table for fast cosecant calculation.
+ */
+object COSEC : TrigonometricBaseFunction {
+
+    /**
+     * Get the cosecant of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The cosecant of the angle.
+     */
+    override operator fun get(angle: Double): Double = 1.0 / SIN[angle]
+
+    /**
+     * Get the cosecant of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The cosecant of the angle.
+     */
+    override operator fun get(angle: Float): Double = 1.0 / SIN[angle]
+
+    /**
+     * Get the cosecant of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The cosecant of the angle.
+     */
+    override operator fun get(angle: Int): Double = 1.0 / SIN[angle]
+
+    /**
+     * Get the cosecant of the angle in radians.
+     *
+     * @param angle The angle in radians.
+     * @return The cosecant of the angle.
+     */
+    override operator fun get(angle: Short): Double = 1.0 / SIN[angle]
+
 }

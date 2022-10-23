@@ -49,6 +49,23 @@ open class FloatMatrix(
     matrix: FloatArray
 ) : Tuple<Float>(FloatArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Float> {
 
+    companion object {
+        fun identity(shape: IntArray): FloatMatrix {
+            shape.complies("Identity matrix only exists for dimension 2") { it.size == 2 }
+
+            val matrix = FloatMatrix(shape)
+            val min = shape.min()
+
+            for (i in 0 until min)
+                matrix[i * shape[1] + i] = 1f
+
+            return matrix
+        }
+    }
+
+    constructor(shape: IntArray) : this(shape.size, shape, FloatArray(shape.reduce { acc, i -> acc * i }) { 0.0f })
+    constructor(shape: IntArray, value: Float) : this(shape.size, shape, FloatArray(shape.reduce { acc, i -> acc * i }) { value })
+
     constructor(dimension: Int, shape: IntArray) : this(dimension, shape, FloatArray(shape.reduce { acc, i -> acc * i }) { 0.0f })
     constructor(dimension: Int, shape: IntArray, value: Float) : this(dimension, shape, FloatArray(shape.reduce { acc, i -> acc * i }) { value })
 
@@ -187,7 +204,7 @@ open class FloatMatrix(
                     result.data[i * c + j] += data[i * r1 + k] * other.data[k * c + j]
         return result
     }
-    
+
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
     internal fun isCompliantMatrix(other: FloatMatrix) =
