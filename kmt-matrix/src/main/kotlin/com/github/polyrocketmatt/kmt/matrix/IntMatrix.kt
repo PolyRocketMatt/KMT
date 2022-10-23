@@ -60,7 +60,8 @@ fun IntMatrix.toArray(): IntArray = this.data.toIntArray()
 open class IntMatrix(
     val shape: IntArray,
     matrix: IntArray
-) : Tuple<Int>(IntArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), Matrix<Int> {
+) : Tuple<Int>(IntArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()),
+    NumericMatrix<Int> {
 
     companion object {
         fun identity(shape: IntArray): IntMatrix {
@@ -261,6 +262,21 @@ open class IntMatrix(
                 matrix[j, i] = this[i, j]
         return matrix
     }
+
+    override fun rref(): NumericMatrix<Double> {
+        TODO("Not yet implemented")
+    }
+
+    override fun solve(): NumericMatrix<Double> {
+        TODO("Not yet implemented")
+    }
+
+    fun isScalar(): Boolean = data.size == 1
+    fun isSquare(): Boolean = shape[0] == shape[1]
+
+    fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
+    fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
+    fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toShort() }.toShortArray())
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 

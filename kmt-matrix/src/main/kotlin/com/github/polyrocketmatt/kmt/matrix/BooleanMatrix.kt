@@ -238,6 +238,9 @@ open class BooleanMatrix(
         return matrix
     }
 
+    fun isScalar(): Boolean = data.size == 1
+    fun isSquare(): Boolean = shape[0] == shape[1]
+
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
     internal fun isCompliantMatrix(other: BooleanMatrix) =

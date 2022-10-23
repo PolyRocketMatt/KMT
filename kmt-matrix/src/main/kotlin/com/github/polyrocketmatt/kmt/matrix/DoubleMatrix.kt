@@ -60,7 +60,8 @@ fun DoubleMatrix.toArray(): DoubleArray = this.data.toDoubleArray()
 open class DoubleMatrix(
     val shape: IntArray,
     matrix: DoubleArray
-) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), Matrix<Double>, NumericMatrix<Double> {
+) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()),
+    NumericMatrix<Double> {
 
     companion object {
         fun identity(shape: IntArray): DoubleMatrix {
@@ -226,14 +227,6 @@ open class DoubleMatrix(
      */
     override fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
 
-    open override fun transpose(): DoubleMatrix {
-        val matrix = DoubleMatrix(intArrayOf(shape[1], shape[0]))
-        for (i in 0 until shape[0])
-            for (j in 0 until shape[1])
-                matrix[j, i] = this[i, j]
-        return matrix
-    }
-
     /**
      * Multiply this matrix with the given matrix. The matrices must have
      * a valid shape for multiplication and must be of dimension 2.
@@ -261,6 +254,29 @@ open class DoubleMatrix(
                     result.data[i * c + j] += data[i * r1 + k] * other.data[k * c + j]
         return result
     }
+
+    open override fun transpose(): DoubleMatrix {
+        val matrix = DoubleMatrix(intArrayOf(shape[1], shape[0]))
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                matrix[j, i] = this[i, j]
+        return matrix
+    }
+
+    override fun rref(): NumericMatrix<Double> {
+        TODO("Not yet implemented")
+    }
+
+    override fun solve(): NumericMatrix<Double> {
+        TODO("Not yet implemented")
+    }
+
+    fun isScalar(): Boolean = data.size == 1
+    fun isSquare(): Boolean = shape[0] == shape[1]
+
+    fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
+    fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
+    fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
