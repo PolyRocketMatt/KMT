@@ -41,6 +41,12 @@ import com.github.polyrocketmatt.kmt.vector.fl.Float2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
 
+/**
+ * Convert a double matrix to a double vector.
+ *
+ * @return A double vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 2x1 or 1x2 matrix.
+ */
 fun DoubleMatrix.toDouble2(): Double2 {
     complies("Cannot create a Double2 from a DoubleMatrix with ${this.data.size} elements!") { this.data.size == 2 }
     return Double2(this.data[0], this.data[1])

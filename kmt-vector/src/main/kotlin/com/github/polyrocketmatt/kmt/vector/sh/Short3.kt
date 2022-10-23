@@ -36,6 +36,12 @@ import com.github.polyrocketmatt.kmt.vector.db.Double3
 import com.github.polyrocketmatt.kmt.vector.fl.Float3
 import com.github.polyrocketmatt.kmt.vector.it.Int3
 
+/**
+ * Convert a short matrix to a short vector.
+ *
+ * @return A short vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 3x1 or 1x3 matrix.
+ */
 fun ShortMatrix.toShort3(): Short3 {
     complies("Cannot create a Short3 from a ShortMatrix with ${this.data.size} elements!") { this.data.size == 3 }
     return Short3(this.data[0], this.data[1], this.data[2])

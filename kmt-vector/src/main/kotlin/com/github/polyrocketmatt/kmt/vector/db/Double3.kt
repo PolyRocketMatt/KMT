@@ -41,6 +41,12 @@ import com.github.polyrocketmatt.kmt.vector.fl.Float3
 import com.github.polyrocketmatt.kmt.vector.it.Int3
 import com.github.polyrocketmatt.kmt.vector.sh.Short3
 
+/**
+ * Convert a double matrix to a double vector.
+ *
+ * @return A double vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 3x1 or 1x3 matrix.
+ */
 fun DoubleMatrix.toDouble3(): Double3 {
     complies("Cannot create a Double3 from a DoubleMatrix with ${this.data.size} elements!") { this.data.size == 3 }
     return Double3(this.data[0], this.data[1], this.data[2])

@@ -3,7 +3,6 @@ package com.github.polyrocketmatt.kmt.vector.bl
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
-import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.vector.Swizzle4
 import com.github.polyrocketmatt.kmt.vector.Vector
@@ -14,6 +13,12 @@ import com.github.polyrocketmatt.kmt.vector.it.Int4
 import com.github.polyrocketmatt.kmt.vector.sh.Short4
 import java.lang.UnsupportedOperationException
 
+/**
+ * Convert a boolean matrix to a boolean vector.
+ *
+ * @return A boolean vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix does contain have 4 elements.
+ */
 fun BooleanMatrix.toBool4(): Bool4 {
     complies("Cannot create a Bool4 from a BooleanMatrix with ${this.data.size} elements!") { this.data.size == 4 }
     return Bool4(this.data[0], this.data[1], this.data[2], this.data[3])

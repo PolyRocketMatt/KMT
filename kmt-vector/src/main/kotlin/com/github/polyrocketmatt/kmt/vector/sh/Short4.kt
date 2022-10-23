@@ -36,6 +36,12 @@ import com.github.polyrocketmatt.kmt.vector.db.Double4
 import com.github.polyrocketmatt.kmt.vector.fl.Float4
 import com.github.polyrocketmatt.kmt.vector.it.Int4
 
+/**
+ * Convert a short matrix to a short vector.
+ *
+ * @return A short vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix does not contain 4 elements.
+ */
 fun ShortMatrix.toShort4(): Short4 {
     complies("Cannot create a Short4 from a ShortMatrix with ${this.data.size} elements!") { this.data.size == 4 }
     return Short4(this.data[0], this.data[1], this.data[2], this.data[3])

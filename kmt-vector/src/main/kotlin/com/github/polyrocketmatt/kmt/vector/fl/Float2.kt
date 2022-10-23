@@ -42,6 +42,12 @@ import com.github.polyrocketmatt.kmt.vector.it.Int2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
 import com.github.polyrocketmatt.kmt.vector.sh.ShortVector
 
+/**
+ * Convert a floating-point matrix to a floating-point vector.
+ *
+ * @return A floating-point vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 2x1 or 1x2 matrix.
+ */
 fun FloatMatrix.toFloat2(): Float2 {
     complies("Cannot create a Float2 from a FloatMatrix with ${this.data.size} elements!") { this.data.size == 2 }
     return Float2(this.data[0], this.data[1])

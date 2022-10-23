@@ -36,6 +36,12 @@ import com.github.polyrocketmatt.kmt.vector.db.Double3
 import com.github.polyrocketmatt.kmt.vector.fl.Float3
 import com.github.polyrocketmatt.kmt.vector.sh.Short3
 
+/**
+ * Convert an int matrix to an int vector.
+ *
+ * @return An int vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 3x1 or 1x3 matrix.
+ */
 fun IntMatrix.toInt3(): Int3 {
     complies("Cannot create a Int3 from a IntMatrix with ${this.data.size} elements!") { this.data.size == 3 }
     return Int3(this.data[0], this.data[1], this.data[2])

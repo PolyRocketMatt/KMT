@@ -13,6 +13,12 @@ import com.github.polyrocketmatt.kmt.vector.fl.Float2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
 
+/**
+ * Convert a boolean matrix to a boolean vector.
+ *
+ * @return A boolean vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 2x1 or 1x2 matrix.
+ */
 fun BooleanMatrix.toBool2(): Bool2 {
     complies("Cannot create a Bool2 from a BooleanMatrix with ${this.data.size} elements!") { this.data.size == 2 }
     return Bool2(this.data[0], this.data[1])

@@ -43,6 +43,12 @@ import com.github.polyrocketmatt.kmt.vector.it.Int3
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
 import com.github.polyrocketmatt.kmt.vector.sh.Short3
 
+/**
+ * Convert a floating-point matrix to a floating-point vector.
+ *
+ * @return A floating-point vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 3x1 or 1x3 matrix.
+ */
 fun FloatMatrix.toFloat3(): Float3 {
     complies("Cannot create a Float3 from a FloatMatrix with ${this.data.size} elements!") { this.data.size == 3 }
     return Float3(this.data[0], this.data[1], this.data[2])

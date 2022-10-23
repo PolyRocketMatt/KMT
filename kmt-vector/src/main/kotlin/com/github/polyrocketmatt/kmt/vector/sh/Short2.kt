@@ -36,6 +36,12 @@ import com.github.polyrocketmatt.kmt.vector.db.Double2
 import com.github.polyrocketmatt.kmt.vector.fl.Float2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
 
+/**
+ * Convert a short matrix to a short vector.
+ *
+ * @return A short vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 2x1 or 1x2 matrix.
+ */
 fun ShortMatrix.toShort2(): Short2 {
     complies("Cannot create a Short2 from a ShortMatrix with ${this.data.size} elements!") { this.data.size == 2 }
     return Short2(this.data[0], this.data[1])

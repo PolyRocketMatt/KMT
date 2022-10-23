@@ -14,6 +14,12 @@ import com.github.polyrocketmatt.kmt.vector.it.Int3
 import com.github.polyrocketmatt.kmt.vector.sh.Short3
 import java.lang.UnsupportedOperationException
 
+/**
+ * Convert a boolean matrix to a boolean vector.
+ *
+ * @return A boolean vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 3x1 or 1x3 matrix.
+ */
 fun BooleanMatrix.toBool3(): Bool3 {
     complies("Cannot create a Bool3 from a BooleanMatrix with ${this.data.size} elements!") { this.data.size == 3 }
     return Bool3(this.data[0], this.data[1], this.data[2])

@@ -41,6 +41,12 @@ import com.github.polyrocketmatt.kmt.vector.fl.Float4
 import com.github.polyrocketmatt.kmt.vector.it.Int4
 import com.github.polyrocketmatt.kmt.vector.sh.Short4
 
+/**
+ * Convert a double matrix to a double vector.
+ *
+ * @return A double vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix does not contain 4 elements.
+ */
 fun DoubleMatrix.toDouble4(): Double4 {
     complies("Cannot create a Double4 from a DoubleMatrix with ${this.data.size} elements!") { this.data.size == 4 }
     return Double4(this.data[0], this.data[1], this.data[2], this.data[3])

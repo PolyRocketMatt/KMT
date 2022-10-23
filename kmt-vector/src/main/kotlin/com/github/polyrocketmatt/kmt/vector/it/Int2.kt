@@ -36,6 +36,12 @@ import com.github.polyrocketmatt.kmt.vector.db.Double2
 import com.github.polyrocketmatt.kmt.vector.fl.Float2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
 
+/**
+ * Convert an int matrix to an int vector.
+ *
+ * @return An int vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 2x1 or 1x2 matrix.
+ */
 fun IntMatrix.toInt2(): Int2 {
     complies("Cannot create a Int2 from a IntMatrix with ${this.data.size} elements!") { this.data.size == 2 }
     return Int2(this.data[0], this.data[1])
