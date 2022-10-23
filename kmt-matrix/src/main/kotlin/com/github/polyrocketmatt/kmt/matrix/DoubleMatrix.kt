@@ -371,9 +371,9 @@ open class DoubleMatrix(
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]
 
-    fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
-    fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
-    fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
+    open fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
+    open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
+    open fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
@@ -445,6 +445,10 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2), matrix) {
     override fun ref(): Double2x2 = super.ref() as Double2x2
     override fun rref(): Double2x2 = super.rref() as Double2x2
 
+    override fun toFloatMatrix(): Float2x2 = Float2x2(data.map { it.toFloat() }.toFloatArray())
+    override fun toIntMatrix(): Int2x2 = Int2x2(data.map { it.toInt() }.toIntArray())
+    override fun toShortMatrix(): Short2x2 = Short2x2(data.map { it.toInt().toShort() }.toShortArray())
+
     override fun copyOf(): Double2x2 = Double2x2(data.copyOf())
 
 }
@@ -487,6 +491,10 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3), matrix) {
 
     override fun ref(): Double3x3 = super.ref() as Double3x3
     override fun rref(): Double3x3 = super.rref() as Double3x3
+
+    override fun toFloatMatrix(): Float3x3 = Float3x3(data.map { it.toFloat() }.toFloatArray())
+    override fun toIntMatrix(): Int3x3 = Int3x3(data.map { it.toInt() }.toIntArray())
+    override fun toShortMatrix(): Short3x3 = Short3x3(data.map { it.toInt().toShort() }.toShortArray())
 
     override fun copyOf(): Double3x3 = Double3x3(data.copyOf())
 
@@ -533,6 +541,10 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4), matrix) {
 
     override fun ref(): Double4x4 = super.ref() as Double4x4
     override fun rref(): Double4x4 = super.rref() as Double4x4
+
+    override fun toFloatMatrix(): Float4x4 = Float4x4(data.map { it.toFloat() }.toFloatArray())
+    override fun toIntMatrix(): Int4x4 = Int4x4(data.map { it.toInt() }.toIntArray())
+    override fun toShortMatrix(): Short4x4 = Short4x4(data.map { it.toInt().toShort() }.toShortArray())
 
     override fun copyOf(): Double4x4 = Double4x4(data.copyOf())
 
