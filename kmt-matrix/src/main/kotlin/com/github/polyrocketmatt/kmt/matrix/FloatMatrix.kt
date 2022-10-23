@@ -105,11 +105,29 @@ open class FloatMatrix(
         return columns
     }
 
-    override fun get(i: Int): Float = data[i]
-    override fun get(row: Int, col: Int): Float = data[row * shape[1] + col]
+    open fun row(idx: Int): FloatArray {
+        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
 
-    override fun set(i: Int, value: Float) { data[i] = value }
-    override fun set(row: Int, col: Int, value: Float) { data[row * shape[1] + col] = value }
+        val row = FloatArray(shape[1])
+        for (j in 0 until shape[1])
+            row[j] = this[idx, j]
+        return row
+    }
+
+    open fun column(idx: Int): FloatArray {
+        complies("Index $idx is out of bounds for ${shape[1]} columns") { idx in 0 until shape[1] }
+
+        val column = FloatArray(shape[0])
+        for (i in 0 until shape[0])
+            column[i] = this[i, idx]
+        return column
+    }
+
+    override operator fun get(i: Int): Float = data[i]
+    override operator fun get(row: Int, col: Int): Float = data[row * shape[1] + col]
+
+    override operator fun set(i: Int, value: Float) { data[i] = value }
+    override operator fun set(row: Int, col: Int, value: Float) { data[row * shape[1] + col] = value }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -239,12 +257,8 @@ open class FloatMatrix(
     open infix fun mult(other: FloatMatrix): FloatMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == shape[1] }
 
-        if (other.shape[0] != shape[1])
-            throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
-
-        val result = FloatMatrix(intArrayOf(shape[0], other.shape[1]))
-
         //  Multiplying rows of first matrix with columns of second matrix
+        val result = FloatMatrix(intArrayOf(shape[0], other.shape[1]))
         val r1 = shape[0]
         val c1 = shape[1]
         val c = other.shape[1]
@@ -329,20 +343,6 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(intArrayOf(2, 2)) {
         data.forEachIndexed { i, value -> data[i] = value }
     }
 
-    override fun mult(other: FloatMatrix): FloatMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
-
-        val result = FloatMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 2)
-            for (j in 0 until c)
-                for (k in 0 until 2)
-                    result.data[i * c + j] += data[i * 2 + k] * other.data[k * c + j]
-        return result
-    }
-
     override fun transpose(): Float2x2 = Float2x2(floatArrayOf(
         data[0], data[2],
         data[1], data[3]
@@ -384,20 +384,6 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(intArrayOf(3, 3)) {
     init {
         complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 9 }
         matrix.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun mult(other: FloatMatrix): FloatMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 3 }
-
-        val result = FloatMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 3)
-            for (j in 0 until c)
-                for (k in 0 until 3)
-                    result.data[i * c + j] += data[i * 3 + k] * other.data[k * c + j]
-        return result
     }
 
     override fun transpose(): Float3x3 = Float3x3(floatArrayOf(
@@ -445,20 +431,6 @@ class Float4x4(matrix: FloatArray) : FloatMatrix(intArrayOf(4, 4)) {
     init {
         complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 16 }
         matrix.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun mult(other: FloatMatrix): FloatMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 4 }
-
-        val result = FloatMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 4)
-            for (j in 0 until c)
-                for (k in 0 until 4)
-                    result.data[i * c + j] += data[i * 4 + k] * other.data[k * c + j]
-        return result
     }
 
     override fun transpose(): Float4x4 = Float4x4(floatArrayOf(

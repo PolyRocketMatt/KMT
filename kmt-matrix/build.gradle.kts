@@ -10,7 +10,6 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
     implementation(project(":kmt-trigonometry"))
-    implementation(project(":kmt-vector"))
 }
 
 tasks.getByName<Test>("test") {

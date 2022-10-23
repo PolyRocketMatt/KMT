@@ -97,15 +97,6 @@ open class DoubleMatrix(
         return rows
     }
 
-    open fun row(idx: Int): DoubleArray {
-        complies("Index must be within 0") { idx in 0 until shape[0] }
-
-        val row = DoubleArray(shape[1])
-        for (j in 0 until shape[1])
-            row[j] = this[idx, j]
-        return row
-    }
-
     open fun columns(): Array<DoubleArray> {
         val columns = Array(shape[1]) { DoubleArray(shape[0]) }
         for (i in 0 until shape[0])
@@ -114,11 +105,29 @@ open class DoubleMatrix(
         return columns
     }
 
-    override fun get(i: Int): Double = data[i]
-    override fun get(row: Int, col: Int): Double = data[row * shape[1] + col]
+    open fun row(idx: Int): DoubleArray {
+        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
 
-    override fun set(i: Int, value: Double) { data[i] = value }
-    override fun set(row: Int, col: Int, value: Double) { data[row * shape[1] + col] = value }
+        val row = DoubleArray(shape[1])
+        for (j in 0 until shape[1])
+            row[j] = this[idx, j]
+        return row
+    }
+
+    open fun column(idx: Int): DoubleArray {
+        complies("Index $idx is out of bounds for ${shape[1]} columns") { idx in 0 until shape[1] }
+
+        val column = DoubleArray(shape[0])
+        for (i in 0 until shape[0])
+            column[i] = this[i, idx]
+        return column
+    }
+
+    override operator fun get(i: Int): Double = data[i]
+    override operator fun get(row: Int, col: Int): Double = data[row * shape[1] + col]
+
+    override operator fun set(i: Int, value: Double) { data[i] = value }
+    override operator fun set(row: Int, col: Int, value: Double) { data[row * shape[1] + col] = value }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -248,12 +257,8 @@ open class DoubleMatrix(
     open infix fun mult(other: DoubleMatrix): DoubleMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == shape[1] }
 
-        if (other.shape[0] != shape[1])
-            throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
-
-        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
-
         //  Multiplying rows of first matrix with columns of second matrix
+        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
         val r1 = shape[0]
         val c1 = shape[1]
         val c = other.shape[1]
@@ -351,21 +356,6 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2)) {
         data.forEachIndexed { i, value -> data[i] = value }
     }
 
-    override fun mult(other: DoubleMatrix): DoubleMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
-
-
-        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 2)
-            for (j in 0 until c)
-                for (k in 0 until 2)
-                    result.data[i * c + j] += data[i * 2 + k] * other.data[k * c + j]
-        return result
-    }
-
     override fun transpose(): DoubleMatrix = Double2x2(doubleArrayOf(
         data[0], data[2],
         data[1], data[3]
@@ -407,20 +397,6 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3)) {
     init {
         complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 4 }
         matrix.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun mult(other: DoubleMatrix): DoubleMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 3 }
-
-        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 3)
-            for (j in 0 until c)
-                for (k in 0 until 3)
-                    result.data[i * c + j] += data[i * 3 + k] * other.data[k * c + j]
-        return result
     }
 
     override fun transpose(): DoubleMatrix = Double3x3(doubleArrayOf(
@@ -469,20 +445,6 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4)) {
     init {
         complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 4 }
         matrix.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun mult(other: DoubleMatrix): DoubleMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 4 }
-
-        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 4)
-            for (j in 0 until c)
-                for (k in 0 until 4)
-                    result.data[i * c + j] += data[i * 4 + k] * other.data[k * c + j]
-        return result
     }
 
     override fun transpose(): DoubleMatrix = Double4x4(doubleArrayOf(

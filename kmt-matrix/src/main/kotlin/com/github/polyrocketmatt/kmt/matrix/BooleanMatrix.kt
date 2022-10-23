@@ -90,11 +90,29 @@ open class BooleanMatrix(
         return columns
     }
 
-    override fun get(i: Int): Boolean = data[i]
-    override fun get(row: Int, col: Int): Boolean = data[row * shape[1] + col]
+    open fun row(idx: Int): BooleanArray {
+        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
 
-    override fun set(i: Int, value: Boolean) { data[i] = value }
-    override fun set(row: Int, col: Int, value: Boolean) { data[row * shape[1] + col] = value }
+        val row = BooleanArray(shape[1])
+        for (j in 0 until shape[1])
+            row[j] = this[idx, j]
+        return row
+    }
+
+    open fun column(idx: Int): BooleanArray {
+        complies("Index $idx is out of bounds for ${shape[1]} columns") { idx in 0 until shape[1] }
+
+        val column = BooleanArray(shape[0])
+        for (i in 0 until shape[0])
+            column[i] = this[i, idx]
+        return column
+    }
+
+    override operator fun get(i: Int): Boolean = data[i]
+    override operator fun get(row: Int, col: Int): Boolean = data[row * shape[1] + col]
+
+    override operator fun set(i: Int, value: Boolean) { data[i] = value }
+    override operator fun set(row: Int, col: Int, value: Boolean) { data[row * shape[1] + col] = value }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
