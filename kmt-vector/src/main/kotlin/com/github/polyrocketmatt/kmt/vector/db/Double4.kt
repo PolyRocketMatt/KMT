@@ -28,6 +28,7 @@ import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
+import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
 import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
@@ -40,6 +41,11 @@ import com.github.polyrocketmatt.kmt.vector.bl.Bool4
 import com.github.polyrocketmatt.kmt.vector.fl.Float4
 import com.github.polyrocketmatt.kmt.vector.it.Int4
 import com.github.polyrocketmatt.kmt.vector.sh.Short4
+
+fun DoubleMatrix.toDouble4(): Double4 {
+    complies("Cannot create a Double4 from a BooleanMatrix with ${this.data.size} elements!") { this.data.size == 4 }
+    return Double4(this.data[0], this.data[1], this.data[2], this.data[3])
+}
 
 operator fun Int.plus(other: Double4): Double4 = Double4(this + other.x, this + other.y, this + other.z, this + other.w)
 operator fun Int.minus(other: Double4): Double4 = Double4(this - other.x, this - other.y, this - other.z, this - other.w)
