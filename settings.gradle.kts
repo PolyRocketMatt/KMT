@@ -19,3 +19,4 @@ gradleEnterprise {
         }
     }
 }
+include("kmt-expr")
