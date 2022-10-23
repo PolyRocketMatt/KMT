@@ -480,6 +480,30 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2), matrix) {
     constructor(value: Double) : this(DoubleArray(4) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
+    operator fun plus(other: Double2x2): Double2x2 {
+        val matrix = Double2x2()
+        data.forEachIndexed { index, d -> matrix.data[index] = d + other.data[index] }
+        return matrix
+    }
+
+    operator fun minus(other: Double2x2): Double2x2 {
+        val matrix = Double2x2()
+        data.forEachIndexed { index, d -> matrix.data[index] = d - other.data[index] }
+        return matrix
+    }
+
+    operator fun times(other: Double2x2): Double2x2 {
+        val matrix = Double2x2()
+        data.forEachIndexed { index, d -> matrix.data[index] = d * other.data[index] }
+        return matrix
+    }
+
+    operator fun div(other: Double2x2): Double2x2 {
+        val matrix = Double2x2()
+        data.forEachIndexed { index, d -> matrix.data[index] = d / other.data[index] }
+        return matrix
+    }
+
     override operator fun plus(value: Double): Double2x2 {
         val matrix = Double2x2()
         data.forEachIndexed { index, d -> matrix.data[index] = d + value }
@@ -543,6 +567,30 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3), matrix) {
     constructor() : this(DoubleArray(9) { 0.0 })
     constructor(value: Double) : this(DoubleArray(9) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
+
+    operator fun plus(other: Double3x3): Double3x3 {
+        val matrix = Double3x3()
+        data.forEachIndexed { index, d -> matrix.data[index] = d + other.data[index] }
+        return matrix
+    }
+
+    operator fun minus(other: Double3x3): Double3x3 {
+        val matrix = Double3x3()
+        data.forEachIndexed { index, d -> matrix.data[index] = d - other.data[index] }
+        return matrix
+    }
+
+    operator fun times(other: Double3x3): Double3x3 {
+        val matrix = Double3x3()
+        data.forEachIndexed { index, d -> matrix.data[index] = d * other.data[index] }
+        return matrix
+    }
+
+    operator fun div(other: Double3x3): Double3x3 {
+        val matrix = Double3x3()
+        data.forEachIndexed { index, d -> matrix.data[index] = d / other.data[index] }
+        return matrix
+    }
 
     override operator fun plus(value: Double): Double3x3 {
         val matrix = Double3x3()
@@ -610,6 +658,30 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4), matrix) {
     constructor() : this(DoubleArray(16) { 0.0 })
     constructor(value: Double) : this(DoubleArray(16) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
+
+    operator fun plus(other: Double4x4): Double4x4 {
+        val matrix = Double4x4()
+        data.forEachIndexed { index, d -> matrix.data[index] = d + other.data[index] }
+        return matrix
+    }
+
+    operator fun minus(other: Double4x4): Double4x4 {
+        val matrix = Double4x4()
+        data.forEachIndexed { index, d -> matrix.data[index] = d - other.data[index] }
+        return matrix
+    }
+
+    operator fun times(other: Double4x4): Double4x4 {
+        val matrix = Double4x4()
+        data.forEachIndexed { index, d -> matrix.data[index] = d * other.data[index] }
+        return matrix
+    }
+
+    operator fun div(other: Double4x4): Double4x4 {
+        val matrix = Double4x4()
+        data.forEachIndexed { index, d -> matrix.data[index] = d / other.data[index] }
+        return matrix
+    }
 
     override operator fun plus(value: Double): Double4x4 {
         val matrix = Double4x4()
