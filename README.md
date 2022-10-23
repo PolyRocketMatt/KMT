@@ -9,6 +9,9 @@ KMT is a library for various mathematical operations in Kotlin. Its original pur
 a modular library for mathematical tasks. Since Kotlin is emerging more and more as a language for 
 scientific computing, this library is intended to provide a solid foundation for such applications.
 
+KMT is currently in very early alpha stages. Implementations, documentations, testing may change in the future. Please 
+keep track of the changelog to see what has changed in the latest versions.
+
 ## Modules
 
 KMT is split into several modules, each of which can be used independently. Currently, the following modules

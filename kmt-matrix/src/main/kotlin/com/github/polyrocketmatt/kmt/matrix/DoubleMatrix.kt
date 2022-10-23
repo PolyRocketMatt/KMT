@@ -1,7 +1,7 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.common.fastAbs
-import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
@@ -130,8 +130,8 @@ open class DoubleMatrix(
     override operator fun get(i: Int): Double = data[i]
     override operator fun get(row: Int, col: Int): Double = data[row * shape[1] + col]
 
-    override operator fun set(i: Int, value: Double) { data[i] = value }
-    override operator fun set(row: Int, col: Int, value: Double) { data[row * shape[1] + col] = value }
+    override operator fun set(i: Int, value: Double) { println("OK"); data[i] = value.decimals(12) }
+    override operator fun set(row: Int, col: Int, value: Double) { println("OK"); data[row * shape[1] + col] = value.decimals(12) }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -303,7 +303,7 @@ open class DoubleMatrix(
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
         for (i in 0 until shape[1])
-            data[i + rowIndex1] += data[i + rowIndex2] * scalar
+            data[i + rowIndex1] += (data[i + rowIndex2] * scalar)
         return this
     }
 
@@ -312,42 +312,59 @@ open class DoubleMatrix(
         for ((currentColumn, _) in (0 until min(shape[0], shape[1])).withIndex()) {
             //  Find index of value with the highest absolute value in current column
             val col = column(currentColumn).copyOfRange(currentColumn, shape[0])
-            val pivotIndex = col.indexByCondition { _, current, _, value -> current.fastAbs() < value.fastAbs() }
+            val pivotIndex = col.indexByCondition(Double.MIN_VALUE) { _, current, _, value -> current.fastAbs() < value.fastAbs() }
             val pivot = col[pivotIndex]
 
             //  The index also gives the row to swap to the top
-            swapRow(0, pivotIndex + currentColumn)
+            swapRow(currentRow, pivotIndex + currentColumn)
 
             //  Update the current row
             currentRow++
 
-            //  Divide first row by pivot
-            multiplyRow(0, 1 / pivot)
-
             //  Gaussian elimination step
-            for (i in 1 until shape[0]) {
+            for (i in currentRow until shape[0]) {
                 //  Solve for k, the scalar to multiply the pivot row with to get 0 in the current column
-                val k = -column(currentColumn)[i]
+                val k = -column(currentColumn)[i] / pivot
 
-                //  Add the pivot row multiplied with k to the current row
-                addRow(i, 0, k)
+                //  Add the pivot row multiplied with k to the current row (which is the index of the current column)
+                addRow(i, currentColumn, k)
             }
-        }
-
-        //  Re-arrange so that 1.0 is on the diagonal
-        for ((currentColumn, i) in (0 until shape[0]).withIndex()) {
-            //  Find the row with a 1.0 in the current column
-            val rowIndex = column(currentColumn).indexByCondition { _, _, _, value -> value == 1.0 }
-
-            //  Swap the row with the current row
-            swapRow(i, rowIndex)
         }
 
         return this
     }
 
     override fun rref(): DoubleMatrix {
-        TODO("Not yet implemented")
+        //  We first bring the matrix in row echelon form
+        ref()
+
+        //  Decide if to clean up tiny values
+        val smallest = data.min()
+        if (smallest < 1e-12)
+            data.forEachIndexed { i, value -> data[i] = value.decimals(12) }
+
+        for (i in shape[0] - 1 downTo 0) {
+            //  Find the row with a 1.0 in the current column
+            val col = row(i)
+            val columnIndex = col.indexOfFirst { it != 0.0 }
+
+            //  Found 0-row
+            if (columnIndex == -1)
+                continue
+
+            //  Make sure there is a 1.0 in the current column
+            if (col[columnIndex] != 1.0)
+                multiplyRow(i, 1.0 / col[columnIndex])
+
+            //  For all rows above, make a 0 in the current column
+            for (j in i - 1 downTo 0) {
+                val k = -column(columnIndex)[j]
+
+                addRow(j, i, k)
+            }
+        }
+
+        return this
     }
 
     override fun solve(): DoubleMatrix {
@@ -384,6 +401,16 @@ open class DoubleMatrix(
         var result = shape.contentHashCode()
         result = 31 * result + data.contentHashCode()
         return result
+    }
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        for (i in 0 until shape[0]) {
+            sb.append("| ")
+            sb.append(row(i).joinToString(" "))
+            sb.append(" |\n")
+        }
+        return sb.toString()
     }
 
 }

@@ -6,13 +6,13 @@ package com.github.polyrocketmatt.kmt.common.utils
  * @param condition The condition function to check.
  * @return The index of the element, or -1 if not found.
  */
-fun BooleanArray.indexByCondition(condition: (cIdx: Int, current: Boolean, idx: Int, value: Boolean) -> Boolean): Int {
+fun BooleanArray.indexByCondition(base: Boolean, condition: (cIdx: Int, current: Boolean, idx: Int, value: Boolean) -> Boolean): Int {
     if (this.isEmpty())
         return -1
 
-    var index = 0
-    var element = this[0]
-    for (i in 1 until this.size) {
+    var index = -1
+    var element = base
+    for (i in 0 until this.size) {
         if (condition(index, element, i, this[i])) {
             element = this[i]
             index = i
@@ -28,13 +28,13 @@ fun BooleanArray.indexByCondition(condition: (cIdx: Int, current: Boolean, idx: 
  * @param condition The condition function to check.
  * @return The index of the element, or -1 if not found.
  */
-fun FloatArray.indexByCondition(condition: (cIdx: Int, current: Float, idx: Int, value: Float) -> Boolean): Int {
+fun FloatArray.indexByCondition(base: Float, condition: (cIdx: Int, current: Float, idx: Int, value: Float) -> Boolean): Int {
     if (this.isEmpty())
         return -1
 
-    var index = 0
-    var element = this[0]
-    for (i in 1 until this.size) {
+    var index = -1
+    var element = base
+    for (i in 0 until this.size) {
         if (condition(index, element, i, this[i])) {
             element = this[i]
             index = i
@@ -50,13 +50,13 @@ fun FloatArray.indexByCondition(condition: (cIdx: Int, current: Float, idx: Int,
  * @param condition The condition function to check.
  * @return The index of the element, or -1 if not found.
  */
-fun DoubleArray.indexByCondition(condition: (cIdx: Int, current: Double, idx: Int, value: Double) -> Boolean): Int {
+fun DoubleArray.indexByCondition(base: Double, condition: (cIdx: Int, current: Double, idx: Int, value: Double) -> Boolean): Int {
     if (this.isEmpty())
         return -1
 
-    var index = 0
-    var element = this[0]
-    for (i in 1 until this.size) {
+    var index = -1
+    var element = base
+    for (i in 0 until this.size) {
         if (condition(index, element, i, this[i])) {
             element = this[i]
             index = i
@@ -72,13 +72,13 @@ fun DoubleArray.indexByCondition(condition: (cIdx: Int, current: Double, idx: In
  * @param condition The condition function to check.
  * @return The index of the element, or -1 if not found.
  */
-fun IntArray.indexByCondition(condition: (cIdx: Int, current: Int, idx: Int, value: Int) -> Boolean): Int {
+fun IntArray.indexByCondition(base: Int, condition: (cIdx: Int, current: Int, idx: Int, value: Int) -> Boolean): Int {
     if (this.isEmpty())
         return -1
 
-    var index = 0
-    var element = this[0]
-    for (i in 1 until this.size) {
+    var index = -1
+    var element = base
+    for (i in 0 until this.size) {
         if (condition(index, element, i, this[i])) {
             element = this[i]
             index = i
