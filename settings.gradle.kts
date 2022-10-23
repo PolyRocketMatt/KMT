@@ -4,7 +4,6 @@ include("kmt-interval")
 include("kmt-trigonometry")
 include("kmt-vector")
 include("kmt-function")
-include("kmt-algorithms")
 include("kmt-matrix")
 
 plugins {
