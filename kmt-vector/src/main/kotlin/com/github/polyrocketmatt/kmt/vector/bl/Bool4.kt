@@ -1,6 +1,7 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Swizzle4
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.Double4
@@ -16,8 +17,23 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) : Tuple4<Boolean>(ar
     constructor(other: Bool4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Boolean) : this(x, x, x, x)
 
-    operator fun plus(other: Bool4) = Bool4(x || other.x, y || other.y, z || other.z, w || other.w)
-    operator fun times(other: Bool4) = Bool4(x && other.x, y && other.y, z && other.z, w && other.w)
+    operator fun plus(other: Bool4): Bool4 = Bool4(x || other.x, y || other.y, z || other.z, w || other.w)
+    operator fun times(other: Bool4): Bool4 = Bool4(x && other.x, y && other.y, z && other.z, w && other.w)
+
+    override fun plus(value: Boolean): Bool4 = Bool4(x || value, y || value, z || value, w || value)
+
+    override fun minus(value: Boolean): Bool4 = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+
+    override fun times(value: Boolean): Bool4 = Bool4(x && value, y && value, z && value, w && value)
+
+    override fun div(value: Boolean): Bool4 = throw UnsupportedOperationException("Cannot divide a boolean from a boolean vector")
+
+    override fun plusAssign(value: Boolean) { x = x || value; y = y || value; z = z || value; w = w || value }
+
+    override fun minusAssign(value: Boolean) = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+
+    override fun timesAssign(value: Boolean) { x = x && value; y = y && value; z = z && value; w = w && value }
+    override fun divAssign(value: Boolean) = throw UnsupportedOperationException("Cannot divide a boolean from a boolean vector")
 
     override fun length(): Float = throw UnsupportedOperationException("Cannot get length of a boolean vector")
     override fun lengthDouble(): Double = throw UnsupportedOperationException("Cannot get length of a boolean vector")

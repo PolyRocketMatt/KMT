@@ -73,55 +73,55 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     constructor(other: Double2) : this(other.x, other.y)
     constructor(x: Double) : this(x, x)
 
-    operator fun plus(other: Double2) = Double2(x + other.x, y + other.y)
-    operator fun minus(other: Double2) = Double2(x - other.x, y - other.y)
-    operator fun times(other: Double2) = Double2(x * other.x, y * other.y)
-    operator fun div(other: Double2) = Double2(x / other.x, y / other.y)
+    operator fun plus(other: Double2): Double2 = Double2(x + other.x, y + other.y)
+    operator fun minus(other: Double2): Double2 = Double2(x - other.x, y - other.y)
+    operator fun times(other: Double2): Double2 = Double2(x * other.x, y * other.y)
+    operator fun div(other: Double2): Double2 = Double2(x / other.x, y / other.y)
 
-    operator fun plus(other: Float2) = Double2(x + other.x, y + other.y)
-    operator fun minus(other: Float2) = Double2(x - other.x, y - other.y)
-    operator fun times(other: Float2) = Double2(x * other.x, y * other.y)
-    operator fun div(other: Float2) = Double2(x / other.x, y / other.y)
+    operator fun plus(other: Float2): Double2 = Double2(x + other.x, y + other.y)
+    operator fun minus(other: Float2): Double2 = Double2(x - other.x, y - other.y)
+    operator fun times(other: Float2): Double2 = Double2(x * other.x, y * other.y)
+    operator fun div(other: Float2): Double2 = Double2(x / other.x, y / other.y)
 
-    operator fun plus(other: Int2) = Double2(x + other.x, y + other.y)
-    operator fun minus(other: Int2) = Double2(x - other.x, y - other.y)
-    operator fun times(other: Int2) = Double2(x * other.x, y * other.y)
-    operator fun div(other: Int2) = Double2(x / other.x, y / other.y)
+    operator fun plus(other: Int2): Double2 = Double2(x + other.x, y + other.y)
+    operator fun minus(other: Int2): Double2 = Double2(x - other.x, y - other.y)
+    operator fun times(other: Int2): Double2 = Double2(x * other.x, y * other.y)
+    operator fun div(other: Int2): Double2 = Double2(x / other.x, y / other.y)
 
-    operator fun plus(other: Short2) = Double2(x + other.x, y + other.y)
-    operator fun minus(other: Short2) = Double2(x - other.x, y - other.y)
-    operator fun times(other: Short2) = Double2(x * other.x, y * other.y)
-    operator fun div(other: Short2) = Double2(x / other.x, y / other.y)
+    operator fun plus(other: Short2): Double2 = Double2(x + other.x, y + other.y)
+    operator fun minus(other: Short2): Double2 = Double2(x - other.x, y - other.y)
+    operator fun times(other: Short2): Double2 = Double2(x * other.x, y * other.y)
+    operator fun div(other: Short2): Double2 = Double2(x / other.x, y / other.y)
 
     operator fun plusAssign(other: Double2) { x += other.x; y += other.y }
     operator fun minusAssign(other: Double2) { x -= other.x; y -= other.y }
     operator fun timesAssign(other: Double2) { x *= other.x; y *= other.y }
     operator fun divAssign(other: Double2) { x /= other.x; y /= other.y }
 
-    operator fun plus(other: Int) = Double2(x + other, y + other)
-    operator fun minus(other: Int) = Double2(x - other, y - other)
-    operator fun times(other: Int) = Double2(x * other, y * other)
-    operator fun div(other: Int) = Double2(x / other, y / other)
+    operator fun plus(value: Int): Double2 = Double2(x + value, y + value)
+    operator fun minus(value: Int): Double2 = Double2(x - value, y - value)
+    operator fun times(value: Int): Double2 = Double2(x * value, y * value)
+    operator fun div(value: Int): Double2 = Double2(x / value, y / value)
 
-    operator fun plus(other: Float) = Double2(x + other, y + other)
-    operator fun minus(other: Float) = Double2(x - other, y - other)
-    operator fun times(other: Float) = Double2(x * other, y * other)
-    operator fun div(other: Float) = Double2(x / other, y / other)
+    operator fun plus(value: Float): Double2 = Double2(x + value, y + value)
+    operator fun minus(value: Float): Double2 = Double2(x - value, y - value)
+    operator fun times(value: Float): Double2 = Double2(x * value, y * value)
+    operator fun div(value: Float): Double2 = Double2(x / value, y / value)
 
-    operator fun plus(other: Double) = Double2(x + other, y + other)
-    operator fun minus(other: Double) = Double2(x - other, y - other)
-    operator fun times(other: Double) = Double2(x * other, y * other)
-    operator fun div(other: Double) = Double2(x / other, y / other)
+    override operator fun plus(value: Double): Double2 = Double2(x + value, y + value)
+    override operator fun minus(value: Double): Double2 = Double2(x - value, y - value)
+    override operator fun times(value: Double): Double2 = Double2(x * value, y * value)
+    override operator fun div(value: Double): Double2 = Double2(x / value, y / value)
 
-    operator fun plus(other: Short) = Double2(x + other, y + other)
-    operator fun minus(other: Short) = Double2(x - other, y - other)
-    operator fun times(other: Short) = Double2(x * other, y * other)
-    operator fun div(other: Short) = Double2(x / other, y / other)
+    operator fun plus(value: Short): Double2 = Double2(x + value, y + value)
+    operator fun minus(value: Short): Double2 = Double2(x - value, y - value)
+    operator fun times(value: Short): Double2 = Double2(x * value, y * value)
+    operator fun div(value: Short): Double2 = Double2(x / value, y / value)
 
-    operator fun plusAssign(other: Double) { x += other; y += other }
-    operator fun minusAssign(other: Double) { x -= other; y -= other }
-    operator fun timesAssign(other: Double) { x *= other; y *= other }
-    operator fun divAssign(other: Double) { x /= other; y /= other }
+    override operator fun plusAssign(value: Double) { x += value; y += value }
+    override operator fun minusAssign(value: Double) { x -= value; y -= value }
+    override operator fun timesAssign(value: Double) { x *= value; y *= value }
+    override operator fun divAssign(value: Double) { x /= value; y /= value }
 
     override fun length(): Float = (x * x + y * y).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y).dsqrt()

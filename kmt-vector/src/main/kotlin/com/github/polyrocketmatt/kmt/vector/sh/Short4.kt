@@ -95,30 +95,30 @@ class Short4(x: Short, y: Short, z: Short, w: Short) : Tuple4<Short>(arrayOf(x, 
     operator fun timesAssign(other: Short4) { x = (x * other.x).toShort(); y = (y * other.y).toShort(); z = (z * other.z).toShort(); w = (w * other.w).toShort() }
     operator fun divAssign(other: Short4) { x = (x / other.x).toShort(); y = (y / other.y).toShort(); z = (z / other.z).toShort(); w = (w / other.w).toShort() }
 
-    operator fun plus(other: Int) = Int4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Int) = Int4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Int) = Int4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Int) = Int4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Int) = Int4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Int) = Int4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Int) = Int4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Int) = Int4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Float) = Float4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Float) = Float4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Float) = Float4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Float) = Float4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Float) = Float4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Float) = Float4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Float) = Float4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Float) = Float4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Double) = Double4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Double) = Double4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Double) = Double4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Double) = Double4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Double) = Double4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Double) = Double4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Double) = Double4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Double) = Double4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Short) = Int4(x + other, y + other, z + other, w + other).asShort()
-    operator fun minus(other: Short) = Int4(x - other, y - other, z - other, w - other).asShort()
-    operator fun times(other: Short) = Int4(x * other, y * other, z * other, w * other).asShort()
-    operator fun div(other: Short) = Int4(x / other, y / other, z / other, w / other).asShort()
+    override operator fun plus(value: Short) = Int4(x + value, y + value, z + value, w + value).asShort()
+    override operator fun minus(value: Short) = Int4(x - value, y - value, z - value, w - value).asShort()
+    override operator fun times(value: Short) = Int4(x * value, y * value, z * value, w * value).asShort()
+    override operator fun div(value: Short) = Int4(x / value, y / value, z / value, w / value).asShort()
 
-    operator fun plusAssign(other: Short) { x = (x + other).toShort(); y = (y + other).toShort(); z = (z + other).toShort(); w = (w + other).toShort() }
-    operator fun minusAssign(other: Short) { x = (x - other).toShort(); y = (y - other).toShort(); z = (z - other).toShort(); w = (w - other).toShort() }
-    operator fun timesAssign(other: Short) { x = (x * other).toShort(); y = (y * other).toShort(); z = (z * other).toShort(); w = (w * other).toShort() }
-    operator fun divAssign(other: Short) { x = (x / other).toShort(); y = (y / other).toShort(); z = (z / other).toShort(); w = (w / other).toShort() }
+    override operator fun plusAssign(value: Short) { x = (x + value).toShort(); y = (y + value).toShort(); z = (z + value).toShort(); w = (w + value).toShort() }
+    override operator fun minusAssign(value: Short) { x = (x - value).toShort(); y = (y - value).toShort(); z = (z - value).toShort(); w = (w - value).toShort() }
+    override operator fun timesAssign(value: Short) { x = (x * value).toShort(); y = (y * value).toShort(); z = (z * value).toShort(); w = (w * value).toShort() }
+    override operator fun divAssign(value: Short) { x = (x / value).toShort(); y = (y / value).toShort(); z = (z / value).toShort(); w = (w / value).toShort() }
 
     override fun length(): Float = (x * x + y * y + z * z).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y + z * z).dsqrt()

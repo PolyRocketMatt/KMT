@@ -93,30 +93,30 @@ class Short2(x: Short, y: Short) : Tuple2<Short>(arrayOf(x, y)), ShortVector, Sw
     operator fun timesAssign(other: Short2) { x = (x * other.x.toInt()).toShort(); y = (y * other.y.toInt()).toShort() }
     operator fun divAssign(other: Short2) { x = (x / other.x.toInt()).toShort(); y = (y / other.y.toInt()).toShort() }
 
-    operator fun plus(other: Int) = Int2(x + other, y + other)
-    operator fun minus(other: Int) = Int2(x - other, y - other)
-    operator fun times(other: Int) = Int2(x * other, y * other)
-    operator fun div(other: Int) = Int2(x / other, y / other)
+    operator fun plus(value: Int) = Int2(x + value, y + value)
+    operator fun minus(value: Int) = Int2(x - value, y - value)
+    operator fun times(value: Int) = Int2(x * value, y * value)
+    operator fun div(value: Int) = Int2(x / value, y / value)
 
-    operator fun plus(other: Float) = Float2(x + other, y + other)
-    operator fun minus(other: Float) = Float2(x - other, y - other)
-    operator fun times(other: Float) = Float2(x * other, y * other)
-    operator fun div(other: Float) = Float2(x / other, y / other)
+    operator fun plus(value: Float) = Float2(x + value, y + value)
+    operator fun minus(value: Float) = Float2(x - value, y - value)
+    operator fun times(value: Float) = Float2(x * value, y * value)
+    operator fun div(value: Float) = Float2(x / value, y / value)
 
-    operator fun plus(other: Double) = Double2(x + other, y + other)
-    operator fun minus(other: Double) = Double2(x - other, y - other)
-    operator fun times(other: Double) = Double2(x * other, y * other)
-    operator fun div(other: Double) = Double2(x / other, y / other)
+    operator fun plus(value: Double) = Double2(x + value, y + value)
+    operator fun minus(value: Double) = Double2(x - value, y - value)
+    operator fun times(value: Double) = Double2(x * value, y * value)
+    operator fun div(value: Double) = Double2(x / value, y / value)
 
-    operator fun plus(other: Short) = Int2(x + other, y + other).asShort()
-    operator fun minus(other: Short) = Int2(x - other, y - other).asShort()
-    operator fun times(other: Short) = Int2(x * other, y * other).asShort()
-    operator fun div(other: Short) = Int2(x / other, y / other).asShort()
+    override operator fun plus(value: Short) = Int2(x + value, y + value).asShort()
+    override operator fun minus(value: Short) = Int2(x - value, y - value).asShort()
+    override operator fun times(value: Short) = Int2(x * value, y * value).asShort()
+    override operator fun div(value: Short) = Int2(x / value, y / value).asShort()
 
-    operator fun plusAssign(other: Short) { x = (x + other).toShort(); y = (y + other).toShort() }
-    operator fun minusAssign(other: Short) { x = (x - other).toShort(); y = (y - other).toShort() }
-    operator fun timesAssign(other: Short) { x = (x * other).toShort(); y = (y * other).toShort() }
-    operator fun divAssign(other: Short) { x = (x / other).toShort(); y = (y / other).toShort() }
+    override operator fun plusAssign(value: Short) { x = (x + value).toShort(); y = (y + value).toShort() }
+    override operator fun minusAssign(value: Short) { x = (x - value).toShort(); y = (y - value).toShort() }
+    override operator fun timesAssign(value: Short) { x = (x * value).toShort(); y = (y * value).toShort() }
+    override operator fun divAssign(value: Short) { x = (x / value).toShort(); y = (y / value).toShort() }
 
     override fun length(): Float = (x * x + y * y).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y).dsqrt()

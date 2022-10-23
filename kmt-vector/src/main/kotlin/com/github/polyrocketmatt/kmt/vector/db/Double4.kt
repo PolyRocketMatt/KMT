@@ -100,30 +100,30 @@ class Double4(x: Double, y: Double, z: Double, w: Double) : Tuple4<Double>(array
     operator fun timesAssign(other: Double4) { x *= other.x; y *= other.y; z *= other.z; w *= other.w }
     operator fun divAssign(other: Double4) { x /= other.x; y /= other.y; z /= other.z; w /= other.w }
 
-    operator fun plus(other: Int) = Double4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Int) = Double4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Int) = Double4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Int) = Double4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Int) = Double4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Int) = Double4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Int) = Double4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Int) = Double4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Float) = Double4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Float) = Double4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Float) = Double4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Float) = Double4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Float) = Double4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Float) = Double4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Float) = Double4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Float) = Double4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Double) = Double4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Double) = Double4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Double) = Double4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Double) = Double4(x / other, y / other, z / other, w / other)
+    override operator fun plus(value: Double) = Double4(x + value, y + value, z + value, w + value)
+    override operator fun minus(value: Double) = Double4(x - value, y - value, z - value, w - value)
+    override operator fun times(value: Double) = Double4(x * value, y * value, z * value, w * value)
+    override operator fun div(value: Double) = Double4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Short) = Double4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Short) = Double4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Short) = Double4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Short) = Double4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Short) = Double4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Short) = Double4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Short) = Double4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Short) = Double4(x / value, y / value, z / value, w / value)
 
-    operator fun plusAssign(other: Double) { x += other; y += other; z += other; w += other }
-    operator fun minusAssign(other: Double) { x -= other; y -= other; z -= other; w -= other }
-    operator fun timesAssign(other: Double) { x *= other; y *= other; z *= other; w *= other }
-    operator fun divAssign(other: Double) { x /= other; y /= other; z /= other; w /= other }
+    override operator fun plusAssign(value: Double) { x += value; y += value; z += value; w += value }
+    override operator fun minusAssign(value: Double) { x -= value; y -= value; z -= value; w -= value }
+    override operator fun timesAssign(value: Double) { x *= value; y *= value; z *= value; w *= value }
+    override operator fun divAssign(value: Double) { x /= value; y /= value; z /= value; w /= value }
 
     override fun length(): Float = (x * x + y * y + z * z).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y + z * z).dsqrt()

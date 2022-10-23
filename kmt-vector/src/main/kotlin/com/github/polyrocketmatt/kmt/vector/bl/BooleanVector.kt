@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.DoubleVector
 import com.github.polyrocketmatt.kmt.vector.fl.FloatVector
@@ -17,7 +18,7 @@ fun BooleanVector.short() = this.asShort()
  *
  * Represents an n-dimensional vector of booleans.
  */
-interface BooleanVector : Vector<Boolean> {
+interface BooleanVector : Vector<Boolean>, Matrix<Boolean> {
 
     /**
      * Get the vector as a floating point vector.

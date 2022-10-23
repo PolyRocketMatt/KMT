@@ -19,6 +19,16 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
     operator fun plus(other: Bool3) = Bool3(x || other.x, y || other.y, z || other.z)
     operator fun times(other: Bool3) = Bool3(x && other.x, y && other.y, z && other.z)
 
+    override fun plus(value: Boolean): Bool3 = Bool3(x || value, y || value, z || value)
+    override fun minus(value: Boolean): Bool3 = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+    override fun times(value: Boolean): Bool3 = Bool3(x && value, y && value, z && value)
+    override fun div(value: Boolean): Bool3 = throw UnsupportedOperationException("Cannot divide a boolean vector by a boolean")
+
+    override fun plusAssign(value: Boolean) { x = x || value; y = y || value; z = z || value }
+    override fun minusAssign(value: Boolean) = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+    override fun timesAssign(value: Boolean) { x = x && value; y = y && value; z = z && value }
+    override fun divAssign(value: Boolean) = throw UnsupportedOperationException("Cannot divide a boolean vector by a boolean")
+
     override fun length(): Float = throw UnsupportedOperationException("Cannot get length of a boolean vector")
     override fun lengthDouble(): Double = throw UnsupportedOperationException("Cannot get length of a boolean vector")
     override fun lengthSq(): Boolean = throw UnsupportedOperationException("Cannot get squared length of a boolean vector")

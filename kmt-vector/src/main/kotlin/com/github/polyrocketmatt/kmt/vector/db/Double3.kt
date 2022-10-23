@@ -99,30 +99,30 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
     operator fun timesAssign(other: Double3) { x *= other.x; y *= other.y; z *= other.z }
     operator fun divAssign(other: Double3) { x /= other.x; y /= other.y; z /= other.z }
 
-    operator fun plus(other: Int) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Int) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Int) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Int) = Double3(x / other, y / other, z / other)
+    operator fun plus(value: Int) = Double3(x + value, y + value, z + value)
+    operator fun minus(value: Int) = Double3(x - value, y - value, z - value)
+    operator fun times(value: Int) = Double3(x * value, y * value, z * value)
+    operator fun div(value: Int) = Double3(x / value, y / value, z / value)
 
-    operator fun plus(other: Float) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Float) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Float) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Float) = Double3(x / other, y / other, z / other)
+    operator fun plus(value: Float) = Double3(x + value, y + value, z + value)
+    operator fun minus(value: Float) = Double3(x - value, y - value, z - value)
+    operator fun times(value: Float) = Double3(x * value, y * value, z * value)
+    operator fun div(value: Float) = Double3(x / value, y / value, z / value)
 
-    operator fun plus(other: Double) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Double) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Double) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Double) = Double3(x / other, y / other, z / other)
+    override operator fun plus(value: Double) = Double3(x + value, y + value, z + value)
+    override operator fun minus(value: Double) = Double3(x - value, y - value, z - value)
+    override operator fun times(value: Double) = Double3(x * value, y * value, z * value)
+    override operator fun div(value: Double) = Double3(x / value, y / value, z / value)
 
-    operator fun plus(other: Short) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Short) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Short) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Short) = Double3(x / other, y / other, z / other)
+    operator fun plus(value: Short) = Double3(x + value, y + value, z + value)
+    operator fun minus(value: Short) = Double3(x - value, y - value, z - value)
+    operator fun times(value: Short) = Double3(x * value, y * value, z * value)
+    operator fun div(value: Short) = Double3(x / value, y / value, z / value)
 
-    operator fun plusAssign(other: Double) { x += other; y += other; z += other }
-    operator fun minusAssign(other: Double) { x -= other; y -= other; z -= other }
-    operator fun timesAssign(other: Double) { x *= other; y *= other; z *= other }
-    operator fun divAssign(other: Double) { x /= other; y /= other; z /= other }
+    override operator fun plusAssign(value: Double) { x += value; y += value; z += value }
+    override operator fun minusAssign(value: Double) { x -= value; y -= value; z -= value }
+    override operator fun timesAssign(value: Double) { x *= value; y *= value; z *= value }
+    override operator fun divAssign(value: Double) { x /= value; y /= value; z /= value }
 
     override fun length(): Float = (x * x + y * y + z * z).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y + z * z).dsqrt()

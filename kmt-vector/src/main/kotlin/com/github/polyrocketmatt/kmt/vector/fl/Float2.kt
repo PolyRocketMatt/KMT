@@ -94,37 +94,35 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
     operator fun times(other: Short2) = Float2(x * other.x, y * other.y)
     operator fun div(other: Short2) = Float2(x / other.x, y / other.y)
 
-    operator fun plusAssign(other: Float2) {
-        println("PLUS > $other"); x += other.x; y += other.y
-    }
+    operator fun plusAssign(other: Float2) { x += other.x; y += other.y }
     operator fun minusAssign(other: Float2) { x -= other.x; y -= other.y }
     operator fun timesAssign(other: Float2) { x *= other.x; y *= other.y }
     operator fun divAssign(other: Float2) { x /= other.x; y /= other.y }
 
-    operator fun plus(other: Int) = Float2(x + other, y + other)
-    operator fun minus(other: Int) = Float2(x - other, y - other)
-    operator fun times(other: Int) = Float2(x * other, y * other)
-    operator fun div(other: Int) = Float2(x / other, y / other)
+    operator fun plus(value: Int) = Float2(x + value, y + value)
+    operator fun minus(value: Int) = Float2(x - value, y - value)
+    operator fun times(value: Int) = Float2(x * value, y * value)
+    operator fun div(value: Int) = Float2(x / value, y / value)
 
-    operator fun plus(other: Float) = Float2(x + other, y + other)
-    operator fun minus(other: Float) = Float2(x - other, y - other)
-    operator fun times(other: Float) = Float2(x * other, y * other)
-    operator fun div(other: Float) = Float2(x / other, y / other)
+    override operator fun plus(value: Float) = Float2(x + value, y + value)
+    override operator fun minus(value: Float) = Float2(x - value, y - value)
+    override operator fun times(value: Float) = Float2(x * value, y * value)
+    override operator fun div(value: Float) = Float2(x / value, y / value)
 
-    operator fun plus(other: Double) = Double2(x + other, y + other)
-    operator fun minus(other: Double) = Double2(x - other, y - other)
-    operator fun times(other: Double) = Double2(x * other, y * other)
-    operator fun div(other: Double) = Double2(x / other, y / other)
+    operator fun plus(value: Double) = Double2(x + value, y + value)
+    operator fun minus(value: Double) = Double2(x - value, y - value)
+    operator fun times(value: Double) = Double2(x * value, y * value)
+    operator fun div(value: Double) = Double2(x / value, y / value)
 
-    operator fun plus(other: Short) = Float2(x + other, y + other)
-    operator fun minus(other: Short) = Float2(x - other, y - other)
-    operator fun times(other: Short) = Float2(x * other, y * other)
-    operator fun div(other: Short) = Float2(x / other, y / other)
+    operator fun plus(value: Short) = Float2(x + value, y + value)
+    operator fun minus(value: Short) = Float2(x - value, y - value)
+    operator fun times(value: Short) = Float2(x * value, y * value)
+    operator fun div(value: Short) = Float2(x / value, y / value)
 
-    operator fun plusAssign(other: Float) { x += other; y += other }
-    operator fun minusAssign(other: Float) { x -= other; y -= other }
-    operator fun timesAssign(other: Float) { x *= other; y *= other }
-    operator fun divAssign(other: Float) { x /= other; y /= other }
+    override operator fun plusAssign(value: Float) { x += value; y += value }
+    override operator fun minusAssign(value: Float) { x -= value; y -= value }
+    override operator fun timesAssign(value: Float) { x *= value; y *= value }
+    override operator fun divAssign(value: Float) { x /= value; y /= value }
 
     override fun length(): Float = (x * x + y * y).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y).dsqrt()

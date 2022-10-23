@@ -94,30 +94,30 @@ class Short3(x: Short, y: Short, z: Short) : Tuple3<Short>(arrayOf(x, y, z)), Sh
     operator fun timesAssign(other: Short3) { x = (x * other.x).toShort(); y = (y * other.y).toShort(); z = (z * other.z).toShort() }
     operator fun divAssign(other: Short3) { x = (x / other.x).toShort(); y = (y / other.y).toShort(); z = (z / other.z).toShort() }
 
-    operator fun plus(other: Int) = Int3(x + other, y + other, z + other)
-    operator fun minus(other: Int) = Int3(x - other, y - other, z - other)
-    operator fun times(other: Int) = Int3(x * other, y * other, z * other)
-    operator fun div(other: Int) = Int3(x / other, y / other, z / other)
+    operator fun plus(value: Int) = Int3(x + value, y + value, z + value)
+    operator fun minus(value: Int) = Int3(x - value, y - value, z - value)
+    operator fun times(value: Int) = Int3(x * value, y * value, z * value)
+    operator fun div(value: Int) = Int3(x / value, y / value, z / value)
 
-    operator fun plus(other: Float) = Float3(x + other, y + other, z + other)
-    operator fun minus(other: Float) = Float3(x - other, y - other, z - other)
-    operator fun times(other: Float) = Float3(x * other, y * other, z * other)
-    operator fun div(other: Float) = Float3(x / other, y / other, z / other)
+    operator fun plus(value: Float) = Float3(x + value, y + value, z + value)
+    operator fun minus(value: Float) = Float3(x - value, y - value, z - value)
+    operator fun times(value: Float) = Float3(x * value, y * value, z * value)
+    operator fun div(value: Float) = Float3(x / value, y / value, z / value)
 
-    operator fun plus(other: Double) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Double) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Double) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Double) = Double3(x / other, y / other, z / other)
+    operator fun plus(value: Double) = Double3(x + value, y + value, z + value)
+    operator fun minus(value: Double) = Double3(x - value, y - value, z - value)
+    operator fun times(value: Double) = Double3(x * value, y * value, z * value)
+    operator fun div(value: Double) = Double3(x / value, y / value, z / value)
 
-    operator fun plus(other: Short) = Int3(x + other, y + other, z + other).asShort()
-    operator fun minus(other: Short) = Int3(x - other, y - other, z - other).asShort()
-    operator fun times(other: Short) = Int3(x * other, y * other, z * other).asShort()
-    operator fun div(other: Short) = Int3(x / other, y / other, z / other).asShort()
+    override operator fun plus(value: Short) = Int3(x + value, y + value, z + value).asShort()
+    override operator fun minus(value: Short) = Int3(x - value, y - value, z - value).asShort()
+    override operator fun times(value: Short) = Int3(x * value, y * value, z * value).asShort()
+    override operator fun div(value: Short) = Int3(x / value, y / value, z / value).asShort()
 
-    operator fun plusAssign(other: Short) { x = (x + other).toShort(); y = (y + other).toShort(); z = (z + other).toShort() }
-    operator fun minusAssign(other: Short) { x = (x - other).toShort(); y = (y - other).toShort(); z = (z - other).toShort() }
-    operator fun timesAssign(other: Short) { x = (x * other).toShort(); y = (y * other).toShort(); z = (z * other).toShort() }
-    operator fun divAssign(other: Short) { x = (x / other).toShort(); y = (y / other).toShort(); z = (z / other).toShort() }
+    override operator fun plusAssign(value: Short) { x = (x + value).toShort(); y = (y + value).toShort(); z = (z + value).toShort() }
+    override operator fun minusAssign(value: Short) { x = (x - value).toShort(); y = (y - value).toShort(); z = (z - value).toShort() }
+    override operator fun timesAssign(value: Short) { x = (x * value).toShort(); y = (y * value).toShort(); z = (z * value).toShort() }
+    override operator fun divAssign(value: Short) { x = (x / value).toShort(); y = (y / value).toShort(); z = (z / value).toShort() }
 
     override fun length(): Float = (x * x + y * y + z * z).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y + z * z).dsqrt()

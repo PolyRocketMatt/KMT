@@ -95,30 +95,30 @@ class Int4(x: Int, y: Int, z: Int, w: Int) : Tuple4<Int>(arrayOf(x, y, z, w)), I
     operator fun timesAssign(other: Int4) { x *= other.x; y *= other.y; z *= other.z; w *= other.w }
     operator fun divAssign(other: Int4) { x /= other.x; y /= other.y; z /= other.z; w /= other.w }
 
-    operator fun plus(other: Int) = Int4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Int) = Int4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Int) = Int4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Int) = Int4(x / other, y / other, z / other, w / other)
+    override operator fun plus(value: Int) = Int4(x + value, y + value, z + value, w + value)
+    override operator fun minus(value: Int) = Int4(x - value, y - value, z - value, w - value)
+    override operator fun times(value: Int) = Int4(x * value, y * value, z * value, w * value)
+    override operator fun div(value: Int) = Int4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Float) = Float4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Float) = Float4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Float) = Float4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Float) = Float4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Float) = Float4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Float) = Float4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Float) = Float4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Float) = Float4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Double) = Double4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Double) = Double4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Double) = Double4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Double) = Double4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Double) = Double4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Double) = Double4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Double) = Double4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Double) = Double4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Short) = Int4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Short) = Int4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Short) = Int4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Short) = Int4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Short) = Int4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Short) = Int4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Short) = Int4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Short) = Int4(x / value, y / value, z / value, w / value)
 
-    operator fun plusAssign(other: Int) { x += other; y += other; z += other; w += other }
-    operator fun minusAssign(other: Int) { x -= other; y -= other; z -= other; w -= other }
-    operator fun timesAssign(other: Int) { x *= other; y *= other; z *= other; w *= other }
-    operator fun divAssign(other: Int) { x /= other; y /= other; z /= other; w /= other }
+    override operator fun plusAssign(value: Int) { x += value; y += value; z += value; w += value }
+    override operator fun minusAssign(value: Int) { x -= value; y -= value; z -= value; w -= value }
+    override operator fun timesAssign(value: Int) { x *= value; y *= value; z *= value; w *= value }
+    override operator fun divAssign(value: Int) { x /= value; y /= value; z /= value; w /= value }
 
     override fun length(): Float = (x * x + y * y + z * z).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y + z * z).dsqrt()
