@@ -28,6 +28,9 @@ import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -193,6 +196,8 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     override fun asInt(): Int2 = Int2(x.toInt(), y.toInt())
     override fun asShort(): Short2 = Short2(x.toInt().toShort(), y.toInt().toShort())
     override fun asBoolean(): Bool2 = Bool2(x != 0.0, y != 0.0)
+    override fun asRowMatrix(): DoubleMatrix = data.toMatrix(intArrayOf(1, 2))
+    override fun asColumnMatrix(): DoubleMatrix = data.toMatrix(intArrayOf(2, 1))
 
     override fun xy(): Double2 = this
     override fun yx(): Double2 = Double2(y, x)

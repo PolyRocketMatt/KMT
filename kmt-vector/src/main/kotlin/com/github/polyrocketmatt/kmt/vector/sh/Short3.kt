@@ -23,6 +23,9 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -195,6 +198,8 @@ class Short3(x: Short, y: Short, z: Short) : Tuple3<Short>(arrayOf(x, y, z)), Sh
     override fun asDouble(): Double3 = Double3(x.toDouble(), y.toDouble(), z.toDouble())
     override fun asInt(): Int3 = Int3(x.toInt(), y.toInt(), z.toInt())
     override fun asBoolean(): Bool3 = Bool3(x != 0.toShort(), y != 0.toShort(), z != 0.toShort())
+    override fun asRowMatrix(): ShortMatrix = data.toMatrix(intArrayOf(1, 3))
+    override fun asColumnMatrix(): ShortMatrix = data.toMatrix(intArrayOf(3, 1))
 
     override fun xy(): Short2 = Short2(x, y)
     override fun yz(): Short2 = Short2(y, z)

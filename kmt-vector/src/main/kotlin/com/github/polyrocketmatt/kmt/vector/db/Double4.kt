@@ -28,6 +28,9 @@ import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -209,6 +212,8 @@ class Double4(x: Double, y: Double, z: Double, w: Double) : Tuple4<Double>(array
     override fun asInt(): Int4 = Int4(x.toInt(), y.toInt(), z.toInt(), w.toInt())
     override fun asShort(): Short4 = Short4(x.toInt().toShort(), y.toInt().toShort(), z.toInt().toShort(), w.toInt().toShort())
     override fun asBoolean(): Bool4 = Bool4(x != 0.0, y != 0.0, z != 0.0, w != 0.0)
+    override fun asRowMatrix(): DoubleMatrix = data.toMatrix(intArrayOf(1, 4))
+    override fun asColumnMatrix(): DoubleMatrix = data.toMatrix(intArrayOf(4, 1))
 
     override fun xy(): Double2 = Double2(x, y)
     override fun xz(): Double2 = Double2(x, z)

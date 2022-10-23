@@ -18,6 +18,8 @@
 
 package com.github.polyrocketmatt.kmt.vector.db
 
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
 import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.bl.BooleanVector
@@ -119,4 +121,18 @@ interface DoubleVector : Vector<Double>, Matrix<Double> {
      * @return The vector as a boolean vector.
      */
     fun asBoolean(): BooleanVector
+
+    /**
+     * Get the vector as a double row matrix.
+     *
+     * @return The vector as a double row matrix.
+     */
+    fun asRowMatrix(): DoubleMatrix
+
+    /**
+     * Get the vector as a double column matrix.
+     *
+     * @return The vector as a double column matrix.
+     */
+    fun asColumnMatrix(): DoubleMatrix
 }

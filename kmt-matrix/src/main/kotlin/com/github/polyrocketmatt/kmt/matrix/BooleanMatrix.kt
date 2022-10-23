@@ -16,6 +16,21 @@ typealias B4x4 = Boolean4x4
  * @return A matrix with the given shape and the given array as its data
  * @throws IllegalStateException If the array does not comply with the given shape
  */
+fun Array<Boolean>.toMatrix(shape: IntArray): BooleanMatrix {
+    val elements = shape.reduce { acc, i -> acc * i }
+    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+            "Expected ${elements}, found ${this.size}" },
+        { this.size == elements })
+    return BooleanMatrix(shape.size, shape, this.toBooleanArray())
+}
+
+/**
+ * Get a matrix with the given shape from the given array.
+ *
+ * @param shape The shape of the matrix
+ * @return A matrix with the given shape and the given array as its data
+ * @throws IllegalStateException If the array does not comply with the given shape
+ */
 fun BooleanArray.toMatrix(shape: IntArray): BooleanMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +

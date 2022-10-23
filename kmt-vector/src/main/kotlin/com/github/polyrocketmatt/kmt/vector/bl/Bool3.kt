@@ -1,6 +1,9 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.vector.Swizzle3
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.Double3
@@ -71,6 +74,8 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
     override fun asDouble(): Double3 = Double3(if (x) 1.0 else 0.0, if (y) 1.0 else 0.0, if (z) 1.0 else 0.0)
     override fun asInt(): Int3 = Int3(if (x) 1 else 0, if (y) 1 else 0, if (z) 1 else 0)
     override fun asShort(): Short3 = Short3(if (x) 1 else 0, if (y) 1 else 0, if (z) 1 else 0)
+    override fun asRowMatrix(): BooleanMatrix = data.toMatrix(intArrayOf(1, 3))
+    override fun asColumnMatrix(): BooleanMatrix = data.toMatrix(intArrayOf(3, 1))
 
     override fun xy(): Bool2 = Bool2(x, y)
     override fun yz(): Bool2 = Bool2(y, z)

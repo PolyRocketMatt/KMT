@@ -18,6 +18,8 @@
 
 package com.github.polyrocketmatt.kmt.vector.fl
 
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
 import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.bl.BooleanVector
@@ -119,4 +121,18 @@ interface FloatVector : Vector<Float>, Matrix<Float> {
      * @return The vector as a boolean vector.
      */
     fun asBoolean(): BooleanVector
+
+    /**
+     * Get the vector as a floating-point row matrix.
+     *
+     * @return The vector as a floating-point row matrix.
+     */
+    fun asRowMatrix(): FloatMatrix
+
+    /**
+     * Get the vector as a floating-point column matrix.
+     *
+     * @return The vector as a floating-point column matrix.
+     */
+    fun asColumnMatrix(): FloatMatrix
 }

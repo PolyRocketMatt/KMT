@@ -16,6 +16,21 @@ typealias I4x4 = Int4x4
  * @return A matrix with the given shape and the given array as its data
  * @throws IllegalStateException If the array does not comply with the given shape
  */
+fun Array<Int>.toMatrix(shape: IntArray): IntMatrix {
+    val elements = shape.reduce { acc, i -> acc * i }
+    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+            "Expected ${elements}, found ${this.size}" },
+        { this.size == elements })
+    return IntMatrix(shape.size, shape, this.toIntArray())
+}
+
+/**
+ * Get a matrix with the given shape from the given array.
+ *
+ * @param shape The shape of the matrix
+ * @return A matrix with the given shape and the given array as its data
+ * @throws IllegalStateException If the array does not comply with the given shape
+ */
 fun IntArray.toMatrix(shape: IntArray): IntMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +

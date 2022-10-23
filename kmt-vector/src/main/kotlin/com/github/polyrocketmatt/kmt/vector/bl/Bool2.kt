@@ -1,6 +1,8 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.vector.Swizzle2
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.Double2
@@ -70,6 +72,8 @@ class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVec
     override fun asDouble(): Double2 = Double2(if (x) 1.0 else 0.0, if (y) 1.0 else 0.0)
     override fun asInt(): Int2 = Int2(if (x) 1 else 0, if (y) 1 else 0)
     override fun asShort(): Short2 = Short2(if (x) 1 else 0, if (y) 1 else 0)
+    override fun asRowMatrix(): BooleanMatrix = data.toMatrix(intArrayOf(1, 2))
+    override fun asColumnMatrix(): BooleanMatrix = data.toMatrix(intArrayOf(2, 1))
 
     override fun xy(): Bool2 = Bool2(x, y)
     override fun yx(): Bool2 = Bool2(y, x)

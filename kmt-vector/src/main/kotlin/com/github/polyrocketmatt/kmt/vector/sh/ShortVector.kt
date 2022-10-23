@@ -18,7 +18,9 @@
 
 package com.github.polyrocketmatt.kmt.vector.sh
 
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
 import com.github.polyrocketmatt.kmt.matrix.Matrix
+import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.bl.BooleanVector
 import com.github.polyrocketmatt.kmt.vector.db.DoubleVector
@@ -64,4 +66,18 @@ interface ShortVector : Vector<Short>, Matrix<Short> {
      * @return The vector as a boolean vector.
      */
     fun asBoolean(): BooleanVector
+
+    /**
+     * Get the vector as a short row matrix.
+     *
+     * @return The vector as a short row matrix.
+     */
+    fun asRowMatrix(): ShortMatrix
+
+    /**
+     * Get the vector as a short column matrix.
+     *
+     * @return The vector as a short column matrix.
+     */
+    fun asColumnMatrix(): ShortMatrix
 }

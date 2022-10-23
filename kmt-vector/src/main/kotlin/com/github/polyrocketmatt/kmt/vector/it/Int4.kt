@@ -23,6 +23,9 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.IntMatrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -195,6 +198,8 @@ class Int4(x: Int, y: Int, z: Int, w: Int) : Tuple4<Int>(arrayOf(x, y, z, w)), I
     override fun asDouble(): Double4 = Double4(x.toDouble(), y.toDouble(), z.toDouble(), w.toDouble())
     override fun asShort(): Short4 = Short4(x.toShort(), y.toShort(), z.toShort(), w.toShort())
     override fun asBoolean(): Bool4 = Bool4(x != 0, y != 0, z != 0, w != 0)
+    override fun asRowMatrix(): IntMatrix = data.toMatrix(intArrayOf(1, 4))
+    override fun asColumnMatrix(): IntMatrix = data.toMatrix(intArrayOf(4, 1))
 
     override fun xy(): Int2 = Int2(x, y)
     override fun xz(): Int2 = Int2(x, z)

@@ -23,6 +23,9 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
+import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.matrix.IntMatrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -179,6 +182,8 @@ class Int2(x: Int, y: Int) : Tuple2<Int>(arrayOf(x, y)), IntVector, Swizzle2 {
     override fun asDouble(): Double2 = Double2(x.toDouble(), y.toDouble())
     override fun asShort(): Short2 = Short2(x.toShort(), y.toShort())
     override fun asBoolean(): Bool2 = Bool2(x != 0, y != 0)
+    override fun asRowMatrix(): IntMatrix = data.toMatrix(intArrayOf(1, 2))
+    override fun asColumnMatrix(): IntMatrix = data.toMatrix(intArrayOf(2, 1))
 
     override fun xy(): Int2 = this
     override fun yx(): Int2 = Int2(y, x)

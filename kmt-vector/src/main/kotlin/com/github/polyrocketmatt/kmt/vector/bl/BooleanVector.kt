@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
 import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.DoubleVector
@@ -47,4 +48,18 @@ interface BooleanVector : Vector<Boolean>, Matrix<Boolean> {
      * @return The vector as a short vector.
      */
     fun asShort(): ShortVector
+
+    /**
+     * Get the vector as a boolean row matrix.
+     *
+     * @return The vector as a boolean row matrix.
+     */
+    fun asRowMatrix(): BooleanMatrix
+
+    /**
+     * Get the vector as a boolean column matrix.
+     *
+     * @return The vector as a boolean column matrix.
+     */
+    fun asColumnMatrix(): BooleanMatrix
 }
