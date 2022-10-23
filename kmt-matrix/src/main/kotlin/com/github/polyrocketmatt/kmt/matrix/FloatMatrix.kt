@@ -278,29 +278,8 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(2, intArrayOf(2, 2)) {
         data.forEachIndexed { i, value -> data[i] = value }
     }
 
-    override fun plusAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.plusAssign(other)
-    }
-
-    override fun minusAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.minusAssign(other)
-    }
-
-    override fun timesAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.timesAssign(other)
-    }
-
-    override fun divAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.divAssign(other)
-    }
-
     override fun mult(other: FloatMatrix): FloatMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
-
 
         val result = FloatMatrix(2, intArrayOf(shape[0], other.shape[1]))
 
@@ -349,26 +328,6 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(2, intArrayOf(3, 3)) {
     init {
         complies("Data must contain 9 elements for a matrix of size 2x2") { data.size == 4 }
         matrix.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun plusAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.plusAssign(other)
-    }
-
-    override fun minusAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.minusAssign(other)
-    }
-
-    override fun timesAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.timesAssign(other)
-    }
-
-    override fun divAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.divAssign(other)
     }
 
     override fun mult(other: FloatMatrix): FloatMatrix {
@@ -424,26 +383,6 @@ class Float4x4(matrix: FloatArray) : FloatMatrix(2, intArrayOf(4, 4)) {
     init {
         complies("Data must contain 16 elements for a matrix of size 2x2") { data.size == 4 }
         matrix.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun plusAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.plusAssign(other)
-    }
-
-    override fun minusAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.minusAssign(other)
-    }
-
-    override fun timesAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.timesAssign(other)
-    }
-
-    override fun divAssign(other: FloatMatrix) {
-        isCompliantMatrix(other)
-        super.divAssign(other)
     }
 
     override fun mult(other: FloatMatrix): FloatMatrix {
