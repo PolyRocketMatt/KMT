@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
@@ -277,12 +278,42 @@ open class DoubleMatrix(
         return matrix
     }
 
+    override fun swapRow(row1: Int, row2: Int): NumericMatrix<Double> {
+        val rowIndex1 = row1 * shape[1]
+        val rowIndex2 = row2 * shape[1]
+        val tmp = data.copyOfRange(rowIndex1, rowIndex1 + shape[1])
+
+        data.copyInto(data, rowIndex1, rowIndex2, rowIndex2 + shape[1])
+        tmp.copyInto(data, rowIndex2, 0, shape[1])
+
+        return this
+    }
+
+    override fun multiplyRow(row: Int, scalar: Double): NumericMatrix<Double> {
+        val rowIndex = row * shape[1]
+
+        data.forEachIndexed { i, value -> data[i + rowIndex] = value * factor }
+
+        return this
+    }
+
+    override fun addRow(row1: Int, row2: Int, scalar: Double): NumericMatrix<Double> {
+        val rowIndex1 = row1 * shape[1]
+        val rowIndex2 = row2 * shape[1]
+
+        data.forEachIndexed { i, value -> data[i + rowIndex1] = value + data[i + rowIndex2] * factor }
+
+        return this
+    }
+
     override fun ref(): NumericMatrix<Double> {
         val matrix = DoubleMatrix(shape)
         val c = 0
 
         //  Find the pivot element, the element in the current row with the highest absolute value
-        //var pivot =
+        var pivot = column(c).maxBy { it.fastAbs() }
+        var pivotIndex = column(c).indexOfFirst { it == pivot }
+
         return this
     }
 

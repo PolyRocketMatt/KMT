@@ -9,6 +9,34 @@ package com.github.polyrocketmatt.kmt.matrix
 interface NumericMatrix<T> : Matrix<T> {
 
     /**
+     * Performs the elementary row operation of swapping two rows.
+     *
+     * @param row1 The first row to swap.
+     * @param row2 The second row to swap.
+     * @return The new matrix with the rows swapped.
+     */
+    fun swapRow(row1: Int, row2: Int): NumericMatrix<T>
+
+    /**
+     * Performs the elementary row operation of multiplying a row by a scalar.
+     *
+     * @param row The row to multiply.
+     * @param scalar The scalar to multiply the row by.
+     * @return The new matrix with the row multiplied.
+     */
+    fun multiplyRow(row: Int, scalar: T): NumericMatrix<T>
+
+    /**
+     * Performs the elementary row operation of adding a multiple of one row to another.
+     *
+     * @param row1 The row to add to.
+     * @param row2 The row to add.
+     * @param scalar The scalar to multiply the row by.
+     * @return The new matrix with the row added.
+     */
+    fun addRow(row1: Int, row2: Int, scalar: T): NumericMatrix<T>
+
+    /**
      * Compute the row echelon form of this matrix using Gaussian elimination
      * with partial pivoting since this is considered to be numerically stable.
      *
