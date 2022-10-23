@@ -76,6 +76,28 @@ open class IntMatrix(
         }
     }
 
+    open fun rows(): Array<IntArray> {
+        val rows = Array(shape[0]) { IntArray(shape[1]) }
+        for (j in 0 until shape[1])
+            for (i in 0 until shape[0])
+                rows[i][j] = this[i, j]
+        return rows
+    }
+
+    open fun columns(): Array<IntArray> {
+        val columns = Array(shape[1]) { IntArray(shape[0]) }
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                columns[j][i] = this[i, j]
+        return columns
+    }
+
+    override fun get(i: Int): Int = data[i]
+    override fun get(row: Int, col: Int): Int = data[row * shape[1] + col]
+
+    override fun set(i: Int, value: Int) { data[i] = value }
+    override fun set(row: Int, col: Int, value: Int) { data[row * shape[1] + col] = value }
+
     constructor(matrix: IntArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray, isShape: Boolean = true) : this(shape, IntArray(shape.reduce { acc, i -> acc * i }) { 0 })
     constructor(shape: IntArray, value: Int) : this(shape, IntArray(shape.reduce { acc, i -> acc * i }) { value })
@@ -232,6 +254,14 @@ open class IntMatrix(
         return result
     }
 
+    open override fun transpose(): IntMatrix {
+        val matrix = IntMatrix(intArrayOf(shape[1], shape[0]))
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                matrix[j, i] = this[i, j]
+        return matrix
+    }
+
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
     internal fun isCompliantMatrix(other: IntMatrix) =
@@ -272,12 +302,12 @@ class Int2x2(matrix: IntArray) : IntMatrix(intArrayOf(2, 2)) {
     constructor() : this(IntArray(4) { 0 })
     constructor(value: Int) : this(IntArray(4) { value })
 
-    fun rows(): Array<IntArray> = arrayOf(
+    override fun rows(): Array<IntArray> = arrayOf(
         intArrayOf(data[0], data[1]),
         intArrayOf(data[2], data[3])
     )
 
-    fun columns(): Array<IntArray> = arrayOf(
+    override fun columns(): Array<IntArray> = arrayOf(
         intArrayOf(data[0], data[2]),
         intArrayOf(data[1], data[3])
     )
@@ -323,13 +353,13 @@ class Int3x3(matrix: IntArray) : IntMatrix(intArrayOf(3, 3)) {
     constructor() : this(IntArray(9) { 0 })
     constructor(value: Int) : this(IntArray(9) { value })
 
-    fun rows(): Array<IntArray> = arrayOf(
+    override fun rows(): Array<IntArray> = arrayOf(
         intArrayOf(data[0], data[1], data[2]),
         intArrayOf(data[3], data[4], data[5]),
         intArrayOf(data[6], data[7], data[8])
     )
 
-    fun columns(): Array<IntArray> = arrayOf(
+    override fun columns(): Array<IntArray> = arrayOf(
         intArrayOf(data[0], data[3], data[6]),
         intArrayOf(data[1], data[4], data[7]),
         intArrayOf(data[2], data[5], data[8])
@@ -377,14 +407,14 @@ class Int4x4(matrix: IntArray) : IntMatrix(intArrayOf(4, 4)) {
     constructor() : this(IntArray(16) { 0 })
     constructor(value: Int) : this(IntArray(16) { value })
 
-    fun rows(): Array<IntArray> = arrayOf(
+    override fun rows(): Array<IntArray> = arrayOf(
         intArrayOf(data[0], data[1], data[2], data[3]),
         intArrayOf(data[4], data[5], data[6], data[7]),
         intArrayOf(data[8], data[9], data[10], data[11]),
         intArrayOf(data[12], data[13], data[14], data[15])
     )
 
-    fun columns(): Array<IntArray> = arrayOf(
+    override fun columns(): Array<IntArray> = arrayOf(
         intArrayOf(data[0], data[4], data[8], data[12]),
         intArrayOf(data[1], data[5], data[9], data[13]),
         intArrayOf(data[2], data[6], data[10], data[14]),

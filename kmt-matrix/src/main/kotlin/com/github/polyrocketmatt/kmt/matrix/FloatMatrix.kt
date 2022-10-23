@@ -88,6 +88,28 @@ open class FloatMatrix(
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
+    open fun rows(): Array<FloatArray> {
+        val rows = Array(shape[0]) { FloatArray(shape[1]) }
+        for (j in 0 until shape[1])
+            for (i in 0 until shape[0])
+                rows[i][j] = this[i, j]
+        return rows
+    }
+
+    open fun columns(): Array<FloatArray> {
+        val columns = Array(shape[1]) { FloatArray(shape[0]) }
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                columns[j][i] = this[i, j]
+        return columns
+    }
+
+    override fun get(i: Int): Float = data[i]
+    override fun get(row: Int, col: Int): Float = data[row * shape[1] + col]
+
+    override fun set(i: Int, value: Float) { data[i] = value }
+    override fun set(row: Int, col: Int, value: Float) { data[row * shape[1] + col] = value }
+
     /**
      * Element-wise addition of this matrix and the given matrix.
      *
@@ -232,6 +254,14 @@ open class FloatMatrix(
         return result
     }
 
+    open override fun transpose(): FloatMatrix {
+        val matrix = FloatMatrix(intArrayOf(shape[1], shape[0]))
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                matrix[j, i] = this[i, j]
+        return matrix
+    }
+
     fun isScalar(): Boolean = data.size == 1
 
     fun isSquare(): Boolean = shape.size == 2 && shape[0] == shape[1]
@@ -276,12 +306,12 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(intArrayOf(2, 2)) {
     constructor() : this(FloatArray(4) { 0.0f })
     constructor(value: Float) : this(FloatArray(4) { value })
 
-    fun rows(): Array<FloatArray> = arrayOf(
+    override fun rows(): Array<FloatArray> = arrayOf(
         floatArrayOf(data[0], data[1]),
         floatArrayOf(data[2], data[3])
     )
 
-    fun columns(): Array<FloatArray> = arrayOf(
+    override fun columns(): Array<FloatArray> = arrayOf(
         floatArrayOf(data[0], data[2]),
         floatArrayOf(data[1], data[3])
     )
@@ -326,13 +356,13 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(intArrayOf(3, 3)) {
     constructor() : this(FloatArray(9) { 0.0f })
     constructor(value: Float) : this(FloatArray(9) { value })
 
-    fun rows(): Array<FloatArray> = arrayOf(
+    override fun rows(): Array<FloatArray> = arrayOf(
         floatArrayOf(data[0], data[1], data[2]),
         floatArrayOf(data[3], data[4], data[5]),
         floatArrayOf(data[6], data[7], data[8])
     )
 
-    fun columns(): Array<FloatArray> = arrayOf(
+    override fun columns(): Array<FloatArray> = arrayOf(
         floatArrayOf(data[0], data[3], data[6]),
         floatArrayOf(data[1], data[4], data[7]),
         floatArrayOf(data[2], data[5], data[8])
@@ -379,14 +409,14 @@ class Float4x4(matrix: FloatArray) : FloatMatrix(intArrayOf(4, 4)) {
     constructor() : this(FloatArray(16) { 0.0f })
     constructor(value: Float) : this(FloatArray(16) { value })
 
-    fun rows(): Array<FloatArray> = arrayOf(
+    override fun rows(): Array<FloatArray> = arrayOf(
         floatArrayOf(data[0], data[1], data[2], data[3]),
         floatArrayOf(data[4], data[5], data[6], data[7]),
         floatArrayOf(data[8], data[9], data[10], data[11]),
         floatArrayOf(data[12], data[13], data[14], data[15])
     )
 
-    fun columns(): Array<FloatArray> = arrayOf(
+    override fun columns(): Array<FloatArray> = arrayOf(
         floatArrayOf(data[0], data[4], data[8], data[12]),
         floatArrayOf(data[1], data[5], data[9], data[13]),
         floatArrayOf(data[2], data[6], data[10], data[14]),

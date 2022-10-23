@@ -74,6 +74,28 @@ open class BooleanMatrix(
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
+    open fun rows(): Array<BooleanArray> {
+        val rows = Array(shape[0]) { BooleanArray(shape[1]) }
+        for (j in 0 until shape[1])
+            for (i in 0 until shape[0])
+                rows[i][j] = this[i, j]
+        return rows
+    }
+
+    open fun columns(): Array<BooleanArray> {
+        val columns = Array(shape[1]) { BooleanArray(shape[0]) }
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                columns[j][i] = this[i, j]
+        return columns
+    }
+
+    override fun get(i: Int): Boolean = data[i]
+    override fun get(row: Int, col: Int): Boolean = data[row * shape[1] + col]
+
+    override fun set(i: Int, value: Boolean) { data[i] = value }
+    override fun set(row: Int, col: Int, value: Boolean) { data[row * shape[1] + col] = value }
+
     /**
      * Element-wise addition of this matrix and the given matrix.
      *
@@ -208,6 +230,14 @@ open class BooleanMatrix(
         return result
     }
 
+    open override fun transpose(): BooleanMatrix {
+        val matrix = BooleanMatrix(intArrayOf(shape[1], shape[0]))
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                matrix[j, i] = this[i, j]
+        return matrix
+    }
+
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
     internal fun isCompliantMatrix(other: BooleanMatrix) =
@@ -244,12 +274,12 @@ class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(intArrayOf(2, 2)) {
     constructor() : this(BooleanArray(4) { false })
     constructor(value: Boolean) : this(BooleanArray(4) { value })
 
-    fun rows(): Array<BooleanArray> = arrayOf(
+    override fun rows(): Array<BooleanArray> = arrayOf(
         booleanArrayOf(data[0], data[1]),
         booleanArrayOf(data[2], data[3])
     )
 
-    fun columns(): Array<BooleanArray> = arrayOf(
+    override fun columns(): Array<BooleanArray> = arrayOf(
         booleanArrayOf(data[0], data[2]),
         booleanArrayOf(data[1], data[3])
     )
@@ -286,13 +316,13 @@ class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(intArrayOf(3, 3)) {
     constructor() : this(BooleanArray(9) { false })
     constructor(value: Boolean) : this(BooleanArray(9) { value })
 
-    fun rows(): Array<BooleanArray> = arrayOf(
+    override fun rows(): Array<BooleanArray> = arrayOf(
         booleanArrayOf(data[0], data[1], data[2]),
         booleanArrayOf(data[3], data[4], data[5]),
         booleanArrayOf(data[6], data[7], data[8])
     )
 
-    fun columns(): Array<BooleanArray> = arrayOf(
+    override fun columns(): Array<BooleanArray> = arrayOf(
         booleanArrayOf(data[0], data[3], data[6]),
         booleanArrayOf(data[1], data[4], data[7]),
         booleanArrayOf(data[2], data[5], data[8])
@@ -330,14 +360,14 @@ class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(intArrayOf(4, 4)) {
     constructor() : this(BooleanArray(16) { false })
     constructor(value: Boolean) : this(BooleanArray(16) { value })
 
-    fun rows(): Array<BooleanArray> = arrayOf(
+    override fun rows(): Array<BooleanArray> = arrayOf(
         booleanArrayOf(data[0], data[1], data[2], data[3]),
         booleanArrayOf(data[4], data[5], data[6], data[7]),
         booleanArrayOf(data[8], data[9], data[10], data[11]),
         booleanArrayOf(data[12], data[13], data[14], data[15])
     )
 
-    fun columns(): Array<BooleanArray> = arrayOf(
+    override fun columns(): Array<BooleanArray> = arrayOf(
         booleanArrayOf(data[0], data[4], data[8], data[12]),
         booleanArrayOf(data[1], data[5], data[9], data[13]),
         booleanArrayOf(data[2], data[6], data[10], data[14]),

@@ -60,7 +60,7 @@ fun DoubleMatrix.toArray(): DoubleArray = this.data.toDoubleArray()
 open class DoubleMatrix(
     val shape: IntArray,
     matrix: DoubleArray
-) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), Matrix<Double> {
+) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), Matrix<Double>, NumericMatrix<Double> {
 
     companion object {
         fun identity(shape: IntArray): DoubleMatrix {
@@ -87,6 +87,28 @@ open class DoubleMatrix(
 
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
+
+    open fun rows(): Array<DoubleArray> {
+        val rows = Array(shape[0]) { DoubleArray(shape[1]) }
+        for (j in 0 until shape[1])
+            for (i in 0 until shape[0])
+                rows[i][j] = this[i, j]
+        return rows
+    }
+
+    open fun columns(): Array<DoubleArray> {
+        val columns = Array(shape[1]) { DoubleArray(shape[0]) }
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                columns[j][i] = this[i, j]
+        return columns
+    }
+
+    override fun get(i: Int): Double = data[i]
+    override fun get(row: Int, col: Int): Double = data[row * shape[1] + col]
+
+    override fun set(i: Int, value: Double) { data[i] = value }
+    override fun set(row: Int, col: Int, value: Double) { data[row * shape[1] + col] = value }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -204,6 +226,14 @@ open class DoubleMatrix(
      */
     override fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
 
+    open override fun transpose(): DoubleMatrix {
+        val matrix = DoubleMatrix(intArrayOf(shape[1], shape[0]))
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                matrix[j, i] = this[i, j]
+        return matrix
+    }
+
     /**
      * Multiply this matrix with the given matrix. The matrices must have
      * a valid shape for multiplication and must be of dimension 2.
@@ -272,12 +302,12 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2)) {
     constructor() : this(DoubleArray(4) { 0.0 })
     constructor(value: Double) : this(DoubleArray(4) { value })
 
-    fun rows(): Array<DoubleArray> = arrayOf(
+    override fun rows(): Array<DoubleArray> = arrayOf(
         doubleArrayOf(data[0], data[1]),
         doubleArrayOf(data[2], data[3])
     )
 
-    fun columns(): Array<DoubleArray> = arrayOf(
+    override fun columns(): Array<DoubleArray> = arrayOf(
         doubleArrayOf(data[0], data[2]),
         doubleArrayOf(data[1], data[3])
     )
@@ -323,13 +353,13 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3)) {
     constructor() : this(DoubleArray(9) { 0.0 })
     constructor(value: Double) : this(DoubleArray(9) { value })
 
-    fun rows(): Array<DoubleArray> = arrayOf(
+    override fun rows(): Array<DoubleArray> = arrayOf(
         doubleArrayOf(data[0], data[1], data[2]),
         doubleArrayOf(data[3], data[4], data[5]),
         doubleArrayOf(data[6], data[7], data[8])
     )
 
-    fun columns(): Array<DoubleArray> = arrayOf(
+    override fun columns(): Array<DoubleArray> = arrayOf(
         doubleArrayOf(data[0], data[3], data[6]),
         doubleArrayOf(data[1], data[4], data[7]),
         doubleArrayOf(data[2], data[5], data[8])
@@ -377,14 +407,14 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4)) {
     constructor() : this(DoubleArray(16) { 0.0 })
     constructor(value: Double) : this(DoubleArray(16) { value })
 
-    fun rows(): Array<DoubleArray> = arrayOf(
+    override fun rows(): Array<DoubleArray> = arrayOf(
         doubleArrayOf(data[0], data[1], data[2], data[3]),
         doubleArrayOf(data[4], data[5], data[6], data[7]),
         doubleArrayOf(data[8], data[9], data[10], data[11]),
         doubleArrayOf(data[12], data[13], data[14], data[15])
     )
 
-    fun columns(): Array<DoubleArray> = arrayOf(
+    override fun columns(): Array<DoubleArray> = arrayOf(
         doubleArrayOf(data[0], data[4], data[8], data[12]),
         doubleArrayOf(data[1], data[5], data[9], data[13]),
         doubleArrayOf(data[2], data[6], data[10], data[14]),

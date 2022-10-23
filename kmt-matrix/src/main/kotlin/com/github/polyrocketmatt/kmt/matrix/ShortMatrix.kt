@@ -88,6 +88,28 @@ open class ShortMatrix(
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
+    open fun rows(): Array<ShortArray> {
+        val rows = Array(shape[0]) { ShortArray(shape[1]) }
+        for (j in 0 until shape[1])
+            for (i in 0 until shape[0])
+                rows[i][j] = this[i, j]
+        return rows
+    }
+
+    open fun columns(): Array<ShortArray> {
+        val columns = Array(shape[1]) { ShortArray(shape[0]) }
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                columns[j][i] = this[i, j]
+        return columns
+    }
+
+    override fun get(i: Int): Short = data[i]
+    override fun get(row: Int, col: Int): Short = data[row * shape[1] + col]
+
+    override fun set(i: Int, value: Short) { data[i] = value }
+    override fun set(row: Int, col: Int, value: Short) { data[row * shape[1] + col] = value }
+
     /**
      * Element-wise addition of this matrix and the given matrix.
      *
@@ -232,6 +254,14 @@ open class ShortMatrix(
         return result
     }
 
+    open override fun transpose(): ShortMatrix {
+        val matrix = ShortMatrix(intArrayOf(shape[1], shape[0]))
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1])
+                matrix[j, i] = this[i, j]
+        return matrix
+    }
+
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
     internal fun isCompliantMatrix(other: ShortMatrix) =
@@ -272,12 +302,12 @@ class Short2x2(matrix: ShortArray) : ShortMatrix(intArrayOf(2, 2)) {
     constructor() : this(ShortArray(4) { 0 })
     constructor(value: Short) : this(ShortArray(4) { value })
 
-    fun rows(): Array<ShortArray> = arrayOf(
+    override fun rows(): Array<ShortArray> = arrayOf(
         shortArrayOf(data[0], data[1]),
         shortArrayOf(data[2], data[3])
     )
 
-    fun columns(): Array<ShortArray> = arrayOf(
+    override fun columns(): Array<ShortArray> = arrayOf(
         shortArrayOf(data[0], data[2]),
         shortArrayOf(data[1], data[3])
     )
@@ -323,13 +353,13 @@ class Short3x3(matrix: ShortArray) : ShortMatrix(intArrayOf(3, 3)) {
     constructor() : this(ShortArray(9) { 0 })
     constructor(value: Short) : this(ShortArray(9) { value })
 
-    fun rows(): Array<ShortArray> = arrayOf(
+    override fun rows(): Array<ShortArray> = arrayOf(
         shortArrayOf(data[0], data[1], data[2]),
         shortArrayOf(data[3], data[4], data[5]),
         shortArrayOf(data[6], data[7], data[8])
     )
 
-    fun columns(): Array<ShortArray> = arrayOf(
+    override fun columns(): Array<ShortArray> = arrayOf(
         shortArrayOf(data[0], data[3], data[6]),
         shortArrayOf(data[1], data[4], data[7]),
         shortArrayOf(data[2], data[5], data[8])
@@ -377,14 +407,14 @@ class Short4x4(matrix: ShortArray) : ShortMatrix(intArrayOf(4, 4)) {
     constructor() : this(ShortArray(16) { 0 })
     constructor(value: Short) : this(ShortArray(16) { value })
 
-    fun rows(): Array<ShortArray> = arrayOf(
+    override fun rows(): Array<ShortArray> = arrayOf(
         shortArrayOf(data[0], data[1], data[2], data[3]),
         shortArrayOf(data[4], data[5], data[6], data[7]),
         shortArrayOf(data[8], data[9], data[10], data[11]),
         shortArrayOf(data[12], data[13], data[14], data[15])
     )
 
-    fun columns(): Array<ShortArray> = arrayOf(
+    override fun columns(): Array<ShortArray> = arrayOf(
         shortArrayOf(data[0], data[4], data[8], data[12]),
         shortArrayOf(data[1], data[5], data[9], data[13]),
         shortArrayOf(data[2], data[6], data[10], data[14]),
