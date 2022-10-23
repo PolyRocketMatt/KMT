@@ -263,13 +263,9 @@ open class FloatMatrix(
         return matrix
     }
 
-    override fun rref(): NumericMatrix<Double> {
-        TODO("Not yet implemented")
-    }
-
-    override fun solve(): NumericMatrix<Double> {
-        TODO("Not yet implemented")
-    }
+    override fun ref(): NumericMatrix<Double> = toDoubleMatrix().ref()
+    override fun rref(): NumericMatrix<Double> = toDoubleMatrix().rref()
+    override fun solve(): NumericMatrix<Double> = toDoubleMatrix().solve()
 
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]

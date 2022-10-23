@@ -97,6 +97,15 @@ open class DoubleMatrix(
         return rows
     }
 
+    open fun row(idx: Int): DoubleArray {
+        complies("Index must be within 0") { idx in 0 until shape[0] }
+
+        val row = DoubleArray(shape[1])
+        for (j in 0 until shape[1])
+            row[j] = this[idx, j]
+        return row
+    }
+
     open fun columns(): Array<DoubleArray> {
         val columns = Array(shape[1]) { DoubleArray(shape[0]) }
         for (i in 0 until shape[0])
@@ -261,6 +270,15 @@ open class DoubleMatrix(
             for (j in 0 until shape[1])
                 matrix[j, i] = this[i, j]
         return matrix
+    }
+
+    override fun ref(): NumericMatrix<Double> {
+        val matrix = DoubleMatrix(shape)
+        val c = 0
+
+        //  Find the pivot element, the element in the current row with the highest absolute value
+        //var pivot =
+        return this
     }
 
     override fun rref(): NumericMatrix<Double> {

@@ -93,4 +93,16 @@ class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVec
     override fun yy(): Bool2 = Bool2(y, y)
 
     override fun copyOf(): Bool2 = Bool2(x, y)
+
+    override fun get(i: Int): Boolean = data[i]
+    override fun get(row: Int, col: Int): Boolean = throw UnsupportedOperationException("Bool2 is considered a vector")
+
+    override fun set(i: Int, value: Boolean) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Bool2")
+    }
+    override fun set(row: Int, col: Int, value: Boolean) = throw UnsupportedOperationException("Bool2 is considered a vector")
+
+    override fun transpose(): Bool2 = this
 }

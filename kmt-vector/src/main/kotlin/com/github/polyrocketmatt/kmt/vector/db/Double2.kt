@@ -216,4 +216,16 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     override fun yy(): Double2 = Double2(y, y)
 
     override fun copyOf(): Double2 = Double2(x, y)
+
+    override fun get(i: Int): Double = data[i]
+    override fun get(row: Int, col: Int): Double = throw UnsupportedOperationException("Double2 is considered a vector")
+
+    override fun set(i: Int, value: Double) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Double2")
+    }
+    override fun set(row: Int, col: Int, value: Double) = throw UnsupportedOperationException("Double2 is considered a vector")
+
+    override fun transpose(): Double2 = this
 }

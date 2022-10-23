@@ -292,4 +292,18 @@ class Double4(x: Double, y: Double, z: Double, w: Double) : Tuple4<Double>(array
     override fun wwww(): Double4 = Double4(w, w, w, w)
 
     override fun copyOf(): Double4 = Double4(x, y, z, w)
+
+    override fun get(i: Int): Double = data[i]
+    override fun get(row: Int, col: Int): Double = throw UnsupportedOperationException("Double4 is considered a vector")
+
+    override fun set(i: Int, value: Double) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        3 -> w = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Double4")
+    }
+    override fun set(row: Int, col: Int, value: Double) = throw UnsupportedOperationException("Double4 is considered a vector")
+
+    override fun transpose(): Double4 = this
 }

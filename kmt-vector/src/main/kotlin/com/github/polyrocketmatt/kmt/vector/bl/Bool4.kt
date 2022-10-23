@@ -159,4 +159,18 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) : Tuple4<Boolean>(ar
     override fun wwww(): Bool4 = Bool4(w, w, w, w)
 
     override fun copyOf(): Bool4 = Bool4(x, y, z, w)
+
+    override fun get(i: Int): Boolean = data[i]
+    override fun get(row: Int, col: Int): Boolean = throw UnsupportedOperationException("Bool4 is considered a vector")
+
+    override fun set(i: Int, value: Boolean) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        3 -> w = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Bool4")
+    }
+    override fun set(row: Int, col: Int, value: Boolean) = throw UnsupportedOperationException("Bool4 is considered a vector")
+
+    override fun transpose(): Bool4 = this
 }

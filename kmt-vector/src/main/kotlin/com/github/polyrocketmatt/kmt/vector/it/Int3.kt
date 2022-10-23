@@ -229,4 +229,18 @@ class Int3(x: Int, y: Int, z: Int) : Tuple3<Int>(arrayOf(x, y, z)), IntVector, S
     override fun zzz(): Int3 = Int3(z, z, z)
 
     override fun copyOf(): Int3 = Int3(x, y, z)
+
+    override fun get(i: Int): Int = data[i]
+    override fun get(row: Int, col: Int): Int = throw UnsupportedOperationException("Int3 is considered a vector")
+
+    override fun set(i: Int, value: Int) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Int3")
+    }
+    override fun set(row: Int, col: Int, value: Int) = throw UnsupportedOperationException("Int3 is considered a vector")
+
+    override fun transpose(): Int3 = this
+
 }

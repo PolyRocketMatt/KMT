@@ -292,4 +292,18 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
     override fun wwww(): Float4 = Float4(w, w, w, w)
 
     override fun copyOf(): Float4 = Float4(x, y, z, w)
+
+    override fun get(i: Int): Float = data[i]
+    override fun get(row: Int, col: Int): Float = throw UnsupportedOperationException("Float4 is considered a vector")
+
+    override fun set(i: Int, value: Float) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        3 -> w = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Float4")
+    }
+    override fun set(row: Int, col: Int, value: Float) = throw UnsupportedOperationException("Float4 is considered a vector")
+
+    override fun transpose(): Float4 = this
 }

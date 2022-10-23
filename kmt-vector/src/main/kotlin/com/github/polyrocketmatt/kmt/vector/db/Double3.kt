@@ -243,4 +243,17 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
     override fun zzz(): Double3 = Double3(z, z, z)
 
     override fun copyOf(): Double3 = Double3(x, y, z)
+
+    override fun get(i: Int): Double = data[i]
+    override fun get(row: Int, col: Int): Double = throw UnsupportedOperationException("Double3 is considered a vector")
+
+    override fun set(i: Int, value: Double) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Double3")
+    }
+    override fun set(row: Int, col: Int, value: Double) = throw UnsupportedOperationException("Double3 is considered a vector")
+
+    override fun transpose(): Double3 = this
 }

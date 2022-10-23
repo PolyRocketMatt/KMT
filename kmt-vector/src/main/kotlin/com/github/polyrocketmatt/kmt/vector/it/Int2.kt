@@ -25,6 +25,7 @@ import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.IntMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
@@ -202,4 +203,16 @@ class Int2(x: Int, y: Int) : Tuple2<Int>(arrayOf(x, y)), IntVector, Swizzle2 {
     override fun yy(): Int2 = Int2(y, y)
 
     override fun copyOf(): Int2 = Int2(x, y)
+
+    override fun get(i: Int): Int = data[i]
+    override fun get(row: Int, col: Int): Int = throw UnsupportedOperationException("Int2 is considered a vector")
+
+    override fun set(i: Int, value: Int) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Int2")
+    }
+    override fun set(row: Int, col: Int, value: Int) = throw UnsupportedOperationException("Int2 is considered a vector")
+
+    override fun transpose(): Int2 = this
 }

@@ -9,7 +9,16 @@ package com.github.polyrocketmatt.kmt.matrix
 interface NumericMatrix<T> : Matrix<T> {
 
     /**
-     * Compute the row-reduced echelon form of this matrix.
+     * Compute the row echelon form of this matrix using Gaussian elimination
+     * with partial pivoting since this is considered to be numerically stable.
+     *
+     * @return The row echelon form of this matrix.
+     */
+    fun ref(): NumericMatrix<Double>
+
+    /**
+     * Compute the row-reduced echelon form of this matrix using Gaussian elimination
+     * with partial pivoting since this is considered to be numerically stable.
      *
      * @return The row-reduced echelon form of this matrix.
      */

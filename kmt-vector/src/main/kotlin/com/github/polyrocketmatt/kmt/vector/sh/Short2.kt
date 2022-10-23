@@ -202,4 +202,16 @@ class Short2(x: Short, y: Short) : Tuple2<Short>(arrayOf(x, y)), ShortVector, Sw
     override fun yy(): Short2 = Short2(y, y)
 
     override fun copyOf(): Short2 = Short2(x, y)
+
+    override fun get(i: Int): Short = data[i]
+    override fun get(row: Int, col: Int): Short = throw UnsupportedOperationException("Short2 is considered a vector")
+
+    override fun set(i: Int, value: Short) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Short2")
+    }
+    override fun set(row: Int, col: Int, value: Short) = throw UnsupportedOperationException("Short2 is considered a vector")
+
+    override fun transpose(): Short2 = this
 }

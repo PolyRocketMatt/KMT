@@ -278,4 +278,18 @@ class Short4(x: Short, y: Short, z: Short, w: Short) : Tuple4<Short>(arrayOf(x, 
     override fun wwww(): Short4 = Short4(w, w, w, w)
 
     override fun copyOf(): Short4 = Short4(x, y, z, w)
+
+    override fun get(i: Int): Short = data[i]
+    override fun get(row: Int, col: Int): Short = throw UnsupportedOperationException("Short4 is considered a vector")
+
+    override fun set(i: Int, value: Short) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        3 -> w = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Short4")
+    }
+    override fun set(row: Int, col: Int, value: Short) = throw UnsupportedOperationException("Short4 is considered a vector")
+
+    override fun transpose(): Short4 = this
 }
