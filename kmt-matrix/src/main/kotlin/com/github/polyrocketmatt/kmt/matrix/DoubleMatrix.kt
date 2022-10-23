@@ -84,6 +84,7 @@ open class DoubleMatrix(
     constructor(matrix: DoubleArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
     constructor(shape: IntArray, value: Double) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -425,28 +426,21 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2), matrix) {
 
     constructor() : this(DoubleArray(4) { 0.0 })
     constructor(value: Double) : this(DoubleArray(4) { value })
-
-    override fun rows(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[1]),
-        doubleArrayOf(data[2], data[3])
-    )
-
-    override fun columns(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[2]),
-        doubleArrayOf(data[1], data[3])
-    )
-
-    init {
-        complies("Data must contain 4 elements for a matrix of size 2x2") { data.size == 4 }
-        data.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
     override fun transpose(): DoubleMatrix = Double2x2(doubleArrayOf(
         data[0], data[2],
         data[1], data[3]
     ))
 
-    override fun copyOf(): Double2x2 = Double2x2(data.copyOf().toDoubleArray())
+    override fun addRow(row1: Int, row2: Int, scalar: Double): Double2x2 = super.addRow(row1, row2, scalar) as Double2x2
+    override fun multiplyRow(row: Int, scalar: Double): Double2x2 = super.multiplyRow(row, scalar) as Double2x2
+    override fun swapRow(row1: Int, row2: Int): Double2x2 = super.swapRow(row1, row2) as Double2x2
+
+    override fun ref(): Double2x2 = super.ref() as Double2x2
+    override fun rref(): Double2x2 = super.rref() as Double2x2
+
+    override fun copyOf(): Double2x2 = Double2x2(data.copyOf())
 
 }
 
@@ -468,23 +462,7 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3), matrix) {
 
     constructor() : this(DoubleArray(9) { 0.0 })
     constructor(value: Double) : this(DoubleArray(9) { value })
-
-    override fun rows(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[1], data[2]),
-        doubleArrayOf(data[3], data[4], data[5]),
-        doubleArrayOf(data[6], data[7], data[8])
-    )
-
-    override fun columns(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[3], data[6]),
-        doubleArrayOf(data[1], data[4], data[7]),
-        doubleArrayOf(data[2], data[5], data[8])
-    )
-
-    init {
-        complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 4 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
     override fun transpose(): DoubleMatrix = Double3x3(doubleArrayOf(
         data[0], data[3], data[6],
@@ -492,7 +470,14 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3), matrix) {
         data[2], data[5], data[8]
     ))
 
-    override fun copyOf(): Double3x3 = Double3x3(data.copyOf().toDoubleArray())
+    override fun addRow(row1: Int, row2: Int, scalar: Double): Double3x3 = super.addRow(row1, row2, scalar) as Double3x3
+    override fun multiplyRow(row: Int, scalar: Double): Double3x3 = super.multiplyRow(row, scalar) as Double3x3
+    override fun swapRow(row1: Int, row2: Int): Double3x3 = super.swapRow(row1, row2) as Double3x3
+
+    override fun ref(): Double3x3 = super.ref() as Double3x3
+    override fun rref(): Double3x3 = super.rref() as Double3x3
+
+    override fun copyOf(): Double3x3 = Double3x3(data.copyOf())
 
 }
 
@@ -516,25 +501,7 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4), matrix) {
 
     constructor() : this(DoubleArray(16) { 0.0 })
     constructor(value: Double) : this(DoubleArray(16) { value })
-
-    override fun rows(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[1], data[2], data[3]),
-        doubleArrayOf(data[4], data[5], data[6], data[7]),
-        doubleArrayOf(data[8], data[9], data[10], data[11]),
-        doubleArrayOf(data[12], data[13], data[14], data[15])
-    )
-
-    override fun columns(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[4], data[8], data[12]),
-        doubleArrayOf(data[1], data[5], data[9], data[13]),
-        doubleArrayOf(data[2], data[6], data[10], data[14]),
-        doubleArrayOf(data[3], data[7], data[11], data[15])
-    )
-
-    init {
-        complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 4 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
     override fun transpose(): DoubleMatrix = Double4x4(doubleArrayOf(
         data[0], data[4], data[8], data[12],
@@ -543,6 +510,13 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4), matrix) {
         data[3], data[7], data[11], data[15]
     ))
 
-    override fun copyOf(): Double4x4 = Double4x4(data.copyOf().toDoubleArray())
+    override fun addRow(row1: Int, row2: Int, scalar: Double): Double4x4 = super.addRow(row1, row2, scalar) as Double4x4
+    override fun multiplyRow(row: Int, scalar: Double): Double4x4 = super.multiplyRow(row, scalar) as Double4x4
+    override fun swapRow(row1: Int, row2: Int): Double4x4 = super.swapRow(row1, row2) as Double4x4
+
+    override fun ref(): Double4x4 = super.ref() as Double4x4
+    override fun rref(): Double4x4 = super.rref() as Double4x4
+
+    override fun copyOf(): Double4x4 = Double4x4(data.copyOf())
 
 }

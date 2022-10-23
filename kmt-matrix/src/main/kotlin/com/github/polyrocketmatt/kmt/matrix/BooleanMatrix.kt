@@ -65,6 +65,7 @@ open class BooleanMatrix(
     constructor(matrix: BooleanArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { false })
     constructor(shape: IntArray, value: Boolean) : this(shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(shape: IntArray, matrix: Array<Boolean>) : this(shape, matrix.toBooleanArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -304,40 +305,14 @@ class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(intArrayOf(2, 2), matrix)
 
     constructor() : this(BooleanArray(4) { false })
     constructor(value: Boolean) : this(BooleanArray(4) { value })
-
-    override fun rows(): Array<BooleanArray> = arrayOf(
-        booleanArrayOf(data[0], data[1]),
-        booleanArrayOf(data[2], data[3])
-    )
-
-    override fun columns(): Array<BooleanArray> = arrayOf(
-        booleanArrayOf(data[0], data[2]),
-        booleanArrayOf(data[1], data[3])
-    )
-
-    init {
-        complies("Data must contain 4 elements for a matrix of size 2x2") { data.size == 4 }
-        data.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun mult(other: BooleanMatrix): BooleanMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
-
-        val result = BooleanMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 2)
-            for (j in 0 until c)
-                for (k in 0 until 2)
-                    result.data[i * c + j] = result.data[i * c + j] || (data[i * 2 + k] && other.data[k * c + j])
-        return result
-    }
+    constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
 
     override fun transpose(): Boolean2x2 = Boolean2x2(booleanArrayOf(
         data[0], data[2],
         data[1], data[3]
     ))
+
+    override fun copyOf(): Boolean2x2 = Boolean2x2(data.copyOf())
 
 }
 
@@ -351,43 +326,15 @@ class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(intArrayOf(3, 3), matrix)
 
     constructor() : this(BooleanArray(9) { false })
     constructor(value: Boolean) : this(BooleanArray(9) { value })
-
-    override fun rows(): Array<BooleanArray> = arrayOf(
-        booleanArrayOf(data[0], data[1], data[2]),
-        booleanArrayOf(data[3], data[4], data[5]),
-        booleanArrayOf(data[6], data[7], data[8])
-    )
-
-    override fun columns(): Array<BooleanArray> = arrayOf(
-        booleanArrayOf(data[0], data[3], data[6]),
-        booleanArrayOf(data[1], data[4], data[7]),
-        booleanArrayOf(data[2], data[5], data[8])
-    )
-
-    init {
-        complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 9 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun mult(other: BooleanMatrix): BooleanMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 3 }
-
-        val result = BooleanMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 3)
-            for (j in 0 until c)
-                for (k in 0 until 3)
-                    result.data[i * c + j] = result.data[i * c + j] || (data[i * 3 + k] && other.data[k * c + j])
-        return result
-    }
+    constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
 
     override fun transpose(): Boolean3x3 = Boolean3x3(booleanArrayOf(
         data[0], data[3], data[6],
         data[1], data[4], data[7],
         data[2], data[5], data[8]
     ))
+
+    override fun copyOf(): Boolean3x3 = Boolean3x3(data.copyOf())
 
 }
 
@@ -401,39 +348,7 @@ class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(intArrayOf(4, 4), matrix)
 
     constructor() : this(BooleanArray(16) { false })
     constructor(value: Boolean) : this(BooleanArray(16) { value })
-
-    override fun rows(): Array<BooleanArray> = arrayOf(
-        booleanArrayOf(data[0], data[1], data[2], data[3]),
-        booleanArrayOf(data[4], data[5], data[6], data[7]),
-        booleanArrayOf(data[8], data[9], data[10], data[11]),
-        booleanArrayOf(data[12], data[13], data[14], data[15])
-    )
-
-    override fun columns(): Array<BooleanArray> = arrayOf(
-        booleanArrayOf(data[0], data[4], data[8], data[12]),
-        booleanArrayOf(data[1], data[5], data[9], data[13]),
-        booleanArrayOf(data[2], data[6], data[10], data[14]),
-        booleanArrayOf(data[3], data[7], data[11], data[15])
-    )
-
-    init {
-        complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 16 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
-
-    override fun mult(other: BooleanMatrix): BooleanMatrix {
-        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 4 }
-
-        val result = BooleanMatrix(intArrayOf(shape[0], other.shape[1]))
-
-        //  Multiplying rows of first matrix with columns of second matrix
-        val c = other.shape[1]
-        for (i in 0 until 4)
-            for (j in 0 until c)
-                for (k in 0 until 4)
-                    result.data[i * c + j] = result.data[i * c + j] || (data[i * 4 + k] && other.data[k * c + j])
-        return result
-    }
+    constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
 
     override fun transpose(): Boolean4x4 = Boolean4x4(booleanArrayOf(
         data[0], data[4], data[8], data[12],
@@ -441,5 +356,7 @@ class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(intArrayOf(4, 4), matrix)
         data[2], data[6], data[10], data[14],
         data[3], data[7], data[11], data[15]
     ))
+
+    override fun copyOf(): Boolean4x4 = Boolean4x4(data.copyOf())
 
 }

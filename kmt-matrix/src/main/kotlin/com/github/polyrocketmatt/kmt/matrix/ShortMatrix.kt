@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
@@ -80,6 +81,7 @@ open class ShortMatrix(
     constructor(matrix: ShortArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, ShortArray(shape.reduce { acc, i -> acc * i }) { 0.toShort() })
     constructor(shape: IntArray, value: Short) : this(shape, ShortArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(matrix: Array<Short>) : this(matrix.toShortArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -346,26 +348,14 @@ class Short2x2(matrix: ShortArray) : ShortMatrix(intArrayOf(2, 2), matrix) {
 
     constructor() : this(ShortArray(4) { 0 })
     constructor(value: Short) : this(ShortArray(4) { value })
-
-    override fun rows(): Array<ShortArray> = arrayOf(
-        shortArrayOf(data[0], data[1]),
-        shortArrayOf(data[2], data[3])
-    )
-
-    override fun columns(): Array<ShortArray> = arrayOf(
-        shortArrayOf(data[0], data[2]),
-        shortArrayOf(data[1], data[3])
-    )
-
-    init {
-        complies("Data must contain 4 elements for a matrix of size 2x2") { data.size == 4 }
-        data.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Short>) : this(matrix.toShortArray())
 
     override fun transpose(): Short2x2 = Short2x2(shortArrayOf(
         data[0], data[2],
         data[1], data[3]
     ))
+
+    override fun copyOf(): Short2x2 = Short2x2(data.copyOf())
 
 }
 
@@ -387,29 +377,15 @@ class Short3x3(matrix: ShortArray) : ShortMatrix(intArrayOf(3, 3), matrix) {
 
     constructor() : this(ShortArray(9) { 0 })
     constructor(value: Short) : this(ShortArray(9) { value })
-
-    override fun rows(): Array<ShortArray> = arrayOf(
-        shortArrayOf(data[0], data[1], data[2]),
-        shortArrayOf(data[3], data[4], data[5]),
-        shortArrayOf(data[6], data[7], data[8])
-    )
-
-    override fun columns(): Array<ShortArray> = arrayOf(
-        shortArrayOf(data[0], data[3], data[6]),
-        shortArrayOf(data[1], data[4], data[7]),
-        shortArrayOf(data[2], data[5], data[8])
-    )
-
-    init {
-        complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 9 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Short>) : this(matrix.toShortArray())
 
     override fun transpose(): Short3x3 = Short3x3(shortArrayOf(
         data[0], data[3], data[6],
         data[1], data[4], data[7],
         data[2], data[5], data[8]
     ))
+
+    override fun copyOf(): Short3x3 = Short3x3(data.copyOf())
 
 }
 
@@ -433,25 +409,7 @@ class Short4x4(matrix: ShortArray) : ShortMatrix(intArrayOf(4, 4), matrix) {
 
     constructor() : this(ShortArray(16) { 0 })
     constructor(value: Short) : this(ShortArray(16) { value })
-
-    override fun rows(): Array<ShortArray> = arrayOf(
-        shortArrayOf(data[0], data[1], data[2], data[3]),
-        shortArrayOf(data[4], data[5], data[6], data[7]),
-        shortArrayOf(data[8], data[9], data[10], data[11]),
-        shortArrayOf(data[12], data[13], data[14], data[15])
-    )
-
-    override fun columns(): Array<ShortArray> = arrayOf(
-        shortArrayOf(data[0], data[4], data[8], data[12]),
-        shortArrayOf(data[1], data[5], data[9], data[13]),
-        shortArrayOf(data[2], data[6], data[10], data[14]),
-        shortArrayOf(data[3], data[7], data[11], data[15])
-    )
-
-    init {
-        complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 16 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Short>) : this(matrix.toShortArray())
 
     override fun transpose(): Short4x4 = Short4x4(shortArrayOf(
         data[0], data[4], data[8], data[12],
@@ -459,5 +417,7 @@ class Short4x4(matrix: ShortArray) : ShortMatrix(intArrayOf(4, 4), matrix) {
         data[2], data[6], data[10], data[14],
         data[3], data[7], data[11], data[15]
     ))
+
+    override fun copyOf(): Short4x4 = Short4x4(data.copyOf())
 
 }

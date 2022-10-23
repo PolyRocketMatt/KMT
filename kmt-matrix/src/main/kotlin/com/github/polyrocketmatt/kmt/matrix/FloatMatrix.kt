@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
@@ -80,6 +81,7 @@ open class FloatMatrix(
     constructor(matrix: FloatArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, FloatArray(shape.reduce { acc, i -> acc * i }) { 0.0f })
     constructor(shape: IntArray, value: Float) : this(shape, FloatArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(matrix: Array<Float>) : this(matrix.toFloatArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -350,26 +352,14 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(intArrayOf(2, 2), matrix) {
 
     constructor() : this(FloatArray(4) { 0.0f })
     constructor(value: Float) : this(FloatArray(4) { value })
-
-    override fun rows(): Array<FloatArray> = arrayOf(
-        floatArrayOf(data[0], data[1]),
-        floatArrayOf(data[2], data[3])
-    )
-
-    override fun columns(): Array<FloatArray> = arrayOf(
-        floatArrayOf(data[0], data[2]),
-        floatArrayOf(data[1], data[3])
-    )
-
-    init {
-        complies("Data must contain 4 elements for a matrix of size 2x2") { data.size == 4 }
-        data.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Float>) : this(matrix.toFloatArray())
 
     override fun transpose(): Float2x2 = Float2x2(floatArrayOf(
         data[0], data[2],
         data[1], data[3]
     ))
+
+    override fun copyOf(): Float2x2 = Float2x2(data.copyOf())
 
 }
 
@@ -391,29 +381,15 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(intArrayOf(3, 3), matrix) {
 
     constructor() : this(FloatArray(9) { 0.0f })
     constructor(value: Float) : this(FloatArray(9) { value })
-
-    override fun rows(): Array<FloatArray> = arrayOf(
-        floatArrayOf(data[0], data[1], data[2]),
-        floatArrayOf(data[3], data[4], data[5]),
-        floatArrayOf(data[6], data[7], data[8])
-    )
-
-    override fun columns(): Array<FloatArray> = arrayOf(
-        floatArrayOf(data[0], data[3], data[6]),
-        floatArrayOf(data[1], data[4], data[7]),
-        floatArrayOf(data[2], data[5], data[8])
-    )
-
-    init {
-        complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 9 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Float>) : this(matrix.toFloatArray())
 
     override fun transpose(): Float3x3 = Float3x3(floatArrayOf(
         data[0], data[3], data[6],
         data[1], data[4], data[7],
         data[2], data[5], data[8]
     ))
+
+    override fun copyOf(): Float3x3 = Float3x3(data.copyOf())
 
 }
 
@@ -436,25 +412,7 @@ class Float4x4(matrix: FloatArray) : FloatMatrix(intArrayOf(4, 4), matrix) {
 
     constructor() : this(FloatArray(16) { 0.0f })
     constructor(value: Float) : this(FloatArray(16) { value })
-
-    override fun rows(): Array<FloatArray> = arrayOf(
-        floatArrayOf(data[0], data[1], data[2], data[3]),
-        floatArrayOf(data[4], data[5], data[6], data[7]),
-        floatArrayOf(data[8], data[9], data[10], data[11]),
-        floatArrayOf(data[12], data[13], data[14], data[15])
-    )
-
-    override fun columns(): Array<FloatArray> = arrayOf(
-        floatArrayOf(data[0], data[4], data[8], data[12]),
-        floatArrayOf(data[1], data[5], data[9], data[13]),
-        floatArrayOf(data[2], data[6], data[10], data[14]),
-        floatArrayOf(data[3], data[7], data[11], data[15])
-    )
-
-    init {
-        complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 16 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Float>) : this(matrix.toFloatArray())
 
     override fun transpose(): Float4x4 = Float4x4(floatArrayOf(
         data[0], data[4], data[8], data[12],
@@ -462,5 +420,7 @@ class Float4x4(matrix: FloatArray) : FloatMatrix(intArrayOf(4, 4), matrix) {
         data[2], data[6], data[10], data[14],
         data[3], data[7], data[11], data[15]
     ))
+
+    override fun copyOf(): Float4x4 = Float4x4(data.copyOf())
 
 }

@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
@@ -80,6 +81,7 @@ open class IntMatrix(
     constructor(matrix: IntArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray, isShape: Boolean = true) : this(shape, IntArray(shape.reduce { acc, i -> acc * i }) { 0 })
     constructor(shape: IntArray, value: Int) : this(shape, IntArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(matrix: Array<Int>) : this(matrix.toIntArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -346,26 +348,14 @@ class Int2x2(matrix: IntArray) : IntMatrix(intArrayOf(2, 2), matrix) {
 
     constructor() : this(IntArray(4) { 0 })
     constructor(value: Int) : this(IntArray(4) { value })
-
-    override fun rows(): Array<IntArray> = arrayOf(
-        intArrayOf(data[0], data[1]),
-        intArrayOf(data[2], data[3])
-    )
-
-    override fun columns(): Array<IntArray> = arrayOf(
-        intArrayOf(data[0], data[2]),
-        intArrayOf(data[1], data[3])
-    )
-
-    init {
-        complies("Data must contain 4 elements for a matrix of size 2x2") { data.size == 4 }
-        data.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Int>) : this(matrix.toIntArray())
 
     override fun transpose(): Int2x2 = Int2x2(intArrayOf(
         data[0], data[2],
         data[1], data[3]
     ))
+
+    override fun copyOf(): Int2x2 = Int2x2(data.copyOf())
 
 }
 
@@ -387,29 +377,15 @@ class Int3x3(matrix: IntArray) : IntMatrix(intArrayOf(3, 3), matrix) {
 
     constructor() : this(IntArray(9) { 0 })
     constructor(value: Int) : this(IntArray(9) { value })
-
-    override fun rows(): Array<IntArray> = arrayOf(
-        intArrayOf(data[0], data[1], data[2]),
-        intArrayOf(data[3], data[4], data[5]),
-        intArrayOf(data[6], data[7], data[8])
-    )
-
-    override fun columns(): Array<IntArray> = arrayOf(
-        intArrayOf(data[0], data[3], data[6]),
-        intArrayOf(data[1], data[4], data[7]),
-        intArrayOf(data[2], data[5], data[8])
-    )
-
-    init {
-        complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 9 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Int>) : this(matrix.toIntArray())
 
     override fun transpose(): Int3x3 = Int3x3(intArrayOf(
         data[0], data[3], data[6],
         data[1], data[4], data[7],
         data[2], data[5], data[8]
     ))
+
+    override fun copyOf(): Int3x3 = Int3x3(data.copyOf())
 
 }
 
@@ -433,25 +409,7 @@ class Int4x4(matrix: IntArray) : IntMatrix(intArrayOf(4, 4), matrix) {
 
     constructor() : this(IntArray(16) { 0 })
     constructor(value: Int) : this(IntArray(16) { value })
-
-    override fun rows(): Array<IntArray> = arrayOf(
-        intArrayOf(data[0], data[1], data[2], data[3]),
-        intArrayOf(data[4], data[5], data[6], data[7]),
-        intArrayOf(data[8], data[9], data[10], data[11]),
-        intArrayOf(data[12], data[13], data[14], data[15])
-    )
-
-    override fun columns(): Array<IntArray> = arrayOf(
-        intArrayOf(data[0], data[4], data[8], data[12]),
-        intArrayOf(data[1], data[5], data[9], data[13]),
-        intArrayOf(data[2], data[6], data[10], data[14]),
-        intArrayOf(data[3], data[7], data[11], data[15])
-    )
-
-    init {
-        complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 16 }
-        matrix.forEachIndexed { i, value -> data[i] = value }
-    }
+    constructor(matrix: Array<Int>) : this(matrix.toIntArray())
 
     override fun transpose(): Int4x4 = Int4x4(intArrayOf(
         data[0], data[4], data[8], data[12],
@@ -459,5 +417,7 @@ class Int4x4(matrix: IntArray) : IntMatrix(intArrayOf(4, 4), matrix) {
         data[2], data[6], data[10], data[14],
         data[3], data[7], data[11], data[15]
     ))
+
+    override fun copyOf(): Int4x4 = Int4x4(data.copyOf())
 
 }
