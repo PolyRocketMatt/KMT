@@ -61,7 +61,7 @@ open class IntMatrix(
     val shape: IntArray,
     matrix: IntArray
 ) : Tuple<Int>(IntArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()),
-    NumericMatrix<Int> {
+    NumericMatrix<Int, Double> {
 
     companion object {
         fun identity(shape: IntArray): IntMatrix {
@@ -277,9 +277,19 @@ open class IntMatrix(
         return matrix
     }
 
-    override fun ref(): NumericMatrix<Double> = toDoubleMatrix().ref()
-    override fun rref(): NumericMatrix<Double> = toDoubleMatrix().rref()
-    override fun solve(): NumericMatrix<Double> = toDoubleMatrix().solve()
+    override fun swapRow(row1: Int, row2: Int): DoubleMatrix {
+        TODO("Not yet implemented")
+    }
+    override fun multiplyRow(row: Int, scalar: Int): DoubleMatrix {
+        TODO("Not yet implemented")
+    }
+    override fun addRow(row1: Int, row2: Int, scalar: Int): DoubleMatrix {
+        TODO("Not yet implemented")
+    }
+
+    override fun ref(): DoubleMatrix = toDoubleMatrix().ref()
+    override fun rref(): DoubleMatrix = toDoubleMatrix().rref()
+    override fun solve(): DoubleMatrix = toDoubleMatrix().solve()
 
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]

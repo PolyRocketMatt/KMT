@@ -91,4 +91,17 @@ class FloatMatrixTest {
     }
 
      */
+
+    @Test
+    fun testRowEchelonForm() {
+        val matrix = DoubleMatrix(intArrayOf(2, 3), doubleArrayOf(
+            1.0, 2.0, 3.0,
+            4.0, 5.0, 6.0
+        )).ref()
+
+        val expected = DoubleMatrix(intArrayOf(2, 3), doubleArrayOf(
+            1.0, 0.0, -1.0,
+            0.0, -1.0, -2.0
+        ))
+    }
 }

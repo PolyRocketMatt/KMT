@@ -1,9 +1,12 @@
 package com.github.polyrocketmatt.kmt.matrix
 
 import com.github.polyrocketmatt.kmt.common.fastAbs
+import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
 import kotlin.IllegalArgumentException
+import kotlin.math.min
 
 typealias DMatrix = DoubleMatrix
 typealias D2x2 = Double2x2
@@ -62,7 +65,7 @@ open class DoubleMatrix(
     val shape: IntArray,
     matrix: DoubleArray
 ) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()),
-    NumericMatrix<Double> {
+    NumericMatrix<Double, Double> {
 
     companion object {
         fun identity(shape: IntArray): DoubleMatrix {
@@ -278,7 +281,7 @@ open class DoubleMatrix(
         return matrix
     }
 
-    override fun swapRow(row1: Int, row2: Int): NumericMatrix<Double> {
+    override fun swapRow(row1: Int, row2: Int): DoubleMatrix {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
         val tmp = data.copyOfRange(rowIndex1, rowIndex1 + shape[1])
@@ -289,39 +292,65 @@ open class DoubleMatrix(
         return this
     }
 
-    override fun multiplyRow(row: Int, scalar: Double): NumericMatrix<Double> {
+    override fun multiplyRow(row: Int, scalar: Double): DoubleMatrix {
         val rowIndex = row * shape[1]
-
-        data.forEachIndexed { i, value -> data[i + rowIndex] = value * factor }
-
+        for (i in 0 until shape[1])
+            data[rowIndex + i] *= scalar
         return this
     }
 
-    override fun addRow(row1: Int, row2: Int, scalar: Double): NumericMatrix<Double> {
+    override fun addRow(row1: Int, row2: Int, scalar: Double): DoubleMatrix {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
+        for (i in 0 until shape[1])
+            data[i + rowIndex1] += data[i + rowIndex2] * scalar
+        return this
+    }
 
-        data.forEachIndexed { i, value -> data[i + rowIndex1] = value + data[i + rowIndex2] * factor }
+    override fun ref(): DoubleMatrix {
+        var currentRow = 0
+        for ((currentColumn, _) in (0 until min(shape[0], shape[1])).withIndex()) {
+            //  Find index of value with the highest absolute value in current column
+            val col = column(currentColumn).copyOfRange(currentColumn, shape[0])
+            val pivotIndex = col.indexByCondition { _, current, _, value -> current.fastAbs() < value.fastAbs() }
+            val pivot = col[pivotIndex]
+
+            //  The index also gives the row to swap to the top
+            swapRow(0, pivotIndex + currentColumn)
+
+            //  Update the current row
+            currentRow++
+
+            //  Divide first row by pivot
+            multiplyRow(0, 1 / pivot)
+
+            //  Gaussian elimination step
+            for (i in 1 until shape[0]) {
+                //  Solve for k, the scalar to multiply the pivot row with to get 0 in the current column
+                val k = -column(currentColumn)[i]
+
+                //  Add the pivot row multiplied with k to the current row
+                addRow(i, 0, k)
+            }
+        }
+
+        //  Re-arrange so that 1.0 is on the diagonal
+        for ((currentColumn, i) in (0 until shape[0]).withIndex()) {
+            //  Find the row with a 1.0 in the current column
+            val rowIndex = column(currentColumn).indexByCondition { _, _, _, value -> value == 1.0 }
+
+            //  Swap the row with the current row
+            swapRow(i, rowIndex)
+        }
 
         return this
     }
 
-    override fun ref(): NumericMatrix<Double> {
-        val matrix = DoubleMatrix(shape)
-        val c = 0
-
-        //  Find the pivot element, the element in the current row with the highest absolute value
-        var pivot = column(c).maxBy { it.fastAbs() }
-        var pivotIndex = column(c).indexOfFirst { it == pivot }
-
-        return this
-    }
-
-    override fun rref(): NumericMatrix<Double> {
+    override fun rref(): DoubleMatrix {
         TODO("Not yet implemented")
     }
 
-    override fun solve(): NumericMatrix<Double> {
+    override fun solve(): DoubleMatrix {
         TODO("Not yet implemented")
     }
 
@@ -338,6 +367,8 @@ open class DoubleMatrix(
         other
             .complies({ "Other is of type ${it::class.java}, expected ${this::class.java}" }, { it::class.java == this::class.java })
             .also { it -> it.complies({ "Shape does not match. Expected ${shapeToString()}, found ${other.shapeToString()}" }, { it.shape.contentEquals(this.shape) }) }
+
+    override fun copyOf(): DoubleMatrix = DoubleMatrix(shape, data.copyOf().toDoubleArray())
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -392,6 +423,8 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2)) {
         data[1], data[3]
     ))
 
+    override fun copyOf(): Double2x2 = Double2x2(data.copyOf().toDoubleArray())
+
 }
 
 /**
@@ -435,6 +468,8 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3)) {
         data[1], data[4], data[7],
         data[2], data[5], data[8]
     ))
+
+    override fun copyOf(): Double3x3 = Double3x3(data.copyOf().toDoubleArray())
 
 }
 
@@ -484,5 +519,7 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4)) {
         data[2], data[6], data[10], data[14],
         data[3], data[7], data[11], data[15]
     ))
+
+    override fun copyOf(): Double4x4 = Double4x4(data.copyOf().toDoubleArray())
 
 }
