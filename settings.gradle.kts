@@ -5,6 +5,8 @@ include("kmt-trigonometry")
 include("kmt-vector")
 include("kmt-function")
 include("kmt-matrix")
+include("kmt-expr")
+include("kmt-linalg")
 
 plugins {
     id("com.gradle.enterprise") version("3.9")
@@ -19,4 +21,3 @@ gradleEnterprise {
         }
     }
 }
-include("kmt-expr")

@@ -324,6 +324,16 @@ open class FloatMatrix(
         return result
     }
 
+    override fun toString(): String {
+        val sb = StringBuilder()
+        for (i in 0 until shape[0]) {
+            sb.append("| ")
+            sb.append(row(i).joinToString(" "))
+            sb.append(" |\n")
+        }
+        return sb.toString()
+    }
+
 }
 
 /**
