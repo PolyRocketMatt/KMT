@@ -106,10 +106,10 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(2, intArrayOf(2, 2)) {
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
-        for (i in 0 until shape[0])
+        for (i in 0 until 2)
             for (j in 0 until c)
-                for (k in 0 until shape[1])
-                    result.data[i * c + j] += data[i * shape[1] + k] * other.data[k * c + j]
+                for (k in 0 until 2)
+                    result.data[i * c + j] += data[i * 2 + k] * other.data[k * c + j]
         return result
     }
 
