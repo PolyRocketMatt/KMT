@@ -20,7 +20,7 @@ package com.github.polyrocketmatt.kmt.matrix
 
 /**
  * @author Matthias Kovacic
- * @since 0.0.7
+ * @since 0.0.8
  *
  * Represents the dimension of a matrix.
  */
