@@ -140,6 +140,58 @@ open class DoubleMatrix(
      * @param other The matrix to add to this matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
+    open operator fun plus(other: DoubleMatrix): DoubleMatrix {
+        isCompliantMatrix(other)
+        val matrix = DoubleMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value + other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun minus(other: DoubleMatrix): DoubleMatrix {
+        isCompliantMatrix(other)
+        val matrix = DoubleMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value - other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun times(other: DoubleMatrix): DoubleMatrix {
+        isCompliantMatrix(other)
+        val matrix = DoubleMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value * other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide this matrix with
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun div(other: DoubleMatrix): DoubleMatrix {
+        isCompliantMatrix(other)
+        val matrix = DoubleMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value / other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
     open operator fun plusAssign(other: DoubleMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
@@ -428,10 +480,29 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2), matrix) {
     constructor(value: Double) : this(DoubleArray(4) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
-    override fun plus(value: Double): Double2x2 = super.plus(value) as Double2x2
-    override fun minus(value: Double): Double2x2 = super.minus(value) as Double2x2
-    override fun times(value: Double): Double2x2 = super.times(value) as Double2x2
-    override fun div(value: Double): Double2x2 = super.div(value) as Double2x2
+    override operator fun plus(value: Double): Double2x2 {
+        val matrix = Double2x2()
+        data.forEachIndexed { index, d -> matrix.data[index] = d + value }
+        return matrix
+    }
+
+    override operator fun minus(value: Double): Double2x2 {
+        val matrix = Double2x2()
+        data.forEachIndexed { index, d -> matrix.data[index] = d - value }
+        return matrix
+    }
+
+    override operator fun times(value: Double): Double2x2 {
+        val matrix = Double2x2()
+        data.forEachIndexed { index, d -> matrix.data[index] = d * value }
+        return matrix
+    }
+
+    override operator fun div(value: Double): Double2x2 {
+        val matrix = Double2x2()
+        data.forEachIndexed { index, d -> matrix.data[index] = d / value }
+        return matrix
+    }
 
     override fun transpose(): DoubleMatrix = Double2x2(doubleArrayOf(
         data[0], data[2],
@@ -473,11 +544,29 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3), matrix) {
     constructor(value: Double) : this(DoubleArray(9) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
-    override fun plus(value: Double): Double3x3 = super.plus(value) as Double3x3
-    override fun minus(value: Double): Double3x3 = super.minus(value) as Double3x3
-    override fun times(value: Double): Double3x3 = super.times(value) as Double3x3
-    override fun div(value: Double): Double3x3 = super.div(value) as Double3x3
+    override operator fun plus(value: Double): Double3x3 {
+        val matrix = Double3x3()
+        data.forEachIndexed { index, d -> matrix.data[index] = d + value }
+        return matrix
+    }
 
+    override operator fun minus(value: Double): Double3x3 {
+        val matrix = Double3x3()
+        data.forEachIndexed { index, d -> matrix.data[index] = d - value }
+        return matrix
+    }
+
+    override operator fun times(value: Double): Double3x3 {
+        val matrix = Double3x3()
+        data.forEachIndexed { index, d -> matrix.data[index] = d * value }
+        return matrix
+    }
+
+    override operator fun div(value: Double): Double3x3 {
+        val matrix = Double3x3()
+        data.forEachIndexed { index, d -> matrix.data[index] = d / value }
+        return matrix
+    }
 
     override fun transpose(): DoubleMatrix = Double3x3(doubleArrayOf(
         data[0], data[3], data[6],
@@ -522,11 +611,29 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4), matrix) {
     constructor(value: Double) : this(DoubleArray(16) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
-    override fun plus(value: Double): Double4x4 = super.plus(value) as Double4x4
-    override fun minus(value: Double): Double4x4 = super.minus(value) as Double4x4
-    override fun times(value: Double): Double4x4 = super.times(value) as Double4x4
-    override fun div(value: Double): Double4x4 = super.div(value) as Double4x4
+    override operator fun plus(value: Double): Double4x4 {
+        val matrix = Double4x4()
+        data.forEachIndexed { index, d -> matrix.data[index] = d + value }
+        return matrix
+    }
 
+    override operator fun minus(value: Double): Double4x4 {
+        val matrix = Double4x4()
+        data.forEachIndexed { index, d -> matrix.data[index] = d - value }
+        return matrix
+    }
+
+    override operator fun times(value: Double): Double4x4 {
+        val matrix = Double4x4()
+        data.forEachIndexed { index, d -> matrix.data[index] = d * value }
+        return matrix
+    }
+
+    override operator fun div(value: Double): Double4x4 {
+        val matrix = Double4x4()
+        data.forEachIndexed { index, d -> matrix.data[index] = d / value }
+        return matrix
+    }
 
     override fun transpose(): DoubleMatrix = Double4x4(doubleArrayOf(
         data[0], data[4], data[8], data[12],

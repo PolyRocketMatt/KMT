@@ -137,6 +137,58 @@ open class FloatMatrix(
      * @param other The matrix to add to this matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
+    open operator fun plus(other: FloatMatrix): FloatMatrix {
+        isCompliantMatrix(other)
+        val matrix = FloatMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value + other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun minus(other: FloatMatrix): FloatMatrix {
+        isCompliantMatrix(other)
+        val matrix = FloatMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value - other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun times(other: FloatMatrix): FloatMatrix {
+        isCompliantMatrix(other)
+        val matrix = FloatMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value * other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide this matrix with
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun div(other: FloatMatrix): FloatMatrix {
+        isCompliantMatrix(other)
+        val matrix = FloatMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value / other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
     open operator fun plusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
@@ -299,9 +351,9 @@ open class FloatMatrix(
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]
 
-    fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
-    fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
-    fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
+    open fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
+    open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
+    open fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
@@ -354,10 +406,42 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(intArrayOf(2, 2), matrix) {
     constructor(value: Float) : this(FloatArray(4) { value })
     constructor(matrix: Array<Float>) : this(matrix.toFloatArray())
 
+    override fun plus(value: Float): Float2x2 {
+        val matrix = Float2x2()
+        data.forEachIndexed { index, f -> matrix.data[index] = f + value }
+        return matrix
+    }
+    override fun minus(value: Float): Float2x2 {
+        val matrix = Float2x2()
+        data.forEachIndexed { index, f -> matrix.data[index] = f - value }
+        return matrix
+    }
+    override fun times(value: Float): Float2x2 {
+        val matrix = Float2x2()
+        data.forEachIndexed { index, f -> matrix.data[index] = f * value }
+        return matrix
+    }
+    override fun div(value: Float): Float2x2 {
+        val matrix = Float2x2()
+        data.forEachIndexed { index, f -> matrix.data[index] = f / value }
+        return matrix
+    }
+
     override fun transpose(): Float2x2 = Float2x2(floatArrayOf(
         data[0], data[2],
         data[1], data[3]
     ))
+
+    override fun addRow(row1: Int, row2: Int, scalar: Float): Float2x2 = super.addRow(row1, row2, scalar) as Float2x2
+    override fun multiplyRow(row: Int, scalar: Float): Float2x2 = super.multiplyRow(row, scalar) as Float2x2
+    override fun swapRow(row1: Int, row2: Int): Float2x2 = super.swapRow(row1, row2) as Float2x2
+
+    override fun ref(): Float2x2 = super.ref() as Float2x2
+    override fun rref(): Float2x2 = super.rref() as Float2x2
+
+    override fun toDoubleMatrix(): Double2x2 = Double2x2(data.map { it.toDouble() }.toDoubleArray())
+    override fun toIntMatrix(): Int2x2 = Int2x2(data.map { it.toInt() }.toIntArray())
+    override fun toShortMatrix(): Short2x2 = Short2x2(data.map { it.toInt().toShort() }.toShortArray())
 
     override fun copyOf(): Float2x2 = Float2x2(data.copyOf())
 
@@ -383,11 +467,43 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(intArrayOf(3, 3), matrix) {
     constructor(value: Float) : this(FloatArray(9) { value })
     constructor(matrix: Array<Float>) : this(matrix.toFloatArray())
 
+    override fun plus(value: Float): Float3x3 {
+        val matrix = Float3x3()
+        data.forEachIndexed { index, f -> matrix.data[index] = f + value }
+        return matrix
+    }
+    override fun minus(value: Float): Float3x3 {
+        val matrix = Float3x3()
+        data.forEachIndexed { index, f -> matrix.data[index] = f - value }
+        return matrix
+    }
+    override fun times(value: Float): Float3x3 {
+        val matrix = Float3x3()
+        data.forEachIndexed { index, f -> matrix.data[index] = f * value }
+        return matrix
+    }
+    override fun div(value: Float): Float3x3 {
+        val matrix = Float3x3()
+        data.forEachIndexed { index, f -> matrix.data[index] = f / value }
+        return matrix
+    }
+
     override fun transpose(): Float3x3 = Float3x3(floatArrayOf(
         data[0], data[3], data[6],
         data[1], data[4], data[7],
         data[2], data[5], data[8]
     ))
+
+    override fun addRow(row1: Int, row2: Int, scalar: Float): Float3x3 = super.addRow(row1, row2, scalar) as Float3x3
+    override fun multiplyRow(row: Int, scalar: Float): Float3x3 = super.multiplyRow(row, scalar) as Float3x3
+    override fun swapRow(row1: Int, row2: Int): Float3x3 = super.swapRow(row1, row2) as Float3x3
+
+    override fun ref(): Float3x3 = super.ref() as Float3x3
+    override fun rref(): Float3x3 = super.rref() as Float3x3
+
+    override fun toDoubleMatrix(): Double3x3 = Double3x3(data.map { it.toDouble() }.toDoubleArray())
+    override fun toIntMatrix(): Int3x3 = Int3x3(data.map { it.toInt() }.toIntArray())
+    override fun toShortMatrix(): Short3x3 = Short3x3(data.map { it.toInt().toShort() }.toShortArray())
 
     override fun copyOf(): Float3x3 = Float3x3(data.copyOf())
 
@@ -414,12 +530,44 @@ class Float4x4(matrix: FloatArray) : FloatMatrix(intArrayOf(4, 4), matrix) {
     constructor(value: Float) : this(FloatArray(16) { value })
     constructor(matrix: Array<Float>) : this(matrix.toFloatArray())
 
+    override fun plus(value: Float): Float4x4 {
+        val matrix = Float4x4()
+        data.forEachIndexed { index, f -> matrix.data[index] = f + value }
+        return matrix
+    }
+    override fun minus(value: Float): Float4x4 {
+        val matrix = Float4x4()
+        data.forEachIndexed { index, f -> matrix.data[index] = f - value }
+        return matrix
+    }
+    override fun times(value: Float): Float4x4 {
+        val matrix = Float4x4()
+        data.forEachIndexed { index, f -> matrix.data[index] = f * value }
+        return matrix
+    }
+    override fun div(value: Float): Float4x4 {
+        val matrix = Float4x4()
+        data.forEachIndexed { index, f -> matrix.data[index] = f / value }
+        return matrix
+    }
+
     override fun transpose(): Float4x4 = Float4x4(floatArrayOf(
         data[0], data[4], data[8], data[12],
         data[1], data[5], data[9], data[13],
         data[2], data[6], data[10], data[14],
         data[3], data[7], data[11], data[15]
     ))
+
+    override fun addRow(row1: Int, row2: Int, scalar: Float): Float4x4 = super.addRow(row1, row2, scalar) as Float4x4
+    override fun multiplyRow(row: Int, scalar: Float): Float4x4 = super.multiplyRow(row, scalar) as Float4x4
+    override fun swapRow(row1: Int, row2: Int): Float4x4 = super.swapRow(row1, row2) as Float4x4
+
+    override fun ref(): Float4x4 = super.ref() as Float4x4
+    override fun rref(): Float4x4 = super.rref() as Float4x4
+
+    override fun toDoubleMatrix(): Double4x4 = Double4x4(data.map { it.toDouble() }.toDoubleArray())
+    override fun toIntMatrix(): Int4x4 = Int4x4(data.map { it.toInt() }.toIntArray())
+    override fun toShortMatrix(): Short4x4 = Short4x4(data.map { it.toInt().toShort() }.toShortArray())
 
     override fun copyOf(): Float4x4 = Float4x4(data.copyOf())
 

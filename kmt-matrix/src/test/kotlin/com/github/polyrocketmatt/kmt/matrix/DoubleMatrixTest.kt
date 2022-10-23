@@ -131,4 +131,13 @@ class DoubleMatrixTest {
 
     }
 
+    @Test
+    fun superTest() {
+        val t = Float2x2(floatArrayOf(1f, 2f, 3f, 4f))
+        val t2 = 2.0f
+        val sum = t + t2
+
+        println(sum)
+    }
+
 }
