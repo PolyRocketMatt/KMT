@@ -428,6 +428,11 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2), matrix) {
     constructor(value: Double) : this(DoubleArray(4) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
 
+    override fun plus(value: Double): Double2x2 = super.plus(value) as Double2x2
+    override fun minus(value: Double): Double2x2 = super.minus(value) as Double2x2
+    override fun times(value: Double): Double2x2 = super.times(value) as Double2x2
+    override fun div(value: Double): Double2x2 = super.div(value) as Double2x2
+
     override fun transpose(): DoubleMatrix = Double2x2(doubleArrayOf(
         data[0], data[2],
         data[1], data[3]
@@ -463,6 +468,12 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3), matrix) {
     constructor() : this(DoubleArray(9) { 0.0 })
     constructor(value: Double) : this(DoubleArray(9) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
+
+    override fun plus(value: Double): Double3x3 = super.plus(value) as Double3x3
+    override fun minus(value: Double): Double3x3 = super.minus(value) as Double3x3
+    override fun times(value: Double): Double3x3 = super.times(value) as Double3x3
+    override fun div(value: Double): Double3x3 = super.div(value) as Double3x3
+
 
     override fun transpose(): DoubleMatrix = Double3x3(doubleArrayOf(
         data[0], data[3], data[6],
@@ -502,6 +513,12 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4), matrix) {
     constructor() : this(DoubleArray(16) { 0.0 })
     constructor(value: Double) : this(DoubleArray(16) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
+
+    override fun plus(value: Double): Double4x4 = super.plus(value) as Double4x4
+    override fun minus(value: Double): Double4x4 = super.minus(value) as Double4x4
+    override fun times(value: Double): Double4x4 = super.times(value) as Double4x4
+    override fun div(value: Double): Double4x4 = super.div(value) as Double4x4
+
 
     override fun transpose(): DoubleMatrix = Double4x4(doubleArrayOf(
         data[0], data[4], data[8], data[12],
