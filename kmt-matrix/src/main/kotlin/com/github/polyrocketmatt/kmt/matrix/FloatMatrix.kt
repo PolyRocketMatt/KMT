@@ -1,6 +1,5 @@
 package com.github.polyrocketmatt.kmt.matrix
 
-import com.github.polyrocketmatt.kmt.common.storage.MutableMemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
@@ -41,6 +40,8 @@ fun FloatMatrix.toArray(): FloatArray = this.data.toFloatArray()
  *
  * @param dimension The dimension of the matrix
  * @param shape The shape of the matrix
+ *
+ * TODO: Fix mult
  */
 open class FloatMatrix(
     override val dimension: Int,
@@ -62,6 +63,7 @@ open class FloatMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
+
     open operator fun minusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
@@ -71,6 +73,7 @@ open class FloatMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
+
     open operator fun divAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }

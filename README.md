@@ -97,6 +97,11 @@ dependencies {
 }
 ```
 
+### Java
+
+KMT can be used within Java as well, since Kotlin is interoperable with Java. You do however need to provide the kotlin
+standard library in order for KMT to work.
+
 ## License
 
 KMT is licensed under the GNU General Public License (version 3). The relevant information for this license can be found [here](https://www.gnu.org/licenses/gpl-3.0.html).
