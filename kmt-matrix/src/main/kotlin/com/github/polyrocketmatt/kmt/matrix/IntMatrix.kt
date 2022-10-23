@@ -4,10 +4,10 @@ import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
 
-typealias DMatrix = DoubleMatrix
-typealias D2x2 = Double2x2
-typealias D3x3 = Double3x3
-typealias D4x4 = Double4x4
+typealias IMatrix = IntMatrix
+typealias I2x2 = Int2x2
+typealias I3x3 = Int3x3
+typealias I4x4 = Int4x4
 
 /**
  * Get a matrix with the given shape from the given array.
@@ -16,12 +16,12 @@ typealias D4x4 = Double4x4
  * @return A matrix with the given shape and the given array as its data
  * @throws IllegalStateException If the array does not comply with the given shape
  */
-fun DoubleArray.toMatrix(shape: IntArray): DoubleMatrix {
+fun IntArray.toMatrix(shape: IntArray): IntMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
             "Expected ${elements}, found ${this.size}" },
         { this.size == elements })
-    return DoubleMatrix(shape.size, shape, this)
+    return IntMatrix(shape.size, shape, this)
 }
 
 /**
@@ -29,7 +29,7 @@ fun DoubleArray.toMatrix(shape: IntArray): DoubleMatrix {
  *
  * @return The array of floating-point numbers with data from the given matrix
  */
-fun DoubleMatrix.toArray(): DoubleArray = this.data.toDoubleArray()
+fun IntMatrix.toArray(): IntArray = this.data.toIntArray()
 
 /**
  * @author Matthias Kovacic
@@ -43,31 +43,31 @@ fun DoubleMatrix.toArray(): DoubleArray = this.data.toDoubleArray()
  *
  * TODO: Fix mult
  */
-open class DoubleMatrix(
+open class IntMatrix(
     override val dimension: Int,
     internal val shape: IntArray,
-    matrix: DoubleArray
-) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Double> {
+    matrix: IntArray
+) : Tuple<Int>(IntArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Int> {
 
     companion object {
-        fun identity(shape: IntArray): DoubleMatrix {
+        fun identity(shape: IntArray): IntMatrix {
             shape.complies("Identity matrix only exists for dimension 2") { it.size == 2 }
 
-            val matrix = DoubleMatrix(shape)
+            val matrix = IntMatrix(shape)
             val min = shape.min()
 
             for (i in 0 until min)
-                matrix[i * shape[1] + i] = 1.0
+                matrix[i * shape[1] + i] = 1
 
             return matrix
         }
     }
 
-    constructor(shape: IntArray) : this(shape.size, shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
-    constructor(shape: IntArray, value: Double) : this(shape.size, shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(shape: IntArray) : this(shape.size, shape, IntArray(shape.reduce { acc, i -> acc * i }) { 0 })
+    constructor(shape: IntArray, value: Int) : this(shape.size, shape, IntArray(shape.reduce { acc, i -> acc * i }) { value })
 
-    constructor(dimension: Int, shape: IntArray) : this(dimension, shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
-    constructor(dimension: Int, shape: IntArray, value: Double) : this(dimension, shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(dimension: Int, shape: IntArray) : this(dimension, shape, IntArray(shape.reduce { acc, i -> acc * i }) { 0 })
+    constructor(dimension: Int, shape: IntArray, value: Int) : this(dimension, shape, IntArray(shape.reduce { acc, i -> acc * i }) { value })
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -82,7 +82,7 @@ open class DoubleMatrix(
      * @param other The matrix to add to this matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
-    open operator fun plusAssign(other: DoubleMatrix) {
+    open operator fun plusAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
@@ -93,7 +93,7 @@ open class DoubleMatrix(
      * @param other The matrix to subtract from this matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
-    open operator fun minusAssign(other: DoubleMatrix) {
+    open operator fun minusAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
@@ -104,7 +104,7 @@ open class DoubleMatrix(
      * @param other The matrix to multiply to this matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
-    open operator fun timesAssign(other: DoubleMatrix) {
+    open operator fun timesAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
@@ -115,7 +115,7 @@ open class DoubleMatrix(
      * @param other The matrix to divide to this matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
-    open operator fun divAssign(other: DoubleMatrix) {
+    open operator fun divAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
@@ -125,8 +125,8 @@ open class DoubleMatrix(
      *
      * @param value The value to add to this matrix
      */
-    override fun plus(value: Double): DoubleMatrix {
-        val matrix = DoubleMatrix(shape)
+    override fun plus(value: Int): IntMatrix {
+        val matrix = IntMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] + term }
         return matrix
     }
@@ -136,8 +136,8 @@ open class DoubleMatrix(
      *
      * @param value The value to subtract from this matrix
      */
-    override fun minus(value: Double): DoubleMatrix {
-        val matrix = DoubleMatrix(shape)
+    override fun minus(value: Int): IntMatrix {
+        val matrix = IntMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] - term }
         return matrix
     }
@@ -147,8 +147,8 @@ open class DoubleMatrix(
      *
      * @param value The value to multiply to this matrix
      */
-    override fun times(value: Double): DoubleMatrix {
-        val matrix = DoubleMatrix(shape)
+    override fun times(value: Int): IntMatrix {
+        val matrix = IntMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] * factor }
         return matrix
     }
@@ -158,8 +158,8 @@ open class DoubleMatrix(
      *
      * @param value The value to divide with this matrix
      */
-    override fun div(value: Double): DoubleMatrix {
-        val matrix = DoubleMatrix(shape)
+    override fun div(value: Int): IntMatrix {
+        val matrix = IntMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] / factor }
         return matrix
     }
@@ -169,28 +169,28 @@ open class DoubleMatrix(
      *
      * @param value The value to add to this matrix
      */
-    override fun plusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
+    override fun plusAssign(value: Int) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
     /**
      * Scalar subtraction of this matrix and the given value.
      *
      * @param value The value to subtract from this matrix
      */
-    override fun minusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
+    override fun minusAssign(value: Int) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
     /**
      * Scalar multiplication of this matrix and the given value.
      *
      * @param value The value to multiply to this matrix
      */
-    override fun timesAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+    override fun timesAssign(value: Int) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
     /**
      * Scalar division of this matrix and the given value.
      *
      * @param value The value to divide with this matrix
      */
-    override fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+    override fun divAssign(value: Int) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have
@@ -201,14 +201,14 @@ open class DoubleMatrix(
      * @throws IllegalArgumentException If the matrices are not of dimension 2
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
-    open infix fun mult(other: DoubleMatrix): DoubleMatrix {
+    open infix fun mult(other: IntMatrix): IntMatrix {
         complies("Cannot multiply matrices with dimension higher than 2") { this.dimension == 2 && other.dimension == 2 }
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == shape[1] }
 
         if (other.shape[0] != shape[1])
             throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
 
-        val result = DoubleMatrix(2, intArrayOf(shape[0], other.shape[1]))
+        val result = IntMatrix(2, intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val r1 = shape[0]
@@ -223,7 +223,7 @@ open class DoubleMatrix(
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
-    internal fun isCompliantMatrix(other: DoubleMatrix) =
+    internal fun isCompliantMatrix(other: IntMatrix) =
         other
             .complies({ "Other is of type ${it::class.java}, expected ${this::class.java}" }, { it::class.java == this::class.java })
             .also { it -> it.complies({ "Shape does not match. Expected ${shapeToString()}, found ${other.shapeToString()}" }, { it.shape.contentEquals(this.shape) }) }
@@ -254,23 +254,23 @@ open class DoubleMatrix(
  *
  * @param matrix The matrix data
  */
-class Double2x2(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(2, 2)) {
+class Int2x2(matrix: IntArray) : IntMatrix(2, intArrayOf(2, 2)) {
 
     companion object {
-        val IDENTITY = Double2x2(doubleArrayOf(1.0, 0.0, 0.0, 1.0))
+        val IDENTITY = Int2x2(intArrayOf(1, 0, 0, 1))
     }
 
-    constructor() : this(DoubleArray(4) { 0.0 })
-    constructor(value: Double) : this(DoubleArray(4) { value })
+    constructor() : this(IntArray(4) { 0 })
+    constructor(value: Int) : this(IntArray(4) { value })
 
-    fun rows(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[1]),
-        doubleArrayOf(data[2], data[3])
+    fun rows(): Array<IntArray> = arrayOf(
+        intArrayOf(data[0], data[1]),
+        intArrayOf(data[2], data[3])
     )
 
-    fun columns(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[2]),
-        doubleArrayOf(data[1], data[3])
+    fun columns(): Array<IntArray> = arrayOf(
+        intArrayOf(data[0], data[2]),
+        intArrayOf(data[1], data[3])
     )
 
     init {
@@ -278,31 +278,31 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(2, 2)) {
         data.forEachIndexed { i, value -> data[i] = value }
     }
 
-    override fun plusAssign(other: DoubleMatrix) {
+    override fun plusAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.plusAssign(other)
     }
 
-    override fun minusAssign(other: DoubleMatrix) {
+    override fun minusAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.minusAssign(other)
     }
 
-    override fun timesAssign(other: DoubleMatrix) {
+    override fun timesAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.timesAssign(other)
     }
 
-    override fun divAssign(other: DoubleMatrix) {
+    override fun divAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.divAssign(other)
     }
 
-    override fun mult(other: DoubleMatrix): DoubleMatrix {
+    override fun mult(other: IntMatrix): IntMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
 
 
-        val result = DoubleMatrix(2, intArrayOf(shape[0], other.shape[1]))
+        val result = IntMatrix(2, intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
@@ -321,29 +321,29 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Double3x3(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(3, 3)) {
+class Int3x3(matrix: IntArray) : IntMatrix(2, intArrayOf(3, 3)) {
 
     companion object {
-        val IDENTITY = Double3x3(doubleArrayOf(
-            1.0, 0.0, 0.0,
-            0.0, 1.0, 0.0,
-            0.0, 0.0, 1.0
+        val IDENTITY = Int3x3(intArrayOf(
+            1, 0, 0,
+            0, 1, 0,
+            0, 0, 1
         ))
     }
 
-    constructor() : this(DoubleArray(9) { 0.0 })
-    constructor(value: Double) : this(DoubleArray(9) { value })
+    constructor() : this(IntArray(9) { 0 })
+    constructor(value: Int) : this(IntArray(9) { value })
 
-    fun rows(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[1], data[2]),
-        doubleArrayOf(data[3], data[4], data[5]),
-        doubleArrayOf(data[6], data[7], data[8])
+    fun rows(): Array<IntArray> = arrayOf(
+        intArrayOf(data[0], data[1], data[2]),
+        intArrayOf(data[3], data[4], data[5]),
+        intArrayOf(data[6], data[7], data[8])
     )
 
-    fun columns(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[3], data[6]),
-        doubleArrayOf(data[1], data[4], data[7]),
-        doubleArrayOf(data[2], data[5], data[8])
+    fun columns(): Array<IntArray> = arrayOf(
+        intArrayOf(data[0], data[3], data[6]),
+        intArrayOf(data[1], data[4], data[7]),
+        intArrayOf(data[2], data[5], data[8])
     )
 
     init {
@@ -351,30 +351,30 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(3, 3)) {
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
-    override fun plusAssign(other: DoubleMatrix) {
+    override fun plusAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.plusAssign(other)
     }
 
-    override fun minusAssign(other: DoubleMatrix) {
+    override fun minusAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.minusAssign(other)
     }
 
-    override fun timesAssign(other: DoubleMatrix) {
+    override fun timesAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.timesAssign(other)
     }
 
-    override fun divAssign(other: DoubleMatrix) {
+    override fun divAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.divAssign(other)
     }
 
-    override fun mult(other: DoubleMatrix): DoubleMatrix {
+    override fun mult(other: IntMatrix): IntMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 3 }
 
-        val result = DoubleMatrix(3, intArrayOf(shape[0], other.shape[1]))
+        val result = IntMatrix(3, intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
@@ -393,33 +393,33 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Double4x4(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(4, 4)) {
+class Int4x4(matrix: IntArray) : IntMatrix(2, intArrayOf(4, 4)) {
 
     companion object {
-        val IDENTITY = Double4x4(doubleArrayOf(
-            1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0
+        val IDENTITY = Int4x4(intArrayOf(
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
         )
         )
     }
 
-    constructor() : this(DoubleArray(16) { 0.0 })
-    constructor(value: Double) : this(DoubleArray(16) { value })
+    constructor() : this(IntArray(16) { 0 })
+    constructor(value: Int) : this(IntArray(16) { value })
 
-    fun rows(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[1], data[2], data[3]),
-        doubleArrayOf(data[4], data[5], data[6], data[7]),
-        doubleArrayOf(data[8], data[9], data[10], data[11]),
-        doubleArrayOf(data[12], data[13], data[14], data[15])
+    fun rows(): Array<IntArray> = arrayOf(
+        intArrayOf(data[0], data[1], data[2], data[3]),
+        intArrayOf(data[4], data[5], data[6], data[7]),
+        intArrayOf(data[8], data[9], data[10], data[11]),
+        intArrayOf(data[12], data[13], data[14], data[15])
     )
 
-    fun columns(): Array<DoubleArray> = arrayOf(
-        doubleArrayOf(data[0], data[4], data[8], data[12]),
-        doubleArrayOf(data[1], data[5], data[9], data[13]),
-        doubleArrayOf(data[2], data[6], data[10], data[14]),
-        doubleArrayOf(data[3], data[7], data[11], data[15])
+    fun columns(): Array<IntArray> = arrayOf(
+        intArrayOf(data[0], data[4], data[8], data[12]),
+        intArrayOf(data[1], data[5], data[9], data[13]),
+        intArrayOf(data[2], data[6], data[10], data[14]),
+        intArrayOf(data[3], data[7], data[11], data[15])
     )
 
     init {
@@ -427,30 +427,30 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(4, 4)) {
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
-    override fun plusAssign(other: DoubleMatrix) {
+    override fun plusAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.plusAssign(other)
     }
 
-    override fun minusAssign(other: DoubleMatrix) {
+    override fun minusAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.minusAssign(other)
     }
 
-    override fun timesAssign(other: DoubleMatrix) {
+    override fun timesAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.timesAssign(other)
     }
 
-    override fun divAssign(other: DoubleMatrix) {
+    override fun divAssign(other: IntMatrix) {
         isCompliantMatrix(other)
         super.divAssign(other)
     }
 
-    override fun mult(other: DoubleMatrix): DoubleMatrix {
+    override fun mult(other: IntMatrix): IntMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 4 }
 
-        val result = DoubleMatrix(4, intArrayOf(shape[0], other.shape[1]))
+        val result = IntMatrix(4, intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
