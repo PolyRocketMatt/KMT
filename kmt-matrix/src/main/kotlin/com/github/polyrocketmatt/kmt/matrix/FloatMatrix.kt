@@ -60,7 +60,7 @@ fun FloatMatrix.toArray(): FloatArray = this.data.toFloatArray()
  */
 open class FloatMatrix(
     override val dimension: Int,
-    internal val shape: IntArray,
+    val shape: IntArray,
     matrix: FloatArray
 ) : Tuple<Float>(FloatArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Float> {
 

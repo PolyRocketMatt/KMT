@@ -60,7 +60,7 @@ fun BooleanMatrix.toArray(): BooleanArray = this.data.toBooleanArray()
  */
 open class BooleanMatrix(
     override val dimension: Int,
-    internal val shape: IntArray,
+    val shape: IntArray,
     matrix: BooleanArray
 ) : Tuple<Boolean>(BooleanArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Boolean> {
 

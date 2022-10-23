@@ -1,7 +1,9 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
+import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.vector.Swizzle2
 import com.github.polyrocketmatt.kmt.vector.Vector
@@ -10,6 +12,11 @@ import com.github.polyrocketmatt.kmt.vector.db.DoubleVector
 import com.github.polyrocketmatt.kmt.vector.fl.Float2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
+
+fun BooleanMatrix.toBool2(): Bool2 {
+    complies("Cannot create a Bool2 from a BooleanMatrix with ${this.data.size} elements!") { this.data.size == 2 }
+    return Bool2(this.data[0], this.data[1])
+}
 
 class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVector, Swizzle2 {
 

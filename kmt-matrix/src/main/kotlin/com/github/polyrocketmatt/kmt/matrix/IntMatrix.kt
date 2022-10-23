@@ -60,7 +60,7 @@ fun IntMatrix.toArray(): IntArray = this.data.toIntArray()
  */
 open class IntMatrix(
     override val dimension: Int,
-    internal val shape: IntArray,
+    val shape: IntArray,
     matrix: IntArray
 ) : Tuple<Int>(IntArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Int> {
 

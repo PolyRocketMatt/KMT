@@ -1,6 +1,7 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
+import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
 import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
@@ -12,6 +13,11 @@ import com.github.polyrocketmatt.kmt.vector.fl.Float3
 import com.github.polyrocketmatt.kmt.vector.it.Int3
 import com.github.polyrocketmatt.kmt.vector.sh.Short3
 import java.lang.UnsupportedOperationException
+
+fun BooleanMatrix.toBool3(): Bool3 {
+    complies("Cannot create a Bool3 from a BooleanMatrix with ${this.data.size} elements!") { this.data.size == 3 }
+    return Bool3(this.data[0], this.data[1], this.data[2])
+}
 
 class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, z)), BooleanVector, Swizzle3 {
 

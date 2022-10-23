@@ -60,7 +60,7 @@ fun ShortMatrix.toArray(): ShortArray = this.data.toShortArray()
  */
 open class ShortMatrix(
     override val dimension: Int,
-    internal val shape: IntArray,
+    val shape: IntArray,
     matrix: ShortArray
 ) : Tuple<Short>(ShortArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Short> {
 

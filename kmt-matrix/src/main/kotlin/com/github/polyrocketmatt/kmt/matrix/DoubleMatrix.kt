@@ -60,7 +60,7 @@ fun DoubleMatrix.toArray(): DoubleArray = this.data.toDoubleArray()
  */
 open class DoubleMatrix(
     override val dimension: Int,
-    internal val shape: IntArray,
+    val shape: IntArray,
     matrix: DoubleArray
 ) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Double> {
 
