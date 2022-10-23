@@ -18,7 +18,6 @@
 
 package com.github.polyrocketmatt.kmt.vector.fl
 
-import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
 import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
 import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Vector

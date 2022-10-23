@@ -21,7 +21,7 @@ fun Array<Short>.toMatrix(shape: IntArray): ShortMatrix {
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
             "Expected ${elements}, found ${this.size}" },
         { this.size == elements })
-    return ShortMatrix(shape.size, shape, this.toShortArray())
+    return ShortMatrix(shape, this.toShortArray())
 }
 
 /**
@@ -36,7 +36,7 @@ fun ShortArray.toMatrix(shape: IntArray): ShortMatrix {
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
             "Expected ${elements}, found ${this.size}" },
         { this.size == elements })
-    return ShortMatrix(shape.size, shape, this)
+    return ShortMatrix(shape, this)
 }
 
 /**
@@ -53,16 +53,14 @@ fun ShortMatrix.toArray(): ShortArray = this.data.toShortArray()
  * Represents a matrix of a given dimension and shape holding
  * floating-point values.
  *
- * @param dimension The dimension of the matrix
  * @param shape The shape of the matrix
  *
  * TODO: Fix mult
  */
 open class ShortMatrix(
-    override val dimension: Int,
     val shape: IntArray,
     matrix: ShortArray
-) : Tuple<Short>(ShortArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Short> {
+) : Tuple<Short>(ShortArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), Matrix<Short> {
 
     companion object {
         fun identity(shape: IntArray): ShortMatrix {
@@ -78,16 +76,15 @@ open class ShortMatrix(
         }
     }
 
-    constructor(shape: IntArray) : this(shape.size, shape, ShortArray(shape.reduce { acc, i -> acc * i }) { 0.toShort() })
-    constructor(shape: IntArray, value: Short) : this(shape.size, shape, ShortArray(shape.reduce { acc, i -> acc * i }) { value })
-
-    constructor(dimension: Int, shape: IntArray) : this(dimension, shape, ShortArray(shape.reduce { acc, i -> acc * i }) { 0.toShort() })
-    constructor(dimension: Int, shape: IntArray, value: Short) : this(dimension, shape, ShortArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(matrix: ShortArray) : this(intArrayOf(matrix.size), matrix)
+    constructor(shape: IntArray) : this(shape, ShortArray(shape.reduce { acc, i -> acc * i }) { 0.toShort() })
+    constructor(shape: IntArray, value: Short) : this(shape, ShortArray(shape.reduce { acc, i -> acc * i }) { value })
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
 
         complies("Data must contain $shapeSize elements for a matrix of size ${shape.joinToString("x") { "$it" }}") { data.size == size }
+
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
@@ -217,13 +214,12 @@ open class ShortMatrix(
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open infix fun mult(other: ShortMatrix): ShortMatrix {
-        complies("Cannot multiply matrices with dimension higher than 2") { this.dimension == 2 && other.dimension == 2 }
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == shape[1] }
 
         if (other.shape[0] != shape[1])
             throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
 
-        val result = ShortMatrix(2, intArrayOf(shape[0], other.shape[1]))
+        val result = ShortMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val r1 = shape[0]
@@ -247,7 +243,6 @@ open class ShortMatrix(
         if (this === other) return true
         if (other !is FloatMatrix) return false
 
-        if (dimension != other.dimension) return false
         if (!shape.contentEquals(other.shape)) return false
         if (!data.contentEquals(other.data)) return false
 
@@ -255,8 +250,7 @@ open class ShortMatrix(
     }
 
     override fun hashCode(): Int {
-        var result = dimension
-        result = 31 * result + shape.contentHashCode()
+        var result = shape.contentHashCode()
         result = 31 * result + data.contentHashCode()
         return result
     }
@@ -269,7 +263,7 @@ open class ShortMatrix(
  *
  * @param matrix The matrix data
  */
-class Short2x2(matrix: ShortArray) : ShortMatrix(2, intArrayOf(2, 2)) {
+class Short2x2(matrix: ShortArray) : ShortMatrix(intArrayOf(2, 2)) {
 
     companion object {
         val IDENTITY = Short2x2(shortArrayOf(1, 0, 0, 1))
@@ -297,7 +291,7 @@ class Short2x2(matrix: ShortArray) : ShortMatrix(2, intArrayOf(2, 2)) {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
 
 
-        val result = ShortMatrix(2, intArrayOf(shape[0], other.shape[1]))
+        val result = ShortMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
@@ -316,7 +310,7 @@ class Short2x2(matrix: ShortArray) : ShortMatrix(2, intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Short3x3(matrix: ShortArray) : ShortMatrix(2, intArrayOf(3, 3)) {
+class Short3x3(matrix: ShortArray) : ShortMatrix(intArrayOf(3, 3)) {
 
     companion object {
         val IDENTITY = Short3x3(shortArrayOf(
@@ -349,7 +343,7 @@ class Short3x3(matrix: ShortArray) : ShortMatrix(2, intArrayOf(3, 3)) {
     override fun mult(other: ShortMatrix): ShortMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 3 }
 
-        val result = ShortMatrix(3, intArrayOf(shape[0], other.shape[1]))
+        val result = ShortMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
@@ -368,7 +362,7 @@ class Short3x3(matrix: ShortArray) : ShortMatrix(2, intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Short4x4(matrix: ShortArray) : ShortMatrix(2, intArrayOf(4, 4)) {
+class Short4x4(matrix: ShortArray) : ShortMatrix(intArrayOf(4, 4)) {
 
     companion object {
         val IDENTITY = Short4x4(shortArrayOf(
@@ -405,7 +399,7 @@ class Short4x4(matrix: ShortArray) : ShortMatrix(2, intArrayOf(4, 4)) {
     override fun mult(other: ShortMatrix): ShortMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 4 }
 
-        val result = ShortMatrix(4, intArrayOf(shape[0], other.shape[1]))
+        val result = ShortMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]

@@ -18,7 +18,6 @@
 
 package com.github.polyrocketmatt.kmt.vector.sh
 
-import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
 import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
 import com.github.polyrocketmatt.kmt.vector.Vector

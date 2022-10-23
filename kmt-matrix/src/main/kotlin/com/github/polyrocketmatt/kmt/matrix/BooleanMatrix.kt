@@ -21,7 +21,7 @@ fun Array<Boolean>.toMatrix(shape: IntArray): BooleanMatrix {
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
             "Expected ${elements}, found ${this.size}" },
         { this.size == elements })
-    return BooleanMatrix(shape.size, shape, this.toBooleanArray())
+    return BooleanMatrix(shape, this.toBooleanArray())
 }
 
 /**
@@ -36,7 +36,7 @@ fun BooleanArray.toMatrix(shape: IntArray): BooleanMatrix {
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
             "Expected ${elements}, found ${this.size}" },
         { this.size == elements })
-    return BooleanMatrix(shape.size, shape, this)
+    return BooleanMatrix(shape, this)
 }
 
 /**
@@ -50,30 +50,27 @@ fun BooleanMatrix.toArray(): BooleanArray = this.data.toBooleanArray()
  * @author Matthias Kovacic
  * @since 0.0.8
  *
- * Represents a matrix of a given dimension and shape holding
+ * Represents a matrix of a given shape holding
  * floating-point values.
  *
- * @param dimension The dimension of the matrix
  * @param shape The shape of the matrix
  *
  * TODO: Fix mult
  */
 open class BooleanMatrix(
-    override val dimension: Int,
     val shape: IntArray,
-    matrix: BooleanArray
-) : Tuple<Boolean>(BooleanArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Boolean> {
+    matrix: BooleanArray,
+) : Tuple<Boolean>(BooleanArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), Matrix<Boolean> {
 
-    constructor(shape: IntArray) : this(shape.size, shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { false })
-    constructor(shape: IntArray, value: Boolean) : this(shape.size, shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { value })
-
-    constructor(dimension: Int, shape: IntArray) : this(dimension, shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { false })
-    constructor(dimension: Int, shape: IntArray, value: Boolean) : this(dimension, shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(matrix: BooleanArray) : this(intArrayOf(matrix.size), matrix)
+    constructor(shape: IntArray) : this(shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { false })
+    constructor(shape: IntArray, value: Boolean) : this(shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { value })
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
 
         complies("Data must contain $shapeSize elements for a matrix of size ${shape.joinToString("x") { "$it" }}") { data.size == size }
+
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
@@ -193,13 +190,12 @@ open class BooleanMatrix(
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open infix fun mult(other: BooleanMatrix): BooleanMatrix {
-        complies("Cannot multiply matrices with dimension higher than 2") { this.dimension == 2 && other.dimension == 2 }
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == shape[1] }
 
         if (other.shape[0] != shape[1])
             throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
 
-        val result = BooleanMatrix(2, intArrayOf(shape[0], other.shape[1]))
+        val result = BooleanMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val r1 = shape[0]
@@ -223,7 +219,6 @@ open class BooleanMatrix(
         if (this === other) return true
         if (other !is FloatMatrix) return false
 
-        if (dimension != other.dimension) return false
         if (!shape.contentEquals(other.shape)) return false
         if (!data.contentEquals(other.data)) return false
 
@@ -231,8 +226,7 @@ open class BooleanMatrix(
     }
 
     override fun hashCode(): Int {
-        var result = dimension
-        result = 31 * result + shape.contentHashCode()
+        var result = shape.contentHashCode()
         result = 31 * result + data.contentHashCode()
         return result
     }
@@ -245,7 +239,7 @@ open class BooleanMatrix(
  *
  * @param matrix The matrix data
  */
-class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(2, intArrayOf(2, 2)) {
+class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(intArrayOf(2, 2)) {
 
     constructor() : this(BooleanArray(4) { false })
     constructor(value: Boolean) : this(BooleanArray(4) { value })
@@ -268,7 +262,7 @@ class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(2, intArrayOf(2, 2)) {
     override fun mult(other: BooleanMatrix): BooleanMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
 
-        val result = BooleanMatrix(2, intArrayOf(shape[0], other.shape[1]))
+        val result = BooleanMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
@@ -287,7 +281,7 @@ class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(2, intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(2, intArrayOf(3, 3)) {
+class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(intArrayOf(3, 3)) {
 
     constructor() : this(BooleanArray(9) { false })
     constructor(value: Boolean) : this(BooleanArray(9) { value })
@@ -312,7 +306,7 @@ class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(2, intArrayOf(3, 3)) {
     override fun mult(other: BooleanMatrix): BooleanMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 3 }
 
-        val result = BooleanMatrix(3, intArrayOf(shape[0], other.shape[1]))
+        val result = BooleanMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
@@ -331,7 +325,7 @@ class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(2, intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(2, intArrayOf(4, 4)) {
+class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(intArrayOf(4, 4)) {
 
     constructor() : this(BooleanArray(16) { false })
     constructor(value: Boolean) : this(BooleanArray(16) { value })
@@ -358,7 +352,7 @@ class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(2, intArrayOf(4, 4)) {
     override fun mult(other: BooleanMatrix): BooleanMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 4 }
 
-        val result = BooleanMatrix(4, intArrayOf(shape[0], other.shape[1]))
+        val result = BooleanMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]

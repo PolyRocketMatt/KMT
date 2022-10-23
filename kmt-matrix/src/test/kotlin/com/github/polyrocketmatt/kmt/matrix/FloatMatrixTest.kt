@@ -1,5 +1,8 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
+import com.github.polyrocketmatt.kmt.matrix.toArray
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException

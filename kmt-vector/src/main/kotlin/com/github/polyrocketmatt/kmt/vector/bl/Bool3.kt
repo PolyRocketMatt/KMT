@@ -3,7 +3,6 @@ package com.github.polyrocketmatt.kmt.vector.bl
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
-import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.vector.Swizzle3
 import com.github.polyrocketmatt.kmt.vector.Vector

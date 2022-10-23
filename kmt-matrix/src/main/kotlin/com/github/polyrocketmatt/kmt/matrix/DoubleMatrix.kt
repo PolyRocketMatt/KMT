@@ -21,7 +21,7 @@ fun Array<Double>.toMatrix(shape: IntArray): DoubleMatrix {
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
             "Expected ${elements}, found ${this.size}" },
         { this.size == elements })
-    return DoubleMatrix(shape.size, shape, this.toDoubleArray())
+    return DoubleMatrix(shape, this.toDoubleArray())
 }
 
 /**
@@ -36,7 +36,7 @@ fun DoubleArray.toMatrix(shape: IntArray): DoubleMatrix {
     shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
             "Expected ${elements}, found ${this.size}" },
         { this.size == elements })
-    return DoubleMatrix(shape.size, shape, this)
+    return DoubleMatrix(shape, this)
 }
 
 /**
@@ -50,19 +50,17 @@ fun DoubleMatrix.toArray(): DoubleArray = this.data.toDoubleArray()
  * @author Matthias Kovacic
  * @since 0.0.8
  *
- * Represents a matrix of a given dimension and shape holding
+ * Represents a matrix of a given shape holding
  * floating-point values.
  *
- * @param dimension The dimension of the matrix
  * @param shape The shape of the matrix
  *
  * TODO: Fix mult
  */
 open class DoubleMatrix(
-    override val dimension: Int,
     val shape: IntArray,
     matrix: DoubleArray
-) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Double> {
+) : Tuple<Double>(DoubleArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), Matrix<Double> {
 
     companion object {
         fun identity(shape: IntArray): DoubleMatrix {
@@ -78,16 +76,15 @@ open class DoubleMatrix(
         }
     }
 
-    constructor(shape: IntArray) : this(shape.size, shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
-    constructor(shape: IntArray, value: Double) : this(shape.size, shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
-
-    constructor(dimension: Int, shape: IntArray) : this(dimension, shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
-    constructor(dimension: Int, shape: IntArray, value: Double) : this(dimension, shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
+    constructor(matrix: DoubleArray) : this(intArrayOf(matrix.size), matrix)
+    constructor(shape: IntArray) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
+    constructor(shape: IntArray, value: Double) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
 
         complies("Data must contain $shapeSize elements for a matrix of size ${shape.joinToString("x") { "$it" }}") { data.size == size }
+
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
@@ -217,13 +214,12 @@ open class DoubleMatrix(
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open infix fun mult(other: DoubleMatrix): DoubleMatrix {
-        complies("Cannot multiply matrices with dimension higher than 2") { this.dimension == 2 && other.dimension == 2 }
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == shape[1] }
 
         if (other.shape[0] != shape[1])
             throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
 
-        val result = DoubleMatrix(2, intArrayOf(shape[0], other.shape[1]))
+        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val r1 = shape[0]
@@ -247,7 +243,6 @@ open class DoubleMatrix(
         if (this === other) return true
         if (other !is FloatMatrix) return false
 
-        if (dimension != other.dimension) return false
         if (!shape.contentEquals(other.shape)) return false
         if (!data.contentEquals(other.data)) return false
 
@@ -255,8 +250,7 @@ open class DoubleMatrix(
     }
 
     override fun hashCode(): Int {
-        var result = dimension
-        result = 31 * result + shape.contentHashCode()
+        var result = shape.contentHashCode()
         result = 31 * result + data.contentHashCode()
         return result
     }
@@ -269,7 +263,7 @@ open class DoubleMatrix(
  *
  * @param matrix The matrix data
  */
-class Double2x2(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(2, 2)) {
+class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2)) {
 
     companion object {
         val IDENTITY = Double2x2(doubleArrayOf(1.0, 0.0, 0.0, 1.0))
@@ -297,7 +291,7 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(2, 2)) {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
 
 
-        val result = DoubleMatrix(2, intArrayOf(shape[0], other.shape[1]))
+        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
@@ -316,7 +310,7 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Double3x3(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(3, 3)) {
+class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3)) {
 
     companion object {
         val IDENTITY = Double3x3(doubleArrayOf(
@@ -349,7 +343,7 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(3, 3)) {
     override fun mult(other: DoubleMatrix): DoubleMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 3 }
 
-        val result = DoubleMatrix(3, intArrayOf(shape[0], other.shape[1]))
+        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
@@ -368,7 +362,7 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Double4x4(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(4, 4)) {
+class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4)) {
 
     companion object {
         val IDENTITY = Double4x4(doubleArrayOf(
@@ -405,7 +399,7 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(2, intArrayOf(4, 4)) {
     override fun mult(other: DoubleMatrix): DoubleMatrix {
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 4 }
 
-        val result = DoubleMatrix(4, intArrayOf(shape[0], other.shape[1]))
+        val result = DoubleMatrix(intArrayOf(shape[0], other.shape[1]))
 
         //  Multiplying rows of first matrix with columns of second matrix
         val c = other.shape[1]
