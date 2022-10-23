@@ -59,58 +59,115 @@ open class FloatMatrix(
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
     open operator fun plusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
 
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
     open operator fun minusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
 
+    /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
     open operator fun timesAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
     open operator fun divAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
-    override fun plus(value: Float): Matrix<Float> {
-        val result = FloatMatrix(dimension, shape)
-        data.forEachIndexed { i, term -> result.data[i] = data[i] + term }
-        return result
-    }
+    /**
+     * Scalar addition of this matrix and the given value.
+     *
+     * @param value The value to add to this matrix
+     */
+    override fun plus(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
-    override fun minus(value: Float): Matrix<Float> {
-        val result = FloatMatrix(dimension, shape)
-        data.forEachIndexed { i, term -> result.data[i] = data[i] - term }
-        return result
-    }
+    /**
+     * Scalar subtraction of this matrix and the given value.
+     *
+     * @param value The value to subtract from this matrix
+     */
+    override fun minus(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
-    override fun times(value: Float): Matrix<Float> {
-    val result = FloatMatrix(dimension, shape)
-        data.forEachIndexed { i, factor -> result.data[i] = data[i] * factor }
-        return result
-    }
+    /**
+     * Scalar multiplication of this matrix and the given value.
+     *
+     * @param value The value to multiply to this matrix
+     */
+    override fun times(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
-    override fun div(value: Float): Matrix<Float> {
-        val result = FloatMatrix(dimension, shape)
-        data.forEachIndexed { i, factor -> result.data[i] = data[i] / factor }
-        return result
-    }
+    /**
+     * Scalar division of this matrix and the given value.
+     *
+     * @param value The value to divide with this matrix
+     */
+    override fun div(value: Float)  = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
 
+    /**
+     * Scalar addition of this matrix and the given value.
+     *
+     * @param value The value to add to this matrix
+     */
     override fun plusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
+    /**
+     * Scalar subtraction of this matrix and the given value.
+     *
+     * @param value The value to subtract from this matrix
+     */
     override fun minusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
+    /**
+     * Scalar multiplication of this matrix and the given value.
+     *
+     * @param value The value to multiply to this matrix
+     */
     override fun timesAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
+    /**
+     * Scalar division of this matrix and the given value.
+     *
+     * @param value The value to divide with this matrix
+     */
     override fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
 
+    /**
+     * Multiply this matrix with the given matrix. The matrices must have
+     * a valid shape for multiplication and must be of dimension 2.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @return The result of the multiplication
+     * @throws IllegalArgumentException If the matrices are not of dimension 2
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
     open infix fun mult(other: FloatMatrix): FloatMatrix {
         complies("Cannot multiply matrices with dimension higher than 2") { this.dimension == 2 && other.dimension == 2 }
         other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == shape[1] }
@@ -130,11 +187,13 @@ open class FloatMatrix(
                     result.data[i * c + j] += data[i * r1 + k] * other.data[k * c + j]
         return result
     }
-
+    
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
     internal fun isCompliantMatrix(other: FloatMatrix) =
-        other.complies({ "Other is of type ${it::class.java}, expected ${this::class.java}" }, { it::class.java == this::class.java })
+        other
+            .complies({ "Other is of type ${it::class.java}, expected ${this::class.java}" }, { it::class.java == this::class.java })
+            .also { it -> it.complies({ "Shape does not match. Expected ${shapeToString()}, found ${other.shapeToString()}" }, { it.shape.contentEquals(this.shape) }) }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
