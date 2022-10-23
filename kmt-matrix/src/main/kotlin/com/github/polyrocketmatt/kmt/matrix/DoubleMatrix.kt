@@ -336,7 +336,7 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3)) {
     )
 
     init {
-        complies("Data must contain 9 elements for a matrix of size 2x2") { data.size == 4 }
+        complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 4 }
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
@@ -392,7 +392,7 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4)) {
     )
 
     init {
-        complies("Data must contain 16 elements for a matrix of size 2x2") { data.size == 4 }
+        complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 4 }
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 

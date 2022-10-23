@@ -339,7 +339,7 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(intArrayOf(3, 3)) {
     )
 
     init {
-        complies("Data must contain 9 elements for a matrix of size 2x2") { data.size == 4 }
+        complies("Data must contain 9 elements for a matrix of size 3x3") { data.size == 9 }
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
@@ -394,7 +394,7 @@ class Float4x4(matrix: FloatArray) : FloatMatrix(intArrayOf(4, 4)) {
     )
 
     init {
-        complies("Data must contain 16 elements for a matrix of size 2x2") { data.size == 4 }
+        complies("Data must contain 16 elements for a matrix of size 4x4") { data.size == 16 }
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
