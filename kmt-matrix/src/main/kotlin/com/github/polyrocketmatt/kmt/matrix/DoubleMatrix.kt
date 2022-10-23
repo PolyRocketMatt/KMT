@@ -367,10 +367,6 @@ open class DoubleMatrix(
         return this
     }
 
-    override fun solve(): DoubleMatrix {
-        TODO("Not yet implemented")
-    }
-
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]
 

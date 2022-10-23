@@ -293,9 +293,6 @@ open class FloatMatrix(
     override fun rref(): FloatMatrix {
         TODO("Not yet implemented")
     }
-    override fun solve(): FloatMatrix {
-        TODO("Not yet implemented")
-    }
 
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]

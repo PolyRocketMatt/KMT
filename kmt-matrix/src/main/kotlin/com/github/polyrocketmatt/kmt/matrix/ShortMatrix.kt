@@ -289,7 +289,6 @@ open class ShortMatrix(
 
     override fun ref(): DoubleMatrix = toDoubleMatrix().ref()
     override fun rref(): DoubleMatrix = toDoubleMatrix().rref()
-    override fun solve(): DoubleMatrix = toDoubleMatrix().solve()
 
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]

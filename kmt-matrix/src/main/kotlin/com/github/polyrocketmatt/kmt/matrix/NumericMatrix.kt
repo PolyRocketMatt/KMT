@@ -52,11 +52,4 @@ interface NumericMatrix<T, K> : Matrix<T> {
      */
     fun rref(): Matrix<K>
 
-    /**
-     * Solve the system of linear equations represented by this matrix.
-     *
-     * @return The solution to the system of linear equations represented by this matrix.
-     */
-    fun solve(): Matrix<K>
-
 }
