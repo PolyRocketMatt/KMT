@@ -137,6 +137,58 @@ open class ShortMatrix(
      * @param other The matrix to add to this matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
+    open operator fun plus(other: ShortMatrix): ShortMatrix {
+        isCompliantMatrix(other)
+        val matrix = ShortMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = (value + other[i]).toShort() }
+        return matrix
+    }
+
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun minus(other: ShortMatrix): ShortMatrix {
+        isCompliantMatrix(other)
+        val matrix = ShortMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = (value - other[i]).toShort() }
+        return matrix
+    }
+
+    /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun times(other: ShortMatrix): ShortMatrix {
+        isCompliantMatrix(other)
+        val matrix = ShortMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = (value * other[i]).toShort() }
+        return matrix
+    }
+
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide this matrix with
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun div(other: ShortMatrix): ShortMatrix {
+        isCompliantMatrix(other)
+        val matrix = ShortMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = (value / other[i]).toShort() }
+        return matrix
+    }
+
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
     open operator fun plusAssign(other: ShortMatrix) {
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = (data[i] + term).toShort() }
@@ -331,93 +383,5 @@ open class ShortMatrix(
         }
         return sb.toString()
     }
-
-}
-
-/**
- * Represents a 2x2 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Short2x2(matrix: ShortArray) : ShortMatrix(intArrayOf(2, 2), matrix) {
-
-    companion object {
-        val IDENTITY = Short2x2(shortArrayOf(1, 0, 0, 1))
-    }
-
-    constructor() : this(ShortArray(4) { 0 })
-    constructor(value: Short) : this(ShortArray(4) { value })
-    constructor(matrix: Array<Short>) : this(matrix.toShortArray())
-
-    override fun transpose(): Short2x2 = Short2x2(shortArrayOf(
-        data[0], data[2],
-        data[1], data[3]
-    ))
-
-    override fun copyOf(): Short2x2 = Short2x2(data.copyOf())
-
-}
-
-/**
- * Represents a 3x3 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Short3x3(matrix: ShortArray) : ShortMatrix(intArrayOf(3, 3), matrix) {
-
-    companion object {
-        val IDENTITY = Short3x3(shortArrayOf(
-            1, 0, 0,
-            0, 1, 0,
-            0, 0, 1
-        ))
-    }
-
-    constructor() : this(ShortArray(9) { 0 })
-    constructor(value: Short) : this(ShortArray(9) { value })
-    constructor(matrix: Array<Short>) : this(matrix.toShortArray())
-
-    override fun transpose(): Short3x3 = Short3x3(shortArrayOf(
-        data[0], data[3], data[6],
-        data[1], data[4], data[7],
-        data[2], data[5], data[8]
-    ))
-
-    override fun copyOf(): Short3x3 = Short3x3(data.copyOf())
-
-}
-
-/**
- * Represents a 4x4 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Short4x4(matrix: ShortArray) : ShortMatrix(intArrayOf(4, 4), matrix) {
-
-    companion object {
-        val IDENTITY = Short4x4(shortArrayOf(
-            1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1
-        )
-        )
-    }
-
-    constructor() : this(ShortArray(16) { 0 })
-    constructor(value: Short) : this(ShortArray(16) { value })
-    constructor(matrix: Array<Short>) : this(matrix.toShortArray())
-
-    override fun transpose(): Short4x4 = Short4x4(shortArrayOf(
-        data[0], data[4], data[8], data[12],
-        data[1], data[5], data[9], data[13],
-        data[2], data[6], data[10], data[14],
-        data[3], data[7], data[11], data[15]
-    ))
-
-    override fun copyOf(): Short4x4 = Short4x4(data.copyOf())
 
 }

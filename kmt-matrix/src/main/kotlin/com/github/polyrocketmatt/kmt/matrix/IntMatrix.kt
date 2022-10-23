@@ -1,14 +1,10 @@
 package com.github.polyrocketmatt.kmt.matrix
 
-import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
 
 typealias IMatrix = IntMatrix
-typealias I2x2 = Int2x2
-typealias I3x3 = Int3x3
-typealias I4x4 = Int4x4
 
 /**
  * Get a matrix with the given shape from the given array.
@@ -130,6 +126,58 @@ open class IntMatrix(
 
     override operator fun set(i: Int, value: Int) { data[i] = value }
     override operator fun set(row: Int, col: Int, value: Int) { data[row * shape[1] + col] = value }
+
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun plus(other: IntMatrix): IntMatrix {
+        isCompliantMatrix(other)
+        val matrix = IntMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value + other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun minus(other: IntMatrix): IntMatrix {
+        isCompliantMatrix(other)
+        val matrix = IntMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value - other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun times(other: IntMatrix): IntMatrix {
+        isCompliantMatrix(other)
+        val matrix = IntMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value * other[i] }
+        return matrix
+    }
+
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide this matrix with
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    open operator fun div(other: IntMatrix): IntMatrix {
+        isCompliantMatrix(other)
+        val matrix = IntMatrix(shape)
+        data.forEachIndexed { i, value -> matrix[i] = value / other[i] }
+        return matrix
+    }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -331,93 +379,5 @@ open class IntMatrix(
         }
         return sb.toString()
     }
-
-}
-
-/**
- * Represents a 2x2 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Int2x2(matrix: IntArray) : IntMatrix(intArrayOf(2, 2), matrix) {
-
-    companion object {
-        val IDENTITY = Int2x2(intArrayOf(1, 0, 0, 1))
-    }
-
-    constructor() : this(IntArray(4) { 0 })
-    constructor(value: Int) : this(IntArray(4) { value })
-    constructor(matrix: Array<Int>) : this(matrix.toIntArray())
-
-    override fun transpose(): Int2x2 = Int2x2(intArrayOf(
-        data[0], data[2],
-        data[1], data[3]
-    ))
-
-    override fun copyOf(): Int2x2 = Int2x2(data.copyOf())
-
-}
-
-/**
- * Represents a 3x3 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Int3x3(matrix: IntArray) : IntMatrix(intArrayOf(3, 3), matrix) {
-
-    companion object {
-        val IDENTITY = Int3x3(intArrayOf(
-            1, 0, 0,
-            0, 1, 0,
-            0, 0, 1
-        ))
-    }
-
-    constructor() : this(IntArray(9) { 0 })
-    constructor(value: Int) : this(IntArray(9) { value })
-    constructor(matrix: Array<Int>) : this(matrix.toIntArray())
-
-    override fun transpose(): Int3x3 = Int3x3(intArrayOf(
-        data[0], data[3], data[6],
-        data[1], data[4], data[7],
-        data[2], data[5], data[8]
-    ))
-
-    override fun copyOf(): Int3x3 = Int3x3(data.copyOf())
-
-}
-
-/**
- * Represents a 4x4 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Int4x4(matrix: IntArray) : IntMatrix(intArrayOf(4, 4), matrix) {
-
-    companion object {
-        val IDENTITY = Int4x4(intArrayOf(
-            1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1, 0,
-            0, 0, 0, 1
-        )
-        )
-    }
-
-    constructor() : this(IntArray(16) { 0 })
-    constructor(value: Int) : this(IntArray(16) { value })
-    constructor(matrix: Array<Int>) : this(matrix.toIntArray())
-
-    override fun transpose(): Int4x4 = Int4x4(intArrayOf(
-        data[0], data[4], data[8], data[12],
-        data[1], data[5], data[9], data[13],
-        data[2], data[6], data[10], data[14],
-        data[3], data[7], data[11], data[15]
-    ))
-
-    override fun copyOf(): Int4x4 = Int4x4(data.copyOf())
 
 }
