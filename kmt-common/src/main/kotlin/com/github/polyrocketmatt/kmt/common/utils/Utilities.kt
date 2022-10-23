@@ -20,7 +20,10 @@
 package com.github.polyrocketmatt.kmt.common.utils
 
 import java.lang.ClassCastException
+import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
+
+
 
 /**
  * Check if a given condition is met on an object of type [T].
@@ -31,7 +34,7 @@ import java.lang.IllegalStateException
  */
 fun <T> T.complies(condition: (T) -> Boolean): T {
     if (!condition(this))
-        throw IllegalStateException()
+        throw IllegalArgumentException()
     return this
 }
 
@@ -45,7 +48,7 @@ fun <T> T.complies(condition: (T) -> Boolean): T {
  */
 fun <T> T.complies(cause: String, condition: (T) -> Boolean): T {
     if (!condition(this))
-        throw IllegalStateException(cause)
+        throw IllegalArgumentException(cause)
     return this
 }
 
@@ -59,7 +62,7 @@ fun <T> T.complies(cause: String, condition: (T) -> Boolean): T {
  */
 fun <T> T.complies(cause: (T) -> String, condition: (T) -> Boolean): T {
     if (!condition(this))
-        throw IllegalStateException(cause(this))
+        throw IllegalArgumentException(cause(this))
     return this
 }
 

@@ -1,5 +1,6 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.storage.MutableMemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
@@ -8,6 +9,28 @@ typealias FMatrix = FloatMatrix
 typealias F2x2 = Float2x2
 typealias F3x3 = Float3x3
 typealias F4x4 = Float4x4
+
+/**
+ * Get a matrix with the given shape from the given array.
+ *
+ * @param shape The shape of the matrix
+ * @return A matrix with the given shape and the given array as its data
+ * @throws IllegalStateException If the array does not comply with the given shape
+ */
+fun FloatArray.toMatrix(shape: IntArray): FloatMatrix {
+    val elements = shape.reduce { acc, i -> acc * i }
+    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+            "Expected ${elements}, found ${this.size}" },
+        { this.size == elements })
+    return FloatMatrix(shape.size, shape, this)
+}
+
+/**
+ * Get an array of floating-point numbers from the given matrix.
+ *
+ * @return The array of floating-point numbers with data from the given matrix
+ */
+fun FloatMatrix.toArray(): FloatArray = this.data.toFloatArray()
 
 /**
  * @author Matthias Kovacic
@@ -23,7 +46,7 @@ open class FloatMatrix(
     override val dimension: Int,
     internal val shape: IntArray,
     matrix: FloatArray
-) : Tuple<Float>(FloatArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension {
+) : Tuple<Float>(FloatArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), MatrixDimension, Matrix<Float> {
 
     constructor(dimension: Int, shape: IntArray) : this(dimension, shape, FloatArray(shape.reduce { acc, i -> acc * i }) { 0.0f })
     constructor(dimension: Int, shape: IntArray, value: Float) : this(dimension, shape, FloatArray(shape.reduce { acc, i -> acc * i }) { value })
@@ -53,8 +76,56 @@ open class FloatMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
+    override fun plus(value: Float): Matrix<Float> {
+        val result = FloatMatrix(dimension, shape)
+        data.forEachIndexed { i, term -> result.data[i] = data[i] + term }
+        return result
+    }
+
+    override fun minus(value: Float): Matrix<Float> {
+        val result = FloatMatrix(dimension, shape)
+        data.forEachIndexed { i, term -> result.data[i] = data[i] - term }
+        return result
+    }
+
+    override fun times(value: Float): Matrix<Float> {
+    val result = FloatMatrix(dimension, shape)
+        data.forEachIndexed { i, factor -> result.data[i] = data[i] * factor }
+        return result
+    }
+
+    override fun div(value: Float): Matrix<Float> {
+        val result = FloatMatrix(dimension, shape)
+        data.forEachIndexed { i, factor -> result.data[i] = data[i] / factor }
+        return result
+    }
+
+    override fun plusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
+
+    override fun minusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
+
+    override fun timesAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+
+    override fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+
     open infix fun mult(other: FloatMatrix): FloatMatrix {
-        return FloatMatrix(dimension, shape)
+        complies("Cannot multiply matrices with dimension higher than 2") { this.dimension == 2 && other.dimension == 2 }
+        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == shape[1] }
+
+        if (other.shape[0] != shape[1])
+            throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
+
+        val result = FloatMatrix(2, intArrayOf(shape[0], other.shape[1]))
+
+        //  Multiplying rows of first matrix with columns of second matrix
+        val r1 = shape[0]
+        val c1 = shape[1]
+        val c = other.shape[1]
+        for (i in 0 until r1)
+            for (j in 0 until c)
+                for (k in 0 until c1)
+                    result.data[i * c + j] += data[i * r1 + k] * other.data[k * c + j]
+        return result
     }
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
@@ -62,8 +133,32 @@ open class FloatMatrix(
     internal fun isCompliantMatrix(other: FloatMatrix) =
         other.complies({ "Other is of type ${it::class.java}, expected ${this::class.java}" }, { it::class.java == this::class.java })
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is FloatMatrix) return false
+
+        if (dimension != other.dimension) return false
+        if (!shape.contentEquals(other.shape)) return false
+        if (!data.contentEquals(other.data)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = dimension
+        result = 31 * result + shape.contentHashCode()
+        result = 31 * result + data.contentHashCode()
+        return result
+    }
+
 }
 
+/**
+ * Represents a 2x2 matrix of a given dimension and shape holding
+ * floating-point values.
+ *
+ * @param matrix The matrix data
+ */
 class Float2x2(matrix: FloatArray) : FloatMatrix(2, intArrayOf(2, 2)) {
 
     companion object {
@@ -90,27 +185,27 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(2, intArrayOf(2, 2)) {
 
     override fun plusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        data.forEachIndexed { i, term -> data[i] = data[i] + term }
+        super.plusAssign(other)
     }
 
     override fun minusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        data.forEachIndexed { i, term -> data[i] = data[i] - term }
+        super.minusAssign(other)
     }
 
     override fun timesAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+        super.timesAssign(other)
     }
 
     override fun divAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+        super.divAssign(other)
     }
 
     override fun mult(other: FloatMatrix): FloatMatrix {
-        if (other.shape[0] != 2)
-            throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
+        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 2 }
+
 
         val result = FloatMatrix(2, intArrayOf(shape[0], other.shape[1]))
 
@@ -125,6 +220,12 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(2, intArrayOf(2, 2)) {
 
 }
 
+/**
+ * Represents a 3x3 matrix of a given dimension and shape holding
+ * floating-point values.
+ *
+ * @param matrix The matrix data
+ */
 class Float3x3(matrix: FloatArray) : FloatMatrix(2, intArrayOf(3, 3)) {
 
     companion object {
@@ -157,27 +258,26 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(2, intArrayOf(3, 3)) {
 
     override fun plusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        other.forEachIndexed { i, term -> data[i] = data[i] + term }
+        super.plusAssign(other)
     }
 
     override fun minusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        other.forEachIndexed { i, term -> data[i] = data[i] - term }
+        super.minusAssign(other)
     }
 
     override fun timesAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        other.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+        super.timesAssign(other)
     }
 
     override fun divAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        other.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+        super.divAssign(other)
     }
 
     override fun mult(other: FloatMatrix): FloatMatrix {
-        if (other.shape[0] != 3)
-            throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
+        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 3 }
 
         val result = FloatMatrix(3, intArrayOf(shape[0], other.shape[1]))
 
@@ -192,6 +292,12 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(2, intArrayOf(3, 3)) {
 
 }
 
+/**
+ * Represents a 4x4 matrix of a given dimension and shape holding
+ * floating-point values.
+ *
+ * @param matrix The matrix data
+ */
 class Float4x4(matrix: FloatArray) : FloatMatrix(2, intArrayOf(4, 4)) {
 
     companion object {
@@ -227,27 +333,26 @@ class Float4x4(matrix: FloatArray) : FloatMatrix(2, intArrayOf(4, 4)) {
 
     override fun plusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        other.forEachIndexed { i, term -> data[i] = data[i] + term }
+        super.plusAssign(other)
     }
 
     override fun minusAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        other.forEachIndexed { i, term -> data[i] = data[i] - term }
+        super.minusAssign(other)
     }
 
     override fun timesAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        other.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+        super.timesAssign(other)
     }
 
     override fun divAssign(other: FloatMatrix) {
         isCompliantMatrix(other)
-        other.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+        super.divAssign(other)
     }
 
     override fun mult(other: FloatMatrix): FloatMatrix {
-        if (other.shape[0] != 4)
-            throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
+        other.complies("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}") { it.shape[0] == 4 }
 
         val result = FloatMatrix(4, intArrayOf(shape[0], other.shape[1]))
 
