@@ -114,5 +114,140 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(2, intArrayOf(2, 2)) {
     }
 
 }
-abstract class Float3x3 : FloatMatrix(2, intArrayOf(3, 3))
-abstract class Float4x4 : FloatMatrix(2, intArrayOf(4, 4))
+
+class Float3x3(matrix: FloatArray) : FloatMatrix(2, intArrayOf(3, 3)) {
+
+    companion object {
+        val IDENTITY = Float2x2(floatArrayOf(
+            1f, 0f, 0f,
+            0f, 1f, 0f,
+            0f, 0f, 1f
+        ))
+    }
+
+    constructor() : this(FloatArray(9) { 0.0f })
+    constructor(value: Float) : this(FloatArray(9) { value })
+
+    fun rows(): Array<FloatArray> = arrayOf(
+        floatArrayOf(data[0], data[1], data[2]),
+        floatArrayOf(data[3], data[4], data[5]),
+        floatArrayOf(data[6], data[7], data[8])
+    )
+
+    fun columns(): Array<FloatArray> = arrayOf(
+        floatArrayOf(data[0], data[3], data[6]),
+        floatArrayOf(data[1], data[4], data[7]),
+        floatArrayOf(data[2], data[5], data[8])
+    )
+
+    init {
+        complies("Data must contain 4 elements for a matrix of size 2x2") { data.size == 4 }
+        matrix.forEachIndexed { i, value -> data[i] = value }
+    }
+
+    override fun plusAssign(other: FloatMatrix) {
+        isCompliantMatrix(other)
+        other.forEachIndexed { i, term -> data[i] = data[i] + term }
+    }
+
+    override fun minusAssign(other: FloatMatrix) {
+        isCompliantMatrix(other)
+        other.forEachIndexed { i, term -> data[i] = data[i] - term }
+    }
+
+    override fun timesAssign(other: FloatMatrix) {
+        isCompliantMatrix(other)
+        other.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+    }
+
+    override fun divAssign(other: FloatMatrix) {
+        isCompliantMatrix(other)
+        other.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+    }
+
+    override fun mult(other: FloatMatrix): FloatNxN {
+        if (other.shape[0] != 3)
+            throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
+
+        val result = FloatNxN(3, intArrayOf(shape[0], other.shape[1]))
+
+        //  Multiplying rows of first matrix with columns of second matrix
+        val c = other.shape[1]
+        for (i in 0 until 3)
+            for (j in 0 until c)
+                for (k in 0 until 3)
+                    result.data[i * c + j] += data[i * 3 + k] * other.data[k * c + j]
+        return result
+    }
+
+}
+
+class Float4x4(matrix: FloatArray) : FloatMatrix(2, intArrayOf(4, 4)) {
+
+    companion object {
+        val IDENTITY = Float2x2(floatArrayOf(
+            1f, 0f, 0f, 0f,
+            0f, 1f, 0f, 0f,
+            0f, 0f, 1f, 0f,
+            0f, 0f, 0f, 1f
+        ))
+    }
+
+    constructor() : this(FloatArray(16) { 0.0f })
+    constructor(value: Float) : this(FloatArray(16) { value })
+
+    fun rows(): Array<FloatArray> = arrayOf(
+        floatArrayOf(data[0], data[1], data[2], data[3]),
+        floatArrayOf(data[4], data[5], data[6], data[7]),
+        floatArrayOf(data[8], data[9], data[10], data[11]),
+        floatArrayOf(data[12], data[13], data[14], data[15])
+    )
+
+    fun columns(): Array<FloatArray> = arrayOf(
+        floatArrayOf(data[0], data[4], data[8], data[12]),
+        floatArrayOf(data[1], data[5], data[9], data[13]),
+        floatArrayOf(data[2], data[6], data[10], data[14]),
+        floatArrayOf(data[3], data[7], data[11], data[15])
+    )
+
+    init {
+        complies("Data must contain 4 elements for a matrix of size 2x2") { data.size == 4 }
+        matrix.forEachIndexed { i, value -> data[i] = value }
+    }
+
+    override fun plusAssign(other: FloatMatrix) {
+        isCompliantMatrix(other)
+        other.forEachIndexed { i, term -> data[i] = data[i] + term }
+    }
+
+    override fun minusAssign(other: FloatMatrix) {
+        isCompliantMatrix(other)
+        other.forEachIndexed { i, term -> data[i] = data[i] - term }
+    }
+
+    override fun timesAssign(other: FloatMatrix) {
+        isCompliantMatrix(other)
+        other.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+    }
+
+    override fun divAssign(other: FloatMatrix) {
+        isCompliantMatrix(other)
+        other.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+    }
+
+    override fun mult(other: FloatMatrix): FloatNxN {
+        if (other.shape[0] != 4)
+            throw IllegalArgumentException("Cannot multiply matrices of sizes ${shapeToString()} and ${other.shapeToString()}")
+
+        val result = FloatNxN(4, intArrayOf(shape[0], other.shape[1]))
+
+        //  Multiplying rows of first matrix with columns of second matrix
+        val c = other.shape[1]
+        for (i in 0 until 4)
+            for (j in 0 until c)
+                for (k in 0 until 4)
+                    result.data[i * c + j] += data[i * 4 + k] * other.data[k * c + j]
+        return result
+    }
+
+}
