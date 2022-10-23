@@ -332,6 +332,11 @@ class Short2x2(matrix: ShortArray) : ShortMatrix(intArrayOf(2, 2)) {
         return result
     }
 
+    override fun transpose(): Short2x2 = Short2x2(shortArrayOf(
+        data[0], data[2],
+        data[1], data[3]
+    ))
+
 }
 
 /**
@@ -383,6 +388,12 @@ class Short3x3(matrix: ShortArray) : ShortMatrix(intArrayOf(3, 3)) {
                     result.data[i * c + j] = (result.data[i * c + j] + data[i * 3 + k] * other.data[k * c + j]).toShort()
         return result
     }
+
+    override fun transpose(): Short3x3 = Short3x3(shortArrayOf(
+        data[0], data[3], data[6],
+        data[1], data[4], data[7],
+        data[2], data[5], data[8]
+    ))
 
 }
 
@@ -439,5 +450,12 @@ class Short4x4(matrix: ShortArray) : ShortMatrix(intArrayOf(4, 4)) {
                     result.data[i * c + j] = (result.data[i * c + j] + data[i * 4 + k] * other.data[k * c + j]).toShort()
         return result
     }
+
+    override fun transpose(): Short4x4 = Short4x4(shortArrayOf(
+        data[0], data[4], data[8], data[12],
+        data[1], data[5], data[9], data[13],
+        data[2], data[6], data[10], data[14],
+        data[3], data[7], data[11], data[15]
+    ))
 
 }

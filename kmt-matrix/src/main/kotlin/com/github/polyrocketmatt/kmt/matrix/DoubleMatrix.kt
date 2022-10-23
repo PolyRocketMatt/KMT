@@ -332,6 +332,11 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2)) {
         return result
     }
 
+    override fun transpose(): DoubleMatrix = Double2x2(doubleArrayOf(
+        data[0], data[2],
+        data[1], data[3]
+    ))
+
 }
 
 /**
@@ -383,6 +388,12 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3)) {
                     result.data[i * c + j] += data[i * 3 + k] * other.data[k * c + j]
         return result
     }
+
+    override fun transpose(): DoubleMatrix = Double3x3(doubleArrayOf(
+        data[0], data[3], data[6],
+        data[1], data[4], data[7],
+        data[2], data[5], data[8]
+    ))
 
 }
 
@@ -439,5 +450,12 @@ class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4)) {
                     result.data[i * c + j] += data[i * 4 + k] * other.data[k * c + j]
         return result
     }
+
+    override fun transpose(): DoubleMatrix = Double4x4(doubleArrayOf(
+        data[0], data[4], data[8], data[12],
+        data[1], data[5], data[9], data[13],
+        data[2], data[6], data[10], data[14],
+        data[3], data[7], data[11], data[15]
+    ))
 
 }

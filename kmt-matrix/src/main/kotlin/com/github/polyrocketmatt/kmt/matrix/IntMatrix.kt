@@ -332,6 +332,11 @@ class Int2x2(matrix: IntArray) : IntMatrix(intArrayOf(2, 2)) {
         return result
     }
 
+    override fun transpose(): Int2x2 = Int2x2(intArrayOf(
+        data[0], data[2],
+        data[1], data[3]
+    ))
+
 }
 
 /**
@@ -383,6 +388,12 @@ class Int3x3(matrix: IntArray) : IntMatrix(intArrayOf(3, 3)) {
                     result.data[i * c + j] += data[i * 3 + k] * other.data[k * c + j]
         return result
     }
+
+    override fun transpose(): Int3x3 = Int3x3(intArrayOf(
+        data[0], data[3], data[6],
+        data[1], data[4], data[7],
+        data[2], data[5], data[8]
+    ))
 
 }
 
@@ -439,5 +450,12 @@ class Int4x4(matrix: IntArray) : IntMatrix(intArrayOf(4, 4)) {
                     result.data[i * c + j] += data[i * 4 + k] * other.data[k * c + j]
         return result
     }
+
+    override fun transpose(): Int4x4 = Int4x4(intArrayOf(
+        data[0], data[4], data[8], data[12],
+        data[1], data[5], data[9], data[13],
+        data[2], data[6], data[10], data[14],
+        data[3], data[7], data[11], data[15]
+    ))
 
 }
