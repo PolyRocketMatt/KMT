@@ -1,14 +1,10 @@
 package com.github.polyrocketmatt.kmt.matrix
 
-import com.github.polyrocketmatt.kmt.common.storage.MemoryStorage
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
 
 typealias SMatrix = ShortMatrix
-typealias S2x2 = Short2x2
-typealias S3x3 = Short3x3
-typealias S4x4 = Short4x4
 
 /**
  * Get a matrix with the given shape from the given array.
