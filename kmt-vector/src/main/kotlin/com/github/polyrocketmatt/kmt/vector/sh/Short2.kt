@@ -23,7 +23,7 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
-import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
@@ -35,6 +35,11 @@ import com.github.polyrocketmatt.kmt.vector.bl.Bool2
 import com.github.polyrocketmatt.kmt.vector.db.Double2
 import com.github.polyrocketmatt.kmt.vector.fl.Float2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
+
+fun ShortMatrix.toShort2(): Short2 {
+    complies("Cannot create a Short2 from a ShortMatrix with ${this.data.size} elements!") { this.data.size == 2 }
+    return Short2(this.data[0], this.data[1])
+}
 
 operator fun Int.plus(other: Short2): Int2 = Int2(this + other.x, this + other.y)
 operator fun Int.minus(other: Short2): Int2 = Int2(this - other.x, this - other.y)

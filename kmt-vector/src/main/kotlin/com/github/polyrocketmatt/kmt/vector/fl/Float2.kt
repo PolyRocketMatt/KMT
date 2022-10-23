@@ -28,7 +28,7 @@ import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
-import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
@@ -41,6 +41,11 @@ import com.github.polyrocketmatt.kmt.vector.db.Double2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
 import com.github.polyrocketmatt.kmt.vector.sh.ShortVector
+
+fun FloatMatrix.toFloat2(): Float2 {
+    complies("Cannot create a Float2 from a FloatMatrix with ${this.data.size} elements!") { this.data.size == 2 }
+    return Float2(this.data[0], this.data[1])
+}
 
 operator fun Int.plus(other: Float2): Float2 = Float2(this + other.x, this + other.y)
 operator fun Int.minus(other: Float2): Float2 = Float2(this - other.x, this - other.y)
