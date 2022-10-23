@@ -19,6 +19,7 @@
 
 package com.github.polyrocketmatt.kmt.common.utils
 
+import java.lang.ClassCastException
 import java.lang.IllegalStateException
 
 /**
@@ -61,3 +62,13 @@ fun <T> T.complies(cause: (T) -> String, condition: (T) -> Boolean): T {
         throw IllegalStateException(cause(this))
     return this
 }
+
+/**
+ * Cast an object that is of type [A] to type [B] if possible.
+ *
+ * @param obj The object to cast
+ * @return The object cast to type [B]
+ * @throws ClassCastException If the object cannot be cast to type [B]
+ */
+inline fun <T, A : T, reified B : T> castIfType(obj: A): B =
+    if (obj is B) obj else throw ClassCastException("Object is not of type ${B::class.simpleName}")

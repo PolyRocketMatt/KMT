@@ -31,11 +31,11 @@ interface MatrixDimension {
 /**
  * Represents a dimension of n.
  */
-open class DimensionN(override val dimension: Int) : MatrixDimension {
+open class Dimension(override val dimension: Int) : MatrixDimension {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is DimensionN) return false
+        if (other !is Dimension) return false
         if (dimension != other.dimension) return false
 
         return true
@@ -50,22 +50,22 @@ open class DimensionN(override val dimension: Int) : MatrixDimension {
 /**
  * Represents a dimension of 4.
  */
-object Dimension4 : DimensionN(4), MatrixDimension
+object Dimension4 : Dimension(4), MatrixDimension
 
 /**
  * Represents a dimension of 3.
  */
-object Dimension3 : DimensionN(3), MatrixDimension
+object Dimension3 : Dimension(3), MatrixDimension
 
 /**
  * Represents a dimension of 2.
  */
-object Dimension2 : DimensionN(2), MatrixDimension
+object Dimension2 : Dimension(2), MatrixDimension
 
 /**
  * Represents a dimension of 1.
  */
-object Dimension1 : DimensionN(1), MatrixDimension
+object Dimension1 : Dimension(1), MatrixDimension
 
 /**
  * Get a dimension object from a given dimension.
@@ -79,5 +79,5 @@ inline fun dimensionOf(dimension: Int): MatrixDimension = when(dimension) {
     2 -> Dimension2
     3 -> Dimension3
     4 -> Dimension4
-    else -> DimensionN(dimension)
+    else -> Dimension(dimension)
 }
