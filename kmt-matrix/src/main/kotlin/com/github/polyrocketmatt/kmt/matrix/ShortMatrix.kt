@@ -328,7 +328,7 @@ open class ShortMatrix(
  *
  * @param matrix The matrix data
  */
-class Short2x2(matrix: ShortArray) : ShortMatrix(intArrayOf(2, 2)) {
+class Short2x2(matrix: ShortArray) : ShortMatrix(intArrayOf(2, 2), matrix) {
 
     companion object {
         val IDENTITY = Short2x2(shortArrayOf(1, 0, 0, 1))
@@ -365,7 +365,7 @@ class Short2x2(matrix: ShortArray) : ShortMatrix(intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Short3x3(matrix: ShortArray) : ShortMatrix(intArrayOf(3, 3)) {
+class Short3x3(matrix: ShortArray) : ShortMatrix(intArrayOf(3, 3), matrix) {
 
     companion object {
         val IDENTITY = Short3x3(shortArrayOf(
@@ -409,7 +409,7 @@ class Short3x3(matrix: ShortArray) : ShortMatrix(intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Short4x4(matrix: ShortArray) : ShortMatrix(intArrayOf(4, 4)) {
+class Short4x4(matrix: ShortArray) : ShortMatrix(intArrayOf(4, 4), matrix) {
 
     companion object {
         val IDENTITY = Short4x4(shortArrayOf(

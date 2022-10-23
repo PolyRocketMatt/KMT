@@ -332,7 +332,7 @@ open class FloatMatrix(
  *
  * @param matrix The matrix data
  */
-class Float2x2(matrix: FloatArray) : FloatMatrix(intArrayOf(2, 2)) {
+class Float2x2(matrix: FloatArray) : FloatMatrix(intArrayOf(2, 2), matrix) {
 
     companion object {
         val IDENTITY = Float2x2(floatArrayOf(1f, 0f, 0f, 1f))
@@ -369,7 +369,7 @@ class Float2x2(matrix: FloatArray) : FloatMatrix(intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Float3x3(matrix: FloatArray) : FloatMatrix(intArrayOf(3, 3)) {
+class Float3x3(matrix: FloatArray) : FloatMatrix(intArrayOf(3, 3), matrix) {
 
     companion object {
         val IDENTITY = Float3x3(floatArrayOf(
@@ -413,7 +413,7 @@ class Float3x3(matrix: FloatArray) : FloatMatrix(intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Float4x4(matrix: FloatArray) : FloatMatrix(intArrayOf(4, 4)) {
+class Float4x4(matrix: FloatArray) : FloatMatrix(intArrayOf(4, 4), matrix) {
 
     companion object {
         val IDENTITY = Float4x4(floatArrayOf(

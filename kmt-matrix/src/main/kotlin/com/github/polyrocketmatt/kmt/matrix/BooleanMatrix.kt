@@ -290,7 +290,7 @@ open class BooleanMatrix(
  *
  * @param matrix The matrix data
  */
-class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(intArrayOf(2, 2)) {
+class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(intArrayOf(2, 2), matrix) {
 
     constructor() : this(BooleanArray(4) { false })
     constructor(value: Boolean) : this(BooleanArray(4) { value })
@@ -337,7 +337,7 @@ class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(intArrayOf(3, 3)) {
+class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(intArrayOf(3, 3), matrix) {
 
     constructor() : this(BooleanArray(9) { false })
     constructor(value: Boolean) : this(BooleanArray(9) { value })
@@ -387,7 +387,7 @@ class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(intArrayOf(4, 4)) {
+class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(intArrayOf(4, 4), matrix) {
 
     constructor() : this(BooleanArray(16) { false })
     constructor(value: Boolean) : this(BooleanArray(16) { value })

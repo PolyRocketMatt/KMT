@@ -328,7 +328,7 @@ open class IntMatrix(
  *
  * @param matrix The matrix data
  */
-class Int2x2(matrix: IntArray) : IntMatrix(intArrayOf(2, 2)) {
+class Int2x2(matrix: IntArray) : IntMatrix(intArrayOf(2, 2), matrix) {
 
     companion object {
         val IDENTITY = Int2x2(intArrayOf(1, 0, 0, 1))
@@ -365,7 +365,7 @@ class Int2x2(matrix: IntArray) : IntMatrix(intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Int3x3(matrix: IntArray) : IntMatrix(intArrayOf(3, 3)) {
+class Int3x3(matrix: IntArray) : IntMatrix(intArrayOf(3, 3), matrix) {
 
     companion object {
         val IDENTITY = Int3x3(intArrayOf(
@@ -409,7 +409,7 @@ class Int3x3(matrix: IntArray) : IntMatrix(intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Int4x4(matrix: IntArray) : IntMatrix(intArrayOf(4, 4)) {
+class Int4x4(matrix: IntArray) : IntMatrix(intArrayOf(4, 4), matrix) {
 
     companion object {
         val IDENTITY = Int4x4(intArrayOf(

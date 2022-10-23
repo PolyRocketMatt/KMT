@@ -417,7 +417,7 @@ open class DoubleMatrix(
  *
  * @param matrix The matrix data
  */
-class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2)) {
+class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2), matrix) {
 
     companion object {
         val IDENTITY = Double2x2(doubleArrayOf(1.0, 0.0, 0.0, 1.0))
@@ -456,7 +456,7 @@ class Double2x2(matrix: DoubleArray) : DoubleMatrix(intArrayOf(2, 2)) {
  *
  * @param matrix The matrix data
  */
-class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3)) {
+class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3), matrix) {
 
     companion object {
         val IDENTITY = Double3x3(doubleArrayOf(
@@ -502,7 +502,7 @@ class Double3x3(matrix: DoubleArray) : DoubleMatrix(intArrayOf(3, 3)) {
  *
  * @param matrix The matrix data
  */
-class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4)) {
+class Double4x4(matrix: DoubleArray) : DoubleMatrix(intArrayOf(4, 4), matrix) {
 
     companion object {
         val IDENTITY = Double4x4(doubleArrayOf(
