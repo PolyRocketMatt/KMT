@@ -33,6 +33,29 @@ using [Dokka](https://github.com/Kotlin/dokka) and is updated automatically upon
 
 Currently only the complete library is offered. In the future, individual modules will be available.
 
+### Gradle
+
+To use KMT in a Gradle project, add the following to your `build.gradle`:
+
+```groovy
+repositories {
+    // Repository
+    maven {
+        name = "GitHubPackages"
+        url = "https://maven.pkg.github.com/PolyRocketMatt/KMT"
+        credentials {
+            username = USERNAME
+            password = TOKEN
+        }
+    }
+}
+
+dependencies {
+    // Dependency
+    implementation 'com.github.polyrocketmatt:kmt:VERSION'
+}
+```
+
 ### Maven 
 
 To use KMT in a Maven project, add the following to your `pom.xml`:
@@ -72,29 +95,6 @@ To use KMT in a Maven project, add the following to your `pom.xml`:
         <password>TOKEN</password>
     </server>
 </servers>
-```
-
-### Gradle
-
-To use KMT in a Gradle project, add the following to your `build.gradle`:
-
-```groovy
-repositories {
-    // Repository
-    maven {
-        name = "GitHubPackages"
-        url = "https://maven.pkg.github.com/PolyRocketMatt/KMT"
-        credentials {
-            username = USERNAME
-            password = TOKEN
-        }
-    }
-}
-
-dependencies {
-    // Dependency
-    implementation 'com.github.polyrocketmatt:kmt:VERSION'
-}
 ```
 
 ### Java
