@@ -326,6 +326,20 @@ open class FloatMatrix(
                 matrix[j, i] = this[i, j]
         return matrix
     }
+    override fun trace(): Float = diag().sum()
+    override fun diag(): FloatMatrix {
+        val diag = FloatMatrix(intArrayOf(1, shape[1]))
+        for (i in 0 until shape[1])
+            diag[i] = this[i, i]
+        return diag
+    }
+
+    override infix fun concatHorizontal(other: Matrix<Float>): Matrix<Float> {
+        TODO("Not yet implemented")
+    }
+    override infix fun concatVertical(other: Matrix<Float>): Matrix<Float> {
+        TODO("Not yet implemented")
+    }
 
     override fun swapRow(row1: Int, row2: Int): FloatMatrix {
         TODO("Not yet implemented")
@@ -341,6 +355,14 @@ open class FloatMatrix(
         TODO("Not yet implemented")
     }
     override fun rref(): FloatMatrix {
+        TODO("Not yet implemented")
+    }
+
+    override fun determinant(): Float {
+        TODO("Not yet implemented")
+    }
+
+    override fun inverse(): Matrix<Float> {
         TODO("Not yet implemented")
     }
 

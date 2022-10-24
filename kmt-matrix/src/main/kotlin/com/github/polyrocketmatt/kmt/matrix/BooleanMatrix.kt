@@ -256,6 +256,20 @@ open class BooleanMatrix(
                 matrix[j, i] = this[i, j]
         return matrix
     }
+    override fun trace(): Boolean = diag().reduce { acc, b -> acc || b }
+    override fun diag(): BooleanMatrix{
+        val diag = BooleanMatrix(intArrayOf(1, shape[1]))
+        for (i in 0 until shape[1])
+            diag[i] = this[i, i]
+        return diag
+    }
+
+    override infix fun concatHorizontal(other: Matrix<Boolean>): Matrix<Boolean> {
+        TODO("Not yet implemented")
+    }
+    override infix fun concatVertical(other: Matrix<Boolean>): Matrix<Boolean> {
+        TODO("Not yet implemented")
+    }
 
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]

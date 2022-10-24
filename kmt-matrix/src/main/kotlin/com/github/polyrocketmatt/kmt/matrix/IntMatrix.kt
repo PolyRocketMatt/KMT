@@ -326,6 +326,20 @@ open class IntMatrix(
                 matrix[j, i] = this[i, j]
         return matrix
     }
+    override fun trace(): Int = diag().sum()
+    override fun diag(): IntMatrix {
+        val diag = IntMatrix(intArrayOf(1, shape[1]))
+        for (i in 0 until shape[1])
+            diag[i] = this[i, i]
+        return diag
+    }
+
+    override infix fun concatHorizontal(other: Matrix<Int>): Matrix<Int> {
+        TODO("Not yet implemented")
+    }
+    override infix fun concatVertical(other: Matrix<Int>): Matrix<Int> {
+        TODO("Not yet implemented")
+    }
 
     override fun swapRow(row1: Int, row2: Int): DoubleMatrix {
         TODO("Not yet implemented")
@@ -339,6 +353,13 @@ open class IntMatrix(
 
     override fun ref(): DoubleMatrix = toDoubleMatrix().ref()
     override fun rref(): DoubleMatrix = toDoubleMatrix().rref()
+
+    override fun determinant(): Int {
+        TODO("Not yet implemented")
+    }
+    override fun inverse(): Matrix<Double> {
+        TODO("Not yet implemented")
+    }
 
     fun isScalar(): Boolean = data.size == 1
     fun isSquare(): Boolean = shape[0] == shape[1]

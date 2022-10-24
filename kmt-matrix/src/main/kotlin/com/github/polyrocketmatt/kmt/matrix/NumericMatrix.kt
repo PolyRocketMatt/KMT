@@ -1,3 +1,21 @@
+/*
+ * KMT, Kotlin Math Toolkit
+ * Copyright (C) Matthias Kovacic <matthias.kovacic@student.kuleuven.be>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.github.polyrocketmatt.kmt.matrix
 
 /**
@@ -5,6 +23,9 @@ package com.github.polyrocketmatt.kmt.matrix
  * @since 0.0.8
  *
  * Represents a numerical matrix that can be used in numerical calculations.
+ *
+ * @param T The type of the matrix elements.
+ * @param K The type of the matrix that is returned after performing an operation.
  */
 interface NumericMatrix<T, K> : Matrix<T> {
 
@@ -37,6 +58,14 @@ interface NumericMatrix<T, K> : Matrix<T> {
     fun addRow(row1: Int, row2: Int, scalar: T): Matrix<K>
 
     /**
+     * Performs the (ordered) list of elementary row operations on the matrix.
+     *
+     * @param operations The list of operations to perform.
+     * @return The new matrix with the operations performed.
+     */
+    fun operate(operations: List<ElementaryOperation>): Matrix<K>
+
+    /**
      * Compute the row echelon form of this matrix using Gaussian elimination
      * with partial pivoting since this is considered to be numerically stable.
      *
@@ -51,5 +80,28 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @return The row-reduced echelon form of this matrix.
      */
     fun rref(): Matrix<K>
+
+    /**
+     * Compute the determinant of this matrix.
+     *
+     * @return The determinant of this matrix.
+     */
+    fun determinant(): T
+
+    /**
+     * Check if the matrix is invertible.
+     *
+     * @return True if the matrix is invertible (the determinant is 0), false otherwise.
+     */
+    fun invertible(): Boolean
+
+    /**
+     * Compute the inverse of this matrix.
+     *
+     * @return The inverse of this matrix.
+     * @throws ArithmeticException If the matrix is not square.
+     * @throws IllegalArgumentException If the matrix is not invertible.
+     */
+    fun inverse(): Matrix<K>
 
 }

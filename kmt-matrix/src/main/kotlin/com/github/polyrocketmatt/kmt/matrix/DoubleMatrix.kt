@@ -5,6 +5,8 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
+import java.util.LinkedList
+import java.util.Stack
 import kotlin.IllegalArgumentException
 import kotlin.math.min
 
@@ -78,6 +80,8 @@ open class DoubleMatrix(
         }
     }
 
+    private val operations = Stack<ElementaryOperation>()
+
     constructor(matrix: DoubleArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
     constructor(shape: IntArray, value: Double) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
@@ -90,6 +94,8 @@ open class DoubleMatrix(
 
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
+
+    fun operations(): List<ElementaryOperation> = operations.toList().reversed()
 
     open fun rows(): Array<DoubleArray> {
         val rows = Array(shape[0]) { DoubleArray(shape[1]) }
@@ -128,8 +134,8 @@ open class DoubleMatrix(
     override operator fun get(i: Int): Double = data[i]
     override operator fun get(row: Int, col: Int): Double = data[row * shape[1] + col]
 
-    override operator fun set(i: Int, value: Double) { println("OK"); data[i] = value.decimals(12) }
-    override operator fun set(row: Int, col: Int, value: Double) { println("OK"); data[row * shape[1] + col] = value.decimals(12) }
+    override operator fun set(i: Int, value: Double) { data[i] = value.decimals(12) }
+    override operator fun set(row: Int, col: Int, value: Double) { data[row * shape[1] + col] = value.decimals(12) }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -330,6 +336,43 @@ open class DoubleMatrix(
                 matrix[j, i] = this[i, j]
         return matrix
     }
+    override fun trace(): Double = diag().sum()
+
+    override fun diag(): DoubleMatrix {
+        val diag = DoubleMatrix(intArrayOf(1, shape[1]))
+        for (i in 0 until shape[1])
+            diag[i] = this[i, i]
+        return diag
+    }
+
+    override infix fun concatHorizontal(other: Matrix<Double>): DoubleMatrix {
+        val matrix = (other.complies("Other matrix must be of type DoubleMatrix") { other is DoubleMatrix } as DoubleMatrix)
+            .complies({ "Rows must match to concatenate horizontally. Expected ${shape[0]}, found ${it.shape[0]}" }, { it.shape[0] == shape[0] })
+        val offset = shape[0]
+        val result = DoubleMatrix(intArrayOf(offset, shape[1] + matrix.shape[1]))
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            result[i * result.shape[1] + j] = this[i, j]
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            result[offset + i * result.shape[1] + j] = matrix[i, j]
+        return result
+    }
+
+    override infix fun concatVertical(other: Matrix<Double>): Matrix<Double> {
+        val matrix = (other.complies("Other matrix must be of type DoubleMatrix") { other is DoubleMatrix } as DoubleMatrix)
+            .complies({ "Columns must match to concatenate vertically. Expected ${shape[1]}, found ${it.shape[1]}" }, { it.shape[1] == shape[1] })
+        val offset = shape[1]
+        val indexOffset = shape[0] * offset
+        val result = DoubleMatrix(intArrayOf(shape[0] + matrix.shape[0], offset))
+        for (i in 0 until indexOffset)
+            result[i] = this[i]
+        for (i in 0 until matrix.shape[0] * offset)
+            result[indexOffset + i] = matrix[i]
+        return result
+    }
+
+    override fun isScalar(): Boolean = data.size == 1
+
+    override fun isSquare(): Boolean = shape[0] == shape[1]
 
     override fun swapRow(row1: Int, row2: Int): DoubleMatrix {
         val rowIndex1 = row1 * shape[1]
@@ -357,16 +400,34 @@ open class DoubleMatrix(
         return this
     }
 
+    override fun operate(operations: List<ElementaryOperation>): DoubleMatrix {
+        val result = copyOf()
+        operations.forEach {
+            when (it.type) {
+                ERO.SWAP -> result.swapRow(it.row1, it.row2)
+                ERO.MULTIPLY -> result.multiplyRow(it.row1, it.scalar)
+                ERO.ADD -> result.addRow(it.row1, it.row2, it.scalar)
+            }
+        }
+
+        result.clean()
+        return result
+    }
+
     override fun ref(): DoubleMatrix {
+        val result = copyOf()
+        result.operations.clear()
+
         var currentRow = 0
         for ((currentColumn, _) in (0 until min(shape[0], shape[1])).withIndex()) {
             //  Find index of value with the highest absolute value in current column
-            val col = column(currentColumn).copyOfRange(currentColumn, shape[0])
+            val col = result.column(currentColumn).copyOfRange(currentColumn, shape[0])
             val pivotIndex = col.indexByCondition(Double.MIN_VALUE) { _, current, _, value -> current.fastAbs() < value.fastAbs() }
             val pivot = col[pivotIndex]
 
             //  The index also gives the row to swap to the top
-            swapRow(currentRow, pivotIndex + currentColumn)
+            result.swapRow(currentRow, pivotIndex + currentColumn)
+            result.operations.push(ElementaryOperation(ERO.SWAP, currentRow, pivotIndex + currentColumn, 0.0))
 
             //  Update the current row
             currentRow++
@@ -374,28 +435,26 @@ open class DoubleMatrix(
             //  Gaussian elimination step
             for (i in currentRow until shape[0]) {
                 //  Solve for k, the scalar to multiply the pivot row with to get 0 in the current column
-                val k = -column(currentColumn)[i] / pivot
+                val k = -result.column(currentColumn)[i] / pivot
 
                 //  Add the pivot row multiplied with k to the current row (which is the index of the current column)
-                addRow(i, currentColumn, k)
+                result.addRow(i, currentColumn, k)
+                result.operations.push(ElementaryOperation(ERO.ADD, i, currentColumn, k))
             }
         }
 
-        return this
+        result.clean()
+        return result
     }
 
     override fun rref(): DoubleMatrix {
         //  We first bring the matrix in row echelon form
-        ref()
-
-        //  Decide if to clean up tiny values
-        val smallest = data.min()
-        if (smallest < 1e-12)
-            data.forEachIndexed { i, value -> data[i] = value.decimals(12) }
+        val result = ref()
+        result.clean()
 
         for (i in shape[0] - 1 downTo 0) {
             //  Find the row with a 1.0 in the current column
-            val col = row(i)
+            val col = result.row(i)
             val columnIndex = col.indexOfFirst { it != 0.0 }
 
             //  Found 0-row
@@ -403,22 +462,43 @@ open class DoubleMatrix(
                 continue
 
             //  Make sure there is a 1.0 in the current column
-            if (col[columnIndex] != 1.0)
-                multiplyRow(i, 1.0 / col[columnIndex])
+            if (col[columnIndex] != 1.0) {
+                result.multiplyRow(i, 1.0 / col[columnIndex])
+                result.operations.push(ElementaryOperation(ERO.MULTIPLY, i, 0, 1.0 / col[columnIndex]))
+            }
 
             //  For all rows above, make a 0 in the current column
             for (j in i - 1 downTo 0) {
-                val k = -column(columnIndex)[j]
+                val k = -result.column(columnIndex)[j]
 
-                addRow(j, i, k)
+                result.addRow(j, i, k)
+                result.operations.push(ElementaryOperation(ERO.ADD, j, i, k))
             }
         }
 
-        return this
+        result.clean()
+        return result
     }
 
-    fun isScalar(): Boolean = data.size == 1
-    fun isSquare(): Boolean = shape[0] == shape[1]
+    override fun determinant(): Double = ref().diag().reduce { acc, d -> acc * d }
+
+    override fun invertible(): Boolean = determinant() != 0.0
+
+    override fun inverse(): DoubleMatrix {
+        complies("Non-square matrix does not have an inverse") { isSquare() }
+        complies("Matrix does not have an inverse, since the determinant is 0") { invertible() }
+
+        val offset = shape[0]
+        val augmented = (copyOf() concatHorizontal identity(intArrayOf(offset, offset)))
+        val operations = rref().operations
+        val rref = augmented.operate(operations)
+
+        //  Extract the right half of the matrix
+        val inverse = DoubleMatrix(intArrayOf(offset, offset))
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            inverse[i * inverse.shape[1] + j] = rref[i, j + offset]
+        return inverse
+    }
 
     open fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
@@ -430,6 +510,11 @@ open class DoubleMatrix(
         other
             .complies({ "Other is of type ${it::class.java}, expected ${this::class.java}" }, { it::class.java == this::class.java })
             .also { it -> it.complies({ "Shape does not match. Expected ${shapeToString()}, found ${other.shapeToString()}" }, { it.shape.contentEquals(this.shape) }) }
+
+    internal fun clean() {
+        //  Decide if to clean up tiny values
+        data.forEachIndexed { i, value -> if (value < 1e12) data[i] = value.decimals(12) }
+    }
 
     override fun copyOf(): DoubleMatrix = DoubleMatrix(shape, data.copyOf().toDoubleArray())
 
