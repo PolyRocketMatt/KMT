@@ -8,6 +8,7 @@ description = "Module that contains core concepts of group theory"
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
+    implementation(project(":kmt-complex"))
 }
 
 tasks.getByName<Test>("test") {
