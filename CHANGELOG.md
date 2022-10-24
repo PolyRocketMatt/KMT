@@ -2,6 +2,21 @@
 
 Log of all changes in each version of the project.
 
+### 0.1.0
+
+- Refactor vectors (no API changes)
+- Remove useless matrix operations on vectors
+- Linalg module now implements spaces, special operations on matrices, etc
+
+---
+
+### 0.0.9 
+
+- Make all modules separately available
+- No major changes
+
+---
+
 ### 0.0.8 - Matrix Update
  
 - Matrices are now supported. 

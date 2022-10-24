@@ -523,6 +523,33 @@ open class DoubleMatrix(
         return inverse
     }
 
+    override fun rank(): Int {
+        //  The rank of a matrix is the dimension of the column space.
+        //  To find the dimension of the column space we reduce the matrix to reduced row echelon form
+        //  and count the number of rows that are not all 0.
+        val rref = rref()
+        var rank = 0
+        for (i in 0 until rref.shape[0]) {
+            val row = rref.row(i)
+            if (row.any { it != 0.0 })
+                rank++
+        }
+
+        return rank
+    }
+
+    override fun nullity(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override fun linearlyIndependentRows(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun linearlyIndependentColumns(): Boolean {
+        TODO("Not yet implemented")
+    }
+
     open fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
     open fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())

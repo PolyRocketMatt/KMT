@@ -103,4 +103,32 @@ interface NumericMatrix<T, K> : GeneralMatrix<T> {
      * @throws IllegalArgumentException If the matrix is not invertible.
      */
     fun inverse(): Matrix<K>
+
+    /**
+     * Get the rank of the matrix.
+     *
+     * @return The rank of the matrix.
+     */
+    fun rank(): Int
+
+    /**
+     * Get the nullity of the matrix.
+     *
+     * @return The nullity of the matrix.
+     */
+    fun nullity(): Int
+
+    /**
+     * Check if the rows of the matrix are linearly independent.
+     *
+     * @return True if the rows are linearly independent, false otherwise.
+     */
+    fun linearlyIndependentRows(): Boolean
+
+    /**
+     * Check if the columns of the matrix are linearly independent.
+     *
+     * @return True if the columns are linearly independent, false otherwise.
+     */
+    fun linearlyIndependentColumns(): Boolean
 }
