@@ -14,6 +14,11 @@ scientific computing, this library is intended to provide a solid foundation for
 KMT is currently in very early alpha stages. Implementations, documentations, testing may change in the future. Please 
 keep track of the changelog to see what has changed in the latest versions.
 
+## Goals
+
+The primary goal of KMT is to provide a modular library for mathematical operations in Kotlin. Also, KMT aims
+to provide users with a library that is easy to understand and use. 
+
 ## Modules
 
 KMT is split into several modules, each of which can be used independently. Currently, the following modules

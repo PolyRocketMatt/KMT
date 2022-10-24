@@ -119,18 +119,4 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
         else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Bool3")
     }
     override fun set(row: Int, col: Int, value: Boolean) = throw UnsupportedOperationException("Bool3 is considered a vector")
-
-    override fun transpose(): Bool3 = this
-
-    override fun trace(): Boolean = throw UnsupportedOperationException("Cannot get trace of a boolean vector")
-
-    override fun diag(): Matrix<Boolean> = throw UnsupportedOperationException("Cannot get diagonal of a boolean vector")
-
-    override fun concatHorizontal(other: Matrix<Boolean>): Matrix<Boolean> = throw UnsupportedOperationException("Cannot concatenate a boolean vector horizontally")
-
-    override fun concatVertical(other: Matrix<Boolean>): Matrix<Boolean> = throw UnsupportedOperationException("Cannot concatenate a boolean vector vertically")
-
-    override fun isScalar(): Boolean = false
-
-    override fun isSquare(): Boolean = false
 }

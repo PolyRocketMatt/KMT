@@ -259,18 +259,4 @@ class Float3(x: Float, y: Float, z: Float) : Tuple3<Float>(arrayOf(x, y, z)), Fl
         else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Float3")
     }
     override fun set(row: Int, col: Int, value: Float) = throw UnsupportedOperationException("Float3 is considered a vector")
-
-    override fun transpose(): Float3 = this
-
-    override fun trace(): Float = throw UnsupportedOperationException("Cannot get trace of a floating-point vector")
-
-    override fun diag(): Matrix<Float> = throw UnsupportedOperationException("Cannot get diagonal of a floating-point vector")
-
-    override fun concatHorizontal(other: Matrix<Float>): Matrix<Float> = throw UnsupportedOperationException("Cannot concatenate a floating-point vector horizontally")
-
-    override fun concatVertical(other: Matrix<Float>): Matrix<Float> = throw UnsupportedOperationException("Cannot concatenate a floating-point vector vertically")
-
-    override fun isScalar(): Boolean = false
-
-    override fun isSquare(): Boolean = false
 }

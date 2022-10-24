@@ -27,7 +27,7 @@ package com.github.polyrocketmatt.kmt.matrix
  * @param T The type of the matrix elements.
  * @param K The type of the matrix that is returned after performing an operation.
  */
-interface NumericMatrix<T, K> : Matrix<T> {
+interface NumericMatrix<T, K> : GeneralMatrix<T> {
 
     /**
      * Performs the elementary row operation of swapping two rows.

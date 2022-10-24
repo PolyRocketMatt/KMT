@@ -243,18 +243,4 @@ class Short3(x: Short, y: Short, z: Short) : Tuple3<Short>(arrayOf(x, y, z)), Sh
         else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Short3")
     }
     override fun set(row: Int, col: Int, value: Short) = throw UnsupportedOperationException("Short3 is considered a vector")
-
-    override fun transpose(): Short3 = this
-
-    override fun trace(): Short = throw UnsupportedOperationException("Cannot get trace of a short vector")
-
-    override fun diag(): Matrix<Short> = throw UnsupportedOperationException("Cannot get diagonal of a short vector")
-
-    override fun concatHorizontal(other: Matrix<Short>): Matrix<Short> = throw UnsupportedOperationException("Cannot concatenate a short vector horizontally")
-
-    override fun concatVertical(other: Matrix<Short>): Matrix<Short> = throw UnsupportedOperationException("Cannot concatenate a short vector vertically")
-
-    override fun isScalar(): Boolean = false
-
-    override fun isSquare(): Boolean = false
 }

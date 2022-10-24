@@ -215,18 +215,4 @@ class Int2(x: Int, y: Int) : Tuple2<Int>(arrayOf(x, y)), IntVector, Swizzle2 {
         else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Int2")
     }
     override fun set(row: Int, col: Int, value: Int) = throw UnsupportedOperationException("Int2 is considered a vector")
-
-    override fun transpose(): Int2 = this
-
-    override fun trace(): Int = throw UnsupportedOperationException("Cannot get trace of a int vector")
-
-    override fun diag(): Matrix<Int> = throw UnsupportedOperationException("Cannot get diagonal of a int vector")
-
-    override fun concatHorizontal(other: Matrix<Int>): Matrix<Int> = throw UnsupportedOperationException("Cannot concatenate a int vector horizontally")
-
-    override fun concatVertical(other: Matrix<Int>): Matrix<Int> = throw UnsupportedOperationException("Cannot concatenate a int vector vertically")
-
-    override fun isScalar(): Boolean = false
-
-    override fun isSquare(): Boolean = false
 }

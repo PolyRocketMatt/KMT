@@ -229,18 +229,4 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
         else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Double2")
     }
     override fun set(row: Int, col: Int, value: Double) = throw UnsupportedOperationException("Double2 is considered a vector")
-
-    override fun transpose(): Double2 = this
-
-    override fun trace(): Double = throw UnsupportedOperationException("Cannot get trace of a double vector")
-
-    override fun diag(): Matrix<Double> = throw UnsupportedOperationException("Cannot get diagonal of a double vector")
-
-    override fun concatHorizontal(other: Matrix<Double>): Matrix<Double> = throw UnsupportedOperationException("Cannot concatenate a double vector horizontally")
-
-    override fun concatVertical(other: Matrix<Double>): Matrix<Double> = throw UnsupportedOperationException("Cannot concatenate a double vector vertically")
-
-    override fun isScalar(): Boolean = false
-
-    override fun isSquare(): Boolean = false
 }
