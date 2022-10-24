@@ -23,9 +23,6 @@ import com.github.polyrocketmatt.kmt.common.utils.complies
 import kotlin.IllegalArgumentException
 
 typealias BMatrix = BooleanMatrix
-typealias B2x2 = Boolean2x2
-typealias B3x3 = Boolean3x3
-typealias B4x4 = Boolean4x4
 
 /**
  * Get a matrix with the given shape from the given array.
@@ -350,73 +347,4 @@ open class BooleanMatrix(
         }
         return sb.toString()
     }
-}
-
-/**
- * Represents a 2x2 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(intArrayOf(2, 2), matrix) {
-
-    constructor() : this(BooleanArray(4) { false })
-    constructor(value: Boolean) : this(BooleanArray(4) { value })
-    constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
-
-    override fun transpose(): Boolean2x2 = Boolean2x2(
-        booleanArrayOf(
-            data[0], data[2],
-            data[1], data[3]
-        )
-    )
-
-    override fun copyOf(): Boolean2x2 = Boolean2x2(data.copyOf())
-}
-
-/**
- * Represents a 3x3 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(intArrayOf(3, 3), matrix) {
-
-    constructor() : this(BooleanArray(9) { false })
-    constructor(value: Boolean) : this(BooleanArray(9) { value })
-    constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
-
-    override fun transpose(): Boolean3x3 = Boolean3x3(
-        booleanArrayOf(
-            data[0], data[3], data[6],
-            data[1], data[4], data[7],
-            data[2], data[5], data[8]
-        )
-    )
-
-    override fun copyOf(): Boolean3x3 = Boolean3x3(data.copyOf())
-}
-
-/**
- * Represents a 4x4 matrix of a given dimension and shape holding
- * floating-point values.
- *
- * @param matrix The matrix data
- */
-class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(intArrayOf(4, 4), matrix) {
-
-    constructor() : this(BooleanArray(16) { false })
-    constructor(value: Boolean) : this(BooleanArray(16) { value })
-    constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
-
-    override fun transpose(): Boolean4x4 = Boolean4x4(
-        booleanArrayOf(
-            data[0], data[4], data[8], data[12],
-            data[1], data[5], data[9], data[13],
-            data[2], data[6], data[10], data[14],
-            data[3], data[7], data[11], data[15]
-        )
-    )
-
-    override fun copyOf(): Boolean4x4 = Boolean4x4(data.copyOf())
 }
