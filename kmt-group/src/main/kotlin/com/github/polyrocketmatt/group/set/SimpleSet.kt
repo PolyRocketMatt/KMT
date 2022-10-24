@@ -103,6 +103,14 @@ open class SimpleSet<T>(private val elements: Set<T>) :
         return SimpleSet(result)
     }
 
+    /**
+     * Compute the complement of this set given a universe set.
+     *
+     * @param universe The universe set to compute the complement with.
+     * @return The complement of this set.
+     */
+    open fun complement(universe: SimpleSet<T>): SimpleSet<T> = universe.difference(this)
+
     override fun iterator(): Iterator<T> = elements.iterator()
 
     open override fun <K> map(map: (T) -> K): SimpleSet<K> = SimpleSet(elements.map(map))
