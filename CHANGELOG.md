@@ -6,7 +6,18 @@ Log of all changes in each version of the project.
 
 - Refactor vectors (no API changes)
 - Remove useless matrix operations on vectors
-- Linalg module now implements spaces, special operations on matrices, etc
+
+**kmt-linalg**
+
+- Support basic vector spaces
+
+**kmt-group**
+
+- New (planned) module
+
+**kmt-complex**
+
+- New (planned) module
 
 ---
 
