@@ -397,29 +397,25 @@ open class FloatMatrix(
     override fun isScalar(): Boolean = data.size == 1
     override fun isSquare(): Boolean = shape[0] == shape[1]
 
-    override fun swapRow(row1: Int, row2: Int): FloatMatrix {
+    override fun swapRow(row1: Int, row2: Int) {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
         val tmp = data.copyOfRange(rowIndex1, rowIndex1 + shape[1])
 
         data.copyInto(data, rowIndex1, rowIndex2, rowIndex2 + shape[1])
         tmp.copyInto(data, rowIndex2, 0, shape[1])
-
-        return this
     }
 
-    override fun multiplyRow(row: Int, scalar: Float): FloatMatrix {
+    override fun multiplyRow(row: Int, scalar: Float) {
         val rowIndex = row * shape[1]
         for (i in 0 until shape[1])
             data[rowIndex + i] *= scalar
-        return this
     }
-    override fun addRow(row1: Int, row2: Int, scalar: Float): FloatMatrix {
+    override fun addRow(row1: Int, row2: Int, scalar: Float) {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
         for (i in 0 until shape[1])
             data[i + rowIndex1] += (data[i + rowIndex2] * scalar)
-        return this
     }
 
     override fun operate(operations: List<ElementaryOperation<Float>>): FloatMatrix {
@@ -520,6 +516,31 @@ open class FloatMatrix(
         for (j in 0 until shape[1]) for (i in 0 until offset)
             inverse[i * inverse.shape[1] + j] = rref[i, j + offset]
         return inverse
+    }
+
+    override fun rank(): Int {
+        //  The rank of a matrix is the dimension of the column space.
+        //  To find the dimension of the column space we reduce the matrix to reduced row echelon form
+        //  and count the number of rows that are not all 0.
+        val rref = rref()
+        var rank = 0
+        for (i in 0 until rref.shape[0]) {
+            val row = rref.row(i)
+            if (row.any { it != 0.0f })
+                rank++
+        }
+
+        return rank
+    }
+
+    override fun nullity(): Int = shape[1] - rank()
+
+    override fun linearlyIndependentRows(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun linearlyIndependentColumns(): Boolean {
+        TODO("Not yet implemented")
     }
 
     open fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())

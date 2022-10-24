@@ -36,7 +36,7 @@ interface NumericMatrix<T, K> : GeneralMatrix<T> {
      * @param row2 The second row to swap.
      * @return The new matrix with the rows swapped.
      */
-    fun swapRow(row1: Int, row2: Int): Matrix<K>
+    fun swapRow(row1: Int, row2: Int)
 
     /**
      * Performs the elementary row operation of multiplying a row by a scalar.
@@ -45,7 +45,7 @@ interface NumericMatrix<T, K> : GeneralMatrix<T> {
      * @param scalar The scalar to multiply the row by.
      * @return The new matrix with the row multiplied.
      */
-    fun multiplyRow(row: Int, scalar: K): Matrix<K>
+    fun multiplyRow(row: Int, scalar: T)
 
     /**
      * Performs the elementary row operation of adding a multiple of one row to another.
@@ -55,7 +55,7 @@ interface NumericMatrix<T, K> : GeneralMatrix<T> {
      * @param scalar The scalar to multiply the row by.
      * @return The new matrix with the row added.
      */
-    fun addRow(row1: Int, row2: Int, scalar: K): Matrix<K>
+    fun addRow(row1: Int, row2: Int, scalar: T)
 
     /**
      * Performs the (ordered) list of elementary row operations on the matrix.
