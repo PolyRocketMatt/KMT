@@ -3,6 +3,8 @@ plugins {
     `java-library`
 }
 
+description = "Module for working with intervals"
+
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))

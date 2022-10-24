@@ -3,6 +3,8 @@ plugins {
     `java-library`
 }
 
+description = "Module for common utilities shared between KMT modules"
+
 dependencies {
     testImplementation(kotlin("test"))
 }
