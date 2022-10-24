@@ -20,6 +20,7 @@ are available:
 * [`common`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Common) - Common mathematical operations
 * [`interval`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Interval) - Interval classes and operations
 * [`vector`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Vector) - Vector classes and operations
+* [`matrix`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Matrix) - Matrix classes and operations
 * [`trigonometry`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Trigonometry) - Tabular trigonometric functions for faster computation
 * [`function`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Function) - Functions and their relative operations (algebraic operations, integration, differentiation)
 
