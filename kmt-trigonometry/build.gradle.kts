@@ -3,6 +3,8 @@ plugins {
     `java-library`
 }
 
+description = "Module for faster trigonometric functions"
+
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))

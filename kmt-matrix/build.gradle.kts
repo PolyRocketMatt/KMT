@@ -3,8 +3,7 @@ plugins {
     `java-library`
 }
 
-group = findProperty("kmt.group") ?: "com.github.polyrocketmatt"
-version = findProperty("kmt.version") ?: "0.0.1"
+description = "Module for NxM-matrices"
 
 dependencies {
     testImplementation(kotlin("test"))
