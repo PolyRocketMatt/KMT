@@ -1,7 +1,11 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.decimals
+import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
+import java.util.*
 import kotlin.IllegalArgumentException
 
 typealias FMatrix = FloatMatrix
@@ -73,6 +77,8 @@ open class FloatMatrix(
             return matrix
         }
     }
+
+    private val operations = Stack<ElementaryOperation<Float>>()
 
     constructor(matrix: FloatArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, FloatArray(shape.reduce { acc, i -> acc * i }) { 0.0f })
@@ -319,14 +325,16 @@ open class FloatMatrix(
         return result
     }
 
-    open override fun transpose(): FloatMatrix {
+     override fun transpose(): FloatMatrix {
         val matrix = FloatMatrix(intArrayOf(shape[1], shape[0]))
         for (i in 0 until shape[0])
             for (j in 0 until shape[1])
                 matrix[j, i] = this[i, j]
         return matrix
     }
+
     override fun trace(): Float = diag().sum()
+
     override fun diag(): FloatMatrix {
         val diag = FloatMatrix(intArrayOf(1, shape[1]))
         for (i in 0 until shape[1])
@@ -334,40 +342,158 @@ open class FloatMatrix(
         return diag
     }
 
-    override infix fun concatHorizontal(other: Matrix<Float>): Matrix<Float> {
-        TODO("Not yet implemented")
-    }
-    override infix fun concatVertical(other: Matrix<Float>): Matrix<Float> {
-        TODO("Not yet implemented")
+    override infix fun concatHorizontal(other: Matrix<Float>): FloatMatrix {
+        val matrix = (other.complies("Other matrix must be of type FloatMatrix") { other is FloatMatrix } as FloatMatrix)
+            .complies({ "Rows must match to concatenate horizontally. Expected ${shape[0]}, found ${it.shape[0]}" }, { it.shape[0] == shape[0] })
+        val offset = shape[0]
+        val result = FloatMatrix(intArrayOf(offset, shape[1] + matrix.shape[1]))
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            result[i * result.shape[1] + j] = this[i, j]
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            result[offset + i * result.shape[1] + j] = matrix[i, j]
+        return result
     }
 
-    override fun swapRow(row1: Int, row2: Int): FloatMatrix {
-        TODO("Not yet implemented")
+    override infix fun concatVertical(other: Matrix<Float>): FloatMatrix {
+        val matrix = (other.complies("Other matrix must be of type FloatMatrix") { other is FloatMatrix } as FloatMatrix)
+            .complies({ "Columns must match to concatenate vertically. Expected ${shape[1]}, found ${it.shape[1]}" }, { it.shape[1] == shape[1] })
+        val offset = shape[1]
+        val indexOffset = shape[0] * offset
+        val result = FloatMatrix(intArrayOf(shape[0] + matrix.shape[0], offset))
+        for (i in 0 until indexOffset)
+            result[i] = this[i]
+        for (i in 0 until matrix.shape[0] * offset)
+            result[indexOffset + i] = matrix[i]
+        return result
     }
+
+    override fun isScalar(): Boolean = data.size == 1
+    override fun isSquare(): Boolean = shape[0] == shape[1]
+
+    override fun swapRow(row1: Int, row2: Int): FloatMatrix {
+        val rowIndex1 = row1 * shape[1]
+        val rowIndex2 = row2 * shape[1]
+        val tmp = data.copyOfRange(rowIndex1, rowIndex1 + shape[1])
+
+        data.copyInto(data, rowIndex1, rowIndex2, rowIndex2 + shape[1])
+        tmp.copyInto(data, rowIndex2, 0, shape[1])
+
+        return this
+    }
+
     override fun multiplyRow(row: Int, scalar: Float): FloatMatrix {
-        TODO("Not yet implemented")
+        val rowIndex = row * shape[1]
+        for (i in 0 until shape[1])
+            data[rowIndex + i] *= scalar
+        return this
     }
     override fun addRow(row1: Int, row2: Int, scalar: Float): FloatMatrix {
-        TODO("Not yet implemented")
+        val rowIndex1 = row1 * shape[1]
+        val rowIndex2 = row2 * shape[1]
+        for (i in 0 until shape[1])
+            data[i + rowIndex1] += (data[i + rowIndex2] * scalar)
+        return this
+    }
+
+    override fun operate(operations: List<ElementaryOperation<Float>>): FloatMatrix {
+        val result = copyOf()
+        operations.forEach {
+            when (it.type) {
+                ERO.SWAP -> result.swapRow(it.row1, it.row2)
+                ERO.MULTIPLY -> result.multiplyRow(it.row1, it.scalar)
+                ERO.ADD -> result.addRow(it.row1, it.row2, it.scalar)
+            }
+        }
+
+        result.clean()
+        return result
     }
 
     override fun ref(): FloatMatrix {
-        TODO("Not yet implemented")
+        val result = copyOf()
+        result.operations.clear()
+
+        var currentRow = 0
+        for ((currentColumn, _) in (0 until kotlin.math.min(shape[0], shape[1])).withIndex()) {
+            //  Find index of value with the highest absolute value in current column
+            val col = result.column(currentColumn).copyOfRange(currentColumn, shape[0])
+            val pivotIndex = col.indexByCondition(Float.MIN_VALUE) { _, current, _, value -> current.fastAbs() < value.fastAbs() }
+            val pivot = col[pivotIndex]
+
+            //  The index also gives the row to swap to the top
+            result.swapRow(currentRow, pivotIndex + currentColumn)
+            result.operations.push(ElementaryOperation(ERO.SWAP, currentRow, pivotIndex + currentColumn, 0.0f))
+
+            //  Update the current row
+            currentRow++
+
+            //  Gaussian elimination step
+            for (i in currentRow until shape[0]) {
+                //  Solve for k, the scalar to multiply the pivot row with to get 0 in the current column
+                val k = -result.column(currentColumn)[i] / pivot
+
+                //  Add the pivot row multiplied with k to the current row (which is the index of the current column)
+                result.addRow(i, currentColumn, k)
+                result.operations.push(ElementaryOperation(ERO.ADD, i, currentColumn, k))
+            }
+        }
+
+        result.clean()
+        return result
     }
+
     override fun rref(): FloatMatrix {
-        TODO("Not yet implemented")
+        //  We first bring the matrix in row echelon form
+        val result = ref()
+        result.clean()
+
+        for (i in shape[0] - 1 downTo 0) {
+            //  Find the row with a 1.0 in the current column
+            val col = result.row(i)
+            val columnIndex = col.indexOfFirst { it != 0.0f }
+
+            //  Found 0-row
+            if (columnIndex == -1)
+                continue
+
+            //  Make sure there is a 1.0 in the current column
+            if (col[columnIndex] != 1.0f) {
+                result.multiplyRow(i, 1.0f / col[columnIndex])
+                result.operations.push(ElementaryOperation(ERO.MULTIPLY, i, 0, 1.0f / col[columnIndex]))
+            }
+
+            //  For all rows above, make a 0 in the current column
+            for (j in i - 1 downTo 0) {
+                val k = -result.column(columnIndex)[j]
+
+                result.addRow(j, i, k)
+                result.operations.push(ElementaryOperation(ERO.ADD, j, i, k))
+            }
+        }
+
+        result.clean()
+        return result
     }
 
-    override fun determinant(): Float {
-        TODO("Not yet implemented")
-    }
+    override fun determinant(): Float = ref().diag().reduce { acc, d -> acc * d }
 
-    override fun inverse(): Matrix<Float> {
-        TODO("Not yet implemented")
-    }
+    override fun isInvertible(): Boolean = determinant() != 0.0f
 
-    fun isScalar(): Boolean = data.size == 1
-    fun isSquare(): Boolean = shape[0] == shape[1]
+    override fun inverse(): FloatMatrix {
+        complies("Non-square matrix does not have an inverse") { isSquare() }
+        complies("Matrix does not have an inverse, since the determinant is 0") { isInvertible() }
+
+        val offset = shape[0]
+        val augmented = (copyOf() concatHorizontal identity(intArrayOf(offset, offset)))
+        val operations = rref().operations
+        val rref = augmented.operate(operations)
+
+        //  Extract the right half of the matrix
+        val inverse = FloatMatrix(intArrayOf(offset, offset))
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            inverse[i * inverse.shape[1] + j] = rref[i, j + offset]
+        return inverse
+    }
 
     open fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
@@ -379,6 +505,13 @@ open class FloatMatrix(
         other
             .complies({ "Other is of type ${it::class.java}, expected ${this::class.java}" }, { it::class.java == this::class.java })
             .also { it -> it.complies({ "Shape does not match. Expected ${shapeToString()}, found ${other.shapeToString()}" }, { it.shape.contentEquals(this.shape) }) }
+
+    internal fun clean() {
+        //  Decide if to clean up tiny values
+        data.forEachIndexed { i, value -> if (value < 1e12) data[i] = value.decimals(12) }
+    }
+
+    override fun copyOf(): FloatMatrix = FloatMatrix(shape, data.copyOf().toFloatArray())
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -45,7 +45,7 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @param scalar The scalar to multiply the row by.
      * @return The new matrix with the row multiplied.
      */
-    fun multiplyRow(row: Int, scalar: T): Matrix<K>
+    fun multiplyRow(row: Int, scalar: K): Matrix<K>
 
     /**
      * Performs the elementary row operation of adding a multiple of one row to another.
@@ -55,7 +55,7 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @param scalar The scalar to multiply the row by.
      * @return The new matrix with the row added.
      */
-    fun addRow(row1: Int, row2: Int, scalar: T): Matrix<K>
+    fun addRow(row1: Int, row2: Int, scalar: K): Matrix<K>
 
     /**
      * Performs the (ordered) list of elementary row operations on the matrix.
@@ -63,7 +63,7 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @param operations The list of operations to perform.
      * @return The new matrix with the operations performed.
      */
-    fun operate(operations: List<ElementaryOperation>): Matrix<K>
+    fun operate(operations: List<ElementaryOperation<K>>): Matrix<K>
 
     /**
      * Compute the row echelon form of this matrix using Gaussian elimination
@@ -86,14 +86,14 @@ interface NumericMatrix<T, K> : Matrix<T> {
      *
      * @return The determinant of this matrix.
      */
-    fun determinant(): T
+    fun determinant(): K
 
     /**
      * Check if the matrix is invertible.
      *
      * @return True if the matrix is invertible (the determinant is 0), false otherwise.
      */
-    fun invertible(): Boolean
+    fun isInvertible(): Boolean
 
     /**
      * Compute the inverse of this matrix.

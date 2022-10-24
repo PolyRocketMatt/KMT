@@ -5,7 +5,6 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
-import java.util.LinkedList
 import java.util.Stack
 import kotlin.IllegalArgumentException
 import kotlin.math.min
@@ -80,7 +79,7 @@ open class DoubleMatrix(
         }
     }
 
-    private val operations = Stack<ElementaryOperation>()
+    private val operations = Stack<ElementaryOperation<Double>>()
 
     constructor(matrix: DoubleArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
@@ -94,8 +93,6 @@ open class DoubleMatrix(
 
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
-
-    fun operations(): List<ElementaryOperation> = operations.toList().reversed()
 
     open fun rows(): Array<DoubleArray> {
         val rows = Array(shape[0]) { DoubleArray(shape[1]) }
@@ -329,7 +326,7 @@ open class DoubleMatrix(
         return result
     }
 
-    open override fun transpose(): DoubleMatrix {
+    override fun transpose(): DoubleMatrix {
         val matrix = DoubleMatrix(intArrayOf(shape[1], shape[0]))
         for (i in 0 until shape[0])
             for (j in 0 until shape[1])
@@ -400,7 +397,7 @@ open class DoubleMatrix(
         return this
     }
 
-    override fun operate(operations: List<ElementaryOperation>): DoubleMatrix {
+    override fun operate(operations: List<ElementaryOperation<Double>>): DoubleMatrix {
         val result = copyOf()
         operations.forEach {
             when (it.type) {
@@ -482,11 +479,11 @@ open class DoubleMatrix(
 
     override fun determinant(): Double = ref().diag().reduce { acc, d -> acc * d }
 
-    override fun invertible(): Boolean = determinant() != 0.0
+    override fun isInvertible(): Boolean = determinant() != 0.0
 
     override fun inverse(): DoubleMatrix {
         complies("Non-square matrix does not have an inverse") { isSquare() }
-        complies("Matrix does not have an inverse, since the determinant is 0") { invertible() }
+        complies("Matrix does not have an inverse, since the determinant is 0") { isInvertible() }
 
         val offset = shape[0]
         val augmented = (copyOf() concatHorizontal identity(intArrayOf(offset, offset)))

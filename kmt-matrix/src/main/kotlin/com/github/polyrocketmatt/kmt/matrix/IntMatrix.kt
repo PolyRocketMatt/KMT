@@ -2,6 +2,7 @@ package com.github.polyrocketmatt.kmt.matrix
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
+import java.util.Stack
 import kotlin.IllegalArgumentException
 
 typealias IMatrix = IntMatrix
@@ -319,14 +320,16 @@ open class IntMatrix(
         return result
     }
 
-    open override fun transpose(): IntMatrix {
+    override fun transpose(): IntMatrix {
         val matrix = IntMatrix(intArrayOf(shape[1], shape[0]))
         for (i in 0 until shape[0])
             for (j in 0 until shape[1])
                 matrix[j, i] = this[i, j]
         return matrix
     }
+
     override fun trace(): Int = diag().sum()
+
     override fun diag(): IntMatrix {
         val diag = IntMatrix(intArrayOf(1, shape[1]))
         for (i in 0 until shape[1])
@@ -334,35 +337,63 @@ open class IntMatrix(
         return diag
     }
 
-    override infix fun concatHorizontal(other: Matrix<Int>): Matrix<Int> {
-        TODO("Not yet implemented")
+    override infix fun concatHorizontal(other: Matrix<Int>): IntMatrix {
+        val matrix = (other.complies("Other matrix must be of type IntMatrix") { other is IntMatrix } as IntMatrix)
+            .complies({ "Rows must match to concatenate horizontally. Expected ${shape[0]}, found ${it.shape[0]}" }, { it.shape[0] == shape[0] })
+        val offset = shape[0]
+        val result = IntMatrix(intArrayOf(offset, shape[1] + matrix.shape[1]))
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            result[i * result.shape[1] + j] = this[i, j]
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            result[offset + i * result.shape[1] + j] = matrix[i, j]
+        return result
     }
-    override infix fun concatVertical(other: Matrix<Int>): Matrix<Int> {
-        TODO("Not yet implemented")
+    override infix fun concatVertical(other: Matrix<Int>): IntMatrix {
+        val matrix = (other.complies("Other matrix must be of type IntMatrix") { other is IntMatrix } as IntMatrix)
+            .complies({ "Columns must match to concatenate vertically. Expected ${shape[1]}, found ${it.shape[1]}" }, { it.shape[1] == shape[1] })
+        val offset = shape[1]
+        val indexOffset = shape[0] * offset
+        val result = IntMatrix(intArrayOf(shape[0] + matrix.shape[0], offset))
+        for (i in 0 until indexOffset)
+            result[i] = this[i]
+        for (i in 0 until matrix.shape[0] * offset)
+            result[indexOffset + i] = matrix[i]
+        return result
     }
+
+    override fun isScalar(): Boolean = data.size == 1
+
+    override fun isSquare(): Boolean = shape[0] == shape[1]
 
     override fun swapRow(row1: Int, row2: Int): DoubleMatrix {
-        TODO("Not yet implemented")
+        val result = toDoubleMatrix()
+        result.swapRow(row1, row2)
+        return result
     }
-    override fun multiplyRow(row: Int, scalar: Int): DoubleMatrix {
-        TODO("Not yet implemented")
+
+    override fun multiplyRow(row: Int, scalar: Double): DoubleMatrix {
+        val result = toDoubleMatrix()
+        result.multiplyRow(row, scalar)
+        return result
     }
-    override fun addRow(row1: Int, row2: Int, scalar: Int): DoubleMatrix {
-        TODO("Not yet implemented")
+
+    override fun addRow(row1: Int, row2: Int, scalar: Double): DoubleMatrix {
+        val result = toDoubleMatrix()
+        result.addRow(row1, row2, scalar)
+        return result
     }
+
+    override fun operate(operations: List<ElementaryOperation<Double>>): DoubleMatrix = toDoubleMatrix().operate(operations)
 
     override fun ref(): DoubleMatrix = toDoubleMatrix().ref()
+
     override fun rref(): DoubleMatrix = toDoubleMatrix().rref()
 
-    override fun determinant(): Int {
-        TODO("Not yet implemented")
-    }
-    override fun inverse(): Matrix<Double> {
-        TODO("Not yet implemented")
-    }
+    override fun determinant(): Double = ref().diag().reduce { acc, i -> acc * i }
 
-    fun isScalar(): Boolean = data.size == 1
-    fun isSquare(): Boolean = shape[0] == shape[1]
+    override fun isInvertible(): Boolean = determinant() != 0.0
+
+    override fun inverse(): DoubleMatrix = toDoubleMatrix().inverse()
 
     fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
     fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
