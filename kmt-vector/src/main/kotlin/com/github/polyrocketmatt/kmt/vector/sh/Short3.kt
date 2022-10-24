@@ -24,6 +24,7 @@ import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
 import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
@@ -244,4 +245,16 @@ class Short3(x: Short, y: Short, z: Short) : Tuple3<Short>(arrayOf(x, y, z)), Sh
     override fun set(row: Int, col: Int, value: Short) = throw UnsupportedOperationException("Short3 is considered a vector")
 
     override fun transpose(): Short3 = this
+
+    override fun trace(): Short = throw UnsupportedOperationException("Cannot get trace of a short vector")
+
+    override fun diag(): Matrix<Short> = throw UnsupportedOperationException("Cannot get diagonal of a short vector")
+
+    override fun concatHorizontal(other: Matrix<Short>): Matrix<Short> = throw UnsupportedOperationException("Cannot concatenate a short vector horizontally")
+
+    override fun concatVertical(other: Matrix<Short>): Matrix<Short> = throw UnsupportedOperationException("Cannot concatenate a short vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

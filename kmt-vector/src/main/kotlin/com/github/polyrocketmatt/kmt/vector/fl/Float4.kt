@@ -30,6 +30,7 @@ import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
@@ -308,4 +309,16 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
     override fun set(row: Int, col: Int, value: Float) = throw UnsupportedOperationException("Float4 is considered a vector")
 
     override fun transpose(): Float4 = this
+
+    override fun trace(): Float = throw UnsupportedOperationException("Cannot get trace of a floating-point vector")
+
+    override fun diag(): Matrix<Float> = throw UnsupportedOperationException("Cannot get diagonal of a floating-point vector")
+
+    override fun concatHorizontal(other: Matrix<Float>): Matrix<Float> = throw UnsupportedOperationException("Cannot concatenate a floating-point vector horizontally")
+
+    override fun concatVertical(other: Matrix<Float>): Matrix<Float> = throw UnsupportedOperationException("Cannot concatenate a floating-point vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

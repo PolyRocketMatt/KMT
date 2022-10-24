@@ -25,6 +25,7 @@ import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.IntMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
@@ -244,4 +245,16 @@ class Int3(x: Int, y: Int, z: Int) : Tuple3<Int>(arrayOf(x, y, z)), IntVector, S
     override fun set(row: Int, col: Int, value: Int) = throw UnsupportedOperationException("Int3 is considered a vector")
 
     override fun transpose(): Int3 = this
+
+    override fun trace(): Int = throw UnsupportedOperationException("Cannot get trace of a int vector")
+
+    override fun diag(): Matrix<Int> = throw UnsupportedOperationException("Cannot get diagonal of a int vector")
+
+    override fun concatHorizontal(other: Matrix<Int>): Matrix<Int> = throw UnsupportedOperationException("Cannot concatenate a int vector horizontally")
+
+    override fun concatVertical(other: Matrix<Int>): Matrix<Int> = throw UnsupportedOperationException("Cannot concatenate a int vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

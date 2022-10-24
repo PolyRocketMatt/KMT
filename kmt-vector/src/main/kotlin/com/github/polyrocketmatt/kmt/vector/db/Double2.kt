@@ -30,6 +30,7 @@ import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
@@ -230,4 +231,16 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     override fun set(row: Int, col: Int, value: Double) = throw UnsupportedOperationException("Double2 is considered a vector")
 
     override fun transpose(): Double2 = this
+
+    override fun trace(): Double = throw UnsupportedOperationException("Cannot get trace of a double vector")
+
+    override fun diag(): Matrix<Double> = throw UnsupportedOperationException("Cannot get diagonal of a double vector")
+
+    override fun concatHorizontal(other: Matrix<Double>): Matrix<Double> = throw UnsupportedOperationException("Cannot concatenate a double vector horizontally")
+
+    override fun concatVertical(other: Matrix<Double>): Matrix<Double> = throw UnsupportedOperationException("Cannot concatenate a double vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

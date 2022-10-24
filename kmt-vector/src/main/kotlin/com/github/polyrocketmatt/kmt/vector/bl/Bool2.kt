@@ -3,6 +3,7 @@ package com.github.polyrocketmatt.kmt.vector.bl
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.vector.Swizzle2
 import com.github.polyrocketmatt.kmt.vector.Vector
@@ -107,4 +108,16 @@ class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVec
     override fun set(row: Int, col: Int, value: Boolean) = throw UnsupportedOperationException("Bool2 is considered a vector")
 
     override fun transpose(): Bool2 = this
+
+    override fun trace(): Boolean = throw UnsupportedOperationException("Cannot get trace of a boolean vector")
+
+    override fun diag(): Matrix<Boolean> = throw UnsupportedOperationException("Cannot get diagonal of a boolean vector")
+
+    override fun concatHorizontal(other: Matrix<Boolean>): Matrix<Boolean> = throw UnsupportedOperationException("Cannot concatenate a boolean vector horizontally")
+
+    override fun concatVertical(other: Matrix<Boolean>): Matrix<Boolean> = throw UnsupportedOperationException("Cannot concatenate a boolean vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }
