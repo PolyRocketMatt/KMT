@@ -25,7 +25,6 @@ import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.IntMatrix
-import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN

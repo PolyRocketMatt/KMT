@@ -33,9 +33,13 @@ typealias SMatrix = ShortMatrix
  */
 fun Array<Short>.toMatrix(shape: IntArray): ShortMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
-    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
-            "Expected ${elements}, found ${this.size}" },
-        { this.size == elements })
+    shape.complies(
+        {
+            "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+                "Expected $elements, found ${this.size}"
+        },
+        { this.size == elements }
+    )
     return ShortMatrix(shape, this.toShortArray())
 }
 
@@ -48,9 +52,13 @@ fun Array<Short>.toMatrix(shape: IntArray): ShortMatrix {
  */
 fun ShortArray.toMatrix(shape: IntArray): ShortMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
-    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
-            "Expected ${elements}, found ${this.size}" },
-        { this.size == elements })
+    shape.complies(
+        {
+            "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+                "Expected $elements, found ${this.size}"
+        },
+        { this.size == elements }
+    )
     return ShortMatrix(shape, this)
 }
 
@@ -75,7 +83,7 @@ fun ShortMatrix.toArray(): ShortArray = this.data.toShortArray()
 open class ShortMatrix(
     val shape: IntArray,
     matrix: ShortArray
-) : Tuple<Short>(ShortArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()),
+) : Tuple<Short>(ShortArray(shape.reduce { acc, i -> acc * i }).toTypedArray()),
     NumericMatrix<Short, Double> {
 
     companion object {
@@ -449,5 +457,4 @@ open class ShortMatrix(
         }
         return sb.toString()
     }
-
 }

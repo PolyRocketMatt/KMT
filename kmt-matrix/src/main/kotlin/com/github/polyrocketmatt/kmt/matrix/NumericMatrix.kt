@@ -103,5 +103,4 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @throws IllegalArgumentException If the matrix is not invertible.
      */
     fun inverse(): Matrix<K>
-
 }

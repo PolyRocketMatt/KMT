@@ -23,8 +23,9 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
-import java.util.*
+import java.util.Stack
 import kotlin.IllegalArgumentException
+import kotlin.math.min
 
 typealias FMatrix = FloatMatrix
 
@@ -37,9 +38,13 @@ typealias FMatrix = FloatMatrix
  */
 fun Array<Float>.toMatrix(shape: IntArray): FloatMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
-    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
-            "Expected ${elements}, found ${this.size}" },
-        { this.size == elements })
+    shape.complies(
+        {
+            "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+                "Expected $elements, found ${this.size}"
+        },
+        { this.size == elements }
+    )
     return FloatMatrix(shape, this.toFloatArray())
 }
 
@@ -52,9 +57,13 @@ fun Array<Float>.toMatrix(shape: IntArray): FloatMatrix {
  */
 fun FloatArray.toMatrix(shape: IntArray): FloatMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
-    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
-            "Expected ${elements}, found ${this.size}" },
-        { this.size == elements })
+    shape.complies(
+        {
+            "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+                "Expected $elements, found ${this.size}"
+        },
+        { this.size == elements }
+    )
     return FloatMatrix(shape, this)
 }
 
@@ -79,7 +88,7 @@ fun FloatMatrix.toArray(): FloatArray = this.data.toFloatArray()
 open class FloatMatrix(
     val shape: IntArray,
     matrix: FloatArray
-) : Tuple<Float>(FloatArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()),
+) : Tuple<Float>(FloatArray(shape.reduce { acc, i -> acc * i }).toTypedArray()),
     NumericMatrix<Float, Float> {
 
     companion object {
@@ -343,7 +352,7 @@ open class FloatMatrix(
         return result
     }
 
-     override fun transpose(): FloatMatrix {
+    override fun transpose(): FloatMatrix {
         val matrix = FloatMatrix(intArrayOf(shape[1], shape[0]))
         for (i in 0 until shape[0])
             for (j in 0 until shape[1])
@@ -432,7 +441,7 @@ open class FloatMatrix(
         result.operations.clear()
 
         var currentRow = 0
-        for ((currentColumn, _) in (0 until kotlin.math.min(shape[0], shape[1])).withIndex()) {
+        for ((currentColumn, _) in (0 until min(shape[0], shape[1])).withIndex()) {
             //  Find index of value with the highest absolute value in current column
             val col = result.column(currentColumn).copyOfRange(currentColumn, shape[0])
             val pivotIndex = col.indexByCondition(Float.MIN_VALUE) { _, current, _, value -> current.fastAbs() < value.fastAbs() }
@@ -556,5 +565,4 @@ open class FloatMatrix(
         }
         return sb.toString()
     }
-
 }

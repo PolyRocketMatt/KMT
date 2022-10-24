@@ -63,7 +63,6 @@ interface TrigonometricBaseFunction {
      * @return the result of the trigonometric function
      */
     operator fun get(angle: Short): Double
-
 }
 
 class Trigonometry {
@@ -149,7 +148,6 @@ object SIN : TrigonometricBaseFunction {
      * @return The sine of the angle.
      */
     override operator fun get(angle: Short): Double = sinLookup((angle * multiplier + 0.5).toInt())
-
 }
 
 /**
@@ -191,7 +189,6 @@ object COS : TrigonometricBaseFunction {
      * @return The cosine of the angle.
      */
     override operator fun get(angle: Short): Double = SIN[angle + 90]
-
 }
 
 /**
@@ -233,7 +230,6 @@ object TAN : TrigonometricBaseFunction {
      * @return The tangent of the angle.
      */
     override operator fun get(angle: Short): Double = SIN[angle] / SIN[angle + 90.0]
-
 }
 
 /**
@@ -275,7 +271,6 @@ object COT : TrigonometricBaseFunction {
      * @return The cotangent of the angle.
      */
     override operator fun get(angle: Short): Double = SIN[angle + 90.0] / SIN[angle]
-
 }
 
 /**
@@ -317,7 +312,6 @@ object SEC : TrigonometricBaseFunction {
      * @return The secant of the angle.
      */
     override operator fun get(angle: Short): Double = 1.0 / SIN[angle + 90.0]
-
 }
 
 /**
@@ -359,5 +353,4 @@ object COSEC : TrigonometricBaseFunction {
      * @return The cosecant of the angle.
      */
     override operator fun get(angle: Short): Double = 1.0 / SIN[angle]
-
 }

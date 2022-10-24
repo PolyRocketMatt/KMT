@@ -29,7 +29,6 @@ enum class ERO {
     SWAP,
     MULTIPLY,
     ADD
-
 }
 
 /**

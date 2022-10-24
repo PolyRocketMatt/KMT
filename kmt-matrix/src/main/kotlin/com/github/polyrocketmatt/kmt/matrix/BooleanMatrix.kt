@@ -36,9 +36,13 @@ typealias B4x4 = Boolean4x4
  */
 fun Array<Boolean>.toMatrix(shape: IntArray): BooleanMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
-    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
-            "Expected ${elements}, found ${this.size}" },
-        { this.size == elements })
+    shape.complies(
+        {
+            "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+                "Expected $elements, found ${this.size}"
+        },
+        { this.size == elements }
+    )
     return BooleanMatrix(shape, this.toBooleanArray())
 }
 
@@ -51,9 +55,13 @@ fun Array<Boolean>.toMatrix(shape: IntArray): BooleanMatrix {
  */
 fun BooleanArray.toMatrix(shape: IntArray): BooleanMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
-    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
-            "Expected ${elements}, found ${this.size}" },
-        { this.size == elements })
+    shape.complies(
+        {
+            "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+                "Expected $elements, found ${this.size}"
+        },
+        { this.size == elements }
+    )
     return BooleanMatrix(shape, this)
 }
 
@@ -78,7 +86,7 @@ fun BooleanMatrix.toArray(): BooleanArray = this.data.toBooleanArray()
 open class BooleanMatrix(
     val shape: IntArray,
     matrix: BooleanArray,
-) : Tuple<Boolean>(BooleanArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()), Matrix<Boolean> {
+) : Tuple<Boolean>(BooleanArray(shape.reduce { acc, i -> acc * i }).toTypedArray()), Matrix<Boolean> {
 
     constructor(matrix: BooleanArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { false })
@@ -275,7 +283,7 @@ open class BooleanMatrix(
         return matrix
     }
     override fun trace(): Boolean = diag().reduce { acc, b -> acc || b }
-    override fun diag(): BooleanMatrix{
+    override fun diag(): BooleanMatrix {
         val diag = BooleanMatrix(intArrayOf(1, shape[1]))
         for (i in 0 until shape[1])
             diag[i] = this[i, i]
@@ -342,7 +350,6 @@ open class BooleanMatrix(
         }
         return sb.toString()
     }
-
 }
 
 /**
@@ -357,13 +364,14 @@ class Boolean2x2(matrix: BooleanArray) : BooleanMatrix(intArrayOf(2, 2), matrix)
     constructor(value: Boolean) : this(BooleanArray(4) { value })
     constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
 
-    override fun transpose(): Boolean2x2 = Boolean2x2(booleanArrayOf(
-        data[0], data[2],
-        data[1], data[3]
-    ))
+    override fun transpose(): Boolean2x2 = Boolean2x2(
+        booleanArrayOf(
+            data[0], data[2],
+            data[1], data[3]
+        )
+    )
 
     override fun copyOf(): Boolean2x2 = Boolean2x2(data.copyOf())
-
 }
 
 /**
@@ -378,14 +386,15 @@ class Boolean3x3(matrix: BooleanArray) : BooleanMatrix(intArrayOf(3, 3), matrix)
     constructor(value: Boolean) : this(BooleanArray(9) { value })
     constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
 
-    override fun transpose(): Boolean3x3 = Boolean3x3(booleanArrayOf(
-        data[0], data[3], data[6],
-        data[1], data[4], data[7],
-        data[2], data[5], data[8]
-    ))
+    override fun transpose(): Boolean3x3 = Boolean3x3(
+        booleanArrayOf(
+            data[0], data[3], data[6],
+            data[1], data[4], data[7],
+            data[2], data[5], data[8]
+        )
+    )
 
     override fun copyOf(): Boolean3x3 = Boolean3x3(data.copyOf())
-
 }
 
 /**
@@ -400,13 +409,14 @@ class Boolean4x4(matrix: BooleanArray) : BooleanMatrix(intArrayOf(4, 4), matrix)
     constructor(value: Boolean) : this(BooleanArray(16) { value })
     constructor(matrix: Array<Boolean>) : this(matrix.toBooleanArray())
 
-    override fun transpose(): Boolean4x4 = Boolean4x4(booleanArrayOf(
-        data[0], data[4], data[8], data[12],
-        data[1], data[5], data[9], data[13],
-        data[2], data[6], data[10], data[14],
-        data[3], data[7], data[11], data[15]
-    ))
+    override fun transpose(): Boolean4x4 = Boolean4x4(
+        booleanArrayOf(
+            data[0], data[4], data[8], data[12],
+            data[1], data[5], data[9], data[13],
+            data[2], data[6], data[10], data[14],
+            data[3], data[7], data[11], data[15]
+        )
+    )
 
     override fun copyOf(): Boolean4x4 = Boolean4x4(data.copyOf())
-
 }

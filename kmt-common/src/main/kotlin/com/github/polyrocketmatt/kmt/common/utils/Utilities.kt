@@ -16,14 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 package com.github.polyrocketmatt.kmt.common.utils
 
 import java.lang.ClassCastException
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
-
-
 
 /**
  * Check if a given condition is met on an object of type [T].

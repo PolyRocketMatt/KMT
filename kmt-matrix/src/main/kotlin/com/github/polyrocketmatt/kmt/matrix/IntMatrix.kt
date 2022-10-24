@@ -33,9 +33,13 @@ typealias IMatrix = IntMatrix
  */
 fun Array<Int>.toMatrix(shape: IntArray): IntMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
-    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
-            "Expected ${elements}, found ${this.size}" },
-        { this.size == elements })
+    shape.complies(
+        {
+            "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+                "Expected $elements, found ${this.size}"
+        },
+        { this.size == elements }
+    )
     return IntMatrix(shape, this.toIntArray())
 }
 
@@ -48,9 +52,13 @@ fun Array<Int>.toMatrix(shape: IntArray): IntMatrix {
  */
 fun IntArray.toMatrix(shape: IntArray): IntMatrix {
     val elements = shape.reduce { acc, i -> acc * i }
-    shape.complies({ "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
-            "Expected ${elements}, found ${this.size}" },
-        { this.size == elements })
+    shape.complies(
+        {
+            "Incorrect array size for shape ${shape.joinToString("x") { "$it" }}. " +
+                "Expected $elements, found ${this.size}"
+        },
+        { this.size == elements }
+    )
     return IntMatrix(shape, this)
 }
 
@@ -75,7 +83,7 @@ fun IntMatrix.toArray(): IntArray = this.data.toIntArray()
 open class IntMatrix(
     val shape: IntArray,
     matrix: IntArray
-) : Tuple<Int>(IntArray(shape.reduce { acc, i -> acc * i  }).toTypedArray()),
+) : Tuple<Int>(IntArray(shape.reduce { acc, i -> acc * i }).toTypedArray()),
     NumericMatrix<Int, Double> {
 
     companion object {
@@ -450,5 +458,4 @@ open class IntMatrix(
         }
         return sb.toString()
     }
-
 }

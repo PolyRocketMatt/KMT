@@ -109,4 +109,3 @@ fun ShortArray.indexByCondition(condition: (cIdx: Int, current: Short, idx: Int,
 
     return index
 }
-

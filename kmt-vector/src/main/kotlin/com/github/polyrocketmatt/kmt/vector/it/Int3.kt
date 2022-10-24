@@ -244,5 +244,4 @@ class Int3(x: Int, y: Int, z: Int) : Tuple3<Int>(arrayOf(x, y, z)), IntVector, S
     override fun set(row: Int, col: Int, value: Int) = throw UnsupportedOperationException("Int3 is considered a vector")
 
     override fun transpose(): Int3 = this
-
 }
