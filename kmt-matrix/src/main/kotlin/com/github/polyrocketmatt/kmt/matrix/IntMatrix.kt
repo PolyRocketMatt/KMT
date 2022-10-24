@@ -1,8 +1,25 @@
+/*
+ * KMT, Kotlin Math Toolkit
+ * Copyright (C) Matthias Kovacic <matthias.kovacic@student.kuleuven.be>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.github.polyrocketmatt.kmt.matrix
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
-import java.util.Stack
 import kotlin.IllegalArgumentException
 
 typealias IMatrix = IntMatrix
@@ -405,6 +422,8 @@ open class IntMatrix(
         other
             .complies({ "Other is of type ${it::class.java}, expected ${this::class.java}" }, { it::class.java == this::class.java })
             .also { it -> it.complies({ "Shape does not match. Expected ${shapeToString()}, found ${other.shapeToString()}" }, { it.shape.contentEquals(this.shape) }) }
+
+    override fun copyOf(): IntMatrix = IntMatrix(shape, data.copyOf().toIntArray())
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

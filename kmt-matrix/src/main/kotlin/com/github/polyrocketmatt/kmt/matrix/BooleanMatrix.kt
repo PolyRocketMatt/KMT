@@ -1,3 +1,21 @@
+/*
+ * KMT, Kotlin Math Toolkit
+ * Copyright (C) Matthias Kovacic <matthias.kovacic@student.kuleuven.be>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.github.polyrocketmatt.kmt.matrix
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
@@ -264,15 +282,33 @@ open class BooleanMatrix(
         return diag
     }
 
-    override infix fun concatHorizontal(other: Matrix<Boolean>): Matrix<Boolean> {
-        TODO("Not yet implemented")
+    override infix fun concatHorizontal(other: Matrix<Boolean>): BooleanMatrix {
+        val matrix = (other.complies("Other matrix must be of type BooleanMatrix") { other is BooleanMatrix } as BooleanMatrix)
+            .complies({ "Rows must match to concatenate horizontally. Expected ${shape[0]}, found ${it.shape[0]}" }, { it.shape[0] == shape[0] })
+        val offset = shape[0]
+        val result = BooleanMatrix(intArrayOf(offset, shape[1] + matrix.shape[1]))
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            result[i * result.shape[1] + j] = this[i, j]
+        for (j in 0 until shape[1]) for (i in 0 until offset)
+            result[offset + i * result.shape[1] + j] = matrix[i, j]
+        return result
     }
-    override infix fun concatVertical(other: Matrix<Boolean>): Matrix<Boolean> {
-        TODO("Not yet implemented")
+    override infix fun concatVertical(other: Matrix<Boolean>): BooleanMatrix {
+        val matrix = (other.complies("Other matrix must be of type BooleanMatrix") { other is BooleanMatrix } as BooleanMatrix)
+            .complies({ "Columns must match to concatenate vertically. Expected ${shape[1]}, found ${it.shape[1]}" }, { it.shape[1] == shape[1] })
+        val offset = shape[1]
+        val indexOffset = shape[0] * offset
+        val result = BooleanMatrix(intArrayOf(shape[0] + matrix.shape[0], offset))
+        for (i in 0 until indexOffset)
+            result[i] = this[i]
+        for (i in 0 until matrix.shape[0] * offset)
+            result[indexOffset + i] = matrix[i]
+        return result
     }
 
-    fun isScalar(): Boolean = data.size == 1
-    fun isSquare(): Boolean = shape[0] == shape[1]
+    override fun isScalar(): Boolean = data.size == 1
+
+    override fun isSquare(): Boolean = shape[0] == shape[1]
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 
