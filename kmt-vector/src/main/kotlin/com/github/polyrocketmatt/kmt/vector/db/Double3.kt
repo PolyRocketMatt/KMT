@@ -28,6 +28,10 @@ import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple3
+import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -37,6 +41,17 @@ import com.github.polyrocketmatt.kmt.vector.bl.Bool3
 import com.github.polyrocketmatt.kmt.vector.fl.Float3
 import com.github.polyrocketmatt.kmt.vector.it.Int3
 import com.github.polyrocketmatt.kmt.vector.sh.Short3
+
+/**
+ * Convert a double matrix to a double vector.
+ *
+ * @return A double vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 3x1 or 1x3 matrix.
+ */
+fun DoubleMatrix.toDouble3(): Double3 {
+    complies("Cannot create a Double3 from a DoubleMatrix with ${this.data.size} elements!") { this.data.size == 3 }
+    return Double3(this.data[0], this.data[1], this.data[2])
+}
 
 operator fun Int.plus(other: Double3): Double3 = Double3(this + other.x, this + other.y, this + other.z)
 operator fun Int.minus(other: Double3): Double3 = Double3(this - other.x, this - other.y, this - other.z)
@@ -99,30 +114,30 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
     operator fun timesAssign(other: Double3) { x *= other.x; y *= other.y; z *= other.z }
     operator fun divAssign(other: Double3) { x /= other.x; y /= other.y; z /= other.z }
 
-    operator fun plus(other: Int) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Int) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Int) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Int) = Double3(x / other, y / other, z / other)
+    operator fun plus(value: Int) = Double3(x + value, y + value, z + value)
+    operator fun minus(value: Int) = Double3(x - value, y - value, z - value)
+    operator fun times(value: Int) = Double3(x * value, y * value, z * value)
+    operator fun div(value: Int) = Double3(x / value, y / value, z / value)
 
-    operator fun plus(other: Float) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Float) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Float) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Float) = Double3(x / other, y / other, z / other)
+    operator fun plus(value: Float) = Double3(x + value, y + value, z + value)
+    operator fun minus(value: Float) = Double3(x - value, y - value, z - value)
+    operator fun times(value: Float) = Double3(x * value, y * value, z * value)
+    operator fun div(value: Float) = Double3(x / value, y / value, z / value)
 
-    operator fun plus(other: Double) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Double) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Double) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Double) = Double3(x / other, y / other, z / other)
+    override operator fun plus(value: Double) = Double3(x + value, y + value, z + value)
+    override operator fun minus(value: Double) = Double3(x - value, y - value, z - value)
+    override operator fun times(value: Double) = Double3(x * value, y * value, z * value)
+    override operator fun div(value: Double) = Double3(x / value, y / value, z / value)
 
-    operator fun plus(other: Short) = Double3(x + other, y + other, z + other)
-    operator fun minus(other: Short) = Double3(x - other, y - other, z - other)
-    operator fun times(other: Short) = Double3(x * other, y * other, z * other)
-    operator fun div(other: Short) = Double3(x / other, y / other, z / other)
+    operator fun plus(value: Short) = Double3(x + value, y + value, z + value)
+    operator fun minus(value: Short) = Double3(x - value, y - value, z - value)
+    operator fun times(value: Short) = Double3(x * value, y * value, z * value)
+    operator fun div(value: Short) = Double3(x / value, y / value, z / value)
 
-    operator fun plusAssign(other: Double) { x += other; y += other; z += other }
-    operator fun minusAssign(other: Double) { x -= other; y -= other; z -= other }
-    operator fun timesAssign(other: Double) { x *= other; y *= other; z *= other }
-    operator fun divAssign(other: Double) { x /= other; y /= other; z /= other }
+    override operator fun plusAssign(value: Double) { x += value; y += value; z += value }
+    override operator fun minusAssign(value: Double) { x -= value; y -= value; z -= value }
+    override operator fun timesAssign(value: Double) { x *= value; y *= value; z *= value }
+    override operator fun divAssign(value: Double) { x /= value; y /= value; z /= value }
 
     override fun length(): Float = (x * x + y * y + z * z).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y + z * z).dsqrt()
@@ -209,6 +224,8 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
     override fun asInt(): Int3 = Int3(x.toInt(), y.toInt(), z.toInt())
     override fun asShort(): Short3 = Short3(x.toInt().toShort(), y.toInt().toShort(), z.toInt().toShort())
     override fun asBoolean(): Bool3 = Bool3(x != 0.0, y != 0.0, z != 0.0)
+    override fun asRowMatrix(): DoubleMatrix = data.toMatrix(intArrayOf(1, 3))
+    override fun asColumnMatrix(): DoubleMatrix = data.toMatrix(intArrayOf(3, 1))
 
     override fun xy(): Double2 = Double2(x, y)
     override fun yz(): Double2 = Double2(y, z)
@@ -227,4 +244,31 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
     override fun zzz(): Double3 = Double3(z, z, z)
 
     override fun copyOf(): Double3 = Double3(x, y, z)
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
+    override fun get(i: Int): Double = data[i]
+    override fun get(row: Int, col: Int): Double = throw UnsupportedOperationException("Double3 is considered a vector")
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
+    override fun set(i: Int, value: Double) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Double3")
+    }
+    override fun set(row: Int, col: Int, value: Double) = throw UnsupportedOperationException("Double3 is considered a vector")
+
+    override fun transpose(): Double3 = this
+
+    override fun trace(): Double = throw UnsupportedOperationException("Cannot get trace of a double vector")
+
+    override fun diag(): Matrix<Double> = throw UnsupportedOperationException("Cannot get diagonal of a double vector")
+
+    override fun concatHorizontal(other: Matrix<Double>): Matrix<Double> = throw UnsupportedOperationException("Cannot concatenate a double vector horizontally")
+
+    override fun concatVertical(other: Matrix<Double>): Matrix<Double> = throw UnsupportedOperationException("Cannot concatenate a double vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

@@ -18,6 +18,8 @@
 
 package com.github.polyrocketmatt.kmt.vector.fl
 
+import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.bl.BooleanVector
 import com.github.polyrocketmatt.kmt.vector.db.DoubleVector
@@ -34,7 +36,7 @@ fun FloatVector.short() = this.asShort()
  *
  * Represents an n-dimensional vector of floating-point numbers.
  */
-interface FloatVector : Vector<Float> {
+interface FloatVector : Vector<Float>, Matrix<Float> {
 
     /**
      * Get a vector with floored components.
@@ -118,4 +120,18 @@ interface FloatVector : Vector<Float> {
      * @return The vector as a boolean vector.
      */
     fun asBoolean(): BooleanVector
+
+    /**
+     * Get the vector as a floating-point row matrix.
+     *
+     * @return The vector as a floating-point row matrix.
+     */
+    fun asRowMatrix(): FloatMatrix
+
+    /**
+     * Get the vector as a floating-point column matrix.
+     *
+     * @return The vector as a floating-point column matrix.
+     */
+    fun asColumnMatrix(): FloatMatrix
 }

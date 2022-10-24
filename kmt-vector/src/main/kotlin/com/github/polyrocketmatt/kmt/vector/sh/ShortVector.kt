@@ -18,6 +18,8 @@
 
 package com.github.polyrocketmatt.kmt.vector.sh
 
+import com.github.polyrocketmatt.kmt.matrix.Matrix
+import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.bl.BooleanVector
 import com.github.polyrocketmatt.kmt.vector.db.DoubleVector
@@ -34,7 +36,7 @@ fun ShortVector.int() = this.asInt()
  *
  * Represents a mutable, n-dimensional vector of shorts.
  */
-interface ShortVector : Vector<Short> {
+interface ShortVector : Vector<Short>, Matrix<Short> {
 
     /**
      * Get the vector as a floating point vector.
@@ -63,4 +65,18 @@ interface ShortVector : Vector<Short> {
      * @return The vector as a boolean vector.
      */
     fun asBoolean(): BooleanVector
+
+    /**
+     * Get the vector as a short row matrix.
+     *
+     * @return The vector as a short row matrix.
+     */
+    fun asRowMatrix(): ShortMatrix
+
+    /**
+     * Get the vector as a short column matrix.
+     *
+     * @return The vector as a short column matrix.
+     */
+    fun asColumnMatrix(): ShortMatrix
 }

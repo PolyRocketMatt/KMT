@@ -1,6 +1,10 @@
 package com.github.polyrocketmatt.kmt.vector.bl
 
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
+import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.matrix.BooleanMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.vector.Swizzle4
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.db.Double4
@@ -10,14 +14,40 @@ import com.github.polyrocketmatt.kmt.vector.it.Int4
 import com.github.polyrocketmatt.kmt.vector.sh.Short4
 import java.lang.UnsupportedOperationException
 
+/**
+ * Convert a boolean matrix to a boolean vector.
+ *
+ * @return A boolean vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix does contain have 4 elements.
+ */
+fun BooleanMatrix.toBool4(): Bool4 {
+    complies("Cannot create a Bool4 from a BooleanMatrix with ${this.data.size} elements!") { this.data.size == 4 }
+    return Bool4(this.data[0], this.data[1], this.data[2], this.data[3])
+}
+
 class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) : Tuple4<Boolean>(arrayOf(x, y, z, w)), BooleanVector, Swizzle4 {
 
     constructor() : this(false, false, false, false)
     constructor(other: Bool4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Boolean) : this(x, x, x, x)
 
-    operator fun plus(other: Bool4) = Bool4(x || other.x, y || other.y, z || other.z, w || other.w)
-    operator fun times(other: Bool4) = Bool4(x && other.x, y && other.y, z && other.z, w && other.w)
+    operator fun plus(other: Bool4): Bool4 = Bool4(x || other.x, y || other.y, z || other.z, w || other.w)
+    operator fun times(other: Bool4): Bool4 = Bool4(x && other.x, y && other.y, z && other.z, w && other.w)
+
+    override fun plus(value: Boolean): Bool4 = Bool4(x || value, y || value, z || value, w || value)
+
+    override fun minus(value: Boolean): Bool4 = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+
+    override fun times(value: Boolean): Bool4 = Bool4(x && value, y && value, z && value, w && value)
+
+    override fun div(value: Boolean): Bool4 = throw UnsupportedOperationException("Cannot divide a boolean from a boolean vector")
+
+    override fun plusAssign(value: Boolean) { x = x || value; y = y || value; z = z || value; w = w || value }
+
+    override fun minusAssign(value: Boolean) = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+
+    override fun timesAssign(value: Boolean) { x = x && value; y = y && value; z = z && value; w = w && value }
+    override fun divAssign(value: Boolean) = throw UnsupportedOperationException("Cannot divide a boolean from a boolean vector")
 
     override fun length(): Float = throw UnsupportedOperationException("Cannot get length of a boolean vector")
     override fun lengthDouble(): Double = throw UnsupportedOperationException("Cannot get length of a boolean vector")
@@ -61,6 +91,8 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) : Tuple4<Boolean>(ar
     override fun asDouble(): Double4 = Double4(if (x) 1.0 else 0.0, if (y) 1.0 else 0.0, if (z) 1.0 else 0.0, if (w) 1.0 else 0.0)
     override fun asInt(): Int4 = Int4(if (x) 1 else 0, if (y) 1 else 0, if (z) 1 else 0, if (w) 1 else 0)
     override fun asShort(): Short4 = Short4(if (x) 1 else 0, if (y) 1 else 0, if (z) 1 else 0, if (w) 1 else 0)
+    override fun asRowMatrix(): BooleanMatrix = data.toMatrix(intArrayOf(1, 4))
+    override fun asColumnMatrix(): BooleanMatrix = data.toMatrix(intArrayOf(4, 1))
 
     override fun xy(): Bool2 = Bool2(x, y)
     override fun xz(): Bool2 = Bool2(x, z)
@@ -128,4 +160,32 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) : Tuple4<Boolean>(ar
     override fun wwww(): Bool4 = Bool4(w, w, w, w)
 
     override fun copyOf(): Bool4 = Bool4(x, y, z, w)
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
+    override fun get(i: Int): Boolean = data[i]
+    override fun get(row: Int, col: Int): Boolean = throw UnsupportedOperationException("Bool4 is considered a vector")
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
+    override fun set(i: Int, value: Boolean) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        3 -> w = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Bool4")
+    }
+    override fun set(row: Int, col: Int, value: Boolean) = throw UnsupportedOperationException("Bool4 is considered a vector")
+
+    override fun transpose(): Bool4 = this
+
+    override fun trace(): Boolean = throw UnsupportedOperationException("Cannot get trace of a boolean vector")
+
+    override fun diag(): Matrix<Boolean> = throw UnsupportedOperationException("Cannot get diagonal of a boolean vector")
+
+    override fun concatHorizontal(other: Matrix<Boolean>): Matrix<Boolean> = throw UnsupportedOperationException("Cannot concatenate a boolean vector horizontally")
+
+    override fun concatVertical(other: Matrix<Boolean>): Matrix<Boolean> = throw UnsupportedOperationException("Cannot concatenate a boolean vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

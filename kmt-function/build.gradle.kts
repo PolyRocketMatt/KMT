@@ -9,6 +9,7 @@ version = findProperty("kmt.version") ?: "0.0.1"
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
+    implementation(project(":kmt-matrix"))
     implementation(project(":kmt-vector"))
     implementation(project(":kmt-interval"))
     implementation(project(":kmt-trigonometry"))

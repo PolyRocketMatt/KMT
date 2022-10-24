@@ -18,6 +18,8 @@
 
 package com.github.polyrocketmatt.kmt.vector.it
 
+import com.github.polyrocketmatt.kmt.matrix.IntMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.bl.BooleanVector
 import com.github.polyrocketmatt.kmt.vector.db.DoubleVector
@@ -34,7 +36,7 @@ fun IntVector.short() = this.asShort()
  *
  * Represents an n-dimensional vector of integers.
  */
-interface IntVector : Vector<Int> {
+interface IntVector : Vector<Int>, Matrix<Int> {
 
     /**
      * Get the vector as a floating point vector.
@@ -63,4 +65,18 @@ interface IntVector : Vector<Int> {
      * @return The vector as a boolean vector.
      */
     fun asBoolean(): BooleanVector
+
+    /**
+     * Get the vector as an int row matrix.
+     *
+     * @return The vector as an int row matrix.
+     */
+    fun asRowMatrix(): IntMatrix
+
+    /**
+     * Get the vector as an int column matrix.
+     *
+     * @return The vector as an int column matrix.
+     */
+    fun asColumnMatrix(): IntMatrix
 }
