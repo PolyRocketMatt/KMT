@@ -3,13 +3,11 @@ plugins {
     `java-library`
 }
 
-description = "Module for 1-dimensional matrices (or vectors)"
+description = "Module that contains core concepts of group theory"
 
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
-    implementation(project(":kmt-matrix"))
-    implementation(project(":kmt-trigonometry"))
 }
 
 tasks.getByName<Test>("test") {
@@ -31,14 +29,14 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "com.github.polyrocketmatt"
-            artifactId = "kmt-vector"
+            artifactId = "kmt-group"
             version = findProperty("kmt.version") as String? ?: "0.0.1"
 
             from(components["java"])
 
             pom {
-                name.set("KMT Vector")
-                description.set("Module for 1-dimensional matrices (or vectors)")
+                name.set("KMT Group")
+                description.set("Module that contains core concepts of group theory")
                 url.set("https://github.com/PolyRocketMatt/KMT")
 
                 licenses {

@@ -21,3 +21,4 @@ gradleEnterprise {
         }
     }
 }
+include("kmt-group")
