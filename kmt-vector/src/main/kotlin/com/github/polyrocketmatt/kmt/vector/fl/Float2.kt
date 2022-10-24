@@ -28,6 +28,10 @@ import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
+import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -38,6 +42,17 @@ import com.github.polyrocketmatt.kmt.vector.db.Double2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
 import com.github.polyrocketmatt.kmt.vector.sh.ShortVector
+
+/**
+ * Convert a floating-point matrix to a floating-point vector.
+ *
+ * @return A floating-point vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 2x1 or 1x2 matrix.
+ */
+fun FloatMatrix.toFloat2(): Float2 {
+    complies("Cannot create a Float2 from a FloatMatrix with ${this.data.size} elements!") { this.data.size == 2 }
+    return Float2(this.data[0], this.data[1])
+}
 
 operator fun Int.plus(other: Float2): Float2 = Float2(this + other.x, this + other.y)
 operator fun Int.minus(other: Float2): Float2 = Float2(this - other.x, this - other.y)
@@ -94,37 +109,35 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
     operator fun times(other: Short2) = Float2(x * other.x, y * other.y)
     operator fun div(other: Short2) = Float2(x / other.x, y / other.y)
 
-    operator fun plusAssign(other: Float2) {
-        println("PLUS > $other"); x += other.x; y += other.y
-    }
+    operator fun plusAssign(other: Float2) { x += other.x; y += other.y }
     operator fun minusAssign(other: Float2) { x -= other.x; y -= other.y }
     operator fun timesAssign(other: Float2) { x *= other.x; y *= other.y }
     operator fun divAssign(other: Float2) { x /= other.x; y /= other.y }
 
-    operator fun plus(other: Int) = Float2(x + other, y + other)
-    operator fun minus(other: Int) = Float2(x - other, y - other)
-    operator fun times(other: Int) = Float2(x * other, y * other)
-    operator fun div(other: Int) = Float2(x / other, y / other)
+    operator fun plus(value: Int) = Float2(x + value, y + value)
+    operator fun minus(value: Int) = Float2(x - value, y - value)
+    operator fun times(value: Int) = Float2(x * value, y * value)
+    operator fun div(value: Int) = Float2(x / value, y / value)
 
-    operator fun plus(other: Float) = Float2(x + other, y + other)
-    operator fun minus(other: Float) = Float2(x - other, y - other)
-    operator fun times(other: Float) = Float2(x * other, y * other)
-    operator fun div(other: Float) = Float2(x / other, y / other)
+    override operator fun plus(value: Float) = Float2(x + value, y + value)
+    override operator fun minus(value: Float) = Float2(x - value, y - value)
+    override operator fun times(value: Float) = Float2(x * value, y * value)
+    override operator fun div(value: Float) = Float2(x / value, y / value)
 
-    operator fun plus(other: Double) = Double2(x + other, y + other)
-    operator fun minus(other: Double) = Double2(x - other, y - other)
-    operator fun times(other: Double) = Double2(x * other, y * other)
-    operator fun div(other: Double) = Double2(x / other, y / other)
+    operator fun plus(value: Double) = Double2(x + value, y + value)
+    operator fun minus(value: Double) = Double2(x - value, y - value)
+    operator fun times(value: Double) = Double2(x * value, y * value)
+    operator fun div(value: Double) = Double2(x / value, y / value)
 
-    operator fun plus(other: Short) = Float2(x + other, y + other)
-    operator fun minus(other: Short) = Float2(x - other, y - other)
-    operator fun times(other: Short) = Float2(x * other, y * other)
-    operator fun div(other: Short) = Float2(x / other, y / other)
+    operator fun plus(value: Short) = Float2(x + value, y + value)
+    operator fun minus(value: Short) = Float2(x - value, y - value)
+    operator fun times(value: Short) = Float2(x * value, y * value)
+    operator fun div(value: Short) = Float2(x / value, y / value)
 
-    operator fun plusAssign(other: Float) { x += other; y += other }
-    operator fun minusAssign(other: Float) { x -= other; y -= other }
-    operator fun timesAssign(other: Float) { x *= other; y *= other }
-    operator fun divAssign(other: Float) { x /= other; y /= other }
+    override operator fun plusAssign(value: Float) { x += value; y += value }
+    override operator fun minusAssign(value: Float) { x -= value; y -= value }
+    override operator fun timesAssign(value: Float) { x *= value; y *= value }
+    override operator fun divAssign(value: Float) { x /= value; y /= value }
 
     override fun length(): Float = (x * x + y * y).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y).dsqrt()
@@ -196,6 +209,8 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
     override fun asInt(): Int2 = Int2(x.toInt(), y.toInt())
     override fun asShort(): ShortVector = Short2(x.toInt().toShort(), y.toInt().toShort())
     override fun asBoolean(): Bool2 = Bool2(x != 0.0f, y != 0.0f)
+    override fun asRowMatrix(): FloatMatrix = data.toMatrix(intArrayOf(1, 2))
+    override fun asColumnMatrix(): FloatMatrix = data.toMatrix(intArrayOf(2, 1))
 
     override fun xy(): Float2 = this
     override fun yx(): Float2 = Float2(y, x)
@@ -203,4 +218,30 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
     override fun yy(): Float2 = Float2(y, y)
 
     override fun copyOf(): Float2 = Float2(x, y)
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
+    override fun get(i: Int): Float = data[i]
+    override fun get(row: Int, col: Int): Float = throw UnsupportedOperationException("Float2 is considered a vector")
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
+    override fun set(i: Int, value: Float) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Float2")
+    }
+    override fun set(row: Int, col: Int, value: Float) = throw UnsupportedOperationException("Float2 is considered a vector")
+
+    override fun transpose(): Float2 = this
+
+    override fun trace(): Float = throw UnsupportedOperationException("Cannot get trace of a floating-point vector")
+
+    override fun diag(): Matrix<Float> = throw UnsupportedOperationException("Cannot get diagonal of a floating-point vector")
+
+    override fun concatHorizontal(other: Matrix<Float>): Matrix<Float> = throw UnsupportedOperationException("Cannot concatenate a floating-point vector horizontally")
+
+    override fun concatVertical(other: Matrix<Float>): Matrix<Float> = throw UnsupportedOperationException("Cannot concatenate a floating-point vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

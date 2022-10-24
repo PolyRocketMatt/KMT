@@ -23,6 +23,10 @@ import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.intPow
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
+import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.matrix.Matrix
+import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -32,6 +36,17 @@ import com.github.polyrocketmatt.kmt.vector.bl.Bool4
 import com.github.polyrocketmatt.kmt.vector.db.Double4
 import com.github.polyrocketmatt.kmt.vector.fl.Float4
 import com.github.polyrocketmatt.kmt.vector.it.Int4
+
+/**
+ * Convert a short matrix to a short vector.
+ *
+ * @return A short vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix does not contain 4 elements.
+ */
+fun ShortMatrix.toShort4(): Short4 {
+    complies("Cannot create a Short4 from a ShortMatrix with ${this.data.size} elements!") { this.data.size == 4 }
+    return Short4(this.data[0], this.data[1], this.data[2], this.data[3])
+}
 
 operator fun Int.plus(other: Short4): Int4 = Int4(this + other.x, this + other.y, this + other.z, this + other.w)
 operator fun Int.minus(other: Short4): Int4 = Int4(this - other.x, this - other.y, this - other.z, this - other.w)
@@ -95,30 +110,30 @@ class Short4(x: Short, y: Short, z: Short, w: Short) : Tuple4<Short>(arrayOf(x, 
     operator fun timesAssign(other: Short4) { x = (x * other.x).toShort(); y = (y * other.y).toShort(); z = (z * other.z).toShort(); w = (w * other.w).toShort() }
     operator fun divAssign(other: Short4) { x = (x / other.x).toShort(); y = (y / other.y).toShort(); z = (z / other.z).toShort(); w = (w / other.w).toShort() }
 
-    operator fun plus(other: Int) = Int4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Int) = Int4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Int) = Int4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Int) = Int4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Int) = Int4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Int) = Int4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Int) = Int4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Int) = Int4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Float) = Float4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Float) = Float4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Float) = Float4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Float) = Float4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Float) = Float4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Float) = Float4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Float) = Float4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Float) = Float4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Double) = Double4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Double) = Double4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Double) = Double4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Double) = Double4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Double) = Double4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Double) = Double4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Double) = Double4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Double) = Double4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Short) = Int4(x + other, y + other, z + other, w + other).asShort()
-    operator fun minus(other: Short) = Int4(x - other, y - other, z - other, w - other).asShort()
-    operator fun times(other: Short) = Int4(x * other, y * other, z * other, w * other).asShort()
-    operator fun div(other: Short) = Int4(x / other, y / other, z / other, w / other).asShort()
+    override operator fun plus(value: Short) = Int4(x + value, y + value, z + value, w + value).asShort()
+    override operator fun minus(value: Short) = Int4(x - value, y - value, z - value, w - value).asShort()
+    override operator fun times(value: Short) = Int4(x * value, y * value, z * value, w * value).asShort()
+    override operator fun div(value: Short) = Int4(x / value, y / value, z / value, w / value).asShort()
 
-    operator fun plusAssign(other: Short) { x = (x + other).toShort(); y = (y + other).toShort(); z = (z + other).toShort(); w = (w + other).toShort() }
-    operator fun minusAssign(other: Short) { x = (x - other).toShort(); y = (y - other).toShort(); z = (z - other).toShort(); w = (w - other).toShort() }
-    operator fun timesAssign(other: Short) { x = (x * other).toShort(); y = (y * other).toShort(); z = (z * other).toShort(); w = (w * other).toShort() }
-    operator fun divAssign(other: Short) { x = (x / other).toShort(); y = (y / other).toShort(); z = (z / other).toShort(); w = (w / other).toShort() }
+    override operator fun plusAssign(value: Short) { x = (x + value).toShort(); y = (y + value).toShort(); z = (z + value).toShort(); w = (w + value).toShort() }
+    override operator fun minusAssign(value: Short) { x = (x - value).toShort(); y = (y - value).toShort(); z = (z - value).toShort(); w = (w - value).toShort() }
+    override operator fun timesAssign(value: Short) { x = (x * value).toShort(); y = (y * value).toShort(); z = (z * value).toShort(); w = (w * value).toShort() }
+    override operator fun divAssign(value: Short) { x = (x / value).toShort(); y = (y / value).toShort(); z = (z / value).toShort(); w = (w / value).toShort() }
 
     override fun length(): Float = (x * x + y * y + z * z).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y + z * z).dsqrt()
@@ -195,6 +210,8 @@ class Short4(x: Short, y: Short, z: Short, w: Short) : Tuple4<Short>(arrayOf(x, 
     override fun asDouble(): Double4 = Double4(x.toDouble(), y.toDouble(), z.toDouble(), w.toDouble())
     override fun asInt(): Int4 = Int4(x.toInt(), y.toInt(), z.toInt(), w.toInt())
     override fun asBoolean(): Bool4 = Bool4(x != 0.toShort(), y != 0.toShort(), z != 0.toShort(), w != 0.toShort())
+    override fun asRowMatrix(): ShortMatrix = data.toMatrix(intArrayOf(1, 4))
+    override fun asColumnMatrix(): ShortMatrix = data.toMatrix(intArrayOf(4, 1))
 
     override fun xy(): Short2 = Short2(x, y)
     override fun xz(): Short2 = Short2(x, z)
@@ -262,4 +279,32 @@ class Short4(x: Short, y: Short, z: Short, w: Short) : Tuple4<Short>(arrayOf(x, 
     override fun wwww(): Short4 = Short4(w, w, w, w)
 
     override fun copyOf(): Short4 = Short4(x, y, z, w)
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
+    override fun get(i: Int): Short = data[i]
+    override fun get(row: Int, col: Int): Short = throw UnsupportedOperationException("Short4 is considered a vector")
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
+    override fun set(i: Int, value: Short) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        3 -> w = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Short4")
+    }
+    override fun set(row: Int, col: Int, value: Short) = throw UnsupportedOperationException("Short4 is considered a vector")
+
+    override fun transpose(): Short4 = this
+
+    override fun trace(): Short = throw UnsupportedOperationException("Cannot get trace of a short vector")
+
+    override fun diag(): Matrix<Short> = throw UnsupportedOperationException("Cannot get diagonal of a short vector")
+
+    override fun concatHorizontal(other: Matrix<Short>): Matrix<Short> = throw UnsupportedOperationException("Cannot concatenate a short vector horizontally")
+
+    override fun concatVertical(other: Matrix<Short>): Matrix<Short> = throw UnsupportedOperationException("Cannot concatenate a short vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

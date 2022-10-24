@@ -100,6 +100,11 @@ interface MutableMemoryStorage<T> : Iterable<T> {
     operator fun minusAssign(other: MutableMemoryStorage<T>)
     operator fun timesAssign(other: MutableMemoryStorage<T>)
     operator fun divAssign(other: MutableMemoryStorage<T>)
+
+    operator fun plus(other: MutableMemoryStorage<T>): MutableMemoryStorage<T>
+    operator fun minus(other: MutableMemoryStorage<T>): MutableMemoryStorage<T>
+    operator fun times(other: MutableMemoryStorage<T>): MutableMemoryStorage<T>
+    operator fun div(other: MutableMemoryStorage<T>): MutableMemoryStorage<T>
 }
 
 abstract class MemoryStorage<T> : MutableMemoryStorage<T> {
@@ -152,6 +157,22 @@ class BooleanMemoryStorage(override val data: BooleanArray) : MemoryStorage<Bool
 
     override fun divAssign(other: MutableMemoryStorage<Boolean>) = throw UnsupportedOperationException("Division is not supported for BooleanMemoryStorage")
 
+    override fun plus(other: MutableMemoryStorage<Boolean>): MutableMemoryStorage<Boolean> {
+        val result = BooleanMemoryStorage(data.copyOf())
+        result += other
+        return result
+    }
+
+    override fun minus(other: MutableMemoryStorage<Boolean>): MutableMemoryStorage<Boolean> = throw UnsupportedOperationException("Subtraction is not supported for BooleanMemoryStorage")
+
+    override fun times(other: MutableMemoryStorage<Boolean>): MutableMemoryStorage<Boolean> {
+        val result = BooleanMemoryStorage(data.copyOf())
+        result *= other
+        return result
+    }
+
+    override fun div(other: MutableMemoryStorage<Boolean>): MutableMemoryStorage<Boolean> = throw UnsupportedOperationException("Division is not supported for BooleanMemoryStorage")
+
     override fun toString(): String = data.contentToString()
 }
 
@@ -196,6 +217,30 @@ class DoubleMemoryStorage(override val data: DoubleArray) : MemoryStorage<Double
     override fun divAssign(other: MutableMemoryStorage<Double>) {
         for (i in indices)
             data[i] = data[i] / other[i]
+    }
+
+    override fun plus(other: MutableMemoryStorage<Double>): MutableMemoryStorage<Double> {
+        val result = DoubleMemoryStorage(data.copyOf())
+        result += other
+        return result
+    }
+
+    override fun minus(other: MutableMemoryStorage<Double>): MutableMemoryStorage<Double> {
+        val result = DoubleMemoryStorage(data.copyOf())
+        result -= other
+        return result
+    }
+
+    override fun times(other: MutableMemoryStorage<Double>): MutableMemoryStorage<Double> {
+        val result = DoubleMemoryStorage(data.copyOf())
+        result *= other
+        return result
+    }
+
+    override fun div(other: MutableMemoryStorage<Double>): MutableMemoryStorage<Double> {
+        val result = DoubleMemoryStorage(data.copyOf())
+        result /= other
+        return result
     }
 
     override fun toString(): String = data.contentToString()
@@ -244,6 +289,30 @@ class FloatMemoryStorage(override val data: FloatArray) : MemoryStorage<Float>()
             data[i] = data[i] / other[i]
     }
 
+    override fun plus(other: MutableMemoryStorage<Float>): MutableMemoryStorage<Float> {
+        val result = FloatMemoryStorage(data.copyOf())
+        result += other
+        return result
+    }
+
+    override fun minus(other: MutableMemoryStorage<Float>): MutableMemoryStorage<Float> {
+        val result = FloatMemoryStorage(data.copyOf())
+        result -= other
+        return result
+    }
+
+    override fun times(other: MutableMemoryStorage<Float>): MutableMemoryStorage<Float> {
+        val result = FloatMemoryStorage(data.copyOf())
+        result *= other
+        return result
+    }
+
+    override fun div(other: MutableMemoryStorage<Float>): MutableMemoryStorage<Float> {
+        val result = FloatMemoryStorage(data.copyOf())
+        result /= other
+        return result
+    }
+
     override fun toString(): String = data.contentToString()
 }
 
@@ -290,6 +359,30 @@ class IntMemoryStorage(override val data: IntArray) : MemoryStorage<Int>() {
             data[i] = data[i] / other[i]
     }
 
+    override fun plus(other: MutableMemoryStorage<Int>): MutableMemoryStorage<Int> {
+        val result = IntMemoryStorage(data.copyOf())
+        result += other
+        return result
+    }
+
+    override fun minus(other: MutableMemoryStorage<Int>): MutableMemoryStorage<Int> {
+        val result = IntMemoryStorage(data.copyOf())
+        result -= other
+        return result
+    }
+
+    override fun times(other: MutableMemoryStorage<Int>): MutableMemoryStorage<Int> {
+        val result = IntMemoryStorage(data.copyOf())
+        result *= other
+        return result
+    }
+
+    override fun div(other: MutableMemoryStorage<Int>): MutableMemoryStorage<Int> {
+        val result = IntMemoryStorage(data.copyOf())
+        result /= other
+        return result
+    }
+
     override fun toString(): String = data.contentToString()
 }
 
@@ -334,6 +427,30 @@ class ShortMemoryStorage(override val data: ShortArray) : MemoryStorage<Short>()
     override fun divAssign(other: MutableMemoryStorage<Short>) {
         for (i in indices)
             data[i] = (data[i] / other[i]).toShort()
+    }
+
+    override fun plus(other: MutableMemoryStorage<Short>): MutableMemoryStorage<Short> {
+        val result = ShortMemoryStorage(data.copyOf())
+        result += other
+        return result
+    }
+
+    override fun minus(other: MutableMemoryStorage<Short>): MutableMemoryStorage<Short> {
+        val result = ShortMemoryStorage(data.copyOf())
+        result -= other
+        return result
+    }
+
+    override fun times(other: MutableMemoryStorage<Short>): MutableMemoryStorage<Short> {
+        val result = ShortMemoryStorage(data.copyOf())
+        result *= other
+        return result
+    }
+
+    override fun div(other: MutableMemoryStorage<Short>): MutableMemoryStorage<Short> {
+        val result = ShortMemoryStorage(data.copyOf())
+        result /= other
+        return result
     }
 
     override fun toString(): String = data.contentToString()

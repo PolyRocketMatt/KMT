@@ -57,6 +57,14 @@ open class Tuple<T>(final override val data: Array<T>) : MemoryStorage<T>() {
 
     open override fun divAssign(other: MutableMemoryStorage<T>) = throw UnsupportedOperationException("Division is not supported for Tuple<${data[0]!!::class.simpleName}>")
 
+    open override fun plus(other: MutableMemoryStorage<T>): MutableMemoryStorage<T> = throw UnsupportedOperationException("Addition is not supported for Tuple<${data[0]!!::class.simpleName}>")
+
+    open override fun minus(other: MutableMemoryStorage<T>): MutableMemoryStorage<T> = throw UnsupportedOperationException("Subtraction is not supported for Tuple<${data[0]!!::class.simpleName}>")
+
+    open override fun times(other: MutableMemoryStorage<T>): MutableMemoryStorage<T> = throw UnsupportedOperationException("Multiplication is not supported for Tuple<${data[0]!!::class.simpleName}>")
+
+    open override fun div(other: MutableMemoryStorage<T>): MutableMemoryStorage<T> = throw UnsupportedOperationException("Division is not supported for Tuple<${data[0]!!::class.simpleName}>")
+
     override fun toString(): String = data.contentToString()
 }
 

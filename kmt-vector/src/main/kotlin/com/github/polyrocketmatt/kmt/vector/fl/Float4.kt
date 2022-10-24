@@ -28,6 +28,10 @@ import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple4
+import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -37,6 +41,17 @@ import com.github.polyrocketmatt.kmt.vector.bl.Bool4
 import com.github.polyrocketmatt.kmt.vector.db.Double4
 import com.github.polyrocketmatt.kmt.vector.it.Int4
 import com.github.polyrocketmatt.kmt.vector.sh.Short4
+
+/**
+ * Convert a floating-point matrix to a floating-point vector.
+ *
+ * @return A floating-point vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix does not contain 4 elements.
+ */
+fun FloatMatrix.toFloat4(): Float4 {
+    complies("Cannot create a Float4 from a FloatMatrix with ${this.data.size} elements!") { this.data.size == 4 }
+    return Float4(this.data[0], this.data[1], this.data[2], this.data[3])
+}
 
 operator fun Int.plus(other: Float4): Float4 = Float4(this + other.x, this + other.y, this + other.z, this + other.w)
 operator fun Int.minus(other: Float4): Float4 = Float4(this - other.x, this - other.y, this - other.z, this - other.w)
@@ -100,30 +115,30 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
     operator fun timesAssign(other: Float4) { x *= other.x; y *= other.y; z *= other.z; w *= other.w }
     operator fun divAssign(other: Float4) { x /= other.x; y /= other.y; z /= other.z; w /= other.w }
 
-    operator fun plus(other: Int) = Float4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Int) = Float4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Int) = Float4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Int) = Float4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Int) = Float4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Int) = Float4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Int) = Float4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Int) = Float4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Float) = Float4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Float) = Float4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Float) = Float4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Float) = Float4(x / other, y / other, z / other, w / other)
+    override operator fun plus(value: Float) = Float4(x + value, y + value, z + value, w + value)
+    override operator fun minus(value: Float) = Float4(x - value, y - value, z - value, w - value)
+    override operator fun times(value: Float) = Float4(x * value, y * value, z * value, w * value)
+    override operator fun div(value: Float) = Float4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Double) = Double4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Double) = Double4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Double) = Double4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Double) = Double4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Double) = Double4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Double) = Double4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Double) = Double4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Double) = Double4(x / value, y / value, z / value, w / value)
 
-    operator fun plus(other: Short) = Float4(x + other, y + other, z + other, w + other)
-    operator fun minus(other: Short) = Float4(x - other, y - other, z - other, w - other)
-    operator fun times(other: Short) = Float4(x * other, y * other, z * other, w * other)
-    operator fun div(other: Short) = Float4(x / other, y / other, z / other, w / other)
+    operator fun plus(value: Short) = Float4(x + value, y + value, z + value, w + value)
+    operator fun minus(value: Short) = Float4(x - value, y - value, z - value, w - value)
+    operator fun times(value: Short) = Float4(x * value, y * value, z * value, w * value)
+    operator fun div(value: Short) = Float4(x / value, y / value, z / value, w / value)
 
-    operator fun plusAssign(other: Float) { x += other; y += other; z += other; w += other }
-    operator fun minusAssign(other: Float) { x -= other; y -= other; z -= other; w -= other }
-    operator fun timesAssign(other: Float) { x *= other; y *= other; z *= other; w *= other }
-    operator fun divAssign(other: Float) { x /= other; y /= other; z /= other; w /= other }
+    override operator fun plusAssign(value: Float) { x += value; y += value; z += value; w += value }
+    override operator fun minusAssign(value: Float) { x -= value; y -= value; z -= value; w -= value }
+    override operator fun timesAssign(value: Float) { x *= value; y *= value; z *= value; w *= value }
+    override operator fun divAssign(value: Float) { x /= value; y /= value; z /= value; w /= value }
 
     override fun length(): Float = (x * x + y * y + z * z).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y + z * z).dsqrt()
@@ -209,6 +224,8 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
     override fun asInt(): Int4 = Int4(x.toInt(), y.toInt(), z.toInt(), w.toInt())
     override fun asShort(): Short4 = Short4(x.toInt().toShort(), y.toInt().toShort(), z.toInt().toShort(), w.toInt().toShort())
     override fun asBoolean(): Bool4 = Bool4(x != 0.0f, y != 0.0f, z != 0.0f, w != 0.0f)
+    override fun asRowMatrix(): FloatMatrix = data.toMatrix(intArrayOf(1, 4))
+    override fun asColumnMatrix(): FloatMatrix = data.toMatrix(intArrayOf(4, 1))
 
     override fun xy(): Float2 = Float2(x, y)
     override fun xz(): Float2 = Float2(x, z)
@@ -276,4 +293,32 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
     override fun wwww(): Float4 = Float4(w, w, w, w)
 
     override fun copyOf(): Float4 = Float4(x, y, z, w)
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
+    override fun get(i: Int): Float = data[i]
+    override fun get(row: Int, col: Int): Float = throw UnsupportedOperationException("Float4 is considered a vector")
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
+    override fun set(i: Int, value: Float) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        2 -> z = value
+        3 -> w = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Float4")
+    }
+    override fun set(row: Int, col: Int, value: Float) = throw UnsupportedOperationException("Float4 is considered a vector")
+
+    override fun transpose(): Float4 = this
+
+    override fun trace(): Float = throw UnsupportedOperationException("Cannot get trace of a floating-point vector")
+
+    override fun diag(): Matrix<Float> = throw UnsupportedOperationException("Cannot get diagonal of a floating-point vector")
+
+    override fun concatHorizontal(other: Matrix<Float>): Matrix<Float> = throw UnsupportedOperationException("Cannot concatenate a floating-point vector horizontally")
+
+    override fun concatVertical(other: Matrix<Float>): Matrix<Float> = throw UnsupportedOperationException("Cannot concatenate a floating-point vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

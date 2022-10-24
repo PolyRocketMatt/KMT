@@ -4,8 +4,9 @@ include("kmt-interval")
 include("kmt-trigonometry")
 include("kmt-vector")
 include("kmt-function")
-include("kmt-algorithms")
 include("kmt-matrix")
+include("kmt-expr")
+include("kmt-linalg")
 
 plugins {
     id("com.gradle.enterprise") version("3.9")

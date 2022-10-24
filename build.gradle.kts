@@ -9,7 +9,6 @@ group = findProperty("kmt.group") ?: "com.github.polyrocketmatt"
 version = findProperty("kmt.version") ?: "0.0.1"
 
 dependencies {
-    mergedJar(project(":kmt-algorithms"))
     mergedJar(project(":kmt-common"))
     mergedJar(project(":kmt-function"))
     mergedJar(project(":kmt-interval"))

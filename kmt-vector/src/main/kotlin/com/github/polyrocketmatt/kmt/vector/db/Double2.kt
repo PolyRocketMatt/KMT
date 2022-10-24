@@ -28,6 +28,10 @@ import com.github.polyrocketmatt.kmt.common.smoothStep
 import com.github.polyrocketmatt.kmt.common.smootherStep
 import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple2
+import com.github.polyrocketmatt.kmt.common.utils.complies
+import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
+import com.github.polyrocketmatt.kmt.matrix.toMatrix
 import com.github.polyrocketmatt.kmt.trigonometry.COS
 import com.github.polyrocketmatt.kmt.trigonometry.SIN
 import com.github.polyrocketmatt.kmt.trigonometry.TAN
@@ -37,6 +41,17 @@ import com.github.polyrocketmatt.kmt.vector.bl.Bool2
 import com.github.polyrocketmatt.kmt.vector.fl.Float2
 import com.github.polyrocketmatt.kmt.vector.it.Int2
 import com.github.polyrocketmatt.kmt.vector.sh.Short2
+
+/**
+ * Convert a double matrix to a double vector.
+ *
+ * @return A double vector whose components are the elements of the matrix.
+ * @throws IllegalArgumentException if the matrix is not a 2x1 or 1x2 matrix.
+ */
+fun DoubleMatrix.toDouble2(): Double2 {
+    complies("Cannot create a Double2 from a DoubleMatrix with ${this.data.size} elements!") { this.data.size == 2 }
+    return Double2(this.data[0], this.data[1])
+}
 
 operator fun Int.plus(other: Double2): Double2 = Double2(this + other.x, this + other.y)
 operator fun Int.minus(other: Double2): Double2 = Double2(this - other.x, this - other.y)
@@ -73,55 +88,55 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     constructor(other: Double2) : this(other.x, other.y)
     constructor(x: Double) : this(x, x)
 
-    operator fun plus(other: Double2) = Double2(x + other.x, y + other.y)
-    operator fun minus(other: Double2) = Double2(x - other.x, y - other.y)
-    operator fun times(other: Double2) = Double2(x * other.x, y * other.y)
-    operator fun div(other: Double2) = Double2(x / other.x, y / other.y)
+    operator fun plus(other: Double2): Double2 = Double2(x + other.x, y + other.y)
+    operator fun minus(other: Double2): Double2 = Double2(x - other.x, y - other.y)
+    operator fun times(other: Double2): Double2 = Double2(x * other.x, y * other.y)
+    operator fun div(other: Double2): Double2 = Double2(x / other.x, y / other.y)
 
-    operator fun plus(other: Float2) = Double2(x + other.x, y + other.y)
-    operator fun minus(other: Float2) = Double2(x - other.x, y - other.y)
-    operator fun times(other: Float2) = Double2(x * other.x, y * other.y)
-    operator fun div(other: Float2) = Double2(x / other.x, y / other.y)
+    operator fun plus(other: Float2): Double2 = Double2(x + other.x, y + other.y)
+    operator fun minus(other: Float2): Double2 = Double2(x - other.x, y - other.y)
+    operator fun times(other: Float2): Double2 = Double2(x * other.x, y * other.y)
+    operator fun div(other: Float2): Double2 = Double2(x / other.x, y / other.y)
 
-    operator fun plus(other: Int2) = Double2(x + other.x, y + other.y)
-    operator fun minus(other: Int2) = Double2(x - other.x, y - other.y)
-    operator fun times(other: Int2) = Double2(x * other.x, y * other.y)
-    operator fun div(other: Int2) = Double2(x / other.x, y / other.y)
+    operator fun plus(other: Int2): Double2 = Double2(x + other.x, y + other.y)
+    operator fun minus(other: Int2): Double2 = Double2(x - other.x, y - other.y)
+    operator fun times(other: Int2): Double2 = Double2(x * other.x, y * other.y)
+    operator fun div(other: Int2): Double2 = Double2(x / other.x, y / other.y)
 
-    operator fun plus(other: Short2) = Double2(x + other.x, y + other.y)
-    operator fun minus(other: Short2) = Double2(x - other.x, y - other.y)
-    operator fun times(other: Short2) = Double2(x * other.x, y * other.y)
-    operator fun div(other: Short2) = Double2(x / other.x, y / other.y)
+    operator fun plus(other: Short2): Double2 = Double2(x + other.x, y + other.y)
+    operator fun minus(other: Short2): Double2 = Double2(x - other.x, y - other.y)
+    operator fun times(other: Short2): Double2 = Double2(x * other.x, y * other.y)
+    operator fun div(other: Short2): Double2 = Double2(x / other.x, y / other.y)
 
     operator fun plusAssign(other: Double2) { x += other.x; y += other.y }
     operator fun minusAssign(other: Double2) { x -= other.x; y -= other.y }
     operator fun timesAssign(other: Double2) { x *= other.x; y *= other.y }
     operator fun divAssign(other: Double2) { x /= other.x; y /= other.y }
 
-    operator fun plus(other: Int) = Double2(x + other, y + other)
-    operator fun minus(other: Int) = Double2(x - other, y - other)
-    operator fun times(other: Int) = Double2(x * other, y * other)
-    operator fun div(other: Int) = Double2(x / other, y / other)
+    operator fun plus(value: Int): Double2 = Double2(x + value, y + value)
+    operator fun minus(value: Int): Double2 = Double2(x - value, y - value)
+    operator fun times(value: Int): Double2 = Double2(x * value, y * value)
+    operator fun div(value: Int): Double2 = Double2(x / value, y / value)
 
-    operator fun plus(other: Float) = Double2(x + other, y + other)
-    operator fun minus(other: Float) = Double2(x - other, y - other)
-    operator fun times(other: Float) = Double2(x * other, y * other)
-    operator fun div(other: Float) = Double2(x / other, y / other)
+    operator fun plus(value: Float): Double2 = Double2(x + value, y + value)
+    operator fun minus(value: Float): Double2 = Double2(x - value, y - value)
+    operator fun times(value: Float): Double2 = Double2(x * value, y * value)
+    operator fun div(value: Float): Double2 = Double2(x / value, y / value)
 
-    operator fun plus(other: Double) = Double2(x + other, y + other)
-    operator fun minus(other: Double) = Double2(x - other, y - other)
-    operator fun times(other: Double) = Double2(x * other, y * other)
-    operator fun div(other: Double) = Double2(x / other, y / other)
+    override operator fun plus(value: Double): Double2 = Double2(x + value, y + value)
+    override operator fun minus(value: Double): Double2 = Double2(x - value, y - value)
+    override operator fun times(value: Double): Double2 = Double2(x * value, y * value)
+    override operator fun div(value: Double): Double2 = Double2(x / value, y / value)
 
-    operator fun plus(other: Short) = Double2(x + other, y + other)
-    operator fun minus(other: Short) = Double2(x - other, y - other)
-    operator fun times(other: Short) = Double2(x * other, y * other)
-    operator fun div(other: Short) = Double2(x / other, y / other)
+    operator fun plus(value: Short): Double2 = Double2(x + value, y + value)
+    operator fun minus(value: Short): Double2 = Double2(x - value, y - value)
+    operator fun times(value: Short): Double2 = Double2(x * value, y * value)
+    operator fun div(value: Short): Double2 = Double2(x / value, y / value)
 
-    operator fun plusAssign(other: Double) { x += other; y += other }
-    operator fun minusAssign(other: Double) { x -= other; y -= other }
-    operator fun timesAssign(other: Double) { x *= other; y *= other }
-    operator fun divAssign(other: Double) { x /= other; y /= other }
+    override operator fun plusAssign(value: Double) { x += value; y += value }
+    override operator fun minusAssign(value: Double) { x -= value; y -= value }
+    override operator fun timesAssign(value: Double) { x *= value; y *= value }
+    override operator fun divAssign(value: Double) { x /= value; y /= value }
 
     override fun length(): Float = (x * x + y * y).sqrt()
     override fun lengthDouble(): Double = (x * x + y * y).dsqrt()
@@ -193,6 +208,8 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     override fun asInt(): Int2 = Int2(x.toInt(), y.toInt())
     override fun asShort(): Short2 = Short2(x.toInt().toShort(), y.toInt().toShort())
     override fun asBoolean(): Bool2 = Bool2(x != 0.0, y != 0.0)
+    override fun asRowMatrix(): DoubleMatrix = data.toMatrix(intArrayOf(1, 2))
+    override fun asColumnMatrix(): DoubleMatrix = data.toMatrix(intArrayOf(2, 1))
 
     override fun xy(): Double2 = this
     override fun yx(): Double2 = Double2(y, x)
@@ -200,4 +217,30 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     override fun yy(): Double2 = Double2(y, y)
 
     override fun copyOf(): Double2 = Double2(x, y)
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
+    override fun get(i: Int): Double = data[i]
+    override fun get(row: Int, col: Int): Double = throw UnsupportedOperationException("Double2 is considered a vector")
+
+    @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
+    override fun set(i: Int, value: Double) = when (i) {
+        0 -> x = value
+        1 -> y = value
+        else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Double2")
+    }
+    override fun set(row: Int, col: Int, value: Double) = throw UnsupportedOperationException("Double2 is considered a vector")
+
+    override fun transpose(): Double2 = this
+
+    override fun trace(): Double = throw UnsupportedOperationException("Cannot get trace of a double vector")
+
+    override fun diag(): Matrix<Double> = throw UnsupportedOperationException("Cannot get diagonal of a double vector")
+
+    override fun concatHorizontal(other: Matrix<Double>): Matrix<Double> = throw UnsupportedOperationException("Cannot concatenate a double vector horizontally")
+
+    override fun concatVertical(other: Matrix<Double>): Matrix<Double> = throw UnsupportedOperationException("Cannot concatenate a double vector vertically")
+
+    override fun isScalar(): Boolean = false
+
+    override fun isSquare(): Boolean = false
 }

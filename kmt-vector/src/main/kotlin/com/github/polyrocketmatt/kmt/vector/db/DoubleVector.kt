@@ -18,6 +18,8 @@
 
 package com.github.polyrocketmatt.kmt.vector.db
 
+import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
+import com.github.polyrocketmatt.kmt.matrix.Matrix
 import com.github.polyrocketmatt.kmt.vector.Vector
 import com.github.polyrocketmatt.kmt.vector.bl.BooleanVector
 import com.github.polyrocketmatt.kmt.vector.fl.FloatVector
@@ -34,7 +36,7 @@ fun DoubleVector.short() = this.asShort()
  *
  * Represents an n-dimensional vector of doubles.
  */
-interface DoubleVector : Vector<Double> {
+interface DoubleVector : Vector<Double>, Matrix<Double> {
 
     /**
      * Get a vector with floored components.
@@ -118,4 +120,18 @@ interface DoubleVector : Vector<Double> {
      * @return The vector as a boolean vector.
      */
     fun asBoolean(): BooleanVector
+
+    /**
+     * Get the vector as a double row matrix.
+     *
+     * @return The vector as a double row matrix.
+     */
+    fun asRowMatrix(): DoubleMatrix
+
+    /**
+     * Get the vector as a double column matrix.
+     *
+     * @return The vector as a double column matrix.
+     */
+    fun asColumnMatrix(): DoubleMatrix
 }
