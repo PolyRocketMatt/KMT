@@ -1,0 +1,466 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Monoid</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../../index.html">
+<span>KMT</span>            </a>    </div>
+    <div>0.1.0-SNAPSHOT
+    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="kmt-group::com.github.polyrocketmatt.kmt.group.algebra/Monoid///PointingToDeclaration//-605877098">
+  <div class="breadcrumbs"><a href="../../index.html">kmt-group</a><span class="delimiter">/</span><a href="../index.html">com.github.polyrocketmatt.kmt.group.algebra</a><span class="delimiter">/</span><a href="index.html">Monoid</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Monoid</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">Monoid</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;identity<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;operation<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>a<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span><span class="token keyword"></span>b<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;elements<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span> : <a href="../-semigroup/index.html">Semigroup</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt; </span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h4 class="">Author</h4><p class="paragraph">Matthias Kovacic</p><h4 class="">Since</h4><p class="paragraph">0.1.0</p><p class="paragraph">Represents a monoid for a set of elements. A monoid has the following properties:</p><ul><li><p class="paragraph">Associativity</p></li><li><p class="paragraph">Closure</p></li><li><p class="paragraph">Identity</p></li></ul></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Parameters">Parameters</button><button class="section-tab" data-togglable="Inheritors">Inheritors</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Parameters</h2>
+      <div data-togglable="Parameters">
+        <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>T</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The type of the elements in the monoid.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>identity</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The identity element of the monoid.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>operation</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The binary operation of the monoid.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>elements</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The elements of the monoid.</p></div></div></div></div></div></div></div></div></div>
+      </div>
+      <h2 class="tabbedcontent">Constructors</h2>
+      <div class="table" data-togglable="Constructors"><a data-name="-171637874%2FConstructors%2F-605877098" anchor-label="Monoid" id="-171637874%2FConstructors%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-monoid.html"><span><span>Monoid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-171637874%2FConstructors%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="-monoid.html"><span class="token function">Monoid</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">identity<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter ">operation<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>a<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span><span class="token keyword"></span>b<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1643046537%2FConstructors%2F-605877098" anchor-label="Monoid" id="1643046537%2FConstructors%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-monoid.html"><span><span>Monoid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1643046537%2FConstructors%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="-monoid.html"><span class="token function">Monoid</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;identity<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;operation<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>a<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span><span class="token keyword"></span>b<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">vararg </span>elements<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-270803711%2FConstructors%2F-605877098" anchor-label="Monoid" id="-270803711%2FConstructors%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-monoid.html"><span><span>Monoid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-270803711%2FConstructors%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="-monoid.html"><span class="token function">Monoid</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;identity<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;operation<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>a<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span><span class="token keyword"></span>b<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;elements<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html">Collection</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1648046618%2FConstructors%2F-605877098" anchor-label="Monoid" id="1648046618%2FConstructors%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-monoid.html"><span><span>Monoid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1648046618%2FConstructors%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="-monoid.html"><span class="token function">Monoid</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;identity<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;operation<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>a<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span><span class="token keyword"></span>b<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;set<span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1399615737%2FConstructors%2F-605877098" anchor-label="Monoid" id="1399615737%2FConstructors%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-monoid.html"><span><span>Monoid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1399615737%2FConstructors%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt; </span><a href="-monoid.html"><span class="token function">Monoid</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;identity<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;operation<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span>a<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span><span class="token keyword"></span>b<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;elements<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="187921754%2FFunctions%2F-605877098" anchor-label="card" id="187921754%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/card.html"><span><span>card</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="187921754%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/card.html"><span class="token function">card</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the cardinality (size) of the set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="2058825132%2FFunctions%2F-605877098" anchor-label="cartesianProduct" id="2058825132%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/cartesian-product.html"><span>cartesian</span><wbr><span><span>Product</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2058825132%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/cartesian-product.html">K</a><span class="token operator">&gt; </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/cartesian-product.html"><span class="token function">cartesianProduct</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">set<span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/cartesian-product.html">K</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/cartesian-product.html">K</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Compute the cartesian product of this set and another set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-368287051%2FFunctions%2F-605877098" anchor-label="checkIntegrity" id="-368287051%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="check-integrity.html"><span>check</span><wbr><span><span>Integrity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-368287051%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="check-integrity.html"><span class="token function">checkIntegrity</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="641249261%2FFunctions%2F-605877098" anchor-label="complement" id="641249261%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/complement.html"><span><span>complement</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="641249261%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/complement.html"><span class="token function">complement</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">universe<span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Compute the complement of this set given a universe set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1364127219%2FFunctions%2F-605877098" anchor-label="contains" id="1364127219%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/contains.html"><span><span>contains</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1364127219%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/contains.html"><span class="token function">contains</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">element<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Check if an element is a member of the set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1454378890%2FFunctions%2F-605877098" anchor-label="difference" id="-1454378890%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/difference.html"><span><span>difference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1454378890%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/difference.html"><span class="token function">difference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">set<span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Compute the difference of this set and another set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="2035118807%2FFunctions%2F-605877098" anchor-label="equals" id="2035118807%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/equals.html"><span><span>equals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2035118807%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/equals.html"><span class="token function">equals</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1532301601%2FFunctions%2F-605877098" anchor-label="forEach" id="1532301601%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html#1532301601%2FFunctions%2F-605877098"><span>for</span><wbr><span><span>Each</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1532301601%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html#1532301601%2FFunctions%2F-605877098"><span class="token function">forEach</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html">Consumer</a><span class="token operator">&lt;</span><span class="token keyword">in </span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1021428333%2FFunctions%2F-605877098" anchor-label="get" id="-1021428333%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="get.html"><span><span>get</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1021428333%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">a<span class="token operator">: </span><a href="index.html">T</a><span class="token punctuation">, </span></span><span class="parameter ">b<span class="token operator">: </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the result of the operation on two elements.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1431099439%2FFunctions%2F-605877098" anchor-label="hashCode" id="1431099439%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/hash-code.html"><span>hash</span><wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1431099439%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/hash-code.html"><span class="token function">hashCode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="969311484%2FFunctions%2F-605877098" anchor-label="identity" id="969311484%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="identity.html"><span><span>identity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="969311484%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="identity.html"><span class="token function">identity</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2005742486%2FFunctions%2F-605877098" anchor-label="intersection" id="-2005742486%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/intersection.html"><span><span>intersection</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2005742486%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/intersection.html"><span class="token function">intersection</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">set<span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Compute the intersection of this set and another set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="146873613%2FFunctions%2F-605877098" anchor-label="isEmpty" id="146873613%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/is-empty.html"><span>is</span><wbr><span><span>Empty</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="146873613%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/is-empty.html"><span class="token function">isEmpty</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Check if the set is empty.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1643042191%2FFunctions%2F-605877098" anchor-label="isSingleton" id="1643042191%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/is-singleton.html"><span>is</span><wbr><span><span>Singleton</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1643042191%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/is-singleton.html"><span class="token function">isSingleton</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Check if the set is a singleton.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-519756377%2FFunctions%2F-605877098" anchor-label="isSubset" id="-519756377%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/is-subset.html"><span>is</span><wbr><span><span>Subset</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-519756377%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/is-subset.html"><span class="token function">isSubset</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">set<span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Check if the set is a subset of another set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-357306564%2FFunctions%2F-605877098" anchor-label="iterator" id="-357306564%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/iterator.html"><span><span>iterator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-357306564%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/iterator.html"><span class="token function">iterator</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html">Iterator</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="837891486%2FFunctions%2F-605877098" anchor-label="map" id="837891486%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/map.html"><span><span>map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="837891486%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/map.html">K</a><span class="token operator">&gt; </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/map.html"><span class="token function">map</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">map<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="index.html">T</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/map.html">K</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/map.html">K</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1387152138%2FFunctions%2F-605877098" anchor-label="spliterator" id="-1387152138%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html#-1387152138%2FFunctions%2F-605877098"><span><span>spliterator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1387152138%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html#-1387152138%2FFunctions%2F-605877098"><span class="token function">spliterator</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.html">Spliterator</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1622795461%2FFunctions%2F-605877098" anchor-label="symmetricDifference" id="1622795461%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/symmetric-difference.html"><span>symmetric</span><wbr><span><span>Difference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1622795461%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/symmetric-difference.html"><span class="token function">symmetricDifference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">set<span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Compute the symmetric difference of this set and another set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1095911466%2FFunctions%2F-605877098" anchor-label="union" id="1095911466%2FFunctions%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/union.html"><span><span>union</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1095911466%2FFunctions%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-group:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/union.html"><span class="token function">union</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">set<span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.github.polyrocketmatt.kmt.group.set/-simple-set/index.html">SimpleSet</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Compute the union of this set and another set.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Inheritors</h2>
+      <div class="table" data-togglable="Inheritors"><a data-name="1113569504%2FInheritors%2F-605877098" anchor-label="Group" id="1113569504%2FInheritors%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-group/index.html">Group</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1113569504%2FInheritors%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="471544050%2FInheritors%2F-605877098" anchor-label="AbelianGroup" id="471544050%2FInheritors%2F-605877098" data-filterable-set=":kmt-group:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-group:dokkaHtmlPartial/main" data-filterable-set=":kmt-group:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-abelian-group/index.html">AbelianGroup</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="471544050%2FInheritors%2F-605877098"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+
+</body></html>
+

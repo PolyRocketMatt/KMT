@@ -1,0 +1,1179 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Short3</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../../index.html">
+<span>KMT</span>            </a>    </div>
+    <div>0.1.0-SNAPSHOT
+    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="kmt-vector::com.github.polyrocketmatt.kmt.vector/Short3///PointingToDeclaration//1728942442">
+  <div class="breadcrumbs"><a href="../../index.html">kmt-vector</a><span class="delimiter">/</span><a href="../index.html">com.github.polyrocketmatt.kmt.vector</a><span class="delimiter">/</span><a href="index.html">Short3</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Short3</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">Short3</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;x<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;y<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;z<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span> : <a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-tuple3/index.html">Tuple3</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt; </span>, <a href="../-short-vector/index.html">ShortVector</a>, <a href="../-swizzle3/index.html">Swizzle3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><h4 class="">Author</h4><p class="paragraph">Matthias Kovacic</p><h4 class="">Since</h4><p class="paragraph">0.0.1</p><p class="paragraph">Represents a 3-dimensional vector of shorts.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Parameters</h2>
+      <div data-togglable="Parameters">
+        <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>x</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The x component of the vector.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>y</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The y component of the vector.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>z</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The z component of the vector.</p></div></div></div></div></div></div></div></div></div>
+      </div>
+      <h2 class="tabbedcontent">Constructors</h2>
+      <div class="table" data-togglable="Constructors"><a data-name="-444357438%2FConstructors%2F1728942442" anchor-label="Short3" id="-444357438%2FConstructors%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-short3.html"><span><span>Short3</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-444357438%2FConstructors%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-short3.html"><span class="token function">Short3</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1857141706%2FConstructors%2F1728942442" anchor-label="Short3" id="-1857141706%2FConstructors%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-short3.html"><span><span>Short3</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1857141706%2FConstructors%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-short3.html"><span class="token function">Short3</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="807446835%2FConstructors%2F1728942442" anchor-label="Short3" id="807446835%2FConstructors%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-short3.html"><span><span>Short3</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="807446835%2FConstructors%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-short3.html"><span class="token function">Short3</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="110712179%2FConstructors%2F1728942442" anchor-label="Short3" id="110712179%2FConstructors%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-short3.html"><span><span>Short3</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="110712179%2FConstructors%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-short3.html"><span class="token function">Short3</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;x<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;y<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;z<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="-1767995249%2FFunctions%2F1728942442" anchor-label="abs" id="-1767995249%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="abs.html"><span><span>abs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1767995249%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="abs.html"><span class="token function">abs</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get vector with the absolute values of all components.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1961493227%2FFunctions%2F1728942442" anchor-label="asBoolean" id="1961493227%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="as-boolean.html"><span>as</span><wbr><span><span>Boolean</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1961493227%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="as-boolean.html"><span class="token function">asBoolean</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-bool3/index.html">Bool3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the vector as a boolean vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="190745364%2FFunctions%2F1728942442" anchor-label="asBooleanArray" id="190745364%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#190745364%2FFunctions%2F1728942442"><span>as</span><wbr><span>Boolean</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="190745364%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-short4/index.html#190745364%2FFunctions%2F1728942442"><span class="token function">asBooleanArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean-array/index.html">BooleanArray</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1742272432%2FFunctions%2F1728942442" anchor-label="asColumnMatrix" id="-1742272432%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="as-column-matrix.html"><span>as</span><wbr><span>Column</span><wbr><span><span>Matrix</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1742272432%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="as-column-matrix.html"><span class="token function">asColumnMatrix</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../kmt-matrix/com.github.polyrocketmatt.kmt.matrix/-short-matrix/index.html">ShortMatrix</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the vector as a short column matrix.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="703067126%2FFunctions%2F1728942442" anchor-label="asDouble" id="703067126%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="as-double.html"><span>as</span><wbr><span><span>Double</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="703067126%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="as-double.html"><span class="token function">asDouble</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the vector as a double vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="999907693%2FFunctions%2F1728942442" anchor-label="asDoubleArray" id="999907693%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#999907693%2FFunctions%2F1728942442"><span>as</span><wbr><span>Double</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="999907693%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-short4/index.html#999907693%2FFunctions%2F1728942442"><span class="token function">asDoubleArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double-array/index.html">DoubleArray</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="129928375%2FFunctions%2F1728942442" anchor-label="asFloat" id="129928375%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="as-float.html"><span>as</span><wbr><span><span>Float</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="129928375%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="as-float.html"><span class="token function">asFloat</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the vector as a floating point vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="613752904%2FFunctions%2F1728942442" anchor-label="asFloatArray" id="613752904%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#613752904%2FFunctions%2F1728942442"><span>as</span><wbr><span>Float</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="613752904%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-short4/index.html#613752904%2FFunctions%2F1728942442"><span class="token function">asFloatArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float-array/index.html">FloatArray</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="868904964%2FFunctions%2F1728942442" anchor-label="asInt" id="868904964%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="as-int.html"><span>as</span><wbr><span><span>Int</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="868904964%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="as-int.html"><span class="token function">asInt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the vector as an integer vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="202835099%2FFunctions%2F1728942442" anchor-label="asIntArray" id="202835099%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#202835099%2FFunctions%2F1728942442"><span>as</span><wbr><span>Int</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="202835099%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-short4/index.html#202835099%2FFunctions%2F1728942442"><span class="token function">asIntArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html">IntArray</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1229247816%2FFunctions%2F1728942442" anchor-label="asRowMatrix" id="-1229247816%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="as-row-matrix.html"><span>as</span><wbr><span>Row</span><wbr><span><span>Matrix</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1229247816%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="as-row-matrix.html"><span class="token function">asRowMatrix</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../kmt-matrix/com.github.polyrocketmatt.kmt.matrix/-short-matrix/index.html">ShortMatrix</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the vector as a short row matrix.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1951140456%2FFunctions%2F1728942442" anchor-label="asShortArray" id="1951140456%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#1951140456%2FFunctions%2F1728942442"><span>as</span><wbr><span>Short</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1951140456%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-short4/index.html#1951140456%2FFunctions%2F1728942442"><span class="token function">asShortArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short-array/index.html">ShortArray</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-87821777%2FFunctions%2F1728942442" anchor-label="avg" id="-87821777%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="avg.html"><span><span>avg</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-87821777%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="avg.html"><span class="token function">avg</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the average of all components of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="224662925%2FFunctions%2F1728942442" anchor-label="copyOf" id="224662925%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="copy-of.html"><span>copy</span><wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="224662925%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="copy-of.html"><span class="token function">copyOf</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1633579290%2FFunctions%2F1728942442" anchor-label="cos" id="1633579290%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="cos.html"><span><span>cos</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1633579290%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="cos.html"><span class="token function">cos</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the cosine of all components of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-81540073%2FFunctions%2F1728942442" anchor-label="cross" id="-81540073%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="cross.html"><span><span>cross</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-81540073%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="cross.html"><span class="token function">cross</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1425178924%2FFunctions%2F1728942442" anchor-label="diff" id="-1425178924%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="diff.html"><span><span>diff</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1425178924%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="diff.html"><span class="token function">diff</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the difference of all components of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="924903558%2FFunctions%2F1728942442" anchor-label="dist" id="924903558%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="dist.html"><span><span>dist</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="924903558%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="dist.html"><span class="token function">dist</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-vector/index.html">Vector</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the distance to another vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="578108676%2FFunctions%2F1728942442" anchor-label="distSq" id="578108676%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="dist-sq.html"><span>dist</span><wbr><span><span>Sq</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="578108676%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="dist-sq.html"><span class="token function">distSq</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-vector/index.html">Vector</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the squared distance to another vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1846692559%2FFunctions%2F1728942442" anchor-label="div" id="1846692559%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1846692559%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the quotient of all components of the vector.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#538917547%2FFunctions%2F1728942442"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-double3/index.html">Double3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-float3/index.html">Float3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-int3/index.html">Int3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2003251505%2FFunctions%2F1728942442" anchor-label="divAssign" id="-2003251505%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-2012309382%2FFunctions%2F1728942442"><span>div</span><wbr><span><span>Assign</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2003251505%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#-2012309382%2FFunctions%2F1728942442"><span class="token function">divAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div-assign.html"><span class="token function">divAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="div-assign.html"><span class="token function">divAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1305797407%2FFunctions%2F1728942442" anchor-label="dot" id="-1305797407%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="dot.html"><span><span>dot</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1305797407%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="dot.html"><span class="token function">dot</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-vector/index.html">Vector</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the dot product of the vector and another vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1846260838%2FFunctions%2F1728942442" anchor-label="forEach" id="-1846260838%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-1846260838%2FFunctions%2F1728942442"><span>for</span><wbr><span><span>Each</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1846260838%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-short4/index.html#-1846260838%2FFunctions%2F1728942442"><span class="token function">forEach</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">p0<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html">Consumer</a><span class="token operator">&lt;</span><span class="token keyword">in </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1766857777%2FFunctions%2F1728942442" anchor-label="get" id="1766857777%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="get.html"><span><span>get</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1766857777%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace strikethrough"><strike><span class="token keyword">open </span></strike><strike><span class="token keyword">operator override </span></strike><strike><span class="token keyword">fun </span></strike><a href="get.html"><strike><span class="token function">get</span></strike></a><strike><span class="token punctuation">(</span></strike><span class="parameters "><span class="parameter ">i<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><strike><span class="token punctuation">)</span></strike><strike><span class="token operator">: </span></strike><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">row<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">col<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-742176242%2FFunctions%2F1728942442" anchor-label="intPow" id="-742176242%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="int-pow.html"><span>int</span><wbr><span><span>Pow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-742176242%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="int-pow.html"><span class="token function">intPow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">n<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Raises the given vector's components to the n-th integer power.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-252116811%2FFunctions%2F1728942442" anchor-label="isIn" id="-252116811%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="is-in.html"><span>is</span><wbr><span><span>In</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-252116811%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="is-in.html"><span class="token function">isIn</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">min<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token punctuation">, </span></span><span class="parameter ">max<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-bool3/index.html">Bool3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Check if the given vector's components are within a range.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1348859113%2FFunctions%2F1728942442" anchor-label="iterator" id="1348859113%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#1348859113%2FFunctions%2F1728942442"><span><span>iterator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1348859113%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#1348859113%2FFunctions%2F1728942442"><span class="token function">iterator</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/index.html">Iterator</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-840159213%2FFunctions%2F1728942442" anchor-label="length" id="-840159213%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="length.html"><span><span>length</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-840159213%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="length.html"><span class="token function">length</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the length of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-271068990%2FFunctions%2F1728942442" anchor-label="lengthDouble" id="-271068990%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="length-double.html"><span>length</span><wbr><span><span>Double</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-271068990%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="length-double.html"><span class="token function">lengthDouble</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the length of the vector as a double.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2127523371%2FFunctions%2F1728942442" anchor-label="lengthSq" id="-2127523371%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="length-sq.html"><span>length</span><wbr><span><span>Sq</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2127523371%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="length-sq.html"><span class="token function">lengthSq</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the squared length of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1042650187%2FFunctions%2F1728942442" anchor-label="max" id="1042650187%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="max.html"><span><span>max</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1042650187%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="max.html"><span class="token function">max</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the maximum component of the vector.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="max.html"><span class="token function">max</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-vector/index.html">Vector</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the vector with maximal components of the vector and another vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2128374361%2FFunctions%2F1728942442" anchor-label="min" id="-2128374361%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="min.html"><span><span>min</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2128374361%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="min.html"><span class="token function">min</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the minimum component of the vector.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="min.html"><span class="token function">min</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-vector/index.html">Vector</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the vector with minimal components of the vector and another vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1039371410%2FFunctions%2F1728942442" anchor-label="minus" id="-1039371410%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#1987194122%2FFunctions%2F1728942442"><span><span>minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1039371410%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#1987194122%2FFunctions%2F1728942442"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-double3/index.html">Double3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-float3/index.html">Float3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-int3/index.html">Int3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1764940752%2FFunctions%2F1728942442" anchor-label="minusAssign" id="-1764940752%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-1638660199%2FFunctions%2F1728942442"><span>minus</span><wbr><span><span>Assign</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1764940752%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#-1638660199%2FFunctions%2F1728942442"><span class="token function">minusAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus-assign.html"><span class="token function">minusAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="minus-assign.html"><span class="token function">minusAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="933220130%2FFunctions%2F1728942442" anchor-label="normalized" id="933220130%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="normalized.html"><span><span>normalized</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="933220130%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="normalized.html"><span class="token function">normalized</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the normalized version of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1869818048%2FFunctions%2F1728942442" anchor-label="plus" id="-1869818048%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-299526336%2FFunctions%2F1728942442"><span><span>plus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1869818048%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#-299526336%2FFunctions%2F1728942442"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-double3/index.html">Double3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-float3/index.html">Float3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-int3/index.html">Int3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-255491518%2FFunctions%2F1728942442" anchor-label="plusAssign" id="-255491518%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-1059032753%2FFunctions%2F1728942442"><span>plus</span><wbr><span><span>Assign</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-255491518%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#-1059032753%2FFunctions%2F1728942442"><span class="token function">plusAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus-assign.html"><span class="token function">plusAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="plus-assign.html"><span class="token function">plusAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-698734414%2FFunctions%2F1728942442" anchor-label="product" id="-698734414%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="product.html"><span><span>product</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-698734414%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="product.html"><span class="token function">product</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the product of all components of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2141003773%2FFunctions%2F1728942442" anchor-label="sdot" id="-2141003773%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="sdot.html"><span><span>sdot</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2141003773%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="sdot.html"><span class="token function">sdot</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the dor product of the vector with itself.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="507787119%2FFunctions%2F1728942442" anchor-label="set" id="507787119%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="set.html"><span><span>set</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="507787119%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace strikethrough"><strike><span class="token keyword">open </span></strike><strike><span class="token keyword">operator override </span></strike><strike><span class="token keyword">fun </span></strike><a href="set.html"><strike><span class="token function">set</span></strike></a><strike><span class="token punctuation">(</span></strike><span class="parameters "><span class="parameter ">i<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><strike><span class="token punctuation">)</span></strike><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;row<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;col<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="222946025%2FFunctions%2F1728942442" anchor-label="sin" id="222946025%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="sin.html"><span><span>sin</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="222946025%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="sin.html"><span class="token function">sin</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the sine of all components of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1387152138%2FFunctions%2F1728942442" anchor-label="spliterator" id="-1387152138%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-1387152138%2FFunctions%2F1728942442"><span><span>spliterator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1387152138%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-short4/index.html#-1387152138%2FFunctions%2F1728942442"><span class="token function">spliterator</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Spliterator.html">Spliterator</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1153607466%2FFunctions%2F1728942442" anchor-label="sum" id="-1153607466%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="sum.html"><span><span>sum</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1153607466%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="sum.html"><span class="token function">sum</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the sum of all components of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="865231936%2FFunctions%2F1728942442" anchor-label="tan" id="865231936%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="tan.html"><span><span>tan</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="865231936%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="tan.html"><span class="token function">tan</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the tangent of all components of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1788299412%2FFunctions%2F1728942442" anchor-label="times" id="-1788299412%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-2033119776%2FFunctions%2F1728942442"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1788299412%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#-2033119776%2FFunctions%2F1728942442"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-double3/index.html">Double3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-float3/index.html">Float3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-int3/index.html">Int3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double3/index.html">Double3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float3/index.html">Float3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int3/index.html">Int3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-163631526%2FFunctions%2F1728942442" anchor-label="timesAssign" id="-163631526%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#478179311%2FFunctions%2F1728942442"><span>times</span><wbr><span><span>Assign</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-163631526%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-short4/index.html#478179311%2FFunctions%2F1728942442"><span class="token function">timesAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../../kmt-common/com.github.polyrocketmatt.kmt.common.storage/-mutable-memory-storage/index.html">MutableMemoryStorage</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing/index.html">Nothing</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times-assign.html"><span class="token function">timesAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Short3</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="times-assign.html"><span class="token function">timesAssign</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1335868245%2FFunctions%2F1728942442" anchor-label="toString" id="-1335868245%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-1335868245%2FFunctions%2F1728942442"><span>to</span><wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1335868245%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-short4/index.html#-1335868245%2FFunctions%2F1728942442"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1609931992%2FFunctions%2F1728942442" anchor-label="unaryMinus" id="1609931992%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="unary-minus.html"><span>unary</span><wbr><span><span>Minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1609931992%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="unary-minus.html"><span class="token function">unaryMinus</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Get the inverted version of the vector.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="798769737%2FFunctions%2F1728942442" anchor-label="xxx" id="798769737%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="xxx.html"><span><span>xxx</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="798769737%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="xxx.html"><span class="token function">xxx</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2076950952%2FFunctions%2F1728942442" anchor-label="xy" id="-2076950952%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="xy.html"><span><span>xy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2076950952%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="xy.html"><span class="token function">xy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-short2/index.html">Short2</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1822423368%2FFunctions%2F1728942442" anchor-label="xyz" id="1822423368%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="xyz.html"><span><span>xyz</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1822423368%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="xyz.html"><span class="token function">xyz</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2045931145%2FFunctions%2F1728942442" anchor-label="xz" id="-2045931145%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="xz.html"><span><span>xz</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2045931145%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="xz.html"><span class="token function">xz</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-short2/index.html">Short2</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1541949718%2FFunctions%2F1728942442" anchor-label="xzy" id="-1541949718%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="xzy.html"><span><span>xzy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1541949718%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="xzy.html"><span class="token function">xzy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1146356742%2FFunctions%2F1728942442" anchor-label="yx" id="-1146356742%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="yx.html"><span><span>yx</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1146356742%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="yx.html"><span class="token function">yx</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-short2/index.html">Short2</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="606072806%2FFunctions%2F1728942442" anchor-label="yxz" id="606072806%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="yxz.html"><span><span>yxz</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="606072806%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="yxz.html"><span class="token function">yxz</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1536667016%2FFunctions%2F1728942442" anchor-label="yyy" id="1536667016%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="yyy.html"><span><span>yyy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1536667016%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="yyy.html"><span class="token function">yyy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1084317128%2FFunctions%2F1728942442" anchor-label="yz" id="-1084317128%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="yz.html"><span><span>yz</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1084317128%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="yz.html"><span class="token function">yz</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-short2/index.html">Short2</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1827706070%2FFunctions%2F1728942442" anchor-label="yzx" id="-1827706070%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="yzx.html"><span><span>yzx</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1827706070%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="yzx.html"><span class="token function">yzx</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-184742725%2FFunctions%2F1728942442" anchor-label="zx" id="-184742725%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="zx.html"><span><span>zx</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-184742725%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="zx.html"><span class="token function">zx</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-short2/index.html">Short2</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="320316454%2FFunctions%2F1728942442" anchor-label="zxy" id="320316454%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="zxy.html"><span><span>zxy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="320316454%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="zxy.html"><span class="token function">zxy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-153722918%2FFunctions%2F1728942442" anchor-label="zy" id="-153722918%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="zy.html"><span><span>zy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-153722918%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="zy.html"><span class="token function">zy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-short2/index.html">Short2</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1250910664%2FFunctions%2F1728942442" anchor-label="zyx" id="1250910664%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="zyx.html"><span><span>zyx</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1250910664%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="zyx.html"><span class="token function">zyx</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2020403001%2FFunctions%2F1728942442" anchor-label="zzz" id="-2020403001%2FFunctions%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="zzz.html"><span><span>zzz</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2020403001%2FFunctions%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="zzz.html"><span class="token function">zzz</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Short3</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="73623085%2FProperties%2F1728942442" anchor-label="data" id="73623085%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#73623085%2FProperties%2F1728942442"><span><span>data</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="73623085%2FProperties%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><a data-name="73623085%2FProperties%2F1728942442" anchor-label="data" id="73623085%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">override </span><span class="token keyword">val </span><a href="../-short4/index.html#73623085%2FProperties%2F1728942442">data</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short-array/index.html">ShortArray</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1833358116%2FProperties%2F1728942442" anchor-label="indices" id="-1833358116%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-1833358116%2FProperties%2F1728942442"><span><span>indices</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1833358116%2FProperties%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><a data-name="-1833358116%2FProperties%2F1728942442" anchor-label="indices" id="-1833358116%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-short4/index.html#-1833358116%2FProperties%2F1728942442">indices</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.ranges/-int-range/index.html">IntRange</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-711247673%2FProperties%2F1728942442" anchor-label="lastIndex" id="-711247673%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#-711247673%2FProperties%2F1728942442"><span>last</span><wbr><span><span>Index</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-711247673%2FProperties%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><a data-name="-711247673%2FProperties%2F1728942442" anchor-label="lastIndex" id="-711247673%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-short4/index.html#-711247673%2FProperties%2F1728942442">lastIndex</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1441117622%2FProperties%2F1728942442" anchor-label="size" id="1441117622%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="../-short4/index.html#1441117622%2FProperties%2F1728942442"><span><span>size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1441117622%2FProperties%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><a data-name="1441117622%2FProperties%2F1728942442" anchor-label="size" id="1441117622%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="../-short4/index.html#1441117622%2FProperties%2F1728942442">size</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1775851658%2FProperties%2F1728942442" anchor-label="x" id="1775851658%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#1775851658%2FProperties%2F1728942442"><span><span>x</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1775851658%2FProperties%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><a data-name="1775851658%2FProperties%2F1728942442" anchor-label="x" id="1775851658%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="index.html#1775851658%2FProperties%2F1728942442">x</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1806871465%2FProperties%2F1728942442" anchor-label="y" id="1806871465%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#1806871465%2FProperties%2F1728942442"><span><span>y</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1806871465%2FProperties%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><a data-name="1806871465%2FProperties%2F1728942442" anchor-label="y" id="1806871465%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="index.html#1806871465%2FProperties%2F1728942442">y</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1837891272%2FProperties%2F1728942442" anchor-label="z" id="1837891272%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a>
+        <div class="table-row" data-filterable-current=":kmt-vector:dokkaHtmlPartial/main" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="index.html#1837891272%2FProperties%2F1728942442"><span><span>z</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1837891272%2FProperties%2F1728942442"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":kmt-vector:dokkaHtmlPartial/main"><a data-name="1837891272%2FProperties%2F1728942442" anchor-label="z" id="1837891272%2FProperties%2F1728942442" data-filterable-set=":kmt-vector:dokkaHtmlPartial/main"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">var </span><a href="index.html#1837891272%2FProperties%2F1728942442">z</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-short/index.html">Short</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+
+</body></html>
+
