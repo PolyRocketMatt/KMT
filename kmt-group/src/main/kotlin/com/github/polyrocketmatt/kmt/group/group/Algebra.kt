@@ -74,11 +74,11 @@ class Semigroup<T>(
     override fun checkIntegrity() {
         //  Check if the operation is closed
         for (a in elements) for (b in elements)
-            complies("The binary operation is not closed for all elements in the Magma") { operation(a, b) in elements }
+            complies("The binary operation is not closed for all elements in the Semigroup") { operation(a, b) in elements }
 
         //  Check associative property
         for (a in elements) for (b in elements) for (c in elements)
-            complies("The binary operation is not associative for all elements in the Monoid") { isAssociative(a, b, c, operation) }
+            complies("The binary operation is not associative for all elements in the Semigroup") { isAssociative(a, b, c, operation) }
     }
 
 }
@@ -115,11 +115,68 @@ class Monoid<T>(
         //  Check associative property
         for (a in elements) for (b in elements) for (c in elements)
             complies("The binary operation is not associative for all elements in the Monoid") { isAssociative(a, b, c, operation) }
+
+        //  Check identity
+        for (a in elements)
+            complies("The identity element is not an identity for all elements in the Monoid") { isIdentity(a, identity, operation) }
     }
 
     operator fun get(a: T, b: T): T = operation(a, b)
 
     fun identity(): T = identity
+
+}
+
+/**
+ * @author Matthias Kovacic
+ * @since 0.1.0
+ *
+ * Represents a group for a set of elements. A group has the following properties:
+ * - Associativity
+ * - Closure
+ * - Identity
+ * - Inverse
+ *
+ * @param T The type of the elements in the group.
+ * @param identity The identity element of the group.
+ * @param inverseMap The inverse operation of the group.
+ * @param operation The binary operation of the group.
+ * @param elements The elements of the group.
+ */
+class Group<T>(
+    private val identity: T,
+    private val inverseMap: (a: T) -> T,
+    private val operation: (a: T, b: T) -> T,
+    elements: Set<T>
+) : Algebra<T>(elements) {
+
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T) : this(identity, inverseMap, operation, emptySet())
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, inverseMap, operation, elements.toSet())
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, elements: Collection<T>) : this(identity, inverseMap, operation, elements.toSet())
+
+    override fun checkIntegrity() {
+        //  Check if the operation is closed
+        for (a in elements) for (b in elements)
+            complies("The binary operation is not closed for all elements in the Group") { operation(a, b) in elements }
+
+        //  Check associative property
+        for (a in elements) for (b in elements) for (c in elements)
+            complies("The binary operation is not associative for all elements in the Group") { isAssociative(a, b, c, operation) }
+
+        //  Check identity
+        for (a in elements)
+            complies("The identity element is not an identity for all elements in the Group") { isIdentity(a, identity, operation) }
+
+        //  Check identity
+        for (a in elements)
+            complies("The inverse is not guaranteed for all elements in the Group") { isInverse(a, inverse(a), operation) }
+    }
+
+    operator fun get(a: T, b: T): T = operation(a, b)
+
+    fun identity(): T = identity
+
+    fun inverse(a: T): T = inverseMap(a)
 
 }
 
