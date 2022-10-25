@@ -40,7 +40,8 @@ fun <T> isIdentity(a: T, id: T, op: (T, T) -> T): Boolean = op(a, id) == a && op
  * @param T the type of the elements the operation is defined on.
  * @param a the element.
  * @param b the inverse.
+ * @param id the identity.
  * @param op the operation.
  * @return true if the element is the inverse, false otherwise.
  */
-fun <T> isInverse(a: T, b: T, op: (T, T) -> T): Boolean = op(a, b) == op(b, a)
+fun <T> isInverse(a: T, b: T, id: T, op: (T, T) -> T): Boolean = op(a, b) == id

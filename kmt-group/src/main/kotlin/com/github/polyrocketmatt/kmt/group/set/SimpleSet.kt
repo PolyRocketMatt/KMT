@@ -111,4 +111,20 @@ open class SimpleSet<T>(internal val elements: Set<T>) : Iterable<T>, Mapping<T>
     override fun iterator(): Iterator<T> = elements.iterator()
 
     open override fun <K> map(map: (T) -> K): SimpleSet<K> = SimpleSet(elements.map(map))
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is SimpleSet<*>) return false
+
+        if (elements.size != other.elements.size) return false
+
+        return hashCode() == other.hashCode()
+    }
+
+    override fun hashCode(): Int {
+        var result = elements.hashCode()
+        result = 31 * result + elements.hashCode()
+        return result
+    }
+
 }

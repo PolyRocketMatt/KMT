@@ -14,10 +14,6 @@ import com.github.polyrocketmatt.kmt.group.set.SimpleSet
  */
 abstract class Algebra<T>(elements: Set<T>) : SimpleSet<T>(elements) {
 
-    constructor() : this(emptySet())
-    constructor(vararg elements: T) : this(elements.toSet())
-    constructor(elements: Collection<T>) : this(elements.toSet())
-
     abstract fun checkIntegrity()
 
 }
@@ -41,6 +37,7 @@ open class Magma<T>(
     constructor(operation: (a: T, b: T) -> T) : this(operation, emptySet())
     constructor(operation: (a: T, b: T) -> T, vararg elements: T) : this(operation, elements.toSet())
     constructor(operation: (a: T, b: T) -> T, elements: Collection<T>) : this(operation, elements.toSet())
+    constructor(operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(operation, set.elements)
 
     override fun checkIntegrity() {
         //  Check if the operation is closed
@@ -85,6 +82,7 @@ open class Semigroup<T>(
     constructor(operation: (a: T, b: T) -> T) : this(operation, emptySet())
     constructor(operation: (a: T, b: T) -> T, vararg elements: T) : this(operation, elements.toSet())
     constructor(operation: (a: T, b: T) -> T, elements: Collection<T>) : this(operation, elements.toSet())
+    constructor(operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(operation, set.elements)
 
     override fun checkIntegrity() {
         //  Check if the operation is closed
@@ -136,6 +134,7 @@ open class Monoid<T>(
     constructor(identity: T, operation: (a: T, b: T) -> T) : this(identity, operation, emptySet())
     constructor(identity: T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, operation, elements.toSet())
     constructor(identity: T, operation: (a: T, b: T) -> T, elements: Collection<T>) : this(identity, operation, elements.toSet())
+    constructor(identity: T, operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(identity, operation, set.elements)
 
     override fun checkIntegrity() {
         //  Check if the operation is closed
@@ -186,7 +185,7 @@ open class Monoid<T>(
  * @param operation The binary operation of the group.
  * @param elements The elements of the group.
  */
-class Group<T>(
+open class Group<T>(
     private val identity: T,
     private val inverseMap: (a: T) -> T,
     private val operation: (a: T, b: T) -> T,
@@ -196,6 +195,7 @@ class Group<T>(
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T) : this(identity, inverseMap, operation, emptySet())
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, inverseMap, operation, elements.toSet())
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, elements: Collection<T>) : this(identity, inverseMap, operation, elements.toSet())
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(identity, inverseMap, operation, set.elements)
 
     override fun checkIntegrity() {
         //  Check if the operation is closed
@@ -210,9 +210,9 @@ class Group<T>(
         for (a in elements)
             complies("The identity element is not an identity for all elements in the Group") { isIdentity(a, identity, operation) }
 
-        //  Check identity
+        //  Check inverse
         for (a in elements)
-            complies("The inverse is not guaranteed for all elements in the Group") { isInverse(a, inverse(a), operation) }
+            complies("The inverse is not guaranteed for all elements in the Group") { isInverse(a, inverse(a), identity, operation) }
     }
 
     /**
@@ -244,10 +244,96 @@ class Group<T>(
      * @return The inverse of the element.
      * @throws IllegalArgumentException If the element is not a member of the group.
      */
-    open fun inverse(element: T): T {
+    fun inverse(element: T): T {
         complies("The element to retrieve the inverse for is not a member of the set") { contains(element) }
         return inverseMap(element)
     }
 
 }
 
+/**
+ * @author Matthias Kovacic
+ * @since 0.1.0
+ *
+ * Represents a group for a set of elements. A group has the following properties:
+ * - Associativity
+ * - Commutativity
+ * - Closure
+ * - Identity
+ * - Inverse
+ *
+ * @param T The type of the elements in the group.
+ * @param identity The identity element of the group.
+ * @param inverseMap The inverse operation of the group.
+ * @param operation The binary operation of the group.
+ * @param elements The elements of the group.
+ */
+class AbelianGroup<T>(
+    private val identity: T,
+    private val inverseMap: (a: T) -> T,
+    private val operation: (a: T, b: T) -> T,
+    elements: Set<T>
+) : Monoid<T>(identity, operation, elements) {
+
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T) : this(identity, inverseMap, operation, emptySet())
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, inverseMap, operation, elements.toSet())
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, elements: Collection<T>) : this(identity, inverseMap, operation, elements.toSet())
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(identity, inverseMap, operation, set.elements)
+
+    override fun checkIntegrity() {
+        //  Check if the operation is closed
+        for (a in elements) for (b in elements)
+            complies("The binary operation is not closed for all elements in the Abelian Group") { operation(a, b) in elements }
+
+        //  Check associative property
+        for (a in elements) for (b in elements) for (c in elements)
+            complies("The binary operation is not associative for all elements in the Abelian Group") { isAssociative(a, b, c, operation) }
+
+        //  Check commutative property
+        for (a in elements) for (b in elements)
+            complies("The binary operation is not commutative for all elements in the Abelian Group") { isCommutative(a, b, operation) }
+
+        //  Check identity
+        for (a in elements)
+            complies("The identity element is not an identity for all elements in the Abelian Group") { isIdentity(a, identity, operation) }
+
+        //  Check inverse
+        for (a in elements)
+            complies("The inverse is not guaranteed for all elements in the Abelian Group") { isInverse(a, inverse(a), identity, operation) }
+    }
+
+    /**
+     * Get the result of the operation on two elements.
+     *
+     * @param a The first element.
+     * @param b The second element.
+     * @return The result of the operation on the two elements.
+     * @throws IllegalArgumentException If any of the two elements is not a member of the group.
+     */
+    override operator fun get(a: T, b: T): T {
+        complies("The first element to retrieve the inverse for is not a member of the set") { contains(a) }
+        complies("The second element to retrieve the inverse for is not a member of the set") { contains(b) }
+
+        return operation(a, b)
+    }
+
+    /**
+     * Get the identity element of the group.
+     *
+     * @return The identity element of the group.
+     */
+    override fun identity(): T = identity
+
+    /**
+     * Get the inverse of an element.
+     *
+     * @param element The element to get the inverse of.
+     * @return The inverse of the element.
+     * @throws IllegalArgumentException If the element is not a member of the group.
+     */
+    fun inverse(element: T): T {
+        complies("The element to retrieve the inverse for is not a member of the set") { contains(element) }
+        return inverseMap(element)
+    }
+
+}

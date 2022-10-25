@@ -2,6 +2,7 @@ package com.github.polyrocketmatt.kmt.group.set
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -123,6 +124,16 @@ class SimpleSetTest {
         val mapped = setA.map(map)
 
         setA.forEachIndexed { idx, i -> assertTrue { map(i) == mapped.elementAt(idx) } }
+    }
+
+    @Test
+    fun testEquals() {
+        val comparisonSetA = SimpleSet(elementsA)
+        val comparisonSetB = SimpleSet(elementsB)
+
+        assertEquals(setA, comparisonSetA)
+        assertEquals(setB, comparisonSetB)
+        assertFalse { setA == setB }
     }
 
 }
