@@ -69,5 +69,4 @@ class AbelianGroupTest {
 
         assertTrue { group.inverse(3) == 5 }
     }
-
 }

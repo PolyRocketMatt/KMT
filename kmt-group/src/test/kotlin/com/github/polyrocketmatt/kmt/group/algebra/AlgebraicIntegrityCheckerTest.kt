@@ -40,5 +40,4 @@ class AlgebraicIntegrityCheckerTest {
         assertFalse { isInverse(1, -1, 0, subtraction) }
         assertFalse { isInverse(1, -1, 1, multiplication) }
     }
-
 }

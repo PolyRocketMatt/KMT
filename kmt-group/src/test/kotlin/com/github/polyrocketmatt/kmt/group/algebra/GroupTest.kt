@@ -69,5 +69,4 @@ class GroupTest {
 
         assertTrue { group.inverse(3) == 5 }
     }
-
 }

@@ -9,15 +9,15 @@ Log of all changes in each version of the project.
 
 **kmt-linalg**
 
-- Support basic vector spaces
+- Support basic
 
 **kmt-group**
 
-- New (planned) module
+- Support basic algebras (magma, monoid, semigroup, group, abelian group)
 
 **kmt-complex**
 
-- New (planned) module
+- Complex numbers have been added
 
 ---
 

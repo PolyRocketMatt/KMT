@@ -47,5 +47,4 @@ class SemigroupTest {
         assertTrue { sgroup[9, 9] == 8 }
         assertFalse { sgroup[1, 2] == 4 }
     }
-
 }

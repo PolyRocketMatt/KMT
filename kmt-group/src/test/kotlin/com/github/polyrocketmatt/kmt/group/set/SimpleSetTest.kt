@@ -19,7 +19,6 @@ class SimpleSetTest {
         setB = SimpleSet(elementsB)
     }
 
-
     @Test
     fun testEmptyConstructor() {
         val emptySet = SimpleSet<Int>()
@@ -135,5 +134,4 @@ class SimpleSetTest {
         assertEquals(setB, comparisonSetB)
         assertFalse { setA == setB }
     }
-
 }

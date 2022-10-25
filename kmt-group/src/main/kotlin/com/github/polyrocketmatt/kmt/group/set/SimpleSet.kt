@@ -126,5 +126,4 @@ open class SimpleSet<T>(internal val elements: Set<T>) : Iterable<T>, Mapping<T>
         result = 31 * result + elements.hashCode()
         return result
     }
-
 }

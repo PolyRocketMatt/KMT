@@ -47,5 +47,4 @@ class MagmaTest {
         assertTrue { magma[9, 9] == 8 }
         assertFalse { magma[1, 2] == 4 }
     }
-
 }

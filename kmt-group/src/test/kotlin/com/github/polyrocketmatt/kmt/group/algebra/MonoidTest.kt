@@ -55,5 +55,4 @@ class MonoidTest {
 
         assertTrue { monoid.identity() == identity }
     }
-
 }

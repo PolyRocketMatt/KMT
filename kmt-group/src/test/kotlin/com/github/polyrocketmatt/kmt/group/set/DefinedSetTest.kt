@@ -94,5 +94,4 @@ class DefinedSetTest {
         assertTrue { COMPLEX.contains(Complex(0.0, -1.0)) }
         assertTrue { COMPLEX.contains(Complex(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY)) }
     }
-
 }

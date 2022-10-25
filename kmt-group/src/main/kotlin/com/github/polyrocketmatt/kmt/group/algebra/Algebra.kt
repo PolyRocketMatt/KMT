@@ -15,7 +15,6 @@ import com.github.polyrocketmatt.kmt.group.set.SimpleSet
 abstract class Algebra<T>(elements: Set<T>) : SimpleSet<T>(elements) {
 
     abstract fun checkIntegrity()
-
 }
 
 /**
@@ -59,7 +58,6 @@ open class Magma<T>(
 
         return operation(a, b)
     }
-
 }
 
 /**
@@ -108,7 +106,6 @@ open class Semigroup<T>(
 
         return operation(a, b)
     }
-
 }
 
 /**
@@ -166,7 +163,6 @@ open class Monoid<T>(
     }
 
     open fun identity(): T = identity
-
 }
 
 /**
@@ -248,7 +244,6 @@ open class Group<T>(
         complies("The element to retrieve the inverse for is not a member of the set") { contains(element) }
         return inverseMap(element)
     }
-
 }
 
 /**
@@ -335,5 +330,4 @@ class AbelianGroup<T>(
         complies("The element to retrieve the inverse for is not a member of the set") { contains(element) }
         return inverseMap(element)
     }
-
 }
