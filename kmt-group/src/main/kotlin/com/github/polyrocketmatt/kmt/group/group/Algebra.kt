@@ -33,7 +33,7 @@ abstract class Algebra<T>(elements: Set<T>) : SimpleSet<T>(elements) {
  * @param operation The binary operation of the magma.
  * @param elements The elements of the magma.
  */
-class Magma<T>(
+open class Magma<T>(
     private val operation: (a: T, b: T) -> T,
     elements: Set<T>
 ) : Algebra<T>(elements) {
@@ -46,6 +46,21 @@ class Magma<T>(
         //  Check if the operation is closed
         for (a in elements) for (b in elements)
             complies("The binary operation is not closed for all elements in the Magma") { operation(a, b) in elements }
+    }
+
+    /**
+     * Get the result of the operation on two elements.
+     *
+     * @param a The first element.
+     * @param b The second element.
+     * @return The result of the operation on the two elements.
+     * @throws IllegalArgumentException If any of the two elements is not a member of the group.
+     */
+    open operator fun get(a: T, b: T): T {
+        complies("The first element to retrieve the inverse for is not a member of the set") { contains(a) }
+        complies("The second element to retrieve the inverse for is not a member of the set") { contains(b) }
+
+        return operation(a, b)
     }
 
 }
@@ -62,10 +77,10 @@ class Magma<T>(
  * @param operation The binary operation of the semigroup.
  * @param elements The elements of the semigroup.
  */
-class Semigroup<T>(
+open class Semigroup<T>(
     private val operation: (a: T, b: T) -> T,
     elements: Set<T>
-) : Algebra<T>(elements) {
+) : Magma<T>(operation, elements) {
 
     constructor(operation: (a: T, b: T) -> T) : this(operation, emptySet())
     constructor(operation: (a: T, b: T) -> T, vararg elements: T) : this(operation, elements.toSet())
@@ -79,6 +94,21 @@ class Semigroup<T>(
         //  Check associative property
         for (a in elements) for (b in elements) for (c in elements)
             complies("The binary operation is not associative for all elements in the Semigroup") { isAssociative(a, b, c, operation) }
+    }
+
+    /**
+     * Get the result of the operation on two elements.
+     *
+     * @param a The first element.
+     * @param b The second element.
+     * @return The result of the operation on the two elements.
+     * @throws IllegalArgumentException If any of the two elements is not a member of the group.
+     */
+    override operator fun get(a: T, b: T): T {
+        complies("The first element to retrieve the inverse for is not a member of the set") { contains(a) }
+        complies("The second element to retrieve the inverse for is not a member of the set") { contains(b) }
+
+        return operation(a, b)
     }
 
 }
@@ -97,11 +127,11 @@ class Semigroup<T>(
  * @param operation The binary operation of the monoid.
  * @param elements The elements of the monoid.
  */
-class Monoid<T>(
+open class Monoid<T>(
     private val identity: T,
     private val operation: (a: T, b: T) -> T,
     elements: Set<T>
-) : Algebra<T>(elements) {
+) : Semigroup<T>(operation, elements) {
 
     constructor(identity: T, operation: (a: T, b: T) -> T) : this(identity, operation, emptySet())
     constructor(identity: T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, operation, elements.toSet())
@@ -129,14 +159,14 @@ class Monoid<T>(
      * @return The result of the operation on the two elements.
      * @throws IllegalArgumentException If any of the two elements is not a member of the group.
      */
-    operator fun get(a: T, b: T): T {
+    override operator fun get(a: T, b: T): T {
         complies("The first element to retrieve the inverse for is not a member of the set") { contains(a) }
         complies("The second element to retrieve the inverse for is not a member of the set") { contains(b) }
 
         return operation(a, b)
     }
 
-    fun identity(): T = identity
+    open fun identity(): T = identity
 
 }
 
@@ -161,7 +191,7 @@ class Group<T>(
     private val inverseMap: (a: T) -> T,
     private val operation: (a: T, b: T) -> T,
     elements: Set<T>
-) : Algebra<T>(elements) {
+) : Monoid<T>(identity, operation, elements) {
 
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T) : this(identity, inverseMap, operation, emptySet())
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, inverseMap, operation, elements.toSet())
@@ -193,7 +223,7 @@ class Group<T>(
      * @return The result of the operation on the two elements.
      * @throws IllegalArgumentException If any of the two elements is not a member of the group.
      */
-    operator fun get(a: T, b: T): T {
+    override operator fun get(a: T, b: T): T {
         complies("The first element to retrieve the inverse for is not a member of the set") { contains(a) }
         complies("The second element to retrieve the inverse for is not a member of the set") { contains(b) }
 
@@ -205,7 +235,7 @@ class Group<T>(
      *
      * @return The identity element of the group.
      */
-    fun identity(): T = identity
+    override fun identity(): T = identity
 
     /**
      * Get the inverse of an element.
@@ -214,7 +244,7 @@ class Group<T>(
      * @return The inverse of the element.
      * @throws IllegalArgumentException If the element is not a member of the group.
      */
-    fun inverse(element: T): T {
+    open fun inverse(element: T): T {
         complies("The element to retrieve the inverse for is not a member of the set") { contains(element) }
         return inverseMap(element)
     }
