@@ -8,6 +8,9 @@ import java.lang.IllegalArgumentException
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
+/**
+ * Tests the [AbelianGroup] algebra by using a modulus 7 group.
+ */
 class AbelianGroupTest {
 
     private val identity = 1

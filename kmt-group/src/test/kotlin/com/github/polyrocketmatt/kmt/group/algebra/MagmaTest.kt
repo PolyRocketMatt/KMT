@@ -8,6 +8,9 @@ import java.lang.IllegalArgumentException
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
+/**
+ * Tests the [Magma] algebra by using a modulus 10 group.
+ */
 class MagmaTest {
 
     private val elements = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)

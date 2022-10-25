@@ -8,6 +8,9 @@ import java.lang.IllegalArgumentException
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
+/**
+ * Tests the [Monoid] algebra by using a modulus 10 group.
+ */
 class MonoidTest {
 
     private val identity = 0
