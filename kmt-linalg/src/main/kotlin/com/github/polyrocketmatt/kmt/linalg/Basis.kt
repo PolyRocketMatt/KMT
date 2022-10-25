@@ -19,13 +19,34 @@ import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
  * @throws IllegalArgumentException If the vectors are not all the same length.
  * @throws IllegalArgumentException If the vectors are not all linearly independent.
  */
-@Suppress("UNCHECKED_CAST")
 inline fun <reified T : Number> constructBasisFrom(vararg vectors: Tuple<T>): Basis<T> {
     if (vectors.isEmpty())
         throw IllegalArgumentException("Basis cannot have 0 vectors")
     if (vectors.any { it.size <= 0 })
         throw IllegalArgumentException("Basis vectors must have at lease length 1")
     if (vectors.any { it.size != vectors[0].size })
+        throw IllegalArgumentException("Basis vectors must all be of equal length")
+    return constructBasisFrom(vectors.toList())
+}
+
+/**
+ * Construct a basis from the given vectors.
+ *
+ * @param T The type of the vectors.
+ * @param vectors The vectors to construct the basis from.
+ * @return The constructed basis.
+ * @throws IllegalArgumentException If there are no vectors provided.
+ * @throws IllegalArgumentException If the vectors are of length 0.
+ * @throws IllegalArgumentException If the vectors are not all the same length.
+ * @throws IllegalArgumentException If the vectors are not all linearly independent.
+ */
+@Suppress("UNCHECKED_CAST")
+inline fun <reified T : Number> constructBasisFrom(vectors: Collection<Tuple<T>>): Basis<T> {
+    if (vectors.isEmpty())
+        throw IllegalArgumentException("Basis cannot have 0 vectors")
+    if (vectors.any { it.size <= 0 })
+        throw IllegalArgumentException("Basis vectors must have at lease length 1")
+    if (vectors.any { it.size != vectors.elementAt(0).size })
         throw IllegalArgumentException("Basis vectors must all be of equal length")
     val basis = mutableSetOf<Tuple<T>>()
     for (element in vectors) {
@@ -52,27 +73,6 @@ inline fun <reified T : Number> constructBasisFrom(vararg vectors: Tuple<T>): Ba
     }
 
     return Basis(basis)
-}
-
-/**
- * Construct a basis from the given vectors.
- *
- * @param T The type of the vectors.
- * @param vectors The vectors to construct the basis from.
- * @return The constructed basis.
- * @throws IllegalArgumentException If there are no vectors provided.
- * @throws IllegalArgumentException If the vectors are of length 0.
- * @throws IllegalArgumentException If the vectors are not all the same length.
- * @throws IllegalArgumentException If the vectors are not all linearly independent.
- */
-fun <T : Number> constructBasisFrom(vectors: Collection<Tuple<T>>): Basis<T> {
-    if (vectors.isEmpty())
-        throw IllegalArgumentException("Basis cannot have 0 vectors")
-    if (vectors.any { it.size <= 0 })
-        throw IllegalArgumentException("Basis vectors must have at lease length 1")
-    if (vectors.any { it.size != vectors.elementAt(0).size })
-        throw IllegalArgumentException("Basis vectors must all be of equal length")
-    return Basis(vectors)
 }
 
 /**

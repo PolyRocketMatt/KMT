@@ -1,4 +1,4 @@
-package com.github.polyrocketmatt.group.set
+package com.github.polyrocketmatt.kmt.group.set
 
 @FunctionalInterface
 interface Mapping<T> {

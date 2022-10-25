@@ -1,6 +1,7 @@
 package com.github.polyrocketmatt.kmt.complex
 
 import com.github.polyrocketmatt.kmt.common.dsqrt
+import com.github.polyrocketmatt.kmt.common.intPow
 import kotlin.math.atan2
 
 /**
@@ -13,11 +14,25 @@ import kotlin.math.atan2
  * @param im The imaginary part of the complex number.
  */
 data class Complex(
-    val re: Double,
-    val im: Double
+    private val re: Double,
+    private val im: Double
 ) {
 
     constructor(re: Double) : this(re, 0.0)
+
+    /**
+     * Get the real part of the complex number.
+     *
+     * @return The real part of the complex number.
+     */
+    fun real(): Double = re
+
+    /**
+     * Get the imaginary part of the complex number.
+     *
+     * @return The imaginary part of the complex number.
+     */
+    fun imaginary(): Double = im
 
     /**
      * Get the magnitude of the complex number.
@@ -75,7 +90,10 @@ data class Complex(
      * @param other The other complex number to multiply.
      * @return The product of the two complex numbers.
      */
-    operator fun times(other: Complex): Complex = Complex(re * other.re - im * other.im, re * other.im + im * other.re)
+    operator fun times(other: Complex): Complex = Complex(
+        re * other.re - im * other.im,
+        re * other.im + im * other.re
+    )
 
     /**
      * Divide a complex number by another.
@@ -84,7 +102,7 @@ data class Complex(
      * @return The quotient of the two complex numbers.
      */
     operator fun div(other: Complex): Complex = Complex(
-        (re * other.re + im * other.im) / (re * re + other.re * other.re),
-        (other.re * im - re * other.im) / (re * re + other.re * other.re)
+        (re * other.re + im * other.im) / (other.re.intPow(2) + other.im.intPow(2)),
+        (im * other.re + re * other.im) / (other.re.intPow(2) + other.im.intPow(2))
     )
 }
