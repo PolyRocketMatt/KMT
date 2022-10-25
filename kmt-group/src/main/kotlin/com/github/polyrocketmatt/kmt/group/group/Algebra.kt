@@ -26,11 +26,12 @@ abstract class Algebra<T>(elements: Set<T>) : SimpleSet<T>(elements) {
  * @author Matthias Kovacic
  * @since 0.1.0
  *
- * Represents a magma for a set of elements.
+ * Represents a magma for a set of elements. A magma has the following properties:
+ * - Closure
  *
- * @param T The type of the elements in the monoid.
- * @param operation The binary operation of the monoid.
- * @param elements The elements of the monoid.
+ * @param T The type of the elements in the magma.
+ * @param operation The binary operation of the magma.
+ * @param elements The elements of the magma.
  */
 class Magma<T>(
     private val operation: (a: T, b: T) -> T,
@@ -53,7 +54,43 @@ class Magma<T>(
  * @author Matthias Kovacic
  * @since 0.1.0
  *
- * Represents a monoid for a set of elements.
+ * Represents a semigroup for a set of elements. A semigroup has the following properties:
+ * - Associativity
+ * - Closure
+ *
+ * @param T The type of the elements in the semigroup.
+ * @param operation The binary operation of the semigroup.
+ * @param elements The elements of the semigroup.
+ */
+class Semigroup<T>(
+    private val operation: (a: T, b: T) -> T,
+    elements: Set<T>
+) : Algebra<T>(elements) {
+
+    constructor(operation: (a: T, b: T) -> T) : this(operation, emptySet())
+    constructor(operation: (a: T, b: T) -> T, vararg elements: T) : this(operation, elements.toSet())
+    constructor(operation: (a: T, b: T) -> T, elements: Collection<T>) : this(operation, elements.toSet())
+
+    override fun checkIntegrity() {
+        //  Check if the operation is closed
+        for (a in elements) for (b in elements)
+            complies("The binary operation is not closed for all elements in the Magma") { operation(a, b) in elements }
+
+        //  Check associative property
+        for (a in elements) for (b in elements) for (c in elements)
+            complies("The binary operation is not associative for all elements in the Monoid") { isAssociative(a, b, c, operation) }
+    }
+
+}
+
+/**
+ * @author Matthias Kovacic
+ * @since 0.1.0
+ *
+ * Represents a monoid for a set of elements. A monoid has the following properties:
+ * - Associativity
+ * - Closure
+ * - Identity
  *
  * @param T The type of the elements in the monoid.
  * @param identity The identity element of the monoid.
