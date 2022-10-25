@@ -36,7 +36,7 @@ class DefinedSet<T>(
 
     override fun contains(element: T): Boolean = isMember(element)
 
-    override fun isSubSet(set: SimpleSet<T>): Boolean = set.all { isMember(it) }
+    override fun isSubset(set: SimpleSet<T>): Boolean = set.all { isMember(it) }
 
     override fun <K> map(map: (T) -> K): SimpleSet<K> = throw UnsupportedOperationException("Cannot map a set since elements are not statically defined")
 

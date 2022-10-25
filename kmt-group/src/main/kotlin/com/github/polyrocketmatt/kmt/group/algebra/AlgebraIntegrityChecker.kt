@@ -1,4 +1,4 @@
-package com.github.polyrocketmatt.kmt.group.group
+package com.github.polyrocketmatt.kmt.group.algebra
 
 /**
  * Check if a given operation is commutative.

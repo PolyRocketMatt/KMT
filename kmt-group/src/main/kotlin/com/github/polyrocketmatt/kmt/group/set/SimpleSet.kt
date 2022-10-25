@@ -53,7 +53,7 @@ open class SimpleSet<T>(internal val elements: Set<T>) : Iterable<T>, Mapping<T>
      * @param set The set to check against.
      * @return True if the set is a subset of the other set, false otherwise.
      */
-    open fun isSubSet(set: SimpleSet<T>): Boolean = elements.containsAll(set.elements)
+    open fun isSubset(set: SimpleSet<T>): Boolean = elements.containsAll(set.elements)
 
     /**
      * Compute the union of this set and another set.
@@ -61,7 +61,7 @@ open class SimpleSet<T>(internal val elements: Set<T>) : Iterable<T>, Mapping<T>
      * @param set The set to compute the union with.
      * @return The union of this set and the other set.
      */
-    open fun union(set: SimpleSet<T>): SimpleSet<T> = SimpleSet(elements + set.elements)
+    open fun union(set: SimpleSet<T>): SimpleSet<T> = SimpleSet((elements + set.elements).distinct())
 
     /**
      * Compute the intersection of this set and another set.
@@ -95,9 +95,8 @@ open class SimpleSet<T>(internal val elements: Set<T>) : Iterable<T>, Mapping<T>
      */
     open fun <K> cartesianProduct(set: SimpleSet<K>): SimpleSet<Pair<T, K>> {
         val result = mutableSetOf<Pair<T, K>>()
-        for (element in elements)
-            for (other in set.elements)
-                result.add(element to other)
+        for (element in elements) for (other in set.elements)
+            result.add(element to other)
         return SimpleSet(result)
     }
 

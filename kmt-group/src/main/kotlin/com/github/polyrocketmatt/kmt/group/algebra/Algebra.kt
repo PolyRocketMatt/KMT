@@ -1,4 +1,4 @@
-package com.github.polyrocketmatt.kmt.group.group
+package com.github.polyrocketmatt.kmt.group.algebra
 
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.group.set.SimpleSet
