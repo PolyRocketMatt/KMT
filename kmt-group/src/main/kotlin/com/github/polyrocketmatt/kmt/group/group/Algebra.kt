@@ -121,7 +121,20 @@ class Monoid<T>(
             complies("The identity element is not an identity for all elements in the Monoid") { isIdentity(a, identity, operation) }
     }
 
-    operator fun get(a: T, b: T): T = operation(a, b)
+    /**
+     * Get the result of the operation on two elements.
+     *
+     * @param a The first element.
+     * @param b The second element.
+     * @return The result of the operation on the two elements.
+     * @throws IllegalArgumentException If any of the two elements is not a member of the group.
+     */
+    operator fun get(a: T, b: T): T {
+        complies("The first element to retrieve the inverse for is not a member of the set") { contains(a) }
+        complies("The second element to retrieve the inverse for is not a member of the set") { contains(b) }
+
+        return operation(a, b)
+    }
 
     fun identity(): T = identity
 
@@ -172,11 +185,39 @@ class Group<T>(
             complies("The inverse is not guaranteed for all elements in the Group") { isInverse(a, inverse(a), operation) }
     }
 
-    operator fun get(a: T, b: T): T = operation(a, b)
+    /**
+     * Get the result of the operation on two elements.
+     *
+     * @param a The first element.
+     * @param b The second element.
+     * @return The result of the operation on the two elements.
+     * @throws IllegalArgumentException If any of the two elements is not a member of the group.
+     */
+    operator fun get(a: T, b: T): T {
+        complies("The first element to retrieve the inverse for is not a member of the set") { contains(a) }
+        complies("The second element to retrieve the inverse for is not a member of the set") { contains(b) }
 
+        return operation(a, b)
+    }
+
+    /**
+     * Get the identity element of the group.
+     *
+     * @return The identity element of the group.
+     */
     fun identity(): T = identity
 
-    fun inverse(a: T): T = inverseMap(a)
+    /**
+     * Get the inverse of an element.
+     *
+     * @param element The element to get the inverse of.
+     * @return The inverse of the element.
+     * @throws IllegalArgumentException If the element is not a member of the group.
+     */
+    fun inverse(element: T): T {
+        complies("The element to retrieve the inverse for is not a member of the set") { contains(element) }
+        return inverseMap(element)
+    }
 
 }
 
