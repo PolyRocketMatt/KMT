@@ -1,3 +1,4 @@
+
 val rootFolder = rootProject.projectDir
 val mergedJar by configurations.creating<Configuration> {
     isCanBeConsumed = false

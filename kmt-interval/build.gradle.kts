@@ -35,8 +35,8 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("Kotlin Mathematical Toolkit")
-                description.set("A collection of math utilities for Kotlin")
+                name.set("KMT Interval")
+                description.set("Module for working with intervals")
                 url.set("https://github.com/PolyRocketMatt/KMT")
 
                 licenses {

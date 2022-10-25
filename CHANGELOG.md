@@ -2,6 +2,32 @@
 
 Log of all changes in each version of the project.
 
+### 0.1.0
+
+- Refactor vectors (no API changes)
+- Remove useless matrix operations on vectors
+
+**kmt-linalg**
+
+- Support basic
+
+**kmt-group**
+
+- Support basic algebras (magma, monoid, semigroup, group, abelian group)
+
+**kmt-complex**
+
+- Complex numbers have been added
+
+---
+
+### 0.0.9 
+
+- Make all modules separately available
+- No major changes
+
+---
+
 ### 0.0.8 - Matrix Update
  
 - Matrices are now supported. 

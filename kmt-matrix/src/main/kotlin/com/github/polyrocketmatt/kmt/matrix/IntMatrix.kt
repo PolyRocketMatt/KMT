@@ -104,6 +104,7 @@ open class IntMatrix(
     constructor(shape: IntArray, isShape: Boolean = true) : this(shape, IntArray(shape.reduce { acc, i -> acc * i }) { 0 })
     constructor(shape: IntArray, value: Int) : this(shape, IntArray(shape.reduce { acc, i -> acc * i }) { value })
     constructor(matrix: Array<Int>) : this(matrix.toIntArray())
+    constructor(shape: IntArray, matrix: Array<Int>) : this(shape, matrix.toIntArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -390,22 +391,26 @@ open class IntMatrix(
 
     override fun isSquare(): Boolean = shape[0] == shape[1]
 
-    override fun swapRow(row1: Int, row2: Int): DoubleMatrix {
-        val result = toDoubleMatrix()
-        result.swapRow(row1, row2)
-        return result
+    override fun swapRow(row1: Int, row2: Int) {
+        val rowIndex1 = row1 * shape[1]
+        val rowIndex2 = row2 * shape[1]
+        val tmp = data.copyOfRange(rowIndex1, rowIndex1 + shape[1])
+
+        data.copyInto(data, rowIndex1, rowIndex2, rowIndex2 + shape[1])
+        tmp.copyInto(data, rowIndex2, 0, shape[1])
     }
 
-    override fun multiplyRow(row: Int, scalar: Double): DoubleMatrix {
-        val result = toDoubleMatrix()
-        result.multiplyRow(row, scalar)
-        return result
+    override fun multiplyRow(row: Int, scalar: Int) {
+        val rowIndex = row * shape[1]
+        for (i in 0 until shape[1])
+            data[rowIndex + i] *= scalar
     }
 
-    override fun addRow(row1: Int, row2: Int, scalar: Double): DoubleMatrix {
-        val result = toDoubleMatrix()
-        result.addRow(row1, row2, scalar)
-        return result
+    override fun addRow(row1: Int, row2: Int, scalar: Int) {
+        val rowIndex1 = row1 * shape[1]
+        val rowIndex2 = row2 * shape[1]
+        for (i in 0 until shape[1])
+            data[i + rowIndex1] += (data[i + rowIndex2] * scalar)
     }
 
     override fun operate(operations: List<ElementaryOperation<Double>>): DoubleMatrix = toDoubleMatrix().operate(operations)
@@ -419,6 +424,18 @@ open class IntMatrix(
     override fun isInvertible(): Boolean = determinant() != 0.0
 
     override fun inverse(): DoubleMatrix = toDoubleMatrix().inverse()
+
+    override fun rank(): Int = toDoubleMatrix().rank()
+
+    override fun nullity(): Int = shape[1] - rank()
+
+    override fun linearlyIndependentRows(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun linearlyIndependentColumns(): Boolean {
+        TODO("Not yet implemented")
+    }
 
     fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
     fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())

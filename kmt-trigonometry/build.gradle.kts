@@ -35,8 +35,8 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("Kotlin Mathematical Toolkit")
-                description.set("A collection of math utilities for Kotlin")
+                name.set("KMT Trigonometry")
+                description.set("Module for faster trigonometric functions")
                 url.set("https://github.com/PolyRocketMatt/KMT")
 
                 licenses {

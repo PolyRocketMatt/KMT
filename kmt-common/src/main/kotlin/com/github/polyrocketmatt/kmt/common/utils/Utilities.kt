@@ -29,7 +29,7 @@ import java.lang.IllegalStateException
  * @return The object itself if the condition is met
  * @throws IllegalStateException If the condition is not met
  */
-fun <T> T.complies(condition: (T) -> Boolean): T {
+inline fun <reified T> T.complies(condition: (T) -> Boolean): T {
     if (!condition(this))
         throw IllegalArgumentException()
     return this
@@ -43,7 +43,7 @@ fun <T> T.complies(condition: (T) -> Boolean): T {
  * @return The object itself if the condition is met
  * @throws IllegalStateException If the condition is not met
  */
-fun <T> T.complies(cause: String, condition: (T) -> Boolean): T {
+inline fun <reified T> T.complies(cause: String, condition: (T) -> Boolean): T {
     if (!condition(this))
         throw IllegalArgumentException(cause)
     return this
@@ -57,7 +57,7 @@ fun <T> T.complies(cause: String, condition: (T) -> Boolean): T {
  * @return The object itself if the condition is met
  * @throws IllegalStateException If the condition is not met
  */
-fun <T> T.complies(cause: (T) -> String, condition: (T) -> Boolean): T {
+inline fun <reified T> T.complies(cause: (T) -> String, condition: (T) -> Boolean): T {
     if (!condition(this))
         throw IllegalArgumentException(cause(this))
     return this

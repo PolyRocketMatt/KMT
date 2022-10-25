@@ -7,6 +7,8 @@ include("kmt-function")
 include("kmt-matrix")
 include("kmt-expr")
 include("kmt-linalg")
+include("kmt-group")
+include("kmt-complex")
 
 plugins {
     id("com.gradle.enterprise") version("3.9")

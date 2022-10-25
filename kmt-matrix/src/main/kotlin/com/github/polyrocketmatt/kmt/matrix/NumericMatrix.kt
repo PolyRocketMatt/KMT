@@ -27,7 +27,7 @@ package com.github.polyrocketmatt.kmt.matrix
  * @param T The type of the matrix elements.
  * @param K The type of the matrix that is returned after performing an operation.
  */
-interface NumericMatrix<T, K> : Matrix<T> {
+interface NumericMatrix<T, K> : GeneralMatrix<T> {
 
     /**
      * Performs the elementary row operation of swapping two rows.
@@ -36,7 +36,7 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @param row2 The second row to swap.
      * @return The new matrix with the rows swapped.
      */
-    fun swapRow(row1: Int, row2: Int): Matrix<K>
+    fun swapRow(row1: Int, row2: Int)
 
     /**
      * Performs the elementary row operation of multiplying a row by a scalar.
@@ -45,7 +45,7 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @param scalar The scalar to multiply the row by.
      * @return The new matrix with the row multiplied.
      */
-    fun multiplyRow(row: Int, scalar: K): Matrix<K>
+    fun multiplyRow(row: Int, scalar: T)
 
     /**
      * Performs the elementary row operation of adding a multiple of one row to another.
@@ -55,7 +55,7 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @param scalar The scalar to multiply the row by.
      * @return The new matrix with the row added.
      */
-    fun addRow(row1: Int, row2: Int, scalar: K): Matrix<K>
+    fun addRow(row1: Int, row2: Int, scalar: T)
 
     /**
      * Performs the (ordered) list of elementary row operations on the matrix.
@@ -103,4 +103,32 @@ interface NumericMatrix<T, K> : Matrix<T> {
      * @throws IllegalArgumentException If the matrix is not invertible.
      */
     fun inverse(): Matrix<K>
+
+    /**
+     * Get the rank of the matrix.
+     *
+     * @return The rank of the matrix.
+     */
+    fun rank(): Int
+
+    /**
+     * Get the nullity of the matrix.
+     *
+     * @return The nullity of the matrix.
+     */
+    fun nullity(): Int
+
+    /**
+     * Check if the rows of the matrix are linearly independent.
+     *
+     * @return True if the rows are linearly independent, false otherwise.
+     */
+    fun linearlyIndependentRows(): Boolean
+
+    /**
+     * Check if the columns of the matrix are linearly independent.
+     *
+     * @return True if the columns are linearly independent, false otherwise.
+     */
+    fun linearlyIndependentColumns(): Boolean
 }

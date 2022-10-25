@@ -37,8 +37,8 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("Kotlin Mathematical Toolkit")
-                description.set("A collection of math utilities for Kotlin")
+                name.set("KMT Vector")
+                description.set("Module for 1-dimensional matrices (or vectors)")
                 url.set("https://github.com/PolyRocketMatt/KMT")
 
                 licenses {

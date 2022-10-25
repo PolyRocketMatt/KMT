@@ -83,7 +83,8 @@ fun BooleanMatrix.toArray(): BooleanArray = this.data.toBooleanArray()
 open class BooleanMatrix(
     val shape: IntArray,
     matrix: BooleanArray,
-) : Tuple<Boolean>(BooleanArray(shape.reduce { acc, i -> acc * i }).toTypedArray()), Matrix<Boolean> {
+) : Tuple<Boolean>(BooleanArray(shape.reduce { acc, i -> acc * i }).toTypedArray()),
+    GeneralMatrix<Boolean> {
 
     constructor(matrix: BooleanArray) : this(intArrayOf(matrix.size), matrix)
     constructor(shape: IntArray) : this(shape, BooleanArray(shape.reduce { acc, i -> acc * i }) { false })

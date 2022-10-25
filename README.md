@@ -1,10 +1,11 @@
 # Kotlin Mathematical Toolkit (KMT)
 
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg?style=for-the-badge)](https://ktlint.github.io/)
-![Kotlin](https://img.shields.io/badge/%20Kotlin-1.7.20%20-blue?style=for-the-badge&logo=kotlin)
-[![Version](https://img.shields.io/badge/dynamic/json?color=blue&label=version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FPolyRocketMatt%2FKMT%2Fmain%2Fversion.json&style=for-the-badge)](https://github.com/PolyRocketMatt/KMT/releases)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)]()
-[![State](https://img.shields.io/badge/State-ALPHA-red?style=for-the-badge)]()
+![State](https://img.shields.io/badge/State-ALPHA-red?style=for-the-badge)
+![Build Status](https://img.shields.io/badge/Build-Passing-%2368AD63?style=for-the-badge)
+![License](https://img.shields.io/badge/License-GPLv3-%2368AD63?style=for-the-badge)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.7.20-%233e7fa8?logo=kotlin&style=for-the-badge)
+[![Version](https://img.shields.io/badge/dynamic/json?color=3e7fa8&label=version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FPolyRocketMatt%2FKMT%2Fmain%2Fversion.json&style=for-the-badge)](https://github.com/PolyRocketMatt/KMT/releases)
 
 KMT is a library for various mathematical operations in Kotlin. Its original purpose was to provide
 a modular library for mathematical tasks. Since Kotlin is emerging more and more as a language for 
@@ -13,17 +14,22 @@ scientific computing, this library is intended to provide a solid foundation for
 KMT is currently in very early alpha stages. Implementations, documentations, testing may change in the future. Please 
 keep track of the changelog to see what has changed in the latest versions.
 
+## Goals
+
+The primary goal of KMT is to provide a modular library for mathematical operations in Kotlin. Also, KMT aims
+to provide users with a library that is easy to understand and use. 
+
 ## Modules
 
 KMT is split into several modules, each of which can be used independently. Currently, the following modules
 are available:
 
-* [`common`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Common) - Common mathematical operations
-* [`interval`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Interval) - Interval classes and operations
-* [`vector`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Vector) - Vector classes and operations
-* [`matrix`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Matrix) - Matrix classes and operations
-* [`trigonometry`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Trigonometry) - Tabular trigonometric functions for faster computation
-* [`function`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Function) - Functions and their relative operations (algebraic operations, integration, differentiation)
+* [`kmt-common`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Common) - Common mathematical operations
+* [`kmt-interval`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Interval) - Interval classes and operations
+* [`kmt-vector`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Vector) - Vector classes and operations
+* [`kmt-matrix`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Matrix) - Matrix classes and operations
+* [`kmt-trigonometry`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Trigonometry) - Tabular trigonometric functions for faster computation
+* [`kmt-function`](https://github.com/PolyRocketMatt/KMT/wiki/KMT-Function) - Functions and their relative operations (algebraic operations, integration, differentiation)
 
 ## Documentation
 
@@ -32,11 +38,12 @@ using [Dokka](https://github.com/Kotlin/dokka) and is updated automatically upon
 
 ## Usage
 
-- ```VERSION``` is the version of the module you want to use. The latest version is 0.0.7-SNAPSHOT
+- ```MODULE``` is the module you want to use.
+- ```VERSION``` is the version of the module you want to use. The latest version is 0.0.9-SNAPSHOT
 - ```USERNAME``` is your GitHub username
 - ```TOKEN``` is a GitHub personal access token with the `read:packages` scope
 
-Currently only the complete library is offered. In the future, individual modules will be available.
+The available modules are listed [here](#modules)
 
 ### Gradle
 

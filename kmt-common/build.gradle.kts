@@ -34,8 +34,8 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("Kotlin Mathematical Toolkit")
-                description.set("A collection of math utilities for Kotlin")
+                name.set("KMT Common")
+                description.set("Module for common utilities shared between KMT modules")
                 url.set("https://github.com/PolyRocketMatt/KMT")
 
                 licenses {

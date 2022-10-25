@@ -111,6 +111,7 @@ open class DoubleMatrix(
     constructor(shape: IntArray) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
     constructor(shape: IntArray, value: Double) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
+    constructor(shape: IntArray, matrix: Array<Double>) : this(shape, matrix.toDoubleArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -397,30 +398,26 @@ open class DoubleMatrix(
 
     override fun isSquare(): Boolean = shape[0] == shape[1]
 
-    override fun swapRow(row1: Int, row2: Int): DoubleMatrix {
+    override fun swapRow(row1: Int, row2: Int) {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
         val tmp = data.copyOfRange(rowIndex1, rowIndex1 + shape[1])
 
         data.copyInto(data, rowIndex1, rowIndex2, rowIndex2 + shape[1])
         tmp.copyInto(data, rowIndex2, 0, shape[1])
-
-        return this
     }
 
-    override fun multiplyRow(row: Int, scalar: Double): DoubleMatrix {
+    override fun multiplyRow(row: Int, scalar: Double) {
         val rowIndex = row * shape[1]
         for (i in 0 until shape[1])
             data[rowIndex + i] *= scalar
-        return this
     }
 
-    override fun addRow(row1: Int, row2: Int, scalar: Double): DoubleMatrix {
+    override fun addRow(row1: Int, row2: Int, scalar: Double) {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
         for (i in 0 until shape[1])
             data[i + rowIndex1] += (data[i + rowIndex2] * scalar)
-        return this
     }
 
     override fun operate(operations: List<ElementaryOperation<Double>>): DoubleMatrix {
@@ -445,7 +442,12 @@ open class DoubleMatrix(
         for ((currentColumn, _) in (0 until min(shape[0], shape[1])).withIndex()) {
             //  Find index of value with the highest absolute value in current column
             val col = result.column(currentColumn).copyOfRange(currentColumn, shape[0])
-            val pivotIndex = col.indexByCondition(Double.MIN_VALUE) { _, current, _, value -> current.fastAbs() < value.fastAbs() }
+
+            //  If column only contains 0, we can continue
+            if (col.all { it == 0.0 })
+                continue
+
+            val pivotIndex = col.indexByCondition(0.0) { _, current, _, value -> current.fastAbs() < value.fastAbs() }
             val pivot = col[pivotIndex]
 
             //  The index also gives the row to swap to the top
@@ -522,6 +524,27 @@ open class DoubleMatrix(
             inverse[i * inverse.shape[1] + j] = rref[i, j + offset]
         return inverse
     }
+
+    override fun rank(): Int {
+        //  The rank of a matrix is the dimension of the column space.
+        //  To find the dimension of the column space we reduce the matrix to reduced row echelon form
+        //  and count the number of rows that are not all 0.
+        val rref = rref()
+        var rank = 0
+        for (i in 0 until rref.shape[0]) {
+            val row = rref.row(i)
+            if (row.any { it != 0.0 })
+                rank++
+        }
+
+        return rank
+    }
+
+    override fun nullity(): Int = shape[1] - rank()
+
+    override fun linearlyIndependentRows(): Boolean = rank() == shape[0]
+
+    override fun linearlyIndependentColumns(): Boolean = rank() == shape[1]
 
     open fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())

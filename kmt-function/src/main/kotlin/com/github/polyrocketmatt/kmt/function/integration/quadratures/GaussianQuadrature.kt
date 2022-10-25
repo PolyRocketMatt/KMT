@@ -7,7 +7,7 @@ import com.github.polyrocketmatt.kmt.function.roots.bisection
 import com.github.polyrocketmatt.kmt.function.type.polynomial.LegendrePolynomial
 import com.github.polyrocketmatt.kmt.interval.Interval
 import com.github.polyrocketmatt.kmt.interval.closed.ClosedDoubleInterval
-import com.github.polyrocketmatt.kmt.vector.db.Double2
+import com.github.polyrocketmatt.kmt.vector.Double2
 
 @Ref("https://www.bragitoff.com/2018/02/determining-roots-legendre-polynomials-weights-gaussian-quadrature-c-program/")
 class GaussianQuadrature<T>(private val n: Int, private val type: Type, private vararg val parameters: Double) : Quadrature<T> {

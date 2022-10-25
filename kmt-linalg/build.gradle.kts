@@ -8,6 +8,7 @@ description = "Module that contains core concepts of linear algebra"
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
+    implementation(project(":kmt-matrix"))
 }
 
 tasks.getByName<Test>("test") {
@@ -35,8 +36,8 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("Kotlin Mathematical Toolkit")
-                description.set("A collection of math utilities for Kotlin")
+                name.set("KMT LinAlg")
+                description.set("Module that contains core concepts of linear algebra")
                 url.set("https://github.com/PolyRocketMatt/KMT")
 
                 licenses {
