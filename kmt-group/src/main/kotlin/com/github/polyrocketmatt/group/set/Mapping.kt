@@ -4,5 +4,4 @@ package com.github.polyrocketmatt.group.set
 interface Mapping<T> {
 
     fun <K> map(map: (T) -> K): SimpleSet<K>
-
 }

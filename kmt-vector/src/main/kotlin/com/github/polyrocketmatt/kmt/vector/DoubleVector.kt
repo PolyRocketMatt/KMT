@@ -596,7 +596,9 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
  * @param z The z component of the vector.
  * @param w The w component of the vector.
  */
-class Double4(x: Double, y: Double, z: Double, w: Double) : Tuple4<Double>(arrayOf(x, y, z, w)), DoubleVector,
+class Double4(x: Double, y: Double, z: Double, w: Double) :
+    Tuple4<Double>(arrayOf(x, y, z, w)),
+    DoubleVector,
     Swizzle4 {
 
     constructor() : this(0.0, 0.0, 0.0, 0.0)
@@ -821,4 +823,3 @@ class Double4(x: Double, y: Double, z: Double, w: Double) : Tuple4<Double>(array
     }
     override fun set(row: Int, col: Int, value: Double) = throw UnsupportedOperationException("Double4 is considered a vector")
 }
-

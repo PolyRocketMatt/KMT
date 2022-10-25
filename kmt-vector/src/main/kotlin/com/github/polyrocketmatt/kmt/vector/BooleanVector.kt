@@ -277,7 +277,9 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
     override fun set(row: Int, col: Int, value: Boolean) = throw java.lang.UnsupportedOperationException("Bool3 is considered a vector")
 }
 
-class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) : Tuple4<Boolean>(arrayOf(x, y, z, w)), BooleanVector,
+class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) :
+    Tuple4<Boolean>(arrayOf(x, y, z, w)),
+    BooleanVector,
     Swizzle4 {
 
     constructor() : this(false, false, false, false)

@@ -18,8 +18,6 @@
 
 package com.github.polyrocketmatt.kmt.vector
 
-import com.github.polyrocketmatt.kmt.vector.db.DoubleVector
-
 /**
  * @author Matthias Kovacic
  * @since 0.0.1

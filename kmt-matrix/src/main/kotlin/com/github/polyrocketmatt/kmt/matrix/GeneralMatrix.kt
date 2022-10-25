@@ -52,5 +52,4 @@ interface GeneralMatrix<T> : Matrix<T> {
      * @return True if this matrix is a square matrix, false otherwise.
      */
     fun isSquare(): Boolean
-
 }

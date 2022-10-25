@@ -35,5 +35,4 @@ interface Matrix<T> {
     operator fun minusAssign(value: T)
     operator fun timesAssign(value: T)
     operator fun divAssign(value: T)
-
 }

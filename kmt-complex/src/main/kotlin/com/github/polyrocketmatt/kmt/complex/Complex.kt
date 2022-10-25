@@ -85,7 +85,6 @@ data class Complex(
      */
     operator fun div(other: Complex): Complex = Complex(
         (re * other.re + im * other.im) / (re * re + other.re * other.re),
-            (other.re * im - re * other.im) / (re * re + other.re * other.re)
+        (other.re * im - re * other.im) / (re * re + other.re * other.re)
     )
-
 }

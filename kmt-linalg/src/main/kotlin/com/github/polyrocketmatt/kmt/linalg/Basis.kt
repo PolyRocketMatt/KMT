@@ -5,6 +5,7 @@ import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.matrix.DoubleMatrix
 import com.github.polyrocketmatt.kmt.matrix.FloatMatrix
 import com.github.polyrocketmatt.kmt.matrix.IntMatrix
+import com.github.polyrocketmatt.kmt.matrix.NumericMatrix
 import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
 
 /**
@@ -19,28 +20,38 @@ import com.github.polyrocketmatt.kmt.matrix.ShortMatrix
  * @throws IllegalArgumentException If the vectors are not all linearly independent.
  */
 @Suppress("UNCHECKED_CAST")
-inline fun <reified T> constructBasisFrom(vararg vectors: Tuple<T>) {
+inline fun <reified T : Number> constructBasisFrom(vararg vectors: Tuple<T>): Basis<T> {
     if (vectors.isEmpty())
         throw IllegalArgumentException("Basis cannot have 0 vectors")
     if (vectors.any { it.size <= 0 })
         throw IllegalArgumentException("Basis vectors must have at lease length 1")
     if (vectors.any { it.size != vectors[0].size })
         throw IllegalArgumentException("Basis vectors must all be of equal length")
-
-    val basisVectors = mutableListOf<Tuple<T>>()
+    val basis = mutableSetOf<Tuple<T>>()
     for (element in vectors) {
-        val elements = (element + basisVectors.toList().flatten()).toTypedArray()
-        val matrix = when (T::class.java) {
-            Float::class.java -> FloatMatrix(intArrayOf(basisVectors.size + 1, element.size), elements as Array<Float>)
-            Double::class.java -> DoubleMatrix(intArrayOf(basisVectors.size + 1, element.size), elements as Array<Double>)
-            Int::class.java -> IntMatrix(intArrayOf(basisVectors.size + 1, element.size), elements as Array<Int>)
-            Short::class.java -> ShortMatrix(intArrayOf(basisVectors.size + 1, element.size), elements as Array<Short>)
-            else -> throw IllegalArgumentException("Basis vectors must be of type Float, Double, Int, or Short")
+        val rows = basis.size + 1
+        val shape = intArrayOf(rows, element.size)
+        val elements = (basis.toList().flatten() + element.data).toTypedArray()
+        val matrix = when (T::class) {
+            java.lang.Float::class,
+            Float::class -> FloatMatrix(shape, elements as Array<Float>)
+
+            java.lang.Double::class,
+            Double::class -> DoubleMatrix(shape, elements as Array<Double>)
+
+            java.lang.Integer::class,
+            Int::class -> IntMatrix(shape, elements as Array<Int>)
+
+            java.lang.Short::class,
+            Short::class -> ShortMatrix(shape, elements as Array<Short>)
+            else -> throw IllegalArgumentException("Unsupported type ${T::class}")
         }
 
-        if (matrix.rank() == basisVectors.size + 1)
-            basisVectors.add(element)
+        if (matrix.rank() == rows)
+            basis.add(element)
     }
+
+    return Basis(basis)
 }
 
 /**
@@ -54,29 +65,14 @@ inline fun <reified T> constructBasisFrom(vararg vectors: Tuple<T>) {
  * @throws IllegalArgumentException If the vectors are not all the same length.
  * @throws IllegalArgumentException If the vectors are not all linearly independent.
  */
-@Suppress("UNCHECKED_CAST")
-inline fun <reified T> constructBasisFrom(vectors: Collection<Tuple<T>>) {
+fun <T : Number> constructBasisFrom(vectors: Collection<Tuple<T>>): Basis<T> {
     if (vectors.isEmpty())
         throw IllegalArgumentException("Basis cannot have 0 vectors")
     if (vectors.any { it.size <= 0 })
         throw IllegalArgumentException("Basis vectors must have at lease length 1")
     if (vectors.any { it.size != vectors.elementAt(0).size })
         throw IllegalArgumentException("Basis vectors must all be of equal length")
-
-    val basisVectors = mutableListOf<Tuple<T>>()
-    for (element in vectors) {
-        val elements = (element + basisVectors.toList().flatten()).toTypedArray()
-        val matrix = when (T::class.java) {
-            Float::class.java -> FloatMatrix(intArrayOf(basisVectors.size + 1, element.size), elements as Array<Float>)
-            Double::class.java -> DoubleMatrix(intArrayOf(basisVectors.size + 1, element.size), elements as Array<Double>)
-            Int::class.java -> IntMatrix(intArrayOf(basisVectors.size + 1, element.size), elements as Array<Int>)
-            Short::class.java -> ShortMatrix(intArrayOf(basisVectors.size + 1, element.size), elements as Array<Short>)
-            else -> throw IllegalArgumentException("Basis vectors must be of type Float, Double, Int, or Short")
-        }
-
-        if (matrix.rank() == basisVectors.size + 1)
-            basisVectors.add(element)
-    }
+    return Basis(vectors)
 }
 
 /**
@@ -91,6 +87,10 @@ inline fun <reified T> constructBasisFrom(vectors: Collection<Tuple<T>>) {
 @Suppress("UNCHECKED_CAST")
 class Basis<T : Number>(private vararg val vectors: Tuple<T>) {
 
+    constructor(vectors: Collection<Tuple<T>>) : this(*vectors.toTypedArray())
+
+    private var matrix: NumericMatrix<T, *>
+
     init {
         complies("Basis cannot have 0 vectors") { vectors.isNotEmpty() }
         complies("Basis vectors must have at lease length 1") { vectors.all { it.size > 0 } }
@@ -98,15 +98,17 @@ class Basis<T : Number>(private vararg val vectors: Tuple<T>) {
 
         //  Check linear dependence
         val shape = intArrayOf(vectors.size, vectors[0].size)
-        val matrix = when (vectors[0][0]) {
-            is Float        -> FloatMatrix(shape, vectors.map { (it.data as Array<Float>).toList() }.flatten().toFloatArray())
-            is Double       -> DoubleMatrix(shape, vectors.map { (it.data as Array<Double>).toList() }.flatten().toDoubleArray())
-            is Int          -> IntMatrix(shape, vectors.map { (it.data as Array<Int>).toList() }.flatten().toIntArray())
-            is Short        -> ShortMatrix(shape, vectors.map { (it.data as Array<Short>).toList() }.flatten().toShortArray())
-            else            -> throw IllegalArgumentException("Basis vectors must be of type Float, Double, Int, or Short")
+        val checkMatrix = when (vectors[0][0]) {
+            is Float -> FloatMatrix(shape, vectors.map { (it.data as Array<Float>).toList() }.flatten().toFloatArray())
+            is Double -> DoubleMatrix(shape, vectors.map { (it.data as Array<Double>).toList() }.flatten().toDoubleArray())
+            is Int -> IntMatrix(shape, vectors.map { (it.data as Array<Int>).toList() }.flatten().toIntArray())
+            is Short -> ShortMatrix(shape, vectors.map { (it.data as Array<Short>).toList() }.flatten().toShortArray())
+            else -> throw IllegalArgumentException("Basis vectors must be of type Float, Double, Int, or Short")
         }
 
-        complies("Basis vectors must be linearly independent!") { matrix.rank() == vectors.size }
+        complies("Basis vectors must be linearly independent!") { checkMatrix.rank() == vectors.size }
+
+        matrix = checkMatrix as NumericMatrix<T, *>
     }
 
     /**
@@ -125,4 +127,5 @@ class Basis<T : Number>(private vararg val vectors: Tuple<T>) {
      */
     fun dimension(): Int = vectors.size
 
+    override fun toString(): String = matrix.toString()
 }

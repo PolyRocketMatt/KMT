@@ -41,5 +41,4 @@ class DefinedSet<T>(
     override fun <K> map(map: (T) -> K): SimpleSet<K> = throw UnsupportedOperationException("Cannot map a set since elements are not statically defined")
 
     fun <K> mapIfContains(element: T, map: (T) -> K): K? = if (contains(element)) map(element) else null
-
 }

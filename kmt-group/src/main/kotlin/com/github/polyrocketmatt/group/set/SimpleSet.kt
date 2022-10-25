@@ -114,5 +114,4 @@ open class SimpleSet<T>(private val elements: Set<T>) :
     override fun iterator(): Iterator<T> = elements.iterator()
 
     open override fun <K> map(map: (T) -> K): SimpleSet<K> = SimpleSet(elements.map(map))
-
 }
