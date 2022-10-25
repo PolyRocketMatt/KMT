@@ -8,6 +8,7 @@ description = "Module that contains core concepts of linear algebra"
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
+    implementation(project(":kmt-matrix"))
 }
 
 tasks.getByName<Test>("test") {

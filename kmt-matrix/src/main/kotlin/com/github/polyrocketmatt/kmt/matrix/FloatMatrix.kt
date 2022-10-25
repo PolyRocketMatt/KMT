@@ -111,6 +111,7 @@ open class FloatMatrix(
     constructor(shape: IntArray) : this(shape, FloatArray(shape.reduce { acc, i -> acc * i }) { 0.0f })
     constructor(shape: IntArray, value: Float) : this(shape, FloatArray(shape.reduce { acc, i -> acc * i }) { value })
     constructor(matrix: Array<Float>) : this(matrix.toFloatArray())
+    constructor(shape: IntArray, matrix: Array<Float>) : this(shape, matrix.toFloatArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }

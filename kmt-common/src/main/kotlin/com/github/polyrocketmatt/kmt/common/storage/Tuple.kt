@@ -19,6 +19,48 @@
 package com.github.polyrocketmatt.kmt.common.storage
 
 /**
+ * Get a tuple of the provided elements.
+ *
+ * @param T The type of the elements.
+ * @param elements The elements to put in the tuple.
+ * @return A tuple of the provided elements.
+ */
+inline fun <reified T : Any> tupleOf(vararg elements: T): Tuple<T> = Tuple(elements.toList().toTypedArray())
+
+/**
+ * Get a 2-tuple of the provided elements.
+ *
+ * @param T The type of the elements.
+ * @param first The first element.
+ * @param second The second element.
+ * @return A 2-tuple of the provided elements.
+ */
+inline fun <reified T : Any> tuple2Of(first: T, second: T): Tuple2<T> = Tuple2(arrayOf(first, second))
+
+/**
+ * Get a 3-tuple of the provided elements.
+ *
+ * @param T The type of the elements.
+ * @param first The first element.
+ * @param second The second element.
+ * @param third The third element.
+ * @return A 3-tuple of the provided elements.
+ */
+inline fun <reified T : Any> tuple3Of(first: T, second: T, third: T): Tuple3<T> = Tuple3(arrayOf(first, second, third))
+
+/**
+ * Get a 4-tuple of the provided elements.
+ *
+ * @param T The type of the elements.
+ * @param first The first element.
+ * @param second The second element.
+ * @param third The third element.
+ * @param fourth The fourth element.
+ * @return A 4-tuple of the provided elements.
+ */
+inline fun <reified T : Any> tuple4Of(first: T, second: T, third: T, fourth: T): Tuple4<T> = Tuple4(arrayOf(first, second, third, fourth))
+
+/**
  * @author Matthias Kovacic
  * @since 0.0.1
  *

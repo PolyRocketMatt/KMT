@@ -104,6 +104,7 @@ open class ShortMatrix(
     constructor(shape: IntArray) : this(shape, ShortArray(shape.reduce { acc, i -> acc * i }) { 0.toShort() })
     constructor(shape: IntArray, value: Short) : this(shape, ShortArray(shape.reduce { acc, i -> acc * i }) { value })
     constructor(matrix: Array<Short>) : this(matrix.toShortArray())
+    constructor(shape: IntArray, matrix: Array<Short>) : this(shape, matrix.toShortArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }

@@ -111,6 +111,7 @@ open class DoubleMatrix(
     constructor(shape: IntArray) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { 0.0 })
     constructor(shape: IntArray, value: Double) : this(shape, DoubleArray(shape.reduce { acc, i -> acc * i }) { value })
     constructor(matrix: Array<Double>) : this(matrix.toDoubleArray())
+    constructor(shape: IntArray, matrix: Array<Double>) : this(shape, matrix.toDoubleArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
@@ -441,7 +442,12 @@ open class DoubleMatrix(
         for ((currentColumn, _) in (0 until min(shape[0], shape[1])).withIndex()) {
             //  Find index of value with the highest absolute value in current column
             val col = result.column(currentColumn).copyOfRange(currentColumn, shape[0])
-            val pivotIndex = col.indexByCondition(Double.MIN_VALUE) { _, current, _, value -> current.fastAbs() < value.fastAbs() }
+
+            //  If column only contains 0, we can continue
+            if (col.all { it == 0.0 })
+                continue
+
+            val pivotIndex = col.indexByCondition(0.0) { _, current, _, value -> current.fastAbs() < value.fastAbs() }
             val pivot = col[pivotIndex]
 
             //  The index also gives the row to swap to the top
@@ -536,13 +542,9 @@ open class DoubleMatrix(
 
     override fun nullity(): Int = shape[1] - rank()
 
-    override fun linearlyIndependentRows(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun linearlyIndependentRows(): Boolean = rank() == shape[0]
 
-    override fun linearlyIndependentColumns(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun linearlyIndependentColumns(): Boolean = rank() == shape[1]
 
     open fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())

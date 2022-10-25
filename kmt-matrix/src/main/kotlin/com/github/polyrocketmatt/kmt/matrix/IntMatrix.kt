@@ -104,6 +104,7 @@ open class IntMatrix(
     constructor(shape: IntArray, isShape: Boolean = true) : this(shape, IntArray(shape.reduce { acc, i -> acc * i }) { 0 })
     constructor(shape: IntArray, value: Int) : this(shape, IntArray(shape.reduce { acc, i -> acc * i }) { value })
     constructor(matrix: Array<Int>) : this(matrix.toIntArray())
+    constructor(shape: IntArray, matrix: Array<Int>) : this(shape, matrix.toIntArray())
 
     init {
         val shapeSize = shape.reduce { acc, i -> acc * i }
