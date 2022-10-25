@@ -12,9 +12,7 @@ import com.github.polyrocketmatt.kmt.common.annotation.Ref
  * @param elements The objects contained within to the set.
  */
 @Ref("https://en.wikipedia.org/wiki/Set_(mathematics)")
-open class SimpleSet<T>(private val elements: Set<T>) :
-    Iterable<T>,
-    Mapping<T> {
+open class SimpleSet<T>(internal val elements: Set<T>) : Iterable<T>, Mapping<T> {
 
     constructor() : this(emptySet())
     constructor(vararg elements: T) : this(elements.toSet())
