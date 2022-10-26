@@ -40,4 +40,16 @@ class AlgebraicIntegrityCheckerTest {
         assertFalse { isInverse(1, -1, 0, subtraction) }
         assertFalse { isInverse(1, -1, 1, multiplication) }
     }
+
+    @Test
+    fun testIsLeftDistributive() {
+        assertTrue { isLeftDistributive(1, 2, 3, addition, multiplication) }
+        assertFalse { isLeftDistributive(2, 5, 3, subtraction, addition) }
+    }
+
+    @Test
+    fun testIsRightDistributive() {
+        assertTrue { isRightDistributive(1, 2, 3, addition, multiplication) }
+        assertFalse { isRightDistributive(2, 5, 3, subtraction, addition) }
+    }
 }

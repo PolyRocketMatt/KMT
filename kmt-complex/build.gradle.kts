@@ -29,7 +29,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "com.github.polyrocketmatt"
-            artifactId = "kmt-linalg"
+            artifactId = "kmt-complex"
             version = findProperty("kmt.version") as String? ?: "0.0.1"
 
             from(components["java"])
