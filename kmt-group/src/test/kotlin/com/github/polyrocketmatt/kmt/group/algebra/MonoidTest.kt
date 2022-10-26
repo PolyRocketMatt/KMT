@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -43,16 +44,15 @@ class MonoidTest {
     fun testMonoidOperation() {
         val monoid = Monoid(identity, modAdd, elements)
 
-        assertTrue { monoid[1, 2] == 3 }
-        assertTrue { monoid[1, 9] == 0 }
-        assertTrue { monoid[9, 9] == 8 }
-        assertFalse { monoid[1, 2] == 4 }
+        assertEquals(3, monoid[1, 2])
+        assertEquals(0, monoid[1, 9])
+        assertEquals(8, monoid[9, 9])
     }
 
     @Test
     fun testMonoidIdentity() {
         val monoid = Monoid(identity, modAdd, elements)
 
-        assertTrue { monoid.identity() == identity }
+        assertEquals(identity, monoid.identity())
     }
 }

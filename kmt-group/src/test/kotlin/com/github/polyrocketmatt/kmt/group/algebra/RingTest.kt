@@ -5,9 +5,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
+/**
+ * Tests the [Ring] algebra by using an additive and multiplicative modulus 7 group.
+ */
 class RingTest {
 
     private val identity = 0
@@ -49,24 +53,22 @@ class RingTest {
     fun testRingOperation() {
         val ring = Ring(identity, inverseMap, modAdd, modMult, elements)
 
-        assertTrue { ring.add(6, 3) == 2 }
-        assertTrue { ring[6, 3] == 2 }
-        assertFalse { ring[6, 3] == 1 }
-        assertTrue { ring.multiply(2, 4) == 1 }
-        assertFalse { ring.multiply(2, 4) == 2 }
+        assertEquals(2, ring.add(6, 3))
+        assertEquals(2, ring[6, 3])
+        assertEquals(1, ring.multiply(2, 4))
     }
 
     @Test
     fun testRingIdentity() {
         val ring = Ring(identity, inverseMap, modAdd, modMult, elements)
 
-        assertTrue { ring.identity() == identity }
+        assertEquals(identity, ring.identity())
     }
 
     @Test
     fun testRingInverse() {
         val ring = Ring(identity, inverseMap, modAdd, modMult, elements)
 
-        assertTrue { ring.inverse(3) == 4 }
+        assertEquals(4, ring.inverse(3))
     }
 }

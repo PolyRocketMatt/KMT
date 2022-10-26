@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -51,22 +52,21 @@ class GroupTest {
     fun testGroupOperation() {
         val group = Group(identity, inverseMap, modMult, elements)
 
-        assertTrue { group[1, 2] == 2 }
-        assertTrue { group[2, 6] == 5 }
-        assertFalse { group[1, 2] == 4 }
+        assertEquals(2, group[1, 2])
+        assertEquals(5, group[2, 6])
     }
 
     @Test
     fun testGroupIdentity() {
         val group = Group(identity, inverseMap, modMult, elements)
 
-        assertTrue { group.identity() == identity }
+        assertEquals(identity, group.identity())
     }
 
     @Test
     fun testGroupInverse() {
         val group = Group(identity, inverseMap, modMult, elements)
 
-        assertTrue { group.inverse(3) == 5 }
+        assertEquals(5, group.inverse(3))
     }
 }

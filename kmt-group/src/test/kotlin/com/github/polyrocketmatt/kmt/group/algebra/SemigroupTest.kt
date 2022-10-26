@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
-import kotlin.test.assertFalse
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 /**
@@ -42,9 +42,8 @@ class SemigroupTest {
     fun testSemigroupOperation() {
         val sgroup = Semigroup(modAdd, elements)
 
-        assertTrue { sgroup[1, 2] == 3 }
-        assertTrue { sgroup[1, 9] == 0 }
-        assertTrue { sgroup[9, 9] == 8 }
-        assertFalse { sgroup[1, 2] == 4 }
+        assertEquals(3, sgroup[1, 2])
+        assertEquals(0, sgroup[1, 9])
+        assertEquals(8, sgroup[9, 9])
     }
 }
