@@ -130,6 +130,7 @@ class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVec
     override fun dist(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get distance between boolean vectors")
     override fun distSq(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get squared distance between boolean vectors")
     override fun dot(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
+    override fun isOrthogonal(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot check if boolean vectors are orthogonal")
     override fun sdot(): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vector with itself")
     override fun unaryMinus(): Bool2 = Bool2(!x, !y)
 
@@ -191,34 +192,35 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
     operator fun times(other: Bool3) = Bool3(x && other.x, y && other.y, z && other.z)
 
     override fun plus(value: Boolean): Bool3 = Bool3(x || value, y || value, z || value)
-    override fun minus(value: Boolean): Bool3 = throw java.lang.UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+    override fun minus(value: Boolean): Bool3 = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
     override fun times(value: Boolean): Bool3 = Bool3(x && value, y && value, z && value)
-    override fun div(value: Boolean): Bool3 = throw java.lang.UnsupportedOperationException("Cannot divide a boolean vector by a boolean")
+    override fun div(value: Boolean): Bool3 = throw UnsupportedOperationException("Cannot divide a boolean vector by a boolean")
 
     override fun plusAssign(value: Boolean) { x = x || value; y = y || value; z = z || value }
-    override fun minusAssign(value: Boolean) = throw java.lang.UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+    override fun minusAssign(value: Boolean) = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
     override fun timesAssign(value: Boolean) { x = x && value; y = y && value; z = z && value }
-    override fun divAssign(value: Boolean) = throw java.lang.UnsupportedOperationException("Cannot divide a boolean vector by a boolean")
+    override fun divAssign(value: Boolean) = throw UnsupportedOperationException("Cannot divide a boolean vector by a boolean")
 
-    override fun length(): Float = throw java.lang.UnsupportedOperationException("Cannot get length of a boolean vector")
-    override fun lengthDouble(): Double = throw java.lang.UnsupportedOperationException("Cannot get length of a boolean vector")
-    override fun lengthSq(): Boolean = throw java.lang.UnsupportedOperationException("Cannot get squared length of a boolean vector")
+    override fun length(): Float = throw UnsupportedOperationException("Cannot get length of a boolean vector")
+    override fun lengthDouble(): Double = throw UnsupportedOperationException("Cannot get length of a boolean vector")
+    override fun lengthSq(): Boolean = throw UnsupportedOperationException("Cannot get squared length of a boolean vector")
     override fun max(): Boolean = if (x) true else if (y) true else z
     override fun min(): Boolean = if (!x) false else if (!y) false else !z
     override fun sum(): Boolean = x || y || z
-    override fun diff(): Boolean = throw java.lang.UnsupportedOperationException("Cannot get difference of a boolean vector")
+    override fun diff(): Boolean = throw UnsupportedOperationException("Cannot get difference of a boolean vector")
     override fun product(): Boolean = x && y && z
-    override fun div(): Boolean = throw java.lang.UnsupportedOperationException("Cannot get division of a boolean vector")
-    override fun normalized(): Vector<Float> = throw java.lang.UnsupportedOperationException("Cannot normalize a boolean vector")
+    override fun div(): Boolean = throw UnsupportedOperationException("Cannot get division of a boolean vector")
+    override fun normalized(): Vector<Float> = throw UnsupportedOperationException("Cannot normalize a boolean vector")
 
-    override fun dist(other: Vector<Boolean>): Float = throw java.lang.UnsupportedOperationException("Cannot get distance between boolean vectors")
-    override fun distSq(other: Vector<Boolean>): Float = throw java.lang.UnsupportedOperationException("Cannot get squared distance between boolean vectors")
-    override fun dot(other: Vector<Boolean>): Float = throw java.lang.UnsupportedOperationException("Cannot get dot product of boolean vectors")
-    override fun sdot(): Boolean = throw java.lang.UnsupportedOperationException("Cannot get dot product of boolean vector with itself")
+    override fun dist(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get distance between boolean vectors")
+    override fun distSq(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get squared distance between boolean vectors")
+    override fun dot(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
+    override fun isOrthogonal(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot check if boolean vectors are orthogonal")
+    override fun sdot(): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vector with itself")
     override fun unaryMinus(): Bool3 = Bool3(!x, !y, !z)
 
     override fun abs(): Bool3 = Bool3(x, y, z)
-    override fun avg(): Float = throw java.lang.UnsupportedOperationException("Cannot get average of a boolean vector")
+    override fun avg(): Float = throw UnsupportedOperationException("Cannot get average of a boolean vector")
     override fun min(other: Vector<Boolean>): Bool3 {
         return if (other is Bool3)
             Bool3(x && other.x, y && other.y, z && other.z)
@@ -231,12 +233,12 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
         else
             throw IllegalArgumentException("Other must be a Bool3")
     }
-    override fun isIn(min: Boolean, max: Boolean): Vector<Boolean> = throw java.lang.UnsupportedOperationException("Cannot check if a boolean vector is in a range")
-    override fun intPow(n: Int): Vector<Boolean> = throw java.lang.UnsupportedOperationException("Cannot raise a boolean vector to a power")
+    override fun isIn(min: Boolean, max: Boolean): Vector<Boolean> = throw UnsupportedOperationException("Cannot check if a boolean vector is in a range")
+    override fun intPow(n: Int): Vector<Boolean> = throw UnsupportedOperationException("Cannot raise a boolean vector to a power")
 
-    override fun sin(): DoubleVector = throw java.lang.UnsupportedOperationException("Cannot get sine of a boolean vector")
-    override fun cos(): DoubleVector = throw java.lang.UnsupportedOperationException("Cannot get cosine of a boolean vector")
-    override fun tan(): DoubleVector = throw java.lang.UnsupportedOperationException("Cannot get tangent of a boolean vector")
+    override fun sin(): DoubleVector = throw UnsupportedOperationException("Cannot get sine of a boolean vector")
+    override fun cos(): DoubleVector = throw UnsupportedOperationException("Cannot get cosine of a boolean vector")
+    override fun tan(): DoubleVector = throw UnsupportedOperationException("Cannot get tangent of a boolean vector")
 
     override fun asFloat(): Float3 = Float3(if (x) 1f else 0f, if (y) 1f else 0f, if (z) 1f else 0f)
     override fun asDouble(): Double3 = Double3(if (x) 1.0 else 0.0, if (y) 1.0 else 0.0, if (z) 1.0 else 0.0)
@@ -265,7 +267,7 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
 
     @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
     override fun get(i: Int): Boolean = data[i]
-    override fun get(row: Int, col: Int): Boolean = throw java.lang.UnsupportedOperationException("Bool3 is considered a vector")
+    override fun get(row: Int, col: Int): Boolean = throw UnsupportedOperationException("Bool3 is considered a vector")
 
     @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
     override fun set(i: Int, value: Boolean) = when (i) {
@@ -274,7 +276,7 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
         2 -> z = value
         else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Bool3")
     }
-    override fun set(row: Int, col: Int, value: Boolean) = throw java.lang.UnsupportedOperationException("Bool3 is considered a vector")
+    override fun set(row: Int, col: Int, value: Boolean) = throw UnsupportedOperationException("Bool3 is considered a vector")
 }
 
 class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) :
@@ -291,38 +293,39 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) :
 
     override fun plus(value: Boolean): Bool4 = Bool4(x || value, y || value, z || value, w || value)
 
-    override fun minus(value: Boolean): Bool4 = throw java.lang.UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+    override fun minus(value: Boolean): Bool4 = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
 
     override fun times(value: Boolean): Bool4 = Bool4(x && value, y && value, z && value, w && value)
 
-    override fun div(value: Boolean): Bool4 = throw java.lang.UnsupportedOperationException("Cannot divide a boolean from a boolean vector")
+    override fun div(value: Boolean): Bool4 = throw UnsupportedOperationException("Cannot divide a boolean from a boolean vector")
 
     override fun plusAssign(value: Boolean) { x = x || value; y = y || value; z = z || value; w = w || value }
 
-    override fun minusAssign(value: Boolean) = throw java.lang.UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
+    override fun minusAssign(value: Boolean) = throw UnsupportedOperationException("Cannot subtract a boolean from a boolean vector")
 
     override fun timesAssign(value: Boolean) { x = x && value; y = y && value; z = z && value; w = w && value }
-    override fun divAssign(value: Boolean) = throw java.lang.UnsupportedOperationException("Cannot divide a boolean from a boolean vector")
+    override fun divAssign(value: Boolean) = throw UnsupportedOperationException("Cannot divide a boolean from a boolean vector")
 
-    override fun length(): Float = throw java.lang.UnsupportedOperationException("Cannot get length of a boolean vector")
-    override fun lengthDouble(): Double = throw java.lang.UnsupportedOperationException("Cannot get length of a boolean vector")
-    override fun lengthSq(): Boolean = throw java.lang.UnsupportedOperationException("Cannot get squared length of a boolean vector")
+    override fun length(): Float = throw UnsupportedOperationException("Cannot get length of a boolean vector")
+    override fun lengthDouble(): Double = throw UnsupportedOperationException("Cannot get length of a boolean vector")
+    override fun lengthSq(): Boolean = throw UnsupportedOperationException("Cannot get squared length of a boolean vector")
     override fun max(): Boolean = if (x) true else if (y) true else if (z) true else w
     override fun min(): Boolean = if (!x) false else if (!y) false else if (!z) false else !w
     override fun sum(): Boolean = x || y || z || w
-    override fun diff(): Boolean = throw java.lang.UnsupportedOperationException("Cannot get difference of a boolean vector")
+    override fun diff(): Boolean = throw UnsupportedOperationException("Cannot get difference of a boolean vector")
     override fun product(): Boolean = x && y && z && w
-    override fun div(): Boolean = throw java.lang.UnsupportedOperationException("Cannot get division of a boolean vector")
-    override fun normalized(): Vector<Float> = throw java.lang.UnsupportedOperationException("Cannot normalize a boolean vector")
+    override fun div(): Boolean = throw UnsupportedOperationException("Cannot get division of a boolean vector")
+    override fun normalized(): Vector<Float> = throw UnsupportedOperationException("Cannot normalize a boolean vector")
 
-    override fun dist(other: Vector<Boolean>): Float = throw java.lang.UnsupportedOperationException("Cannot get distance between boolean vectors")
-    override fun distSq(other: Vector<Boolean>): Float = throw java.lang.UnsupportedOperationException("Cannot get squared distance between boolean vectors")
-    override fun dot(other: Vector<Boolean>): Float = throw java.lang.UnsupportedOperationException("Cannot get dot product of boolean vectors")
-    override fun sdot(): Boolean = throw java.lang.UnsupportedOperationException("Cannot get dot product of boolean vector with itself")
+    override fun dist(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get distance between boolean vectors")
+    override fun distSq(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get squared distance between boolean vectors")
+    override fun dot(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
+    override fun isOrthogonal(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot check orthogonality of boolean vectors")
+    override fun sdot(): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vector with itself")
     override fun unaryMinus(): Bool4 = Bool4(!x, !y, !z, !w)
 
     override fun abs(): Bool4 = Bool4(x, y, z, w)
-    override fun avg(): Float = throw java.lang.UnsupportedOperationException("Cannot get average of a boolean vector")
+    override fun avg(): Float = throw UnsupportedOperationException("Cannot get average of a boolean vector")
     override fun min(other: Vector<Boolean>): Bool4 {
         return if (other is Bool4)
             Bool4(x && other.x, y && other.y, z && other.z, w && other.w)
@@ -335,12 +338,11 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) :
         else
             throw IllegalArgumentException("Other must be a Bool4")
     }
-    override fun isIn(min: Boolean, max: Boolean): Vector<Boolean> = throw java.lang.UnsupportedOperationException("Cannot check if a boolean vector is in a range")
-    override fun intPow(n: Int): Vector<Boolean> = throw java.lang.UnsupportedOperationException("Cannot raise a boolean vector to a power")
-
-    override fun sin(): DoubleVector = throw java.lang.UnsupportedOperationException("Cannot get sine of a boolean vector")
-    override fun cos(): DoubleVector = throw java.lang.UnsupportedOperationException("Cannot get cosine of a boolean vector")
-    override fun tan(): DoubleVector = throw java.lang.UnsupportedOperationException("Cannot get tangent of a boolean vector")
+    override fun isIn(min: Boolean, max: Boolean): Vector<Boolean> = throw UnsupportedOperationException("Cannot check if a boolean vector is in a range")
+    override fun intPow(n: Int): Vector<Boolean> = throw UnsupportedOperationException("Cannot raise a boolean vector to a power")
+    override fun sin(): DoubleVector = throw UnsupportedOperationException("Cannot get sine of a boolean vector")
+    override fun cos(): DoubleVector = throw UnsupportedOperationException("Cannot get cosine of a boolean vector")
+    override fun tan(): DoubleVector = throw UnsupportedOperationException("Cannot get tangent of a boolean vector")
 
     override fun asFloat(): Float4 = Float4(if (x) 1f else 0f, if (y) 1f else 0f, if (z) 1f else 0f, if (w) 1f else 0f)
     override fun asDouble(): Double4 = Double4(if (x) 1.0 else 0.0, if (y) 1.0 else 0.0, if (z) 1.0 else 0.0, if (w) 1.0 else 0.0)
@@ -418,7 +420,7 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) :
 
     @Deprecated("Use operator instead", ReplaceWith("vector[i]"))
     override fun get(i: Int): Boolean = data[i]
-    override fun get(row: Int, col: Int): Boolean = throw java.lang.UnsupportedOperationException("Bool4 is considered a vector")
+    override fun get(row: Int, col: Int): Boolean = throw UnsupportedOperationException("Bool4 is considered a vector")
 
     @Deprecated("Use operator instead", ReplaceWith("vector[i] = value"))
     override fun set(i: Int, value: Boolean) = when (i) {
@@ -428,5 +430,5 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) :
         3 -> w = value
         else -> throw IndexOutOfBoundsException("Index $i is out of bounds for Bool4")
     }
-    override fun set(row: Int, col: Int, value: Boolean) = throw java.lang.UnsupportedOperationException("Bool4 is considered a vector")
+    override fun set(row: Int, col: Int, value: Boolean) = throw UnsupportedOperationException("Bool4 is considered a vector")
 }

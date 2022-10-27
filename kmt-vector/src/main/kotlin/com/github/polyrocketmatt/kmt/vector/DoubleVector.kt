@@ -333,12 +333,13 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
         } else
             throw IllegalArgumentException("Other must be a Double2")
     }
-    override fun dot(other: Vector<Double>): Float {
+    override fun dot(other: Vector<Double>): Double {
         if (other is Double2) {
-            return (x * other.x + y * other.y).toFloat()
+            return x * other.x + y * other.y
         } else
             throw IllegalArgumentException("Other must be a Double2")
     }
+    override fun isOrthogonal(other: Vector<Double>): Boolean = dot(other) == 0.0
     override fun sdot(): Double = x * x + y * y
     override fun unaryMinus(): Double2 = Double2(-x, -y)
 
@@ -494,12 +495,13 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
         } else
             throw IllegalArgumentException("Other must be a Double3")
     }
-    override fun dot(other: Vector<Double>): Float {
+    override fun dot(other: Vector<Double>): Double {
         if (other is Double3) {
-            return (x * other.x + y * other.y + z * other.z).toFloat()
+            return x * other.x + y * other.y + z * other.z
         } else
             throw IllegalArgumentException("Other must be a Double3")
     }
+    override fun isOrthogonal(other: Vector<Double>): Boolean = dot(other) == 0.0
     override fun sdot(): Double = x * x + y * y + z * z
     override fun unaryMinus(): Double3 = Double3(-x, -y, -z)
     fun cross(other: Double3): Double3 = Double3(
@@ -686,12 +688,13 @@ class Double4(x: Double, y: Double, z: Double, w: Double) :
         } else
             throw IllegalArgumentException("Other must be a Double4")
     }
-    override fun dot(other: Vector<Double>): Float {
+    override fun dot(other: Vector<Double>): Double {
         if (other is Double4) {
-            return (x * other.x + y * other.y + z * other.z + w * other.w).toFloat()
+            return x * other.x + y * other.y + z * other.z + w * other.w
         } else
             throw IllegalArgumentException("Other must be a Double4")
     }
+    override fun isOrthogonal(other: Vector<Double>): Boolean = dot(other) == 0.0
     override fun sdot(): Double = x * x + y * y + z * z + w * w
     override fun unaryMinus(): Double4 = Double4(-x, -y, -z, -w)
 

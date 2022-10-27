@@ -118,7 +118,15 @@ interface Vector<T> {
      * @param other The other vector.
      * @return The dot product of the vector and the other vector.
      */
-    fun dot(other: Vector<T>): Float
+    fun dot(other: Vector<T>): T
+
+    /**
+     * Check if the vector and the other vector are orthogonal.
+     *
+     * @param other The other vector.
+     * @return True if the vector and the other vector are orthogonal, false otherwise.
+     */
+    fun isOrthogonal(other: Vector<T>): Boolean
 
     /**
      * Get the dor product of the vector with itself.

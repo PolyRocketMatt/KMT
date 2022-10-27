@@ -273,12 +273,13 @@ class Int2(x: Int, y: Int) : Tuple2<Int>(arrayOf(x, y)), IntVector, Swizzle2 {
         } else
             throw IllegalArgumentException("Other must be a Int2")
     }
-    override fun dot(other: Vector<Int>): Float {
+    override fun dot(other: Vector<Int>): Int {
         if (other is Int2)
-            return (x * other.x + y * other.y).toFloat()
+            return x * other.x + y * other.y
         else
             throw IllegalArgumentException("Other must be a Int2")
     }
+    override fun isOrthogonal(other: Vector<Int>): Boolean = dot(other) == 0
     override fun sdot(): Int = x * x + y * y
     override fun unaryMinus(): Int2 = Int2(-x, -y)
 
@@ -425,12 +426,13 @@ class Int3(x: Int, y: Int, z: Int) : Tuple3<Int>(arrayOf(x, y, z)), IntVector, S
         } else
             throw IllegalArgumentException("Other must be a Int3")
     }
-    override fun dot(other: Vector<Int>): Float {
+    override fun dot(other: Vector<Int>): Int {
         if (other is Int3) {
-            return (x * other.x + y * other.y + z * other.z).toFloat()
+            return x * other.x + y * other.y + z * other.z
         } else
             throw IllegalArgumentException("Other must be a Int3")
     }
+    override fun isOrthogonal(other: Vector<Int>): Boolean = dot(other) == 0
     override fun sdot(): Int = x * x + y * y + z * z
     override fun unaryMinus(): Int3 = Int3(-x, -y, -z)
     fun cross(other: Double3): Double3 = Double3(
@@ -605,12 +607,13 @@ class Int4(x: Int, y: Int, z: Int, w: Int) : Tuple4<Int>(arrayOf(x, y, z, w)), I
         } else
             throw IllegalArgumentException("Other must be a Int4")
     }
-    override fun dot(other: Vector<Int>): Float {
+    override fun dot(other: Vector<Int>): Int {
         if (other is Int4) {
-            return (x * other.x + y * other.y + z * other.z + w * other.w).toFloat()
+            return x * other.x + y * other.y + z * other.z + w * other.w
         } else
             throw IllegalArgumentException("Other must be a Int4")
     }
+    override fun isOrthogonal(other: Vector<Int>): Boolean = dot(other) == 0
     override fun sdot(): Int = x * x + y * y + z * z + w * w
     override fun unaryMinus(): Int4 = Int4(-x, -y, -z, -w)
 

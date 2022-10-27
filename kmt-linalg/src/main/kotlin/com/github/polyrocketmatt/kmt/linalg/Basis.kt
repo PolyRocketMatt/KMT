@@ -118,7 +118,7 @@ class Basis<T : Number>(private vararg val vectors: Tuple<T>) {
      * @return The vector at the given index.
      * @throws IndexOutOfBoundsException If the index is out of bounds.
      */
-    operator fun get(index: Int) = vectors[index]
+    operator fun get(index: Int): Tuple<T> = vectors[index]
 
     /**
      * Get the dimension (number of vectors) in the basis.

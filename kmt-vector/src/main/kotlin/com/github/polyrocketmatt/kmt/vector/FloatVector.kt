@@ -339,6 +339,7 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
         else
             throw IllegalArgumentException("Other must be a Float2")
     }
+    override fun isOrthogonal(other: Vector<Float>): Boolean = dot(other) == 0.0f
     override fun sdot(): Float = x * x + y * y
     override fun unaryMinus(): Float2 = Float2(-x, -y)
 
@@ -500,6 +501,7 @@ class Float3(x: Float, y: Float, z: Float) : Tuple3<Float>(arrayOf(x, y, z)), Fl
         } else
             throw IllegalArgumentException("Other must be a Float3")
     }
+    override fun isOrthogonal(other: Vector<Float>): Boolean = dot(other) == 0.0f
     override fun sdot(): Float = x * x + y * y + z * z
     override fun unaryMinus(): Float3 = Float3(-x, -y, -z)
     fun cross(other: Float3): Float3 = Float3(
@@ -689,6 +691,7 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
         } else
             throw IllegalArgumentException("Other must be a Float4")
     }
+    override fun isOrthogonal(other: Vector<Float>): Boolean = dot(other) == 0.0f
     override fun sdot(): Float = x * x + y * y + z * z + w * w
     override fun unaryMinus(): Float4 = Float4(-x, -y, -z, -w)
 

@@ -9,6 +9,7 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
     implementation(project(":kmt-matrix"))
+    implementation(project(":kmt-group"))
 }
 
 tasks.getByName<Test>("test") {
