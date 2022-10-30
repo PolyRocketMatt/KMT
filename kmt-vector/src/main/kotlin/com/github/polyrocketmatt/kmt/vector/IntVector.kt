@@ -196,6 +196,8 @@ class Int2(x: Int, y: Int) : Tuple2<Int>(arrayOf(x, y)), IntVector, Swizzle2 {
     constructor(other: Int2) : this(other.x, other.y)
     constructor(x: Int) : this(x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 2)
+
     operator fun plus(other: Int2) = Int2(x + other.x, y + other.y)
     operator fun minus(other: Int2) = Int2(x - other.x, y - other.y)
     operator fun times(other: Int2) = Int2(x * other.x, y * other.y)
@@ -346,6 +348,8 @@ class Int3(x: Int, y: Int, z: Int) : Tuple3<Int>(arrayOf(x, y, z)), IntVector, S
     constructor() : this(0, 0, 0)
     constructor(other: Int3) : this(other.x, other.y, other.z)
     constructor(x: Int) : this(x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 3)
 
     operator fun plus(other: Int3) = Int3(x + other.x, y + other.y, z + other.z)
     operator fun minus(other: Int3) = Int3(x - other.x, y - other.y, z - other.z)
@@ -525,6 +529,8 @@ class Int4(x: Int, y: Int, z: Int, w: Int) : Tuple4<Int>(arrayOf(x, y, z, w)), I
     constructor() : this(0, 0, 0, 0)
     constructor(other: Int4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Int) : this(x, x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 4)
 
     operator fun plus(other: Int4) = Int4(x + other.x, y + other.y, z + other.z, w + other.w)
     operator fun minus(other: Int4) = Int4(x - other.x, y - other.y, z - other.z, w - other.w)

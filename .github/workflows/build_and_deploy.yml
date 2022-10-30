@@ -36,7 +36,7 @@ jobs:
         prerelease: false
         tag_name: ${{ steps.version_ext.outputs.kmt-version }}
         release_name: ${{ steps.version_ext.outputs.kmt-version }}
-        body_path: ./CHANGELOG.md
+        body_path: ./RELEASE.md
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload artifact

@@ -2,6 +2,24 @@
 
 Log of all changes in each version of the project.
 
+### 0.1.1
+
+**kmt-matrix**
+
+- Further implementation of matrices (support for LU decomposition, QR factorisation and other operations)
+
+**kmt-vector**
+
+**kmt-signal**
+
+- Planned
+
+**General**
+
+- Fixed some bugs in the documentation
+
+--- 
+
 ### 0.1.0
 
 - Refactor vectors (no API changes)

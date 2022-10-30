@@ -103,6 +103,8 @@ class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVec
     constructor(other: Bool2) : this(other.x, other.y)
     constructor(x: Boolean) : this(x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 2)
+
     operator fun plus(other: Bool2): Bool2 = Bool2(x || other.x, y || other.y)
     operator fun times(other: Bool2): Bool2 = Bool2(x && other.x, y && other.y)
 
@@ -129,7 +131,7 @@ class Bool2(x: Boolean, y: Boolean) : Tuple2<Boolean>(arrayOf(x, y)), BooleanVec
 
     override fun dist(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get distance between boolean vectors")
     override fun distSq(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get squared distance between boolean vectors")
-    override fun dot(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
+    override fun dot(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
     override fun isOrthogonal(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot check if boolean vectors are orthogonal")
     override fun sdot(): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vector with itself")
     override fun unaryMinus(): Bool2 = Bool2(!x, !y)
@@ -188,6 +190,8 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
     constructor(other: Bool3) : this(other.x, other.y, other.z)
     constructor(x: Boolean) : this(x, x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 3)
+
     operator fun plus(other: Bool3) = Bool3(x || other.x, y || other.y, z || other.z)
     operator fun times(other: Bool3) = Bool3(x && other.x, y && other.y, z && other.z)
 
@@ -214,7 +218,7 @@ class Bool3(x: Boolean, y: Boolean, z: Boolean) : Tuple3<Boolean>(arrayOf(x, y, 
 
     override fun dist(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get distance between boolean vectors")
     override fun distSq(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get squared distance between boolean vectors")
-    override fun dot(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
+    override fun dot(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
     override fun isOrthogonal(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot check if boolean vectors are orthogonal")
     override fun sdot(): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vector with itself")
     override fun unaryMinus(): Bool3 = Bool3(!x, !y, !z)
@@ -288,6 +292,8 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) :
     constructor(other: Bool4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Boolean) : this(x, x, x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 4)
+
     operator fun plus(other: Bool4): Bool4 = Bool4(x || other.x, y || other.y, z || other.z, w || other.w)
     operator fun times(other: Bool4): Bool4 = Bool4(x && other.x, y && other.y, z && other.z, w && other.w)
 
@@ -319,7 +325,7 @@ class Bool4(x: Boolean, y: Boolean, z: Boolean, w: Boolean) :
 
     override fun dist(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get distance between boolean vectors")
     override fun distSq(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get squared distance between boolean vectors")
-    override fun dot(other: Vector<Boolean>): Float = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
+    override fun dot(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vectors")
     override fun isOrthogonal(other: Vector<Boolean>): Boolean = throw UnsupportedOperationException("Cannot check orthogonality of boolean vectors")
     override fun sdot(): Boolean = throw UnsupportedOperationException("Cannot get dot product of boolean vector with itself")
     override fun unaryMinus(): Bool4 = Bool4(!x, !y, !z, !w)

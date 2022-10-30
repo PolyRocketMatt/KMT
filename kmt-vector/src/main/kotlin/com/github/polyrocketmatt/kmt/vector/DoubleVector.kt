@@ -256,6 +256,8 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     constructor(other: Double2) : this(other.x, other.y)
     constructor(x: Double) : this(x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 2)
+
     operator fun plus(other: Double2): Double2 = Double2(x + other.x, y + other.y)
     operator fun minus(other: Double2): Double2 = Double2(x - other.x, y - other.y)
     operator fun times(other: Double2): Double2 = Double2(x * other.x, y * other.y)
@@ -415,6 +417,8 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
     constructor() : this(0.0, 0.0, 0.0)
     constructor(other: Double3) : this(other.x, other.y, other.z)
     constructor(x: Double) : this(x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 3)
 
     operator fun plus(other: Int3) = Double3(x + other.x, y + other.y, z + other.z)
     operator fun minus(other: Int3) = Double3(x - other.x, y - other.y, z - other.z)
@@ -606,6 +610,8 @@ class Double4(x: Double, y: Double, z: Double, w: Double) :
     constructor() : this(0.0, 0.0, 0.0, 0.0)
     constructor(other: Double4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Double) : this(x, x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 4)
 
     operator fun plus(other: Int4) = Double4(x + other.x, y + other.y, z + other.z, w + other.w)
     operator fun minus(other: Int4) = Double4(x - other.x, y - other.y, z - other.z, w - other.w)

@@ -196,6 +196,8 @@ class Short2(x: Short, y: Short) : Tuple2<Short>(arrayOf(x, y)), ShortVector, Sw
     constructor(other: Short2) : this(other.x, other.y)
     constructor(x: Short) : this(x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 2)
+
     operator fun plus(other: Int2) = Int2(x + other.x, y + other.y)
     operator fun minus(other: Int2) = Int2(x - other.x, y - other.y)
     operator fun times(other: Int2) = Int2(x * other.x, y * other.y)
@@ -346,6 +348,8 @@ class Short3(x: Short, y: Short, z: Short) : Tuple3<Short>(arrayOf(x, y, z)), Sh
     constructor() : this(0, 0, 0)
     constructor(other: Short3) : this(other.x, other.y, other.z)
     constructor(x: Short) : this(x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 3)
 
     operator fun plus(other: Int3) = Int3(x + other.x, y + other.y, z + other.z)
     operator fun minus(other: Int3) = Int3(x - other.x, y - other.y, z - other.z)
@@ -525,6 +529,8 @@ class Short4(x: Short, y: Short, z: Short, w: Short) : Tuple4<Short>(arrayOf(x, 
     constructor() : this(0, 0, 0, 0)
     constructor(other: Short4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Short) : this(x, x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 4)
 
     operator fun plus(other: Int4) = Int4(x + other.x, y + other.y, z + other.z, w + other.w)
     operator fun minus(other: Int4) = Int4(x - other.x, y - other.y, z - other.z, w - other.w)
