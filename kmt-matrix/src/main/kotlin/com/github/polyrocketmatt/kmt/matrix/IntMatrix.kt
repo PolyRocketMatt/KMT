@@ -148,6 +148,8 @@ open class IntMatrix(
         return column
     }
 
+    override fun shape(): IntArray = shape
+
     override operator fun get(i: Int): Int = data[i]
     override operator fun get(row: Int, col: Int): Int = data[row * shape[1] + col]
 
@@ -419,6 +421,8 @@ open class IntMatrix(
 
     override fun rref(): DoubleMatrix = toDoubleMatrix().rref()
 
+    override fun luDecomposition(): Pair<DoubleMatrix, DoubleMatrix> = toDoubleMatrix().luDecomposition()
+
     override fun determinant(): Double = ref().diag().reduce { acc, i -> acc * i }
 
     override fun isInvertible(): Boolean = determinant() != 0.0
@@ -434,6 +438,16 @@ open class IntMatrix(
     }
 
     override fun linearlyIndependentColumns(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun norm(type: NormType): Double = toDoubleMatrix().norm(type)
+
+    override fun eigenvalues(): Array<Double> {
+        TODO("Not yet implemented")
+    }
+
+    override fun eigenvectors(): Array<Tuple<Double>> {
         TODO("Not yet implemented")
     }
 

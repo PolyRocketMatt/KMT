@@ -148,6 +148,8 @@ open class ShortMatrix(
         return column
     }
 
+    override fun shape(): IntArray = shape
+
     override operator fun get(i: Int): Short = data[i]
     override operator fun get(row: Int, col: Int): Short = data[row * shape[1] + col]
 
@@ -418,6 +420,8 @@ open class ShortMatrix(
     override fun ref(): DoubleMatrix = toDoubleMatrix().ref()
     override fun rref(): DoubleMatrix = toDoubleMatrix().rref()
 
+    override fun luDecomposition(): Pair<DoubleMatrix, DoubleMatrix> = toDoubleMatrix().luDecomposition()
+
     override fun determinant(): Double = ref().diag().reduce { acc, d -> acc * d }
 
     override fun isInvertible(): Boolean = determinant() != 0.0
@@ -433,6 +437,16 @@ open class ShortMatrix(
     }
 
     override fun linearlyIndependentColumns(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun norm(type: NormType): Double = toDoubleMatrix().norm(type)
+
+    override fun eigenvalues(): Array<Double> {
+        TODO("Not yet implemented")
+    }
+
+    override fun eigenvectors(): Array<Tuple<Double>> {
         TODO("Not yet implemented")
     }
 

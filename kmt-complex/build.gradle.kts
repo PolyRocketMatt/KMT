@@ -7,7 +7,6 @@ description = "Module for working with complex numbers"
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation(project(":kmt-common"))
 }
 
 tasks.getByName<Test>("test") {

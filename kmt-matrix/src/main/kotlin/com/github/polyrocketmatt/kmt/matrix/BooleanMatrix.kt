@@ -133,6 +133,8 @@ open class BooleanMatrix(
         return column
     }
 
+    override fun shape(): IntArray = shape
+
     override operator fun get(i: Int): Boolean = data[i]
     override operator fun get(row: Int, col: Int): Boolean = data[row * shape[1] + col]
 

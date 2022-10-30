@@ -18,6 +18,8 @@
 
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.storage.Tuple
+
 /**
  * @author Matthias Kovacic
  * @since 0.0.8
@@ -82,6 +84,14 @@ interface NumericMatrix<T, K> : GeneralMatrix<T> {
     fun rref(): Matrix<K>
 
     /**
+     * Compute the LU-decomposition of this matrix where the lower triangle matrix is 1
+     * on the diagonal.
+     *
+     * @return The LU-decomposition of this matrix.
+     */
+    fun luDecomposition(): Pair<Matrix<K>, Matrix<K>>
+
+    /**
      * Compute the determinant of this matrix.
      *
      * @return The determinant of this matrix.
@@ -131,4 +141,17 @@ interface NumericMatrix<T, K> : GeneralMatrix<T> {
      * @return True if the columns are linearly independent, false otherwise.
      */
     fun linearlyIndependentColumns(): Boolean
+
+    /**
+     * Get the norm of the matrix depending on the given type of norm.
+     *
+     * @param type The type of norm to compute.
+     * @return The norm of the matrix.
+     */
+    fun norm(type: NormType): K
+
+    fun eigenvalues(): Array<K>
+
+    fun eigenvectors(): Array<Tuple<K>>
+
 }

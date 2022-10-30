@@ -19,6 +19,7 @@
 package com.github.polyrocketmatt.kmt.matrix
 
 import com.github.polyrocketmatt.kmt.common.decimals
+import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
@@ -66,6 +67,8 @@ fun DoubleArray.toMatrix(shape: IntArray): DoubleMatrix {
     )
     return DoubleMatrix(shape, this)
 }
+
+fun doubleMatrixOf(shape: IntArray, vararg elements: Double): DoubleMatrix = DoubleMatrix(shape, elements)
 
 /**
  * Get an array of floating-point numbers from the given matrix.
@@ -154,6 +157,8 @@ open class DoubleMatrix(
             column[i] = this[i, idx]
         return column
     }
+
+    override fun shape(): IntArray = shape
 
     override operator fun get(i: Int): Double = data[i]
     override operator fun get(row: Int, col: Int): Double = data[row * shape[1] + col]
@@ -505,6 +510,40 @@ open class DoubleMatrix(
         return result
     }
 
+    override fun luDecomposition(): Pair<DoubleMatrix, DoubleMatrix> {
+        complies("Non-square matrix does not have an LU-decomposition") { isSquare() }
+
+        //  Doolittle's algorithm
+        val l = DoubleMatrix(shape)
+        val u = DoubleMatrix(shape)
+
+        for (row in 0 until shape[0]) {
+            //  Upper triangle
+            for (col in row until shape[1]) {
+                var sum = 0.0
+                for (k in 0 until row)
+                    sum += l[row, k] * u[k, col]
+
+                u[row, col] = this[row, col] - sum
+            }
+
+            //  Lower triangle
+            for (col in row until shape[1]) {
+                if (row == col)
+                    l[row, row] = 1.0
+                else {
+                    var sum = 0.0
+                    for (k in 0 until row)
+                        sum += l[col, k] * u[k, row]
+
+                    l[col, row] = (this[col, row] - sum) / u[row, row]
+                }
+            }
+        }
+
+        return Pair(l, u)
+    }
+
     override fun determinant(): Double = ref().diag().reduce { acc, d -> acc * d }
 
     override fun isInvertible(): Boolean = determinant() != 0.0
@@ -546,9 +585,29 @@ open class DoubleMatrix(
 
     override fun linearlyIndependentColumns(): Boolean = rank() == shape[1]
 
+    override fun norm(type: NormType): Double = when(type) {
+        NormType.ONE_NORM           -> columns().maxOfOrNull { column -> column.sumOf { it.fastAbs() } } ?: throw IllegalArgumentException("Could not find l1-norm of matrix")
+        NormType.TWO_NORM           -> (transpose() mult this).eigenvalues().maxOfOrNull { it.fastAbs() }?.dsqrt() ?: throw IllegalArgumentException("Could not find l2-norm of matrix")
+        NormType.INFINITY_NORM      -> rows().maxOfOrNull { row -> row.sumOf { it.fastAbs() } } ?: throw IllegalArgumentException("Could not find l∞-norm of matrix")
+        NormType.FROBENIUS_NORM     -> data.sumOf { it * it }.dsqrt()
+        NormType.MAX_NORM           -> data.max()
+    }
+
+    override fun eigenvalues(): Array<Double> {
+        complies("Cannot compute eigenvalues of non-square matrix ${shapeToString()}") { isSquare() }
+
+        TODO("Not yet implemented")
+    }
+
+    override fun eigenvectors(): Array<Tuple<Double>> {
+        TODO("Not yet implemented")
+    }
+
     open fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
     open fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
+
+    fun decimals(n: Int) { data.forEachIndexed { index, d -> data[index] = d.decimals(n) } }
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 

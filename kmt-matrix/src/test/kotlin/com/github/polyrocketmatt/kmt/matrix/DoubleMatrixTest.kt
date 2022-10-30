@@ -67,7 +67,7 @@ class DoubleMatrixTest {
     }
 
     @Test
-    fun refTest() {
+    fun inverseTest() {
         val matrix = DoubleMatrix(
             intArrayOf(3, 3),
             doubleArrayOf(
@@ -79,4 +79,29 @@ class DoubleMatrixTest {
 
         println(matrix)
     }
+
+    @Test
+    fun testLUDecomp() {
+        val matrix = doubleMatrixOf(
+            intArrayOf(4, 4),
+            3.0, -7.0, -2.0, 2.0,
+            -3.0, 5.0, 1.0, 0.0,
+            6.0, -4.0, 0.0, -5.0,
+            -9.0, 5.0, -5.0, 12.0
+        )
+
+        val decomposition = matrix.luDecomposition()
+        val l = decomposition.first
+        val u = decomposition.second
+
+        println(l)
+        println("\n")
+        println(u)
+
+        val test = l mult u
+        test.decimals(3)
+        println("\n")
+        println(test)
+    }
+
 }

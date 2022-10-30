@@ -19,6 +19,7 @@
 package com.github.polyrocketmatt.kmt.matrix
 
 import com.github.polyrocketmatt.kmt.common.decimals
+import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
@@ -154,6 +155,8 @@ open class FloatMatrix(
             column[i] = this[i, idx]
         return column
     }
+
+    override fun shape(): IntArray = shape
 
     override operator fun get(i: Int): Float = data[i]
     override operator fun get(row: Int, col: Int): Float = data[row * shape[1] + col]
@@ -499,6 +502,40 @@ open class FloatMatrix(
         return result
     }
 
+    override fun luDecomposition(): Pair<FloatMatrix, FloatMatrix> {
+        complies("Non-square matrix does not have an LU-decomposition") { isSquare() }
+
+        //  Doolittle's algorithm
+        val l = FloatMatrix(shape)
+        val u = FloatMatrix(shape)
+
+        for (row in 0 until shape[0]) {
+            //  Upper triangle
+            for (col in row until shape[1]) {
+                var sum = 0.0f
+                for (k in 0 until row)
+                    sum += l[row, k] * u[k, col]
+
+                u[row, col] = this[row, col] - sum
+            }
+
+            //  Lower triangle
+            for (col in row until shape[1]) {
+                if (row == col)
+                    l[row, row] = 1.0f
+                else {
+                    var sum = 0.0f
+                    for (k in 0 until row)
+                        sum += l[col, k] * u[k, row]
+
+                    l[col, row] = (this[col, row] - sum) / u[row, row]
+                }
+            }
+        }
+
+        return Pair(l, u)
+    }
+
     override fun determinant(): Float = ref().diag().reduce { acc, d -> acc * d }
 
     override fun isInvertible(): Boolean = determinant() != 0.0f
@@ -541,6 +578,22 @@ open class FloatMatrix(
     }
 
     override fun linearlyIndependentColumns(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun norm(type: NormType): Float = when(type) {
+        NormType.ONE_NORM           -> columns().maxOfOrNull { column -> column.sumOf { it.fastAbs().toDouble() } }?.toFloat() ?: throw IllegalArgumentException("Could not find l1-norm of matrix")
+        NormType.TWO_NORM           -> (transpose() mult this).eigenvalues().maxOfOrNull { it.fastAbs().toDouble() }?.dsqrt()?.toFloat() ?: throw IllegalArgumentException("Could not find l2-norm of matrix")
+        NormType.INFINITY_NORM      -> rows().maxOfOrNull { row -> row.sumOf { it.fastAbs().toDouble() } }?.toFloat() ?: throw IllegalArgumentException("Could not find l∞-norm of matrix")
+        NormType.FROBENIUS_NORM     -> data.sumOf { (it * it).toDouble() }.dsqrt().toFloat()
+        NormType.MAX_NORM           -> data.max()
+    }
+
+    override fun eigenvalues(): Array<Float> {
+        TODO("Not yet implemented")
+    }
+
+    override fun eigenvectors(): Array<Tuple<Float>> {
         TODO("Not yet implemented")
     }
 

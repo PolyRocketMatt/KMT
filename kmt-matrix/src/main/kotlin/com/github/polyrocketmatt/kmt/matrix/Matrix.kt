@@ -20,6 +20,8 @@ package com.github.polyrocketmatt.kmt.matrix
 
 interface Matrix<T> {
 
+    fun shape(): IntArray
+
     operator fun get(i: Int): T
     operator fun get(row: Int, col: Int): T
 

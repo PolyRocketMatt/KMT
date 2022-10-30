@@ -1,5 +1,7 @@
 package com.github.polyrocketmatt.kmt.common.utils
 
+import com.github.polyrocketmatt.kmt.complex.Complex
+
 /**
  * Find the index of the element in the array, given the condition function.
  *
@@ -94,13 +96,35 @@ fun IntArray.indexByCondition(base: Int, condition: (cIdx: Int, current: Int, id
  * @param condition The condition function to check.
  * @return The index of the element, or -1 if not found.
  */
-fun ShortArray.indexByCondition(condition: (cIdx: Int, current: Short, idx: Int, value: Short) -> Boolean): Int {
+fun ShortArray.indexByCondition(base: Short, condition: (cIdx: Int, current: Short, idx: Int, value: Short) -> Boolean): Int {
     if (this.isEmpty())
         return -1
 
-    var index = 0
-    var element = this[0]
-    for (i in 1 until this.size) {
+    var index = -1
+    var element = base
+    for (i in 0 until this.size) {
+        if (condition(index, element, i, this[i])) {
+            element = this[i]
+            index = i
+        }
+    }
+
+    return index
+}
+
+/**
+ * Find the index of the element in the array, given the condition function.
+ *
+ * @param condition The condition function to check.
+ * @return The index of the element, or -1 if not found.
+ */
+fun Array<Complex>.indexByCondition(base: Complex, condition: (cIdx: Int, current: Complex, idx: Int, value: Complex) -> Boolean): Int {
+    if (this.isEmpty())
+        return -1
+
+    var index = -1
+    var element = base
+    for (i in 0 until this.size) {
         if (condition(index, element, i, this[i])) {
             element = this[i]
             index = i
