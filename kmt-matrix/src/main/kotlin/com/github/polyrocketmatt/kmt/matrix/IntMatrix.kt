@@ -393,6 +393,10 @@ open class IntMatrix(
 
     override fun isSquare(): Boolean = shape[0] == shape[1]
 
+    override fun isOrthogonal(): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun swapRow(row1: Int, row2: Int) {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
@@ -421,7 +425,11 @@ open class IntMatrix(
 
     override fun rref(): DoubleMatrix = toDoubleMatrix().rref()
 
+    override fun solve(): Tuple<Double> = toDoubleMatrix().solve()
+
     override fun luDecomposition(): Pair<DoubleMatrix, DoubleMatrix> = toDoubleMatrix().luDecomposition()
+
+    override fun qrDecomposition(method: QRFactorizationMethod): Pair<DoubleMatrix, DoubleMatrix> = toDoubleMatrix().qrDecomposition(method)
 
     override fun determinant(): Double = ref().diag().reduce { acc, i -> acc * i }
 

@@ -1,6 +1,11 @@
 package com.github.polyrocketmatt.kmt.matrix
 
+import com.github.polyrocketmatt.kmt.common.storage.Tuple
+import com.github.polyrocketmatt.kmt.common.storage.tupleOf
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.lang.IllegalArgumentException
+import kotlin.test.assertEquals
 
 class DoubleMatrixTest {
 
@@ -81,27 +86,37 @@ class DoubleMatrixTest {
     }
 
     @Test
-    fun testLUDecomp() {
+    fun testSingleSolution() {
         val matrix = doubleMatrixOf(
-            intArrayOf(4, 4),
-            3.0, -7.0, -2.0, 2.0,
-            -3.0, 5.0, 1.0, 0.0,
-            6.0, -4.0, 0.0, -5.0,
-            -9.0, 5.0, -5.0, 12.0
+            intArrayOf(2, 3),
+            3.0, -7.0, -2.0,
+            -3.0, 5.0, 1.0,
         )
 
-        val decomposition = matrix.luDecomposition()
-        val l = decomposition.first
-        val u = decomposition.second
+        assertEquals(tupleOf(0.5, 0.5), matrix.solve())
+    }
 
-        println(l)
-        println("\n")
-        println(u)
+    @Test
+    fun testNoSolution() {
+        val matrix = doubleMatrixOf(
+            intArrayOf(3, 3),
+            3.0, -7.0, -2.0,
+            -3.0, 5.0, 1.0,
+            -1.0, 10.0, 2.0
+        )
 
-        val test = l mult u
-        test.decimals(3)
-        println("\n")
-        println(test)
+        assertThrows<IllegalArgumentException> { matrix.solve() }
+    }
+
+    @Test
+    fun testInfinitelyManySolution() {
+        val matrix = doubleMatrixOf(
+            intArrayOf(2, 3),
+            2.0, 3.0, 5.0,
+            6.0, 9.0, 15.0,
+        )
+
+        assertThrows<IllegalArgumentException> { matrix.solve() }
     }
 
 }

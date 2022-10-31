@@ -403,6 +403,10 @@ open class DoubleMatrix(
 
     override fun isSquare(): Boolean = shape[0] == shape[1]
 
+    override fun isOrthogonal(): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun swapRow(row1: Int, row2: Int) {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
@@ -510,6 +514,32 @@ open class DoubleMatrix(
         return result
     }
 
+    override fun solve(): Tuple<Double> {
+        //  Create augmented matrix
+        val equation = DoubleMatrix(intArrayOf(shape[0], shape[1] - 1))
+        val result = DoubleMatrix(intArrayOf(shape[0], 1))
+        for (column in 0 until shape[1] - 1)
+            for (row in 0 until shape[0])
+                equation[row, column] = this[row, column]
+        for (row in 0 until shape[0])
+            result[row, 0] = this[row, shape[1] - 1]
+
+        //  Solve
+        val rref = equation.rref()
+        val operations = rref.operations
+        val solution = result.operate(operations)
+
+        //  If there is a row with a non-zero element but a 0 in the last column, there is no solution
+        for (idx in 0 until rref.shape[0])
+            complies("There is no solution for the system of linear equations") { !(rref.row(idx).all { it == 0.0 } && solution[idx, 0] != 0.0) }
+
+        //  If there is a row with a 0 in all columns, there are infinite solutions
+        for (idx in 0 until rref.shape[0])
+            complies("There are infinite solutions for the system of linear equations") { !(rref.row(idx).all { it == 0.0 } && solution[idx, 0] == 0.0) }
+
+        return Tuple(solution.data)
+    }
+
     override fun luDecomposition(): Pair<DoubleMatrix, DoubleMatrix> {
         complies("Non-square matrix does not have an LU-decomposition") { isSquare() }
 
@@ -542,6 +572,10 @@ open class DoubleMatrix(
         }
 
         return Pair(l, u)
+    }
+
+    override fun qrDecomposition(method: QRFactorizationMethod): Pair<DoubleMatrix, DoubleMatrix> {
+        TODO("Not yet implemented")
     }
 
     override fun determinant(): Double = ref().diag().reduce { acc, d -> acc * d }

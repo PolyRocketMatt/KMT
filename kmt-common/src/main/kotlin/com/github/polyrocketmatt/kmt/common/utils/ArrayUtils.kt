@@ -1,7 +1,5 @@
 package com.github.polyrocketmatt.kmt.common.utils
 
-import com.github.polyrocketmatt.kmt.complex.Complex
-
 /**
  * Find the index of the element in the array, given the condition function.
  *

@@ -84,12 +84,27 @@ interface NumericMatrix<T, K> : GeneralMatrix<T> {
     fun rref(): Matrix<K>
 
     /**
+     * Solves the system of linear equations represented by this matrix.
+     *
+     * @return The solution to the system of linear equations.
+     */
+    fun solve(): Tuple<K>
+
+    /**
      * Compute the LU-decomposition of this matrix where the lower triangle matrix is 1
      * on the diagonal.
      *
      * @return The LU-decomposition of this matrix.
      */
     fun luDecomposition(): Pair<Matrix<K>, Matrix<K>>
+
+    /**
+     * Compute the QR-decomposition of this matrix with the given method.
+     *
+     * @param method The method to use for the QR-decomposition.
+     * @return The QR-decomposition of this matrix.
+     */
+    fun qrDecomposition(method: QRFactorizationMethod): Pair<Matrix<K>, Matrix<K>>
 
     /**
      * Compute the determinant of this matrix.
@@ -104,6 +119,13 @@ interface NumericMatrix<T, K> : GeneralMatrix<T> {
      * @return True if the matrix is invertible (the determinant is 0), false otherwise.
      */
     fun isInvertible(): Boolean
+
+    /**
+     * Check if the matrix is orthogonal
+     *
+     * @return True if the matrix is orthogonal, false otherwise.
+     */
+    fun isOrthogonal(): Boolean
 
     /**
      * Compute the inverse of this matrix.

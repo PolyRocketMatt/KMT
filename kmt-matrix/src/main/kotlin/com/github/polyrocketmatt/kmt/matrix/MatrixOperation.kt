@@ -13,3 +13,9 @@ enum class NormType {
     FROBENIUS_NORM,
     MAX_NORM
 }
+
+enum class QRFactorizationMethod {
+    GRAM_SCHMIDT,
+    GIVENS,
+    PIVOTING
+}
