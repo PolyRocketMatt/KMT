@@ -7,7 +7,6 @@ description = "Module for common utilities shared between KMT modules"
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation(project(":kmt-complex"))
 }
 
 tasks.getByName<Test>("test") {
