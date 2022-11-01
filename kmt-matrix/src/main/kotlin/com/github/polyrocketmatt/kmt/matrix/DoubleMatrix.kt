@@ -199,7 +199,13 @@ open class DoubleMatrix(
         return matrix
     }
 
-    override operator fun plus(value: Matrix<Double>): DoubleMatrix = plus(value as DoubleMatrix)
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override operator fun plus(other: Matrix<Double>): DoubleMatrix = plus(other as DoubleMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -214,7 +220,13 @@ open class DoubleMatrix(
         return matrix
     }
 
-    override operator fun minus(value: Matrix<Double>): DoubleMatrix = minus(value as DoubleMatrix)
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override operator fun minus(other: Matrix<Double>): DoubleMatrix = minus(other as DoubleMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -229,7 +241,13 @@ open class DoubleMatrix(
         return matrix
     }
 
-    override operator fun times(value: Matrix<Double>): DoubleMatrix = times(value as DoubleMatrix)
+    /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override operator fun times(other: Matrix<Double>): DoubleMatrix = times(other as DoubleMatrix)
 
     /**
      * Element-wise division of this matrix and the given matrix.
@@ -244,7 +262,13 @@ open class DoubleMatrix(
         return matrix
     }
 
-    override operator fun div(value: Matrix<Double>): DoubleMatrix = div(value as DoubleMatrix)
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide this matrix with
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override operator fun div(other: Matrix<Double>): DoubleMatrix = div(other as DoubleMatrix)
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -257,7 +281,13 @@ open class DoubleMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
 
-    override operator fun plusAssign(value: Matrix<Double>) = plusAssign(value as DoubleMatrix)
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override operator fun plusAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -270,7 +300,13 @@ open class DoubleMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
 
-    override operator fun minusAssign(value: Matrix<Double>) = plusAssign(value as DoubleMatrix)
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override operator fun minusAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -283,7 +319,13 @@ open class DoubleMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
-    override operator fun timesAssign(value: Matrix<Double>) = plusAssign(value as DoubleMatrix)
+    /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override operator fun timesAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
     /**
      * Element-wise division of this matrix and the given matrix.
@@ -296,7 +338,13 @@ open class DoubleMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
-    override operator fun divAssign(value: Matrix<Double>) = plusAssign(value as DoubleMatrix)
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override operator fun divAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
     /**
      * Scalar addition of this matrix and the given value.
@@ -370,6 +418,11 @@ open class DoubleMatrix(
      */
     override fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
 
+    /**
+     * Invert the elements of this matrix.
+     *
+     * @return The inverted matrix
+     */
     override fun unaryMinus(): DoubleMatrix = times(-1.0)
 
     /**

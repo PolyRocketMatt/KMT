@@ -179,6 +179,14 @@ open class FloatMatrix(
     }
 
     /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun plus(other: Matrix<Float>): FloatMatrix = plus(other as FloatMatrix)
+
+    /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
@@ -190,6 +198,14 @@ open class FloatMatrix(
         data.forEachIndexed { i, value -> matrix[i] = value - other[i] }
         return matrix
     }
+
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun minus(other: Matrix<Float>): FloatMatrix = minus(other as FloatMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -205,6 +221,14 @@ open class FloatMatrix(
     }
 
     /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun times(other: Matrix<Float>): FloatMatrix = times(other as FloatMatrix)
+
+    /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
@@ -218,6 +242,14 @@ open class FloatMatrix(
     }
 
     /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide this matrix with
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun div(other: Matrix<Float>): FloatMatrix = div(other as FloatMatrix)
+
+    /**
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
@@ -227,6 +259,14 @@ open class FloatMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
+
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun plusAssign(other: Matrix<Float>) = plusAssign(other as FloatMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -240,6 +280,14 @@ open class FloatMatrix(
     }
 
     /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun minusAssign(other: Matrix<Float>) = minusAssign(other as FloatMatrix)
+
+    /**
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply to this matrix
@@ -251,6 +299,14 @@ open class FloatMatrix(
     }
 
     /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun timesAssign(other: Matrix<Float>) = timesAssign(other as FloatMatrix)
+
+    /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide to this matrix
@@ -260,6 +316,14 @@ open class FloatMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
+
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun divAssign(other: Matrix<Float>) = divAssign(other as FloatMatrix)
 
     /**
      * Scalar addition of this matrix and the given value.
@@ -332,6 +396,13 @@ open class FloatMatrix(
      * @param value The value to divide with this matrix
      */
     override fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+
+    /**
+     * Invert the elements of this matrix.
+     *
+     * @return The inverted matrix
+     */
+    override fun unaryMinus(): Matrix<Float> = times(-1f)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have
