@@ -21,7 +21,6 @@ package com.github.polyrocketmatt.kmt.matrix
 import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
-import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
