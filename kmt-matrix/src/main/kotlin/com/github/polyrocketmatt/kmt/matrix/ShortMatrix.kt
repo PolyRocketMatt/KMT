@@ -170,6 +170,14 @@ open class ShortMatrix(
     }
 
     /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun plus(other: Matrix<Short>): ShortMatrix = plus(other as ShortMatrix)
+
+    /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
@@ -181,6 +189,14 @@ open class ShortMatrix(
         data.forEachIndexed { i, value -> matrix[i] = (value - other[i]).toShort() }
         return matrix
     }
+
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun minus(other: Matrix<Short>): ShortMatrix = minus(other as ShortMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -196,6 +212,14 @@ open class ShortMatrix(
     }
 
     /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun times(other: Matrix<Short>): ShortMatrix = times(other as ShortMatrix)
+
+    /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
@@ -209,6 +233,14 @@ open class ShortMatrix(
     }
 
     /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide this matrix with
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun div(other: Matrix<Short>): ShortMatrix = div(other as ShortMatrix)
+
+    /**
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
@@ -218,6 +250,14 @@ open class ShortMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = (data[i] + term).toShort() }
     }
+
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun plusAssign(other: Matrix<Short>) = plusAssign(other as ShortMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -231,6 +271,14 @@ open class ShortMatrix(
     }
 
     /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun minusAssign(other: Matrix<Short>) = minusAssign(other as ShortMatrix)
+
+    /**
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply to this matrix
@@ -242,6 +290,14 @@ open class ShortMatrix(
     }
 
     /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun timesAssign(other: Matrix<Short>) = timesAssign(other as ShortMatrix)
+
+    /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide to this matrix
@@ -251,6 +307,14 @@ open class ShortMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = (data[i] / factor).toShort() }
     }
+
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun divAssign(other: Matrix<Short>) = divAssign(other as ShortMatrix)
 
     /**
      * Scalar addition of this matrix and the given value.
@@ -323,6 +387,13 @@ open class ShortMatrix(
      * @param value The value to divide with this matrix
      */
     override fun divAssign(value: Short) = data.forEachIndexed { i, factor -> data[i] = (data[i] / factor).toShort() }
+
+    /**
+     * Invert the elements of this matrix.
+     *
+     * @return The inverted matrix
+     */
+    override fun unaryMinus(): Matrix<Short> = times(-1)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have
