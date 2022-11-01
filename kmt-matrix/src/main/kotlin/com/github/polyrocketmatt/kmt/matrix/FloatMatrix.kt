@@ -534,7 +534,7 @@ open class FloatMatrix(
     }
 
     override fun luDecomposition(): Pair<FloatMatrix, FloatMatrix> {
-        complies("Non-square matrix does not have an LU-decomposition") { isSquare() }
+        complies("Non-square matrix does not have an LU-decomposition. Use PLU-decomposition instead.") { isSquare() }
 
         //  Doolittle's algorithm
         val l = FloatMatrix(shape)

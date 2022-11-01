@@ -561,37 +561,55 @@ open class DoubleMatrix(
     }
 
     override fun luDecomposition(): Pair<DoubleMatrix, DoubleMatrix> {
-        complies("Non-square matrix does not have an LU-decomposition") { isSquare() }
+        if (isSquare()) {
+            //  Doolittle's algorithm
+            val l = DoubleMatrix(shape)
+            val u = DoubleMatrix(shape)
 
-        //  Doolittle's algorithm
-        val l = DoubleMatrix(shape)
-        val u = DoubleMatrix(shape)
-
-        for (row in 0 until shape[0]) {
-            //  Upper triangle
-            for (col in row until shape[1]) {
-                var sum = 0.0
-                for (k in 0 until row)
-                    sum += l[row, k] * u[k, col]
-
-                u[row, col] = this[row, col] - sum
-            }
-
-            //  Lower triangle
-            for (col in row until shape[1]) {
-                if (row == col)
-                    l[row, row] = 1.0
-                else {
+            for (row in 0 until shape[0]) {
+                //  Upper triangle
+                for (col in row until shape[1]) {
                     var sum = 0.0
                     for (k in 0 until row)
-                        sum += l[col, k] * u[k, row]
+                        sum += l[row, k] * u[k, col]
 
-                    l[col, row] = (this[col, row] - sum) / u[row, row]
+                    u[row, col] = this[row, col] - sum
+                }
+
+                //  Lower triangle
+                for (col in row until shape[1]) {
+                    if (row == col)
+                        l[row, row] = 1.0
+                    else {
+                        var sum = 0.0
+                        for (k in 0 until row)
+                            sum += l[col, k] * u[k, row]
+
+                        l[col, row] = (this[col, row] - sum) / u[row, row]
+                    }
                 }
             }
-        }
 
-        return Pair(l, u)
+            return Pair(l, u)
+        } else {
+            val l = identity(intArrayOf(shape[0], shape[0]))
+            val u = copyOf()
+
+            //  Gaussian elimination
+            for (i in 0 until min(shape[0], shape[1])) {
+                val col = u.column(i).copyOfRange(i, shape[0])
+                val pivot = col[0]
+
+                for (j in i + 1 until shape[0]) {
+                    val k = -u.column(i)[j] / pivot
+
+                    l[j, i] = -k
+                    u.addRow(j, i, k)
+                }
+            }
+
+            return Pair(l, u)
+        }
     }
 
     override fun qrDecomposition(method: QRFactorizationMethod): Pair<DoubleMatrix, DoubleMatrix> {

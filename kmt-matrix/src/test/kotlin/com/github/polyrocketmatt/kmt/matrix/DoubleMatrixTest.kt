@@ -150,4 +150,38 @@ class DoubleMatrixTest {
             }
     }
 
+    @Test
+    fun testLUDecomposition() {
+        val matrix = doubleMatrixOf(
+            intArrayOf(4, 2),
+            1.0, 2.0,
+            3.0, 4.0,
+            2.0, 5.0,
+            4.0, 6.0
+        )
+
+        val lu = matrix.luDecomposition()
+        val l = doubleMatrixOf(
+            intArrayOf(4, 4),
+            1.0, 0.0, 0.0, 0.0,
+            3.0, 1.0, 0.0, 0.0,
+            2.0, -0.5, 1.0, 0.0,
+            4.0, 1.0, 0.0, 1.0
+        )
+        val u = doubleMatrixOf(
+            intArrayOf(4, 2),
+            1.0, 2.0,
+            0.0, -2.0,
+            0.0, 0.0,
+            0.0, 0.0
+        )
+
+        for (i in 0 until l.shape[0])
+            for (j in 0 until l.shape[1])
+                assertEquals(l[i, j], lu.first[i, j], 1e-8)
+        for (i in 0 until u.shape[0])
+            for (j in 0 until u.shape[1])
+                assertEquals(u[i, j], lu.second[i, j], 1e-8)
+    }
+
 }
