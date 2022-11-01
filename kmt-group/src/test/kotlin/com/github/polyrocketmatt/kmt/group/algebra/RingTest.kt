@@ -53,9 +53,9 @@ class RingTest {
     fun testRingOperation() {
         val ring = Ring(identity, inverseMap, modAdd, modMult, elements)
 
-        assertEquals(2, ring.add(6, 3))
+        assertEquals(2, ring.primary(6, 3))
         assertEquals(2, ring[6, 3])
-        assertEquals(1, ring.multiply(2, 4))
+        assertEquals(1, ring.secondary(2, 4))
     }
 
     @Test
