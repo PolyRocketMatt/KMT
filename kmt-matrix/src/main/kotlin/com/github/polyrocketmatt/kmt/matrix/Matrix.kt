@@ -18,6 +18,14 @@
 
 package com.github.polyrocketmatt.kmt.matrix
 
+/**
+ * @author Matthias Kovacic
+ * @since 0.0.8
+ *
+ * Represents a matrix of the mathematical definition (i.e. dimension 2).
+ *
+ * @param T The type of the matrix elements.
+ */
 interface Matrix<T> {
 
     /**
