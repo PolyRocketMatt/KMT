@@ -151,9 +151,11 @@ open class ShortMatrix(
     override fun shape(): IntArray = shape
 
     override operator fun get(i: Int): Short = data[i]
+
     override operator fun get(row: Int, col: Int): Short = data[row * shape[1] + col]
 
     override operator fun set(i: Int, value: Short) { data[i] = value }
+
     override operator fun set(row: Int, col: Int, value: Short) { data[row * shape[1] + col] = value }
 
     /**
@@ -170,14 +172,7 @@ open class ShortMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise addition of this matrix and the given matrix.
-     *
-     * @param other The matrix to add to this matrix
-     * @return The sum of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
-    override fun plus(other: Matrix<Short>): ShortMatrix = plus(other as ShortMatrix)
+    override operator fun plus(other: Matrix<Short>): ShortMatrix = plus(other as ShortMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -193,14 +188,7 @@ open class ShortMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise subtraction of this matrix and the given matrix.
-     *
-     * @param other The matrix to subtract from this matrix
-     * @return The difference of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
-    override fun minus(other: Matrix<Short>): ShortMatrix = minus(other as ShortMatrix)
+    override operator fun minus(other: Matrix<Short>): ShortMatrix = minus(other as ShortMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -216,14 +204,7 @@ open class ShortMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise multiplication of this matrix and the given matrix.
-     *
-     * @param other The matrix to multiply with this matrix
-     * @return The product of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
-    override fun times(other: Matrix<Short>): ShortMatrix = times(other as ShortMatrix)
+    override operator fun times(other: Matrix<Short>): ShortMatrix = times(other as ShortMatrix)
 
     /**
      * Element-wise division of this matrix and the given matrix.
@@ -239,14 +220,7 @@ open class ShortMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise division of this matrix and the given matrix.
-     *
-     * @param other The matrix to divide this matrix with
-     * @return The quotient of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
-    override fun div(other: Matrix<Short>): ShortMatrix = div(other as ShortMatrix)
+    override operator fun div(other: Matrix<Short>): ShortMatrix = div(other as ShortMatrix)
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -259,13 +233,7 @@ open class ShortMatrix(
         data.forEachIndexed { i, term -> data[i] = (data[i] + term).toShort() }
     }
 
-    /**
-     * Element-wise addition of this matrix and the given matrix.
-     *
-     * @param other The matrix to add to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
-    override fun plusAssign(other: Matrix<Short>) = plusAssign(other as ShortMatrix)
+    override operator fun plusAssign(other: Matrix<Short>) = plusAssign(other as ShortMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -278,13 +246,7 @@ open class ShortMatrix(
         data.forEachIndexed { i, term -> data[i] = (data[i] - term).toShort() }
     }
 
-    /**
-     * Element-wise subtraction of this matrix and the given matrix.
-     *
-     * @param other The matrix to subtract from this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
-    override fun minusAssign(other: Matrix<Short>) = minusAssign(other as ShortMatrix)
+    override operator fun minusAssign(other: Matrix<Short>) = minusAssign(other as ShortMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -297,13 +259,7 @@ open class ShortMatrix(
         data.forEachIndexed { i, factor -> data[i] = (data[i] * factor).toShort() }
     }
 
-    /**
-     * Element-wise multiplication of this matrix and the given matrix.
-     *
-     * @param other The matrix to multiply to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
-    override fun timesAssign(other: Matrix<Short>) = timesAssign(other as ShortMatrix)
+    override operator fun timesAssign(other: Matrix<Short>) = timesAssign(other as ShortMatrix)
 
     /**
      * Element-wise division of this matrix and the given matrix.
@@ -316,96 +272,41 @@ open class ShortMatrix(
         data.forEachIndexed { i, factor -> data[i] = (data[i] / factor).toShort() }
     }
 
-    /**
-     * Element-wise division of this matrix and the given matrix.
-     *
-     * @param other The matrix to divide to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
-    override fun divAssign(other: Matrix<Short>) = divAssign(other as ShortMatrix)
+    override operator fun divAssign(other: Matrix<Short>) = divAssign(other as ShortMatrix)
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     * @return The sum of this matrix and the given value
-     */
-    override fun plus(value: Short): ShortMatrix {
+    override operator fun plus(value: Short): ShortMatrix {
         val matrix = ShortMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = (data[i] + term).toShort() }
         return matrix
     }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     * @return The difference of this matrix and the given value
-     */
-    override fun minus(value: Short): ShortMatrix {
+    override operator fun minus(value: Short): ShortMatrix {
         val matrix = ShortMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = (data[i] - term).toShort() }
         return matrix
     }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     * @return The product of this matrix and the given value
-     */
-    override fun times(value: Short): ShortMatrix {
+    override operator fun times(value: Short): ShortMatrix {
         val matrix = ShortMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = (data[i] * factor).toShort() }
         return matrix
     }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     * @return The quotient of this matrix and the given value
-     */
-    override fun div(value: Short): ShortMatrix {
+    override operator fun div(value: Short): ShortMatrix {
         val matrix = ShortMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = (data[i] / factor).toShort() }
         return matrix
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
-    override fun plusAssign(value: Short) = data.forEachIndexed { i, term -> data[i] = (data[i] + term).toShort() }
+    override operator fun plusAssign(value: Short) = data.forEachIndexed { i, term -> data[i] = (data[i] + term).toShort() }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
-    override fun minusAssign(value: Short) = data.forEachIndexed { i, term -> data[i] = (data[i] - term).toShort() }
+    override operator fun minusAssign(value: Short) = data.forEachIndexed { i, term -> data[i] = (data[i] - term).toShort() }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
-    override fun timesAssign(value: Short) = data.forEachIndexed { i, factor -> data[i] = (data[i] * factor).toShort() }
+    override operator fun timesAssign(value: Short) = data.forEachIndexed { i, factor -> data[i] = (data[i] * factor).toShort() }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
-    override fun divAssign(value: Short) = data.forEachIndexed { i, factor -> data[i] = (data[i] / factor).toShort() }
+    override operator fun divAssign(value: Short) = data.forEachIndexed { i, factor -> data[i] = (data[i] / factor).toShort() }
 
-    /**
-     * Invert the elements of this matrix.
-     *
-     * @return The inverted matrix
-     */
-    override fun unaryMinus(): Matrix<Short> = times(-1)
+    override operator fun unaryMinus(): Matrix<Short> = times(-1)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have

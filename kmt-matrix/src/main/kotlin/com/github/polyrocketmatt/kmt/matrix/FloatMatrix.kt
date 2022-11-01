@@ -181,7 +181,7 @@ open class FloatMatrix(
         return matrix
     }
 
-    override fun plus(other: Matrix<Float>): FloatMatrix = plus(other as FloatMatrix)
+    override operator fun plus(other: Matrix<Float>): FloatMatrix = plus(other as FloatMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -197,7 +197,7 @@ open class FloatMatrix(
         return matrix
     }
 
-    override fun minus(other: Matrix<Float>): FloatMatrix = minus(other as FloatMatrix)
+    override operator fun minus(other: Matrix<Float>): FloatMatrix = minus(other as FloatMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -213,7 +213,7 @@ open class FloatMatrix(
         return matrix
     }
 
-    override fun times(other: Matrix<Float>): FloatMatrix = times(other as FloatMatrix)
+    override operator fun times(other: Matrix<Float>): FloatMatrix = times(other as FloatMatrix)
 
     /**
      * Element-wise division of this matrix and the given matrix.
@@ -229,7 +229,7 @@ open class FloatMatrix(
         return matrix
     }
 
-    override fun div(other: Matrix<Float>): FloatMatrix = div(other as FloatMatrix)
+    override operator fun div(other: Matrix<Float>): FloatMatrix = div(other as FloatMatrix)
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -242,7 +242,7 @@ open class FloatMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
 
-    override fun plusAssign(other: Matrix<Float>) = plusAssign(other as FloatMatrix)
+    override operator fun plusAssign(other: Matrix<Float>) = plusAssign(other as FloatMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -255,7 +255,7 @@ open class FloatMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
 
-    override fun minusAssign(other: Matrix<Float>) = minusAssign(other as FloatMatrix)
+    override operator fun minusAssign(other: Matrix<Float>) = minusAssign(other as FloatMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -268,7 +268,7 @@ open class FloatMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
-    override fun timesAssign(other: Matrix<Float>) = timesAssign(other as FloatMatrix)
+    override operator fun timesAssign(other: Matrix<Float>) = timesAssign(other as FloatMatrix)
 
     /**
      * Element-wise division of this matrix and the given matrix.
@@ -281,41 +281,41 @@ open class FloatMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
-    override fun divAssign(other: Matrix<Float>) = divAssign(other as FloatMatrix)
+    override operator fun divAssign(other: Matrix<Float>) = divAssign(other as FloatMatrix)
 
-    override fun plus(value: Float): FloatMatrix {
+    override operator fun plus(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] + term }
         return matrix
     }
 
-    override fun minus(value: Float): FloatMatrix {
+    override operator fun minus(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] - term }
         return matrix
     }
 
-    override fun times(value: Float): FloatMatrix {
+    override operator fun times(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] * factor }
         return matrix
     }
 
-    override fun div(value: Float): FloatMatrix {
+    override operator fun div(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] / factor }
         return matrix
     }
 
-    override fun plusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
+    override operator fun plusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
-    override fun minusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
+    override operator fun minusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
-    override fun timesAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+    override operator fun timesAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
-    override fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+    override operator fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
 
-    override fun unaryMinus(): Matrix<Float> = times(-1f)
+    override operator fun unaryMinus(): Matrix<Float> = times(-1f)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have
