@@ -8,6 +8,8 @@ description = "Module for working with matrices"
 dependencies {
     testImplementation(kotlin("test"))
     implementation(project(":kmt-common"))
+    implementation(project(":kmt-complex"))
+    implementation(project(":kmt-group"))
     implementation(project(":kmt-trigonometry"))
 }
 

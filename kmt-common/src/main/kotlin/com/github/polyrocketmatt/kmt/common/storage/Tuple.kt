@@ -108,6 +108,22 @@ open class Tuple<T>(final override val data: Array<T>) : MemoryStorage<T>() {
     open override fun div(other: MutableMemoryStorage<T>): MutableMemoryStorage<T> = throw UnsupportedOperationException("Division is not supported for Tuple<${data[0]!!::class.simpleName}>")
 
     override fun toString(): String = data.contentToString()
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Tuple<*>
+
+        if (!data.contentEquals(other.data)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return data.contentHashCode()
+    }
+
 }
 
 /**

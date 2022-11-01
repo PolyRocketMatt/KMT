@@ -43,7 +43,8 @@ using [Dokka](https://github.com/Kotlin/dokka) and is updated automatically upon
 - ```USERNAME``` is your GitHub username
 - ```TOKEN``` is a GitHub personal access token with the `read:packages` scope
 
-The available modules are listed [here](#modules)
+The available modules are listed [here](#modules). If you want to use all modules together, you can
+use ```KMT``` as the module name.
 
 ### Gradle
 
@@ -64,7 +65,7 @@ repositories {
 
 dependencies {
     // Dependency
-    implementation 'com.github.polyrocketmatt:kmt:VERSION'
+    implementation 'com.github.polyrocketmatt:MODULE:VERSION'
 }
 ```
 

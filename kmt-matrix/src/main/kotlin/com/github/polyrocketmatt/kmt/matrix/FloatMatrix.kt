@@ -19,7 +19,9 @@
 package com.github.polyrocketmatt.kmt.matrix
 
 import com.github.polyrocketmatt.kmt.common.decimals
+import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
+import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
@@ -155,16 +157,21 @@ open class FloatMatrix(
         return column
     }
 
+    override fun shape(): IntArray = shape
+
     override operator fun get(i: Int): Float = data[i]
+
     override operator fun get(row: Int, col: Int): Float = data[row * shape[1] + col]
 
     override operator fun set(i: Int, value: Float) { data[i] = value }
+
     override operator fun set(row: Int, col: Int, value: Float) { data[row * shape[1] + col] = value }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun plus(other: FloatMatrix): FloatMatrix {
@@ -174,10 +181,13 @@ open class FloatMatrix(
         return matrix
     }
 
+    override operator fun plus(other: Matrix<Float>): FloatMatrix = plus(other as FloatMatrix)
+
     /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun minus(other: FloatMatrix): FloatMatrix {
@@ -187,10 +197,13 @@ open class FloatMatrix(
         return matrix
     }
 
+    override operator fun minus(other: Matrix<Float>): FloatMatrix = minus(other as FloatMatrix)
+
     /**
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun times(other: FloatMatrix): FloatMatrix {
@@ -200,10 +213,13 @@ open class FloatMatrix(
         return matrix
     }
 
+    override operator fun times(other: Matrix<Float>): FloatMatrix = times(other as FloatMatrix)
+
     /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun div(other: FloatMatrix): FloatMatrix {
@@ -212,6 +228,8 @@ open class FloatMatrix(
         data.forEachIndexed { i, value -> matrix[i] = value / other[i] }
         return matrix
     }
+
+    override operator fun div(other: Matrix<Float>): FloatMatrix = div(other as FloatMatrix)
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -224,6 +242,8 @@ open class FloatMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
 
+    override operator fun plusAssign(other: Matrix<Float>) = plusAssign(other as FloatMatrix)
+
     /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
@@ -234,6 +254,8 @@ open class FloatMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
+
+    override operator fun minusAssign(other: Matrix<Float>) = minusAssign(other as FloatMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -246,6 +268,8 @@ open class FloatMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
+    override operator fun timesAssign(other: Matrix<Float>) = timesAssign(other as FloatMatrix)
+
     /**
      * Element-wise division of this matrix and the given matrix.
      *
@@ -257,77 +281,41 @@ open class FloatMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
-    override fun plus(value: Float): FloatMatrix {
+    override operator fun divAssign(other: Matrix<Float>) = divAssign(other as FloatMatrix)
+
+    override operator fun plus(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] + term }
         return matrix
     }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
-    override fun minus(value: Float): FloatMatrix {
+    override operator fun minus(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] - term }
         return matrix
     }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
-    override fun times(value: Float): FloatMatrix {
+    override operator fun times(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] * factor }
         return matrix
     }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
-    override fun div(value: Float): FloatMatrix {
+    override operator fun div(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] / factor }
         return matrix
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
-    override fun plusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
+    override operator fun plusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
-    override fun minusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
+    override operator fun minusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
-    override fun timesAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+    override operator fun timesAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
-    override fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+    override operator fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+
+    override operator fun unaryMinus(): Matrix<Float> = times(-1f)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have
@@ -397,6 +385,10 @@ open class FloatMatrix(
 
     override fun isScalar(): Boolean = data.size == 1
     override fun isSquare(): Boolean = shape[0] == shape[1]
+
+    override fun isOrthogonal(): Boolean {
+        TODO("Not yet implemented")
+    }
 
     override fun swapRow(row1: Int, row2: Int) {
         val rowIndex1 = row1 * shape[1]
@@ -499,6 +491,113 @@ open class FloatMatrix(
         return result
     }
 
+    override fun solve(): Tuple<Float> {
+        //  Create augmented matrix
+        val equation = FloatMatrix(intArrayOf(shape[0], shape[1] - 1))
+        val result = FloatMatrix(intArrayOf(shape[0], 1))
+        for (column in 0 until shape[1] - 1)
+            for (row in 0 until shape[0])
+                equation[row, column] = this[row, column]
+        for (row in 0 until shape[0])
+            result[row, 0] = this[row, shape[1] - 1]
+
+        //  Solve
+        val rref = equation.rref()
+        val operations = rref.operations
+        val solution = result.operate(operations)
+
+        //  If there is a row with a non-zero element but a 0 in the last column, there is no solution
+        for (idx in 0 until rref.shape[0])
+            complies("There is no solution for the system of linear equations") { !(rref.row(idx).all { it == 0.0f } && solution[idx, 0] != 0.0f) }
+
+        //  If there is a row with a 0 in all columns, there are infinite solutions
+        for (idx in 0 until rref.shape[0])
+            complies("There are infinite solutions for the system of linear equations") { !(rref.row(idx).all { it == 0.0f } && solution[idx, 0] == 0.0f) }
+
+        return Tuple(solution.data)
+    }
+
+    override fun luDecomposition(): Pair<FloatMatrix, FloatMatrix> {
+        if (isSquare()) {
+            //  Doolittle's algorithm
+            val l = FloatMatrix(shape)
+            val u = FloatMatrix(shape)
+
+            for (row in 0 until shape[0]) {
+                //  Upper triangle
+                for (col in row until shape[1]) {
+                    var sum = 0.0f
+                    for (k in 0 until row)
+                        sum += l[row, k] * u[k, col]
+
+                    u[row, col] = this[row, col] - sum
+                }
+
+                //  Lower triangle
+                for (col in row until shape[1]) {
+                    if (row == col)
+                        l[row, row] = 1.0f
+                    else {
+                        var sum = 0.0f
+                        for (k in 0 until row)
+                            sum += l[col, k] * u[k, row]
+
+                        l[col, row] = (this[col, row] - sum) / u[row, row]
+                    }
+                }
+            }
+
+            return Pair(l, u)
+        } else {
+            val l = identity(intArrayOf(shape[0], shape[0]))
+            val u = copyOf()
+
+            //  Gaussian elimination
+            for (i in 0 until min(shape[0], shape[1])) {
+                val col = u.column(i).copyOfRange(i, shape[0])
+                val pivot = col[0]
+
+                for (j in i + 1 until shape[0]) {
+                    val k = -u.column(i)[j] / pivot
+
+                    l[j, i] = -k
+                    u.addRow(j, i, k)
+                }
+            }
+
+            return Pair(l, u)
+        }
+    }
+
+    override fun qrDecomposition(method: QRFactorizationMethod): Pair<FloatMatrix, FloatMatrix> {
+        return when (method) {
+            QRFactorizationMethod.GRAM_SCHMIDT  -> gramSchmidt()
+            else                                -> throw IllegalArgumentException("Unknown QR-factorization method")
+        }
+    }
+
+    private fun gramSchmidt(): Pair<FloatMatrix, FloatMatrix> {
+        val q = FloatMatrix(shape)
+        val r = FloatMatrix(shape)
+
+        for (j in 0 until shape[1]) {
+            val v = column(j)
+
+            for (i in 0 until j) {
+                r[i, j] = (q.column(i).mapIndexed { index, d -> d * column(j)[index] }.sum())
+
+                for (row in 0 until shape[0])
+                    v[row] -= r[i, j] * q[row, i]
+            }
+
+            r[j, j] = v.mapIndexed { _, d -> d * d }.sum().sqrt()
+            for (row in 0 until shape[0])
+                q[row, j] = v[row] / r[j, j]
+        }
+
+        return Pair(q, r)
+    }
+
     override fun determinant(): Float = ref().diag().reduce { acc, d -> acc * d }
 
     override fun isInvertible(): Boolean = determinant() != 0.0f
@@ -544,8 +643,41 @@ open class FloatMatrix(
         TODO("Not yet implemented")
     }
 
+    override fun norm(type: NormType): Float = when(type) {
+        NormType.ONE_NORM           -> columns().maxOfOrNull { column -> column.sumOf { it.fastAbs().toDouble() } }?.toFloat() ?: throw IllegalArgumentException("Could not find l1-norm of matrix")
+        NormType.TWO_NORM           -> (transpose() mult this).eigenvalues().maxOfOrNull { it.fastAbs().toDouble() }?.dsqrt()?.toFloat() ?: throw IllegalArgumentException("Could not find l2-norm of matrix")
+        NormType.INFINITY_NORM      -> rows().maxOfOrNull { row -> row.sumOf { it.fastAbs().toDouble() } }?.toFloat() ?: throw IllegalArgumentException("Could not find l∞-norm of matrix")
+        NormType.FROBENIUS_NORM     -> data.sumOf { (it * it).toDouble() }.dsqrt().toFloat()
+        NormType.MAX_NORM           -> data.max()
+    }
+
+    override fun eigenvalues(): Array<Float> {
+        TODO("Not yet implemented")
+    }
+
+    override fun eigenvectors(): Array<Tuple<Float>> {
+        TODO("Not yet implemented")
+    }
+
+    /**
+     * Convert the matrix to a double matrix.
+     *
+     * @return The matrix as a double matrix.
+     */
     open fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
+
+    /**
+     * Convert the matrix to an integer matrix.
+     *
+     * @return The matrix as an integer matrix.
+     */
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
+
+    /**
+     * Convert the matrix to a short matrix.
+     *
+     * @return The matrix as a short matrix.
+     */
     open fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }

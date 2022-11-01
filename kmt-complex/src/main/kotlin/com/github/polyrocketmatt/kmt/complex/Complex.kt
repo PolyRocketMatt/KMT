@@ -1,8 +1,25 @@
+/*
+ * KMT, Kotlin Math Toolkit
+ * Copyright (C) Matthias Kovacic <matthias.kovacic@student.kuleuven.be>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.github.polyrocketmatt.kmt.complex
 
-import com.github.polyrocketmatt.kmt.common.dsqrt
-import com.github.polyrocketmatt.kmt.common.intPow
 import kotlin.math.atan2
+import kotlin.math.sqrt
 
 /**
  * @author Matthias Kovacic
@@ -39,7 +56,7 @@ data class Complex(
      *
      * @return The magnitude of the complex number.
      */
-    fun magnitude(): Double = (re * re + im * im).dsqrt()
+    fun magnitude(): Double = sqrt(re * re + im * im)
 
     /**
      * Get the angle between the vector (re, im) represented by the
@@ -102,7 +119,23 @@ data class Complex(
      * @return The quotient of the two complex numbers.
      */
     operator fun div(other: Complex): Complex = Complex(
-        (re * other.re + im * other.im) / (other.re.intPow(2) + other.im.intPow(2)),
-        (im * other.re + re * other.im) / (other.re.intPow(2) + other.im.intPow(2))
+        (re * other.re + im * other.im) / (other.re * other.re + other.im * other.im),
+        (im * other.re + re * other.im) / (other.re * other.re + other.im * other.im)
     )
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Complex) return false
+
+        if (re != other.re) return false
+        if (im != other.im) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = re.hashCode()
+        result = 31 * result + im.hashCode()
+        return result
+    }
 }

@@ -148,16 +148,21 @@ open class IntMatrix(
         return column
     }
 
+    override fun shape(): IntArray = shape
+
     override operator fun get(i: Int): Int = data[i]
+
     override operator fun get(row: Int, col: Int): Int = data[row * shape[1] + col]
 
     override operator fun set(i: Int, value: Int) { data[i] = value }
+
     override operator fun set(row: Int, col: Int, value: Int) { data[row * shape[1] + col] = value }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun plus(other: IntMatrix): IntMatrix {
@@ -167,10 +172,13 @@ open class IntMatrix(
         return matrix
     }
 
+    override operator fun plus(other: Matrix<Int>): IntMatrix = plus(other as IntMatrix)
+
     /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun minus(other: IntMatrix): IntMatrix {
@@ -180,10 +188,13 @@ open class IntMatrix(
         return matrix
     }
 
+    override operator fun minus(other: Matrix<Int>): IntMatrix = minus(other as IntMatrix)
+
     /**
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun times(other: IntMatrix): IntMatrix {
@@ -193,10 +204,13 @@ open class IntMatrix(
         return matrix
     }
 
+    override operator fun times(other: Matrix<Int>): IntMatrix = times(other as IntMatrix)
+
     /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun div(other: IntMatrix): IntMatrix {
@@ -205,6 +219,8 @@ open class IntMatrix(
         data.forEachIndexed { i, value -> matrix[i] = value / other[i] }
         return matrix
     }
+
+    override operator fun div(other: Matrix<Int>): IntMatrix = div(other as IntMatrix)
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -217,6 +233,8 @@ open class IntMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
 
+    override operator fun plusAssign(other: Matrix<Int>) = plusAssign(other as IntMatrix)
+
     /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
@@ -227,6 +245,8 @@ open class IntMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
+
+    override operator fun minusAssign(other: Matrix<Int>) = minusAssign(other as IntMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -239,6 +259,8 @@ open class IntMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
+    override operator fun timesAssign(other: Matrix<Int>) = timesAssign(other as IntMatrix)
+
     /**
      * Element-wise division of this matrix and the given matrix.
      *
@@ -250,77 +272,41 @@ open class IntMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
-    override fun plus(value: Int): IntMatrix {
+    override operator fun divAssign(other: Matrix<Int>) = divAssign(other as IntMatrix)
+
+    override operator fun plus(value: Int): IntMatrix {
         val matrix = IntMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] + term }
         return matrix
     }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
-    override fun minus(value: Int): IntMatrix {
+    override operator fun minus(value: Int): IntMatrix {
         val matrix = IntMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] - term }
         return matrix
     }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
-    override fun times(value: Int): IntMatrix {
+    override operator fun times(value: Int): IntMatrix {
         val matrix = IntMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] * factor }
         return matrix
     }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
-    override fun div(value: Int): IntMatrix {
+    override operator fun div(value: Int): IntMatrix {
         val matrix = IntMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] / factor }
         return matrix
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
-    override fun plusAssign(value: Int) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
+    override operator fun plusAssign(value: Int) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
-    override fun minusAssign(value: Int) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
+    override operator fun minusAssign(value: Int) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
-    override fun timesAssign(value: Int) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+    override operator fun timesAssign(value: Int) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
-    override fun divAssign(value: Int) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+    override operator fun divAssign(value: Int) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+
+    override operator fun unaryMinus(): Matrix<Int> = times(-1)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have
@@ -391,6 +377,10 @@ open class IntMatrix(
 
     override fun isSquare(): Boolean = shape[0] == shape[1]
 
+    override fun isOrthogonal(): Boolean {
+        TODO("Not yet implemented")
+    }
+
     override fun swapRow(row1: Int, row2: Int) {
         val rowIndex1 = row1 * shape[1]
         val rowIndex2 = row2 * shape[1]
@@ -419,6 +409,12 @@ open class IntMatrix(
 
     override fun rref(): DoubleMatrix = toDoubleMatrix().rref()
 
+    override fun solve(): Tuple<Double> = toDoubleMatrix().solve()
+
+    override fun luDecomposition(): Pair<DoubleMatrix, DoubleMatrix> = toDoubleMatrix().luDecomposition()
+
+    override fun qrDecomposition(method: QRFactorizationMethod): Pair<DoubleMatrix, DoubleMatrix> = toDoubleMatrix().qrDecomposition(method)
+
     override fun determinant(): Double = ref().diag().reduce { acc, i -> acc * i }
 
     override fun isInvertible(): Boolean = determinant() != 0.0
@@ -437,8 +433,35 @@ open class IntMatrix(
         TODO("Not yet implemented")
     }
 
+    override fun norm(type: NormType): Double = toDoubleMatrix().norm(type)
+
+    override fun eigenvalues(): Array<Double> {
+        TODO("Not yet implemented")
+    }
+
+    override fun eigenvectors(): Array<Tuple<Double>> {
+        TODO("Not yet implemented")
+    }
+
+    /**
+     * Convert the matrix to a double matrix.
+     *
+     * @return The matrix as a double matrix.
+     */
     fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
+
+    /**
+     * Convert the matrix to a floating-point matrix.
+     *
+     * @return The matrix as a floating-point matrix.
+     */
     fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
+
+    /**
+     * Convert the matrix to a short matrix.
+     *
+     * @return The matrix as a short matrix.
+     */
     fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toShort() }.toShortArray())
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }

@@ -7,7 +7,6 @@ description = "Module for working with complex numbers"
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation(project(":kmt-common"))
 }
 
 tasks.getByName<Test>("test") {
@@ -29,7 +28,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "com.github.polyrocketmatt"
-            artifactId = "kmt-linalg"
+            artifactId = "kmt-complex"
             version = findProperty("kmt.version") as String? ?: "0.0.1"
 
             from(components["java"])

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -42,9 +43,8 @@ class MagmaTest {
     fun testMagmaOperation() {
         val magma = Magma(modAdd, elements)
 
-        assertTrue { magma[1, 2] == 3 }
-        assertTrue { magma[1, 9] == 0 }
-        assertTrue { magma[9, 9] == 8 }
-        assertFalse { magma[1, 2] == 4 }
+        assertEquals(3, magma[1, 2])
+        assertEquals(0, magma[1, 9])
+        assertEquals(8, magma[9, 9])
     }
 }

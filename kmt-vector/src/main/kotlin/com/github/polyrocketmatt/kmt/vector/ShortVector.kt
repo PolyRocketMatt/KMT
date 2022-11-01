@@ -196,6 +196,8 @@ class Short2(x: Short, y: Short) : Tuple2<Short>(arrayOf(x, y)), ShortVector, Sw
     constructor(other: Short2) : this(other.x, other.y)
     constructor(x: Short) : this(x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 2)
+
     operator fun plus(other: Int2) = Int2(x + other.x, y + other.y)
     operator fun minus(other: Int2) = Int2(x - other.x, y - other.y)
     operator fun times(other: Int2) = Int2(x * other.x, y * other.y)
@@ -273,12 +275,13 @@ class Short2(x: Short, y: Short) : Tuple2<Short>(arrayOf(x, y)), ShortVector, Sw
         } else
             throw IllegalArgumentException("Other must be a Short2")
     }
-    override fun dot(other: Vector<Short>): Float {
+    override fun dot(other: Vector<Short>): Short {
         if (other is Short2)
-            return (x * other.x + y * other.y).toFloat()
+            return (x * other.x + y * other.y).toShort()
         else
             throw IllegalArgumentException("Other must be a Short2")
     }
+    override fun isOrthogonal(other: Vector<Short>): Boolean = dot(other) == 0.toShort()
     override fun sdot(): Short = (x * x + y * y).toShort()
     override fun unaryMinus(): Short2 = Int2(-x, -y).asShort()
 
@@ -345,6 +348,8 @@ class Short3(x: Short, y: Short, z: Short) : Tuple3<Short>(arrayOf(x, y, z)), Sh
     constructor() : this(0, 0, 0)
     constructor(other: Short3) : this(other.x, other.y, other.z)
     constructor(x: Short) : this(x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 3)
 
     operator fun plus(other: Int3) = Int3(x + other.x, y + other.y, z + other.z)
     operator fun minus(other: Int3) = Int3(x - other.x, y - other.y, z - other.z)
@@ -425,12 +430,13 @@ class Short3(x: Short, y: Short, z: Short) : Tuple3<Short>(arrayOf(x, y, z)), Sh
         } else
             throw IllegalArgumentException("Other must be a Short3")
     }
-    override fun dot(other: Vector<Short>): Float {
+    override fun dot(other: Vector<Short>): Short {
         if (other is Short3) {
-            return (x * other.x + y * other.y + z * other.z).toFloat()
+            return (x * other.x + y * other.y + z * other.z).toShort()
         } else
             throw IllegalArgumentException("Other must be a Short3")
     }
+    override fun isOrthogonal(other: Vector<Short>): Boolean = dot(other) == 0.toShort()
     override fun sdot(): Short = (x * x + y * y + z * z).toShort()
     override fun unaryMinus(): Short3 = Int3(-x, -y, -z).asShort()
     fun cross(other: Short3): Short3 = Int3(
@@ -524,6 +530,8 @@ class Short4(x: Short, y: Short, z: Short, w: Short) : Tuple4<Short>(arrayOf(x, 
     constructor(other: Short4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Short) : this(x, x, x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 4)
+
     operator fun plus(other: Int4) = Int4(x + other.x, y + other.y, z + other.z, w + other.w)
     operator fun minus(other: Int4) = Int4(x - other.x, y - other.y, z - other.z, w - other.w)
     operator fun times(other: Int4) = Int4(x * other.x, y * other.y, z * other.z, w * other.w)
@@ -605,12 +613,13 @@ class Short4(x: Short, y: Short, z: Short, w: Short) : Tuple4<Short>(arrayOf(x, 
         } else
             throw IllegalArgumentException("Other must be a Short4")
     }
-    override fun dot(other: Vector<Short>): Float {
+    override fun dot(other: Vector<Short>): Short {
         if (other is Short4) {
-            return (x * other.x + y * other.y + z * other.z + w * other.w).toFloat()
+            return (x * other.x + y * other.y + z * other.z + w * other.w).toShort()
         } else
             throw IllegalArgumentException("Other must be a Short4")
     }
+    override fun isOrthogonal(other: Vector<Short>): Boolean = dot(other) == 0.toShort()
     override fun sdot(): Short = (x * x + y * y + z * z + w * w).toShort()
     override fun unaryMinus(): Short4 = Int4(-x, -y, -z, -w).asShort()
 

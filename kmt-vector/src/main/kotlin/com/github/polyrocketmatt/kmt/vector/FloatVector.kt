@@ -256,6 +256,8 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
     constructor(other: Float2) : this(other.x, other.y)
     constructor(x: Float) : this(x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 2)
+
     operator fun plus(other: Float2) = Float2(x + other.x, y + other.y)
     operator fun minus(other: Float2) = Float2(x - other.x, y - other.y)
     operator fun times(other: Float2) = Float2(x * other.x, y * other.y)
@@ -339,6 +341,7 @@ class Float2(x: Float, y: Float) : Tuple2<Float>(arrayOf(x, y)), FloatVector, Sw
         else
             throw IllegalArgumentException("Other must be a Float2")
     }
+    override fun isOrthogonal(other: Vector<Float>): Boolean = dot(other) == 0.0f
     override fun sdot(): Float = x * x + y * y
     override fun unaryMinus(): Float2 = Float2(-x, -y)
 
@@ -414,6 +417,8 @@ class Float3(x: Float, y: Float, z: Float) : Tuple3<Float>(arrayOf(x, y, z)), Fl
     constructor() : this(0f, 0f, 0f)
     constructor(other: Float3) : this(other.x, other.y, other.z)
     constructor(x: Float) : this(x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 3)
 
     operator fun plus(other: Int3) = Float3(x + other.x, y + other.y, z + other.z)
     operator fun minus(other: Int3) = Float3(x - other.x, y - other.y, z - other.z)
@@ -500,6 +505,7 @@ class Float3(x: Float, y: Float, z: Float) : Tuple3<Float>(arrayOf(x, y, z)), Fl
         } else
             throw IllegalArgumentException("Other must be a Float3")
     }
+    override fun isOrthogonal(other: Vector<Float>): Boolean = dot(other) == 0.0f
     override fun sdot(): Float = x * x + y * y + z * z
     override fun unaryMinus(): Float3 = Float3(-x, -y, -z)
     fun cross(other: Float3): Float3 = Float3(
@@ -602,6 +608,8 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
     constructor(other: Float4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Float) : this(x, x, x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 4)
+
     operator fun plus(other: Int4) = Float4(x + other.x, y + other.y, z + other.z, w + other.w)
     operator fun minus(other: Int4) = Float4(x - other.x, y - other.y, z - other.z, w - other.w)
     operator fun times(other: Int4) = Float4(x * other.x, y * other.y, z * other.z, w * other.w)
@@ -689,6 +697,7 @@ class Float4(x: Float, y: Float, z: Float, w: Float) : Tuple4<Float>(arrayOf(x, 
         } else
             throw IllegalArgumentException("Other must be a Float4")
     }
+    override fun isOrthogonal(other: Vector<Float>): Boolean = dot(other) == 0.0f
     override fun sdot(): Float = x * x + y * y + z * z + w * w
     override fun unaryMinus(): Float4 = Float4(-x, -y, -z, -w)
 

@@ -16,18 +16,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.polyrocketmatt.kmt.common
+package com.github.polyrocketmatt.kmt.matrix
 
 /**
  * @author Matthias Kovacic
- * @since 0.0.1
+ * @since 0.1.1
  *
- * Represents a datatype.
+ * Represents different norms.
  */
-enum class DataType {
+enum class NormType {
+    ONE_NORM,
+    TWO_NORM,
+    INFINITY_NORM,
+    FROBENIUS_NORM,
+    MAX_NORM
+}
 
-    DOUBLE,
-    FLOAT,
-    INT,
-    SHORT
+/**
+ * @author Matthias Kovacic
+ * @since 0.1.1
+ *
+ * Represents different QR-factorization methods.
+ */
+enum class QRFactorizationMethod {
+    GRAM_SCHMIDT,
+    GIVENS,
+    PIVOTING
 }

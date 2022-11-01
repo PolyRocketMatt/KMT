@@ -19,6 +19,7 @@
 package com.github.polyrocketmatt.kmt.matrix
 
 import com.github.polyrocketmatt.kmt.common.decimals
+import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
@@ -66,6 +67,8 @@ fun DoubleArray.toMatrix(shape: IntArray): DoubleMatrix {
     )
     return DoubleMatrix(shape, this)
 }
+
+fun doubleMatrixOf(shape: IntArray, vararg elements: Double): DoubleMatrix = DoubleMatrix(shape, elements)
 
 /**
  * Get an array of floating-point numbers from the given matrix.
@@ -121,6 +124,11 @@ open class DoubleMatrix(
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
+    /**
+     * Get the rows of the matrix.
+     *
+     * @return The rows as an array of arrays.
+     */
     open fun rows(): Array<DoubleArray> {
         val rows = Array(shape[0]) { DoubleArray(shape[1]) }
         for (j in 0 until shape[1])
@@ -129,6 +137,11 @@ open class DoubleMatrix(
         return rows
     }
 
+    /**
+     * Get the columns of the matrix.
+     *
+     * @return The columns as an array of arrays.
+     */
     open fun columns(): Array<DoubleArray> {
         val columns = Array(shape[1]) { DoubleArray(shape[0]) }
         for (i in 0 until shape[0])
@@ -137,34 +150,85 @@ open class DoubleMatrix(
         return columns
     }
 
-    open fun row(idx: Int): DoubleArray {
-        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
+    /**
+     * Get the row at the given index of the matrix.
+     *
+     * @param index The index of the row
+     * @return The row as an array
+     * @throws IllegalArgumentException If the index is out of bounds
+     */
+    open fun row(index: Int): DoubleArray {
+        complies("Index $index is out of bounds for ${shape[0]} rows") { index in 0 until shape[0] }
 
         val row = DoubleArray(shape[1])
         for (j in 0 until shape[1])
-            row[j] = this[idx, j]
+            row[j] = this[index, j]
         return row
     }
 
-    open fun column(idx: Int): DoubleArray {
-        complies("Index $idx is out of bounds for ${shape[1]} columns") { idx in 0 until shape[1] }
+    /**
+     * Get the row at the given index of the matrix.
+     *
+     * @param index The index of the row
+     * @return The row as a matrix
+     * @throws IllegalArgumentException If the index is out of bounds
+     */
+    open fun rowAsMatrix(index: Int): DoubleMatrix {
+        complies("Index $index is out of bounds for ${shape[0]} rows") { index in 0 until shape[0] }
+
+        val row = DoubleMatrix(intArrayOf(1, shape[1]))
+        for (j in 0 until shape[1])
+            row[0, j] = this[index, j]
+        return row
+    }
+
+    /**
+     * Get the column at the given index of the matrix.
+     *
+     * @param index The index of the column at
+     * @return The column at as an array
+     * @throws IllegalArgumentException If the index is out of bounds
+     */
+    open fun column(index: Int): DoubleArray {
+        complies("Index $index is out of bounds for ${shape[1]} columns") { index in 0 until shape[1] }
 
         val column = DoubleArray(shape[0])
         for (i in 0 until shape[0])
-            column[i] = this[i, idx]
+            column[i] = this[i, index]
         return column
     }
 
+    /**
+     * Get the column at the given index of the matrix.
+     *
+     * @param index The index of the column at
+     * @return The column at as a matrix
+     * @throws IllegalArgumentException If the index is out of bounds
+     */
+    open fun columnAsMatrix(index: Int): DoubleMatrix {
+        complies("Index $index is out of bounds for ${shape[0]} rows") { index in 0 until shape[0] }
+
+        val column = DoubleMatrix(intArrayOf(shape[0], 1))
+        for (i in 0 until shape[0])
+            column[i, 0] = this[i, index]
+        return column
+    }
+
+    override fun shape(): IntArray = shape
+
     override operator fun get(i: Int): Double = data[i]
+
     override operator fun get(row: Int, col: Int): Double = data[row * shape[1] + col]
 
     override operator fun set(i: Int, value: Double) { data[i] = value.decimals(12) }
+
     override operator fun set(row: Int, col: Int, value: Double) { data[row * shape[1] + col] = value.decimals(12) }
 
     /**
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun plus(other: DoubleMatrix): DoubleMatrix {
@@ -174,10 +238,13 @@ open class DoubleMatrix(
         return matrix
     }
 
+    override operator fun plus(other: Matrix<Double>): DoubleMatrix = plus(other as DoubleMatrix)
+
     /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun minus(other: DoubleMatrix): DoubleMatrix {
@@ -187,10 +254,13 @@ open class DoubleMatrix(
         return matrix
     }
 
+    override operator fun minus(other: Matrix<Double>): DoubleMatrix = minus(other as DoubleMatrix)
+
     /**
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun times(other: DoubleMatrix): DoubleMatrix {
@@ -200,10 +270,13 @@ open class DoubleMatrix(
         return matrix
     }
 
+    override operator fun times(other: Matrix<Double>): DoubleMatrix = times(other as DoubleMatrix)
+
     /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun div(other: DoubleMatrix): DoubleMatrix {
@@ -212,6 +285,8 @@ open class DoubleMatrix(
         data.forEachIndexed { i, value -> matrix[i] = value / other[i] }
         return matrix
     }
+
+    override operator fun div(other: Matrix<Double>): DoubleMatrix = div(other as DoubleMatrix)
 
     /**
      * Element-wise addition of this matrix and the given matrix.
@@ -224,6 +299,8 @@ open class DoubleMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
 
+    override operator fun plusAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
+
     /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
@@ -234,6 +311,8 @@ open class DoubleMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
+
+    override operator fun minusAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -246,6 +325,8 @@ open class DoubleMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
+    override operator fun timesAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
+
     /**
      * Element-wise division of this matrix and the given matrix.
      *
@@ -257,77 +338,41 @@ open class DoubleMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
-    override fun plus(value: Double): DoubleMatrix {
+    override operator fun divAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
+
+    override operator fun plus(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] + term }
         return matrix
     }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
-    override fun minus(value: Double): DoubleMatrix {
+    override operator fun minus(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] - term }
         return matrix
     }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
-    override fun times(value: Double): DoubleMatrix {
+    override operator fun times(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] * factor }
         return matrix
     }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
-    override fun div(value: Double): DoubleMatrix {
+    override operator fun div(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] / factor }
         return matrix
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
-    override fun plusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
+    override operator fun plusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
-    override fun minusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
+    override operator fun minusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
-    override fun timesAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+    override operator fun timesAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
-    override fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+    override operator fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+
+    override operator fun unaryMinus(): DoubleMatrix = times(-1.0)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have
@@ -397,6 +442,10 @@ open class DoubleMatrix(
     override fun isScalar(): Boolean = data.size == 1
 
     override fun isSquare(): Boolean = shape[0] == shape[1]
+
+    override fun isOrthogonal(): Boolean {
+        TODO("Not yet implemented")
+    }
 
     override fun swapRow(row1: Int, row2: Int) {
         val rowIndex1 = row1 * shape[1]
@@ -505,6 +554,113 @@ open class DoubleMatrix(
         return result
     }
 
+    override fun solve(): Tuple<Double> {
+        //  Create augmented matrix
+        val equation = DoubleMatrix(intArrayOf(shape[0], shape[1] - 1))
+        val result = DoubleMatrix(intArrayOf(shape[0], 1))
+        for (column in 0 until shape[1] - 1)
+            for (row in 0 until shape[0])
+                equation[row, column] = this[row, column]
+        for (row in 0 until shape[0])
+            result[row, 0] = this[row, shape[1] - 1]
+
+        //  Solve
+        val rref = equation.rref()
+        val operations = rref.operations
+        val solution = result.operate(operations)
+
+        //  If there is a row with a non-zero element but a 0 in the last column, there is no solution
+        for (idx in 0 until rref.shape[0])
+            complies("There is no solution for the system of linear equations") { !(rref.row(idx).all { it == 0.0 } && solution[idx, 0] != 0.0) }
+
+        //  If there is a row with a 0 in all columns, there are infinite solutions
+        for (idx in 0 until rref.shape[0])
+            complies("There are infinite solutions for the system of linear equations") { !(rref.row(idx).all { it == 0.0 } && solution[idx, 0] == 0.0) }
+
+        return Tuple(solution.data)
+    }
+
+    override fun luDecomposition(): Pair<DoubleMatrix, DoubleMatrix> {
+        if (isSquare()) {
+            //  Doolittle's algorithm
+            val l = DoubleMatrix(shape)
+            val u = DoubleMatrix(shape)
+
+            for (row in 0 until shape[0]) {
+                //  Upper triangle
+                for (col in row until shape[1]) {
+                    var sum = 0.0
+                    for (k in 0 until row)
+                        sum += l[row, k] * u[k, col]
+
+                    u[row, col] = this[row, col] - sum
+                }
+
+                //  Lower triangle
+                for (col in row until shape[1]) {
+                    if (row == col)
+                        l[row, row] = 1.0
+                    else {
+                        var sum = 0.0
+                        for (k in 0 until row)
+                            sum += l[col, k] * u[k, row]
+
+                        l[col, row] = (this[col, row] - sum) / u[row, row]
+                    }
+                }
+            }
+
+            return Pair(l, u)
+        } else {
+            val l = identity(intArrayOf(shape[0], shape[0]))
+            val u = copyOf()
+
+            //  Gaussian elimination
+            for (i in 0 until min(shape[0], shape[1])) {
+                val col = u.column(i).copyOfRange(i, shape[0])
+                val pivot = col[0]
+
+                for (j in i + 1 until shape[0]) {
+                    val k = -u.column(i)[j] / pivot
+
+                    l[j, i] = -k
+                    u.addRow(j, i, k)
+                }
+            }
+
+            return Pair(l, u)
+        }
+    }
+
+    override fun qrDecomposition(method: QRFactorizationMethod): Pair<DoubleMatrix, DoubleMatrix> {
+        return when (method) {
+            QRFactorizationMethod.GRAM_SCHMIDT  -> gramSchmidt()
+            else                                -> throw IllegalArgumentException("Unknown QR-factorization method")
+        }
+    }
+
+    private fun gramSchmidt(): Pair<DoubleMatrix, DoubleMatrix> {
+        val q = DoubleMatrix(shape)
+        val r = DoubleMatrix(shape)
+
+        for (j in 0 until shape[1]) {
+            val v = column(j)
+
+            for (i in 0 until j) {
+                r[i, j] = (q.column(i).mapIndexed { index, d -> d * column(j)[index] }.sum())
+
+                for (row in 0 until shape[0])
+                    v[row] -= r[i, j] * q[row, i]
+            }
+
+            r[j, j] = v.mapIndexed { _, d -> d * d }.sum().dsqrt()
+            for (row in 0 until shape[0])
+                q[row, j] = v[row] / r[j, j]
+        }
+
+        return Pair(q, r)
+    }
+
     override fun determinant(): Double = ref().diag().reduce { acc, d -> acc * d }
 
     override fun isInvertible(): Boolean = determinant() != 0.0
@@ -546,9 +702,51 @@ open class DoubleMatrix(
 
     override fun linearlyIndependentColumns(): Boolean = rank() == shape[1]
 
+    override fun norm(type: NormType): Double = when(type) {
+        NormType.ONE_NORM           -> columns().maxOfOrNull { column -> column.sumOf { it.fastAbs() } } ?: throw IllegalArgumentException("Could not find l1-norm of matrix")
+        NormType.TWO_NORM           -> (transpose() mult this).eigenvalues().maxOfOrNull { it.fastAbs() }?.dsqrt() ?: throw IllegalArgumentException("Could not find l2-norm of matrix")
+        NormType.INFINITY_NORM      -> rows().maxOfOrNull { row -> row.sumOf { it.fastAbs() } } ?: throw IllegalArgumentException("Could not find l∞-norm of matrix")
+        NormType.FROBENIUS_NORM     -> data.sumOf { it * it }.dsqrt()
+        NormType.MAX_NORM           -> data.max()
+    }
+
+    override fun eigenvalues(): Array<Double> {
+        complies("Cannot compute eigenvalues of non-square matrix ${shapeToString()}") { isSquare() }
+
+        TODO("Not yet implemented")
+    }
+
+    override fun eigenvectors(): Array<Tuple<Double>> {
+        TODO("Not yet implemented")
+    }
+
+    /**
+     * Convert the matrix to a floating-point matrix.
+     *
+     * @return The matrix as a floating-point matrix.
+     */
     open fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
+
+    /**
+     * Convert the matrix to an integer matrix.
+     *
+     * @return The matrix as an integer matrix.
+     */
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
+
+    /**
+     * Convert the matrix to a short matrix.
+     *
+     * @return The matrix as a short matrix.
+     */
     open fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
+
+    /**
+     * Round all elements of the matrix to the amount of decimals specified.
+     *
+     * @param decimals The amount of decimals to round to.
+     */
+    fun decimals(decimals: Int) { data.forEachIndexed { index, d -> data[index] = d.decimals(decimals) } }
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 

@@ -256,6 +256,8 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
     constructor(other: Double2) : this(other.x, other.y)
     constructor(x: Double) : this(x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 2)
+
     operator fun plus(other: Double2): Double2 = Double2(x + other.x, y + other.y)
     operator fun minus(other: Double2): Double2 = Double2(x - other.x, y - other.y)
     operator fun times(other: Double2): Double2 = Double2(x * other.x, y * other.y)
@@ -333,12 +335,13 @@ class Double2(x: Double, y: Double) : Tuple2<Double>(arrayOf(x, y)), DoubleVecto
         } else
             throw IllegalArgumentException("Other must be a Double2")
     }
-    override fun dot(other: Vector<Double>): Float {
+    override fun dot(other: Vector<Double>): Double {
         if (other is Double2) {
-            return (x * other.x + y * other.y).toFloat()
+            return x * other.x + y * other.y
         } else
             throw IllegalArgumentException("Other must be a Double2")
     }
+    override fun isOrthogonal(other: Vector<Double>): Boolean = dot(other) == 0.0
     override fun sdot(): Double = x * x + y * y
     override fun unaryMinus(): Double2 = Double2(-x, -y)
 
@@ -414,6 +417,8 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
     constructor() : this(0.0, 0.0, 0.0)
     constructor(other: Double3) : this(other.x, other.y, other.z)
     constructor(x: Double) : this(x, x, x)
+
+    override fun shape(): IntArray = intArrayOf(1, 3)
 
     operator fun plus(other: Int3) = Double3(x + other.x, y + other.y, z + other.z)
     operator fun minus(other: Int3) = Double3(x - other.x, y - other.y, z - other.z)
@@ -494,12 +499,13 @@ class Double3(x: Double, y: Double, z: Double) : Tuple3<Double>(arrayOf(x, y, z)
         } else
             throw IllegalArgumentException("Other must be a Double3")
     }
-    override fun dot(other: Vector<Double>): Float {
+    override fun dot(other: Vector<Double>): Double {
         if (other is Double3) {
-            return (x * other.x + y * other.y + z * other.z).toFloat()
+            return x * other.x + y * other.y + z * other.z
         } else
             throw IllegalArgumentException("Other must be a Double3")
     }
+    override fun isOrthogonal(other: Vector<Double>): Boolean = dot(other) == 0.0
     override fun sdot(): Double = x * x + y * y + z * z
     override fun unaryMinus(): Double3 = Double3(-x, -y, -z)
     fun cross(other: Double3): Double3 = Double3(
@@ -605,6 +611,8 @@ class Double4(x: Double, y: Double, z: Double, w: Double) :
     constructor(other: Double4) : this(other.x, other.y, other.z, other.w)
     constructor(x: Double) : this(x, x, x, x)
 
+    override fun shape(): IntArray = intArrayOf(1, 4)
+
     operator fun plus(other: Int4) = Double4(x + other.x, y + other.y, z + other.z, w + other.w)
     operator fun minus(other: Int4) = Double4(x - other.x, y - other.y, z - other.z, w - other.w)
     operator fun times(other: Int4) = Double4(x * other.x, y * other.y, z * other.z, w * other.w)
@@ -686,12 +694,13 @@ class Double4(x: Double, y: Double, z: Double, w: Double) :
         } else
             throw IllegalArgumentException("Other must be a Double4")
     }
-    override fun dot(other: Vector<Double>): Float {
+    override fun dot(other: Vector<Double>): Double {
         if (other is Double4) {
-            return (x * other.x + y * other.y + z * other.z + w * other.w).toFloat()
+            return x * other.x + y * other.y + z * other.z + w * other.w
         } else
             throw IllegalArgumentException("Other must be a Double4")
     }
+    override fun isOrthogonal(other: Vector<Double>): Boolean = dot(other) == 0.0
     override fun sdot(): Double = x * x + y * y + z * z + w * w
     override fun unaryMinus(): Double4 = Double4(-x, -y, -z, -w)
 
