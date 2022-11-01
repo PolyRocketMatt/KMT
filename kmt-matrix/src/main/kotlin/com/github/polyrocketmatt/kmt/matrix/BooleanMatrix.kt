@@ -136,9 +136,11 @@ open class BooleanMatrix(
     override fun shape(): IntArray = shape
 
     override operator fun get(i: Int): Boolean = data[i]
+
     override operator fun get(row: Int, col: Int): Boolean = data[row * shape[1] + col]
 
     override operator fun set(i: Int, value: Boolean) { data[i] = value }
+
     override operator fun set(row: Int, col: Int, value: Boolean) { data[row * shape[1] + col] = value }
 
     /**
@@ -156,13 +158,6 @@ open class BooleanMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise addition of this matrix and the given matrix.
-     *
-     * @param other The matrix to add to this matrix
-     * @return The sum of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun plus(other: Matrix<Boolean>): BooleanMatrix = plus(other as BooleanMatrix)
 
     /**
@@ -173,12 +168,6 @@ open class BooleanMatrix(
      */
     open operator fun minus(other: BooleanMatrix): BooleanMatrix = throw UnsupportedOperationException("Cannot subtract boolean matrices")
 
-    /**
-     * Element-wise subtraction of this matrix and the given matrix.
-     *
-     * @param other The matrix to subtract from this matrix
-     * @throws UnsupportedOperationException Boolean matrices cannot be subtracted
-     */
     override fun minus(other: Matrix<Boolean>): BooleanMatrix = minus(other as BooleanMatrix)
 
     /**
@@ -196,13 +185,6 @@ open class BooleanMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise multiplication of this matrix and the given matrix.
-     *
-     * @param other The matrix to multiply with this matrix
-     * @return The product of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun times(other: Matrix<Boolean>): BooleanMatrix = times(other as BooleanMatrix)
 
     /**
@@ -213,12 +195,6 @@ open class BooleanMatrix(
      */
     open operator fun div(other: BooleanMatrix): BooleanMatrix = throw UnsupportedOperationException("Cannot divide boolean matrices")
 
-    /**
-     * Element-wise division of this matrix and the given matrix.
-     *
-     * @param other The matrix to divide this matrix with
-     * @throws UnsupportedOperationException Boolean matrices cannot be subtracted
-     */
     override fun div(other: Matrix<Boolean>): BooleanMatrix = div(other as BooleanMatrix)
 
     /**
@@ -232,12 +208,6 @@ open class BooleanMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] || term }
     }
 
-    /**
-     * Element-wise addition of this matrix and the given matrix.
-     *
-     * @param other The matrix to add to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun plusAssign(other: Matrix<Boolean>) = plusAssign(other as BooleanMatrix)
 
     /**
@@ -250,12 +220,6 @@ open class BooleanMatrix(
         throw UnsupportedOperationException("Cannot subtract boolean matrices")
     }
 
-    /**
-     * Element-wise subtraction of this matrix and the given matrix.
-     *
-     * @param other The matrix to subtract from this matrix
-     * @throws UnsupportedOperationException Boolean matrices cannot be subtracted
-     */
     override fun minusAssign(other: Matrix<Boolean>) = minusAssign(other as BooleanMatrix)
 
     /**
@@ -269,12 +233,6 @@ open class BooleanMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] && factor }
     }
 
-    /**
-     * Element-wise multiplication of this matrix and the given matrix.
-     *
-     * @param other The matrix to multiply to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun timesAssign(other: Matrix<Boolean>) = timesAssign(other as BooleanMatrix)
 
     /**
@@ -287,87 +245,32 @@ open class BooleanMatrix(
         throw UnsupportedOperationException("Cannot divide boolean matrices")
     }
 
-    /**
-     * Element-wise division of this matrix and the given matrix.
-     *
-     * @param other The matrix to divide to this matrix
-     * @throws UnsupportedOperationException Boolean matrices cannot be divided
-     */
     override fun divAssign(other: Matrix<Boolean>) = divAssign(other as BooleanMatrix)
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     * @return The sum of this matrix and the given value
-     */
     override fun plus(value: Boolean): BooleanMatrix {
         val matrix = BooleanMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] || term }
         return matrix
     }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     * @throws UnsupportedOperationException Boolean matrices cannot be subtracted
-     */
     override fun minus(value: Boolean): BooleanMatrix = throw UnsupportedOperationException("Cannot subtract boolean from boolean matrix")
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     * @return The product of this matrix and the given value
-     */
     override fun times(value: Boolean): BooleanMatrix {
         val matrix = BooleanMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] && factor }
         return matrix
     }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     * @throws UnsupportedOperationException Boolean matrices cannot be divided
-     */
     override fun div(value: Boolean): BooleanMatrix = throw UnsupportedOperationException("Cannot divide boolean matrix by boolean")
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
     override fun plusAssign(value: Boolean) = data.forEachIndexed { i, term -> data[i] = data[i] || term }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
     override fun minusAssign(value: Boolean) = throw UnsupportedOperationException("Cannot subtract boolean from boolean matrix")
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
     override fun timesAssign(value: Boolean) = data.forEachIndexed { i, factor -> data[i] = data[i] && factor }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
     override fun divAssign(value: Boolean) = throw UnsupportedOperationException("Cannot divide boolean from boolean matrix")
 
-    /**
-     * Invert the elements of this matrix.
-     *
-     * @return The inverted matrix
-     */
     override fun unaryMinus(): BooleanMatrix = BooleanMatrix(shape, data.map { !it }.toBooleanArray())
 
     /**

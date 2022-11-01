@@ -314,7 +314,7 @@ open class FloatMatrix(
     override fun timesAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
     override fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
-    
+
     override fun unaryMinus(): Matrix<Float> = times(-1f)
 
     /**
