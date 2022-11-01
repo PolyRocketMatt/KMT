@@ -15,10 +15,11 @@ import com.github.polyrocketmatt.kmt.complex.Complex
 class DefinedSet<T>(
     private val isMember: (T) -> Boolean,
     private val isEmpty: Boolean,
-    private val isSingleton: Boolean
-) : SimpleSet<T>() {
+    private val isSingleton: Boolean,
+    private val isInfinite: Boolean
+) : SimpleSet<T>(isInfinite = isInfinite) {
 
-    constructor(isMember: (T) -> Boolean) : this(isMember, false, false)
+    constructor(isMember: (T) -> Boolean) : this(isMember, false, false, true)
 
     companion object {
         val NATURAL = DefinedSet<Int> { it >= 0 }
@@ -32,7 +33,9 @@ class DefinedSet<T>(
 
     override fun isSingleton(): Boolean = isSingleton
 
-    override fun card(): Int = throw UnsupportedOperationException("Cannot decide if a set is empty since elements are not statically defined")
+    override fun isInfinite(): Boolean = isInfinite
+
+    override fun card(): Int = if (isEmpty) 0 else if (isSingleton) 1 else throw UnsupportedOperationException("Cannot decide if a set is empty since elements are not statically defined")
 
     override fun contains(element: T): Boolean = isMember(element)
 

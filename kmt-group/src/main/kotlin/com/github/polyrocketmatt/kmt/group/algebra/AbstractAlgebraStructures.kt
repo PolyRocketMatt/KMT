@@ -10,11 +10,12 @@ import com.github.polyrocketmatt.kmt.group.set.SimpleSet
  * Represents an algebra on a set of elements.
  *
  * @param T The type of the elements in the algebra.
- * @param elements The elements of the algebra.
+ * @param set The set of the algebra.
  */
-abstract class Algebra<T>(elements: Set<T>) : SimpleSet<T>(elements) {
+abstract class Algebra<T>(set: SimpleSet<T>) : SimpleSet<T>(set.elements, set.isInfinite()) {
 
     abstract fun checkIntegrity()
+
 }
 
 /**
@@ -28,19 +29,21 @@ abstract class Algebra<T>(elements: Set<T>) : SimpleSet<T>(elements) {
  *
  * @param T The type of the elements in the magma.
  * @param operation The binary operation of the magma.
- * @param elements The elements of the magma.
+ * @param set The set of the magma.
  */
 open class Magma<T>(
     private val operation: (a: T, b: T) -> T,
-    elements: Set<T>
-) : Algebra<T>(elements) {
+    set: SimpleSet<T>
+) : Algebra<T>(set) {
 
     constructor(operation: (a: T, b: T) -> T) : this(operation, emptySet())
     constructor(operation: (a: T, b: T) -> T, vararg elements: T) : this(operation, elements.toSet())
     constructor(operation: (a: T, b: T) -> T, elements: Collection<T>) : this(operation, elements.toSet())
-    constructor(operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(operation, set.elements)
+    constructor(operation: (a: T, b: T) -> T, set: Set<T>) : this(operation, SimpleSet(set))
 
     override fun checkIntegrity() {
+        complies("Cannot check the integrity of a set with infinitely many elements") { !isInfinite() }
+
         //  Check if the operation is closed
         for (a in elements) for (b in elements)
             complies("The binary operation is not closed for all elements in the Magma") { operation(a, b) in elements }
@@ -74,19 +77,21 @@ open class Magma<T>(
  *
  * @param T The type of the elements in the semigroup.
  * @param operation The binary operation of the semigroup.
- * @param elements The elements of the semigroup.
+ * @param set The set of the semigroup.
  */
 open class Semigroup<T>(
     private val operation: (a: T, b: T) -> T,
-    elements: Set<T>
-) : Magma<T>(operation, elements) {
+    set: SimpleSet<T>
+) : Magma<T>(operation, set) {
 
     constructor(operation: (a: T, b: T) -> T) : this(operation, emptySet())
     constructor(operation: (a: T, b: T) -> T, vararg elements: T) : this(operation, elements.toSet())
     constructor(operation: (a: T, b: T) -> T, elements: Collection<T>) : this(operation, elements.toSet())
-    constructor(operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(operation, set.elements)
+    constructor(operation: (a: T, b: T) -> T, set: Set<T>) : this(operation, SimpleSet(set))
 
     override fun checkIntegrity() {
+        complies("Cannot check the integrity of a set with infinitely many elements") { !isInfinite() }
+
         //  Check if the operation is closed
         for (a in elements) for (b in elements)
             complies("The binary operation is not closed for all elements in the Semigroup") { operation(a, b) in elements }
@@ -126,20 +131,22 @@ open class Semigroup<T>(
  * @param T The type of the elements in the monoid.
  * @param identity The identity element of the monoid.
  * @param operation The binary operation of the monoid.
- * @param elements The elements of the monoid.
+ * @param set The set of the monoid.
  */
 open class Monoid<T>(
     private val identity: T,
     private val operation: (a: T, b: T) -> T,
-    elements: Set<T>
-) : Semigroup<T>(operation, elements) {
+    set: SimpleSet<T>
+) : Semigroup<T>(operation, set) {
 
     constructor(identity: T, operation: (a: T, b: T) -> T) : this(identity, operation, emptySet())
     constructor(identity: T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, operation, elements.toSet())
     constructor(identity: T, operation: (a: T, b: T) -> T, elements: Collection<T>) : this(identity, operation, elements.toSet())
-    constructor(identity: T, operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(identity, operation, set.elements)
+    constructor(identity: T, operation: (a: T, b: T) -> T, set: Set<T>) : this(identity, operation, SimpleSet(set))
 
     override fun checkIntegrity() {
+        complies("Cannot check the integrity of a set with infinitely many elements") { !isInfinite() }
+
         //  Check identity in the set
         complies("Identity is not a member of the Monoid") { elements.contains(identity) }
 
@@ -190,21 +197,24 @@ open class Monoid<T>(
  * @param identity The identity element of the group.
  * @param inverseMap The inverse operation of the group.
  * @param operation The binary operation of the group.
- * @param elements The elements of the group.
+ * @param set The set of the group.
  */
 open class Group<T>(
     private val identity: T,
     private val inverseMap: (a: T) -> T,
     private val operation: (a: T, b: T) -> T,
-    elements: Set<T>
-) : Monoid<T>(identity, operation, elements) {
+    set: SimpleSet<T>
+) : Monoid<T>(identity, operation, set) {
 
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T) : this(identity, inverseMap, operation, emptySet())
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, inverseMap, operation, elements.toSet())
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, elements: Collection<T>) : this(identity, inverseMap, operation, elements.toSet())
-    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(identity, inverseMap, operation, set.elements)
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, set: Set<T>) : this(identity, inverseMap, operation, SimpleSet(set))
 
     override fun checkIntegrity() {
+        println(isInfinite())
+        complies("Cannot check the integrity of a set with infinitely many elements") { !isInfinite() }
+
         //  Check identity in the set
         complies("Identity is not a member of the Group") { elements.contains(identity) }
 
@@ -275,21 +285,23 @@ open class Group<T>(
  * @param identity The identity element of the group.
  * @param inverseMap The inverse operation of the group.
  * @param operation The binary operation of the group.
- * @param elements The elements of the group.
+ * @param set The set of the group.
  */
 open class AbelianGroup<T>(
     private val identity: T,
     private val inverseMap: (a: T) -> T,
     private val operation: (a: T, b: T) -> T,
-    elements: Set<T>
-) : Monoid<T>(identity, operation, elements) {
+    set: SimpleSet<T>
+) : Monoid<T>(identity, operation, set) {
 
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T) : this(identity, inverseMap, operation, emptySet())
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, vararg elements: T) : this(identity, inverseMap, operation, elements.toSet())
     constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, elements: Collection<T>) : this(identity, inverseMap, operation, elements.toSet())
-    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, set: SimpleSet<T>) : this(identity, inverseMap, operation, set.elements)
+    constructor(identity: T, inverseMap: (a: T) -> T, operation: (a: T, b: T) -> T, set: Set<T>) : this(identity, inverseMap, operation, SimpleSet(set))
 
     override fun checkIntegrity() {
+        complies("Cannot check the integrity of a set with infinitely many elements") { !isInfinite() }
+
         //  Check identity in the set
         complies("Identity is not a member of the Abelian Group") { elements.contains(identity) }
 
@@ -363,15 +375,15 @@ open class AbelianGroup<T>(
  * @param inverseMap The inverse operation of the ring.
  * @param addition The addition of the ring.
  * @param multiplication The multiplication of the ring.
- * @param elements The elements of the ring.
+ * @param set The set of the ring.
  */
 class Ring<T>(
     private val identity: T,
     private val inverseMap: (a: T) -> T,
     private val addition: (a: T, b: T) -> T,
     private val multiplication: (a: T, b: T) -> T,
-    elements: Set<T>
-) : AbelianGroup<T>(identity, inverseMap, addition, elements) {
+    set: SimpleSet<T>
+) : AbelianGroup<T>(identity, inverseMap, addition, set) {
 
     constructor(identity: T, inverseMap: (a: T) -> T, addition: (a: T, b: T) -> T, multiplication: (a: T, b: T) -> T)
             : this(identity, inverseMap, addition, multiplication, emptySet())
@@ -379,10 +391,12 @@ class Ring<T>(
             : this(identity, inverseMap, addition, multiplication, elements.toSet())
     constructor(identity: T, inverseMap: (a: T) -> T, addition: (a: T, b: T) -> T, multiplication: (a: T, b: T) -> T, elements: Collection<T>)
             : this(identity, inverseMap, addition, multiplication, elements.toSet())
-    constructor(identity: T, inverseMap: (a: T) -> T, addition: (a: T, b: T) -> T, multiplication: (a: T, b: T) -> T, set: SimpleSet<T>)
-            : this(identity, inverseMap, addition, multiplication, set.elements)
+    constructor(identity: T, inverseMap: (a: T) -> T, addition: (a: T, b: T) -> T, multiplication: (a: T, b: T) -> T, set: Set<T>)
+            : this(identity, inverseMap, addition, multiplication, SimpleSet(set))
 
     override fun checkIntegrity() {
+        complies("Cannot check the integrity of a set with infinitely many elements") { !isInfinite() }
+
         //  Check identity in the set
         complies("Identity is not a member of the Ring") { elements.contains(identity) }
 
@@ -473,7 +487,7 @@ class Ring<T>(
  * @param multiplicativeInverseMap The inverse operation for multiplication of the field.
  * @param addition The addition of the field.
  * @param multiplication The multiplication of the field.
- * @param elements The elements of the field.
+ * @param set The set of the field.
  */
 class Field<T>(
     private val additiveIdentity: T,
@@ -482,8 +496,8 @@ class Field<T>(
     private val multiplicativeInverseMap: (a: T) -> T,
     private val addition: (a: T, b: T) -> T,
     private val multiplication: (a: T, b: T) -> T,
-    elements: Set<T>
-) : AbelianGroup<T>(additiveIdentity, additiveInverseMap, addition, elements) {
+    set: SimpleSet<T>
+) : AbelianGroup<T>(additiveIdentity, additiveInverseMap, addition, set) {
 
     @Suppress("UNCHECKED_CAST")
     private val multiplicativeGroup = AbelianGroup(multiplicativeIdentity, multiplicativeInverseMap, multiplication, (elements - additiveIdentity))
@@ -494,10 +508,12 @@ class Field<T>(
             : this(additiveIdentity, multiplicativeIdentity, additiveInverseMap, multiplicativeInverseMap, addition, multiplication, elements.toSet())
     constructor(additiveIdentity: T, multiplicativeIdentity: T, additiveInverseMap: (a: T) -> T, multiplicativeInverseMap: (a: T) -> T, addition: (a: T, b: T) -> T, multiplication: (a: T, b: T) -> T, elements: Collection<T>)
             : this(additiveIdentity, multiplicativeIdentity, additiveInverseMap, multiplicativeInverseMap, addition, multiplication, elements.toSet())
-    constructor(additiveIdentity: T, multiplicativeIdentity: T, additiveInverseMap: (a: T) -> T, multiplicativeInverseMap: (a: T) -> T, addition: (a: T, b: T) -> T, multiplication: (a: T, b: T) -> T, set: SimpleSet<T>)
-            : this(additiveIdentity, multiplicativeIdentity, additiveInverseMap, multiplicativeInverseMap, addition, multiplication, set.elements)
+    constructor(additiveIdentity: T, multiplicativeIdentity: T, additiveInverseMap: (a: T) -> T, multiplicativeInverseMap: (a: T) -> T, addition: (a: T, b: T) -> T, multiplication: (a: T, b: T) -> T, set: Set<T>)
+            : this(additiveIdentity, multiplicativeIdentity, additiveInverseMap, multiplicativeInverseMap, addition, multiplication, SimpleSet(set))
 
     override fun checkIntegrity() {
+        complies("Cannot check the integrity of a set with infinitely many elements") { !isInfinite() }
+
         //  Check identity in the set
         complies("Additive Identity is not a member of the Field") { elements.contains(additiveIdentity) }
         complies("Multiplicative Identity is not a member of the Field") { elements.contains(multiplicativeIdentity) }
