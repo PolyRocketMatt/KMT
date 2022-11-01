@@ -145,7 +145,7 @@ open class BooleanMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
-     * @return The result of the addition
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun plus(other: BooleanMatrix): BooleanMatrix {
@@ -160,7 +160,7 @@ open class BooleanMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
-     * @return The result of the addition
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun plus(other: Matrix<Boolean>): BooleanMatrix = plus(other as BooleanMatrix)
@@ -185,7 +185,7 @@ open class BooleanMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
-     * @return The result of the multiplication
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun times(other: BooleanMatrix): BooleanMatrix {
@@ -200,7 +200,7 @@ open class BooleanMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
-     * @return The result of the multiplication
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun times(other: Matrix<Boolean>): BooleanMatrix = times(other as BooleanMatrix)
@@ -299,6 +299,7 @@ open class BooleanMatrix(
      * Scalar addition of this matrix and the given value.
      *
      * @param value The value to add to this matrix
+     * @return The sum of this matrix and the given value
      */
     override fun plus(value: Boolean): BooleanMatrix {
         val matrix = BooleanMatrix(shape)
@@ -310,6 +311,7 @@ open class BooleanMatrix(
      * Scalar subtraction of this matrix and the given value.
      *
      * @param value The value to subtract from this matrix
+     * @throws UnsupportedOperationException Boolean matrices cannot be subtracted
      */
     override fun minus(value: Boolean): BooleanMatrix = throw UnsupportedOperationException("Cannot subtract boolean from boolean matrix")
 
@@ -317,6 +319,7 @@ open class BooleanMatrix(
      * Scalar multiplication of this matrix and the given value.
      *
      * @param value The value to multiply to this matrix
+     * @return The product of this matrix and the given value
      */
     override fun times(value: Boolean): BooleanMatrix {
         val matrix = BooleanMatrix(shape)
@@ -328,6 +331,7 @@ open class BooleanMatrix(
      * Scalar division of this matrix and the given value.
      *
      * @param value The value to divide with this matrix
+     * @throws UnsupportedOperationException Boolean matrices cannot be divided
      */
     override fun div(value: Boolean): BooleanMatrix = throw UnsupportedOperationException("Cannot divide boolean matrix by boolean")
 

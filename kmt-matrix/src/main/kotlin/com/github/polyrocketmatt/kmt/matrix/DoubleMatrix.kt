@@ -189,6 +189,7 @@ open class DoubleMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun plus(other: DoubleMatrix): DoubleMatrix {
@@ -202,6 +203,7 @@ open class DoubleMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override operator fun plus(other: Matrix<Double>): DoubleMatrix = plus(other as DoubleMatrix)
@@ -210,6 +212,7 @@ open class DoubleMatrix(
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun minus(other: DoubleMatrix): DoubleMatrix {
@@ -223,6 +226,7 @@ open class DoubleMatrix(
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override operator fun minus(other: Matrix<Double>): DoubleMatrix = minus(other as DoubleMatrix)
@@ -231,6 +235,7 @@ open class DoubleMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun times(other: DoubleMatrix): DoubleMatrix {
@@ -244,6 +249,7 @@ open class DoubleMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override operator fun times(other: Matrix<Double>): DoubleMatrix = times(other as DoubleMatrix)
@@ -252,6 +258,7 @@ open class DoubleMatrix(
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun div(other: DoubleMatrix): DoubleMatrix {
@@ -265,6 +272,7 @@ open class DoubleMatrix(
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override operator fun div(other: Matrix<Double>): DoubleMatrix = div(other as DoubleMatrix)
@@ -349,6 +357,7 @@ open class DoubleMatrix(
      * Scalar addition of this matrix and the given value.
      *
      * @param value The value to add to this matrix
+     * @return The sum of this matrix and the given value
      */
     override fun plus(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
@@ -360,6 +369,7 @@ open class DoubleMatrix(
      * Scalar subtraction of this matrix and the given value.
      *
      * @param value The value to subtract from this matrix
+     * @return The difference of this matrix and the given value
      */
     override fun minus(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
@@ -371,6 +381,7 @@ open class DoubleMatrix(
      * Scalar multiplication of this matrix and the given value.
      *
      * @param value The value to multiply to this matrix
+     * @return The product of this matrix and the given value
      */
     override fun times(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
@@ -382,6 +393,7 @@ open class DoubleMatrix(
      * Scalar division of this matrix and the given value.
      *
      * @param value The value to divide with this matrix
+     * @return The quotient of this matrix and the given value
      */
     override fun div(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)

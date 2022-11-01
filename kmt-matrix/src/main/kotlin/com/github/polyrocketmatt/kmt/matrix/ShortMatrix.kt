@@ -160,6 +160,7 @@ open class ShortMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun plus(other: ShortMatrix): ShortMatrix {
@@ -173,6 +174,7 @@ open class ShortMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun plus(other: Matrix<Short>): ShortMatrix = plus(other as ShortMatrix)
@@ -181,6 +183,7 @@ open class ShortMatrix(
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun minus(other: ShortMatrix): ShortMatrix {
@@ -194,6 +197,7 @@ open class ShortMatrix(
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun minus(other: Matrix<Short>): ShortMatrix = minus(other as ShortMatrix)
@@ -202,6 +206,7 @@ open class ShortMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun times(other: ShortMatrix): ShortMatrix {
@@ -215,6 +220,7 @@ open class ShortMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun times(other: Matrix<Short>): ShortMatrix = times(other as ShortMatrix)
@@ -223,6 +229,7 @@ open class ShortMatrix(
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun div(other: ShortMatrix): ShortMatrix {
@@ -236,6 +243,7 @@ open class ShortMatrix(
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun div(other: Matrix<Short>): ShortMatrix = div(other as ShortMatrix)
@@ -320,6 +328,7 @@ open class ShortMatrix(
      * Scalar addition of this matrix and the given value.
      *
      * @param value The value to add to this matrix
+     * @return The sum of this matrix and the given value
      */
     override fun plus(value: Short): ShortMatrix {
         val matrix = ShortMatrix(shape)
@@ -331,6 +340,7 @@ open class ShortMatrix(
      * Scalar subtraction of this matrix and the given value.
      *
      * @param value The value to subtract from this matrix
+     * @return The difference of this matrix and the given value
      */
     override fun minus(value: Short): ShortMatrix {
         val matrix = ShortMatrix(shape)
@@ -342,6 +352,7 @@ open class ShortMatrix(
      * Scalar multiplication of this matrix and the given value.
      *
      * @param value The value to multiply to this matrix
+     * @return The product of this matrix and the given value
      */
     override fun times(value: Short): ShortMatrix {
         val matrix = ShortMatrix(shape)
@@ -353,6 +364,7 @@ open class ShortMatrix(
      * Scalar division of this matrix and the given value.
      *
      * @param value The value to divide with this matrix
+     * @return The quotient of this matrix and the given value
      */
     override fun div(value: Short): ShortMatrix {
         val matrix = ShortMatrix(shape)

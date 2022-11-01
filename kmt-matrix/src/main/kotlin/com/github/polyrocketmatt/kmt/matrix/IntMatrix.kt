@@ -160,6 +160,7 @@ open class IntMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun plus(other: IntMatrix): IntMatrix {
@@ -173,6 +174,7 @@ open class IntMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun plus(other: Matrix<Int>): IntMatrix = plus(other as IntMatrix)
@@ -181,6 +183,7 @@ open class IntMatrix(
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun minus(other: IntMatrix): IntMatrix {
@@ -194,6 +197,7 @@ open class IntMatrix(
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun minus(other: Matrix<Int>): IntMatrix = minus(other as IntMatrix)
@@ -202,6 +206,7 @@ open class IntMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun times(other: IntMatrix): IntMatrix {
@@ -215,6 +220,7 @@ open class IntMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun times(other: Matrix<Int>): IntMatrix = times(other as IntMatrix)
@@ -223,6 +229,7 @@ open class IntMatrix(
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun div(other: IntMatrix): IntMatrix {
@@ -236,6 +243,7 @@ open class IntMatrix(
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun div(other: Matrix<Int>): IntMatrix = div(other as IntMatrix)
@@ -320,6 +328,7 @@ open class IntMatrix(
      * Scalar addition of this matrix and the given value.
      *
      * @param value The value to add to this matrix
+     * @return The sum of this matrix and the given value
      */
     override fun plus(value: Int): IntMatrix {
         val matrix = IntMatrix(shape)
@@ -331,6 +340,7 @@ open class IntMatrix(
      * Scalar subtraction of this matrix and the given value.
      *
      * @param value The value to subtract from this matrix
+     * @return The difference of this matrix and the given value
      */
     override fun minus(value: Int): IntMatrix {
         val matrix = IntMatrix(shape)
@@ -342,6 +352,7 @@ open class IntMatrix(
      * Scalar multiplication of this matrix and the given value.
      *
      * @param value The value to multiply to this matrix
+     * @return The product of this matrix and the given value
      */
     override fun times(value: Int): IntMatrix {
         val matrix = IntMatrix(shape)
@@ -353,6 +364,7 @@ open class IntMatrix(
      * Scalar division of this matrix and the given value.
      *
      * @param value The value to divide with this matrix
+     * @return The quotient of this matrix and the given value
      */
     override fun div(value: Int): IntMatrix {
         val matrix = IntMatrix(shape)

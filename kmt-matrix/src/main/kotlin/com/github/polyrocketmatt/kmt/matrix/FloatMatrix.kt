@@ -169,6 +169,7 @@ open class FloatMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun plus(other: FloatMatrix): FloatMatrix {
@@ -182,6 +183,7 @@ open class FloatMatrix(
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
+     * @return The sum of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun plus(other: Matrix<Float>): FloatMatrix = plus(other as FloatMatrix)
@@ -190,6 +192,7 @@ open class FloatMatrix(
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun minus(other: FloatMatrix): FloatMatrix {
@@ -203,6 +206,7 @@ open class FloatMatrix(
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
+     * @return The difference of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun minus(other: Matrix<Float>): FloatMatrix = minus(other as FloatMatrix)
@@ -211,6 +215,7 @@ open class FloatMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun times(other: FloatMatrix): FloatMatrix {
@@ -224,6 +229,7 @@ open class FloatMatrix(
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply with this matrix
+     * @return The product of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun times(other: Matrix<Float>): FloatMatrix = times(other as FloatMatrix)
@@ -232,6 +238,7 @@ open class FloatMatrix(
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     open operator fun div(other: FloatMatrix): FloatMatrix {
@@ -245,6 +252,7 @@ open class FloatMatrix(
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
+     * @return The quotient of this matrix and the given matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     override fun div(other: Matrix<Float>): FloatMatrix = div(other as FloatMatrix)
@@ -329,6 +337,7 @@ open class FloatMatrix(
      * Scalar addition of this matrix and the given value.
      *
      * @param value The value to add to this matrix
+     * @return The sum of this matrix and the given value
      */
     override fun plus(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
@@ -340,6 +349,7 @@ open class FloatMatrix(
      * Scalar subtraction of this matrix and the given value.
      *
      * @param value The value to subtract from this matrix
+     * @return The difference of this matrix and the given value
      */
     override fun minus(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
@@ -351,6 +361,7 @@ open class FloatMatrix(
      * Scalar multiplication of this matrix and the given value.
      *
      * @param value The value to multiply to this matrix
+     * @return The product of this matrix and the given value
      */
     override fun times(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
@@ -362,6 +373,7 @@ open class FloatMatrix(
      * Scalar division of this matrix and the given value.
      *
      * @param value The value to divide with this matrix
+     * @return The quotient of this matrix and the given value
      */
     override fun div(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
