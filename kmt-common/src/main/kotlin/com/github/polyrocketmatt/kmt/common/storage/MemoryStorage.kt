@@ -96,15 +96,66 @@ interface MutableMemoryStorage<T> : Iterable<T> {
      */
     fun asShortArray(): ShortArray
 
-    operator fun plusAssign(other: MutableMemoryStorage<T>)
-    operator fun minusAssign(other: MutableMemoryStorage<T>)
-    operator fun timesAssign(other: MutableMemoryStorage<T>)
-    operator fun divAssign(other: MutableMemoryStorage<T>)
-
+    /**
+     * Element-wise addition of this storage and the given storage.
+     *
+     * @param other The storage to add to this storage
+     * @return The sum of this storage and the given storage
+     */
     operator fun plus(other: MutableMemoryStorage<T>): MutableMemoryStorage<T>
+
+    /**
+     * Element-wise subtraction of this storage and the given storage.
+     *
+     * @param other The storage to subtract from this storage
+     * @return The difference of this storage and the given storage
+     */
     operator fun minus(other: MutableMemoryStorage<T>): MutableMemoryStorage<T>
+
+    /**
+     * Element-wise multiplication of this storage and the given storage.
+     *
+     * @param other The storage to multiply with this storage
+     * @return The product of this storage and the given storage
+     */
     operator fun times(other: MutableMemoryStorage<T>): MutableMemoryStorage<T>
+
+    /**
+     * Element-wise division of this storage and the given storage.
+     *
+     * @param other The storage to divide this storage with
+     * @return The quotient of this storage and the given storage
+     */
     operator fun div(other: MutableMemoryStorage<T>): MutableMemoryStorage<T>
+
+
+    /**
+     * Element-wise addition of this storage and the given storage.
+     *
+     * @param other The storage to add to this storage
+     */
+    operator fun plusAssign(other: MutableMemoryStorage<T>)
+
+    /**
+     * Element-wise subtraction of this storage and the given storage.
+     *
+     * @param other The storage to subtract from this storage
+     */
+    operator fun minusAssign(other: MutableMemoryStorage<T>)
+
+    /**
+     * Element-wise multiplication of this storage and the given storage.
+     *
+     * @param other The storage to multiply with this storage
+     */
+    operator fun timesAssign(other: MutableMemoryStorage<T>)
+
+    /**
+     * Element-wise division of this storage and the given storage.
+     *
+     * @param other The storage to divide to this storage
+     */
+    operator fun divAssign(other: MutableMemoryStorage<T>)
 }
 
 abstract class MemoryStorage<T> : MutableMemoryStorage<T> {
@@ -113,11 +164,17 @@ abstract class MemoryStorage<T> : MutableMemoryStorage<T> {
     abstract var lastIndex: Int
 
     abstract override fun copyOf(): MemoryStorage<T>
+
     abstract override fun asBooleanArray(): BooleanArray
+
     abstract override fun asDoubleArray(): DoubleArray
+
     abstract override fun asFloatArray(): FloatArray
+
     abstract override fun asIntArray(): IntArray
+
     abstract override fun asShortArray(): ShortArray
+
 }
 
 class BooleanMemoryStorage(override val data: BooleanArray) : MemoryStorage<Boolean>() {
@@ -143,20 +200,6 @@ class BooleanMemoryStorage(override val data: BooleanArray) : MemoryStorage<Bool
     override fun get(i: Int): Boolean = data[i]
     override fun set(i: Int, value: Boolean) { data[i] = value }
 
-    override operator fun plusAssign(other: MutableMemoryStorage<Boolean>) {
-        for (i in indices)
-            data[i] = data[i] || other[i]
-    }
-
-    override fun minusAssign(other: MutableMemoryStorage<Boolean>) = throw UnsupportedOperationException("Subtraction is not supported for BooleanMemoryStorage")
-
-    override fun timesAssign(other: MutableMemoryStorage<Boolean>) {
-        for (i in indices)
-            data[i] = data[i] && other[i]
-    }
-
-    override fun divAssign(other: MutableMemoryStorage<Boolean>) = throw UnsupportedOperationException("Division is not supported for BooleanMemoryStorage")
-
     override fun plus(other: MutableMemoryStorage<Boolean>): MutableMemoryStorage<Boolean> {
         val result = BooleanMemoryStorage(data.copyOf())
         result += other
@@ -172,6 +215,20 @@ class BooleanMemoryStorage(override val data: BooleanArray) : MemoryStorage<Bool
     }
 
     override fun div(other: MutableMemoryStorage<Boolean>): MutableMemoryStorage<Boolean> = throw UnsupportedOperationException("Division is not supported for BooleanMemoryStorage")
+
+    override operator fun plusAssign(other: MutableMemoryStorage<Boolean>) {
+        for (i in indices)
+            data[i] = data[i] || other[i]
+    }
+
+    override fun minusAssign(other: MutableMemoryStorage<Boolean>) = throw UnsupportedOperationException("Subtraction is not supported for BooleanMemoryStorage")
+
+    override fun timesAssign(other: MutableMemoryStorage<Boolean>) {
+        for (i in indices)
+            data[i] = data[i] && other[i]
+    }
+
+    override fun divAssign(other: MutableMemoryStorage<Boolean>) = throw UnsupportedOperationException("Division is not supported for BooleanMemoryStorage")
 
     override fun toString(): String = data.contentToString()
 }
@@ -197,27 +254,8 @@ class DoubleMemoryStorage(override val data: DoubleArray) : MemoryStorage<Double
     override fun iterator(): Iterator<Double> = data.iterator()
 
     override fun get(i: Int): Double = data[i]
+
     override fun set(i: Int, value: Double) { data[i] = value }
-
-    override operator fun plusAssign(other: MutableMemoryStorage<Double>) {
-        for (i in indices)
-            data[i] = data[i] + other[i]
-    }
-
-    override fun minusAssign(other: MutableMemoryStorage<Double>) {
-        for (i in indices)
-            data[i] = data[i] - other[i]
-    }
-
-    override fun timesAssign(other: MutableMemoryStorage<Double>) {
-        for (i in indices)
-            data[i] = data[i] - other[i]
-    }
-
-    override fun divAssign(other: MutableMemoryStorage<Double>) {
-        for (i in indices)
-            data[i] = data[i] / other[i]
-    }
 
     override fun plus(other: MutableMemoryStorage<Double>): MutableMemoryStorage<Double> {
         val result = DoubleMemoryStorage(data.copyOf())
@@ -241,6 +279,26 @@ class DoubleMemoryStorage(override val data: DoubleArray) : MemoryStorage<Double
         val result = DoubleMemoryStorage(data.copyOf())
         result /= other
         return result
+    }
+
+    override operator fun plusAssign(other: MutableMemoryStorage<Double>) {
+        for (i in indices)
+            data[i] = data[i] + other[i]
+    }
+
+    override fun minusAssign(other: MutableMemoryStorage<Double>) {
+        for (i in indices)
+            data[i] = data[i] - other[i]
+    }
+
+    override fun timesAssign(other: MutableMemoryStorage<Double>) {
+        for (i in indices)
+            data[i] = data[i] - other[i]
+    }
+
+    override fun divAssign(other: MutableMemoryStorage<Double>) {
+        for (i in indices)
+            data[i] = data[i] / other[i]
     }
 
     override fun toString(): String = data.contentToString()
@@ -267,27 +325,8 @@ class FloatMemoryStorage(override val data: FloatArray) : MemoryStorage<Float>()
     override fun iterator(): Iterator<Float> = data.iterator()
 
     override fun get(i: Int): Float = data[i]
+
     override fun set(i: Int, value: Float) { data[i] = value }
-
-    override operator fun plusAssign(other: MutableMemoryStorage<Float>) {
-        for (i in indices)
-            data[i] = data[i] + other[i]
-    }
-
-    override fun minusAssign(other: MutableMemoryStorage<Float>) {
-        for (i in indices)
-            data[i] = data[i] - other[i]
-    }
-
-    override fun timesAssign(other: MutableMemoryStorage<Float>) {
-        for (i in indices)
-            data[i] = data[i] - other[i]
-    }
-
-    override fun divAssign(other: MutableMemoryStorage<Float>) {
-        for (i in indices)
-            data[i] = data[i] / other[i]
-    }
 
     override fun plus(other: MutableMemoryStorage<Float>): MutableMemoryStorage<Float> {
         val result = FloatMemoryStorage(data.copyOf())
@@ -311,6 +350,26 @@ class FloatMemoryStorage(override val data: FloatArray) : MemoryStorage<Float>()
         val result = FloatMemoryStorage(data.copyOf())
         result /= other
         return result
+    }
+
+    override operator fun plusAssign(other: MutableMemoryStorage<Float>) {
+        for (i in indices)
+            data[i] = data[i] + other[i]
+    }
+
+    override fun minusAssign(other: MutableMemoryStorage<Float>) {
+        for (i in indices)
+            data[i] = data[i] - other[i]
+    }
+
+    override fun timesAssign(other: MutableMemoryStorage<Float>) {
+        for (i in indices)
+            data[i] = data[i] - other[i]
+    }
+
+    override fun divAssign(other: MutableMemoryStorage<Float>) {
+        for (i in indices)
+            data[i] = data[i] / other[i]
     }
 
     override fun toString(): String = data.contentToString()
@@ -337,27 +396,8 @@ class IntMemoryStorage(override val data: IntArray) : MemoryStorage<Int>() {
     override fun iterator(): Iterator<Int> = data.iterator()
 
     override fun get(i: Int): Int = data[i]
+
     override fun set(i: Int, value: Int) { data[i] = value }
-
-    override operator fun plusAssign(other: MutableMemoryStorage<Int>) {
-        for (i in indices)
-            data[i] = data[i] + other[i]
-    }
-
-    override fun minusAssign(other: MutableMemoryStorage<Int>) {
-        for (i in indices)
-            data[i] = data[i] - other[i]
-    }
-
-    override fun timesAssign(other: MutableMemoryStorage<Int>) {
-        for (i in indices)
-            data[i] = data[i] - other[i]
-    }
-
-    override fun divAssign(other: MutableMemoryStorage<Int>) {
-        for (i in indices)
-            data[i] = data[i] / other[i]
-    }
 
     override fun plus(other: MutableMemoryStorage<Int>): MutableMemoryStorage<Int> {
         val result = IntMemoryStorage(data.copyOf())
@@ -381,6 +421,26 @@ class IntMemoryStorage(override val data: IntArray) : MemoryStorage<Int>() {
         val result = IntMemoryStorage(data.copyOf())
         result /= other
         return result
+    }
+
+    override operator fun plusAssign(other: MutableMemoryStorage<Int>) {
+        for (i in indices)
+            data[i] = data[i] + other[i]
+    }
+
+    override fun minusAssign(other: MutableMemoryStorage<Int>) {
+        for (i in indices)
+            data[i] = data[i] - other[i]
+    }
+
+    override fun timesAssign(other: MutableMemoryStorage<Int>) {
+        for (i in indices)
+            data[i] = data[i] - other[i]
+    }
+
+    override fun divAssign(other: MutableMemoryStorage<Int>) {
+        for (i in indices)
+            data[i] = data[i] / other[i]
     }
 
     override fun toString(): String = data.contentToString()
@@ -407,27 +467,8 @@ class ShortMemoryStorage(override val data: ShortArray) : MemoryStorage<Short>()
     override fun iterator(): Iterator<Short> = data.iterator()
 
     override fun get(i: Int): Short = data[i]
+
     override fun set(i: Int, value: Short) { data[i] = value }
-
-    override operator fun plusAssign(other: MutableMemoryStorage<Short>) {
-        for (i in indices)
-            data[i] = (data[i] + other[i]).toShort()
-    }
-
-    override fun minusAssign(other: MutableMemoryStorage<Short>) {
-        for (i in indices)
-            data[i] = (data[i] - other[i]).toShort()
-    }
-
-    override fun timesAssign(other: MutableMemoryStorage<Short>) {
-        for (i in indices)
-            data[i] = (data[i] - other[i]).toShort()
-    }
-
-    override fun divAssign(other: MutableMemoryStorage<Short>) {
-        for (i in indices)
-            data[i] = (data[i] / other[i]).toShort()
-    }
 
     override fun plus(other: MutableMemoryStorage<Short>): MutableMemoryStorage<Short> {
         val result = ShortMemoryStorage(data.copyOf())
@@ -451,6 +492,26 @@ class ShortMemoryStorage(override val data: ShortArray) : MemoryStorage<Short>()
         val result = ShortMemoryStorage(data.copyOf())
         result /= other
         return result
+    }
+
+    override operator fun plusAssign(other: MutableMemoryStorage<Short>) {
+        for (i in indices)
+            data[i] = (data[i] + other[i]).toShort()
+    }
+
+    override fun minusAssign(other: MutableMemoryStorage<Short>) {
+        for (i in indices)
+            data[i] = (data[i] - other[i]).toShort()
+    }
+
+    override fun timesAssign(other: MutableMemoryStorage<Short>) {
+        for (i in indices)
+            data[i] = (data[i] - other[i]).toShort()
+    }
+
+    override fun divAssign(other: MutableMemoryStorage<Short>) {
+        for (i in indices)
+            data[i] = (data[i] / other[i]).toShort()
     }
 
     override fun toString(): String = data.contentToString()

@@ -116,7 +116,7 @@ interface Matrix<T> {
     /**
      * Element-wise multiplication of this matrix and the given matrix.
      *
-     * @param other The matrix to multiply to this matrix
+     * @param other The matrix to multiply with this matrix
      * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
      */
     operator fun timesAssign(other: Matrix<T>)
@@ -148,7 +148,7 @@ interface Matrix<T> {
     /**
      * Scalar multiplication of this matrix and the given value.
      *
-     * @param value The value to multiply to this matrix
+     * @param value The value to multiply with this matrix
      * @return The product of this matrix and the given value
      */
     operator fun times(value: T): Matrix<T>
@@ -178,7 +178,7 @@ interface Matrix<T> {
     /**
      * Scalar multiplication of this matrix and the given value.
      *
-     * @param value The value to multiply to this matrix
+     * @param value The value to multiply with this matrix
      */
     operator fun timesAssign(value: T)
 
