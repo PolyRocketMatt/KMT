@@ -119,4 +119,35 @@ class DoubleMatrixTest {
         assertThrows<IllegalArgumentException> { matrix.solve() }
     }
 
+    @Test
+    fun testQRDecomposition() {
+        val shape = intArrayOf(3, 3)
+        val matrix = doubleMatrixOf(
+            shape,
+            1.0, 1.0, 0.0,
+            1.0, 0.0, 1.0,
+            0.0, 1.0, 1.0
+        )
+
+        val qr = matrix.qrDecomposition(QRFactorizationMethod.GRAM_SCHMIDT)
+        val q = doubleMatrixOf(
+            shape,
+            0.707106781187, 0.408248290463, -0.57735026919,
+            0.707106781187, -0.408248290464, 0.577350269189,
+            0.0, 0.816496580927, 0.577350269191
+        )
+        val r = doubleMatrixOf(
+            shape,
+            1.414213562373, 0.707106781187, 0.707106781187,
+            0.0, 1.224744871392, 0.408248290463,
+            0.0, 0.0, 1.154700538379
+        )
+
+        for (i in 0 until shape[0])
+            for (j in 0 until shape[1]) {
+                assertEquals(q[i, j], qr.first[i, j], 1e-8)
+                assertEquals(r[i, j], qr.second[i, j], 1e-8)
+            }
+    }
+
 }

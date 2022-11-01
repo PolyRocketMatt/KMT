@@ -21,6 +21,7 @@ package com.github.polyrocketmatt.kmt.matrix
 import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
+import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
@@ -149,12 +150,31 @@ open class DoubleMatrix(
         return row
     }
 
+    open fun rowAsMatrix(idx: Int): DoubleMatrix {
+        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
+
+        val row = DoubleMatrix(intArrayOf(1, shape[1]))
+        for (j in 0 until shape[1])
+            row[0, j] = this[idx, j]
+        return row
+    }
+
+
     open fun column(idx: Int): DoubleArray {
         complies("Index $idx is out of bounds for ${shape[1]} columns") { idx in 0 until shape[1] }
 
         val column = DoubleArray(shape[0])
         for (i in 0 until shape[0])
             column[i] = this[i, idx]
+        return column
+    }
+
+    open fun columnAsMatrix(idx: Int): DoubleMatrix {
+        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
+
+        val column = DoubleMatrix(intArrayOf(shape[0], 1))
+        for (i in 0 until shape[0])
+            column[i, 0] = this[i, idx]
         return column
     }
 
@@ -575,7 +595,32 @@ open class DoubleMatrix(
     }
 
     override fun qrDecomposition(method: QRFactorizationMethod): Pair<DoubleMatrix, DoubleMatrix> {
-        TODO("Not yet implemented")
+        return when (method) {
+            QRFactorizationMethod.GRAM_SCHMIDT  -> gramSchmidt()
+            else                                -> throw IllegalArgumentException("Unknown QR-factorization method")
+        }
+    }
+
+    private fun gramSchmidt(): Pair<DoubleMatrix, DoubleMatrix> {
+        val q = DoubleMatrix(shape)
+        val r = DoubleMatrix(shape)
+
+        for (j in 0 until shape[1]) {
+            val v = column(j)
+
+            for (i in 0 until j) {
+                r[i, j] = (q.column(i).mapIndexed { index, d -> d * column(j)[index] }.sum())
+
+                for (row in 0 until shape[0])
+                    v[row] -= r[i, j] * q[row, i]
+            }
+
+            r[j, j] = v.mapIndexed { _, d -> d * d }.sum().dsqrt()
+            for (row in 0 until shape[0])
+                q[row, j] = v[row] / r[j, j]
+        }
+
+        return Pair(q, r)
     }
 
     override fun determinant(): Double = ref().diag().reduce { acc, d -> acc * d }

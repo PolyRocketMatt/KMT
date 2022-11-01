@@ -21,6 +21,7 @@ package com.github.polyrocketmatt.kmt.matrix
 import com.github.polyrocketmatt.kmt.common.decimals
 import com.github.polyrocketmatt.kmt.common.dsqrt
 import com.github.polyrocketmatt.kmt.common.fastAbs
+import com.github.polyrocketmatt.kmt.common.sqrt
 import com.github.polyrocketmatt.kmt.common.storage.Tuple
 import com.github.polyrocketmatt.kmt.common.utils.complies
 import com.github.polyrocketmatt.kmt.common.utils.indexByCondition
@@ -567,7 +568,32 @@ open class FloatMatrix(
     }
 
     override fun qrDecomposition(method: QRFactorizationMethod): Pair<FloatMatrix, FloatMatrix> {
-        TODO("Not yet implemented")
+        return when (method) {
+            QRFactorizationMethod.GRAM_SCHMIDT  -> gramSchmidt()
+            else                                -> throw IllegalArgumentException("Unknown QR-factorization method")
+        }
+    }
+
+    private fun gramSchmidt(): Pair<FloatMatrix, FloatMatrix> {
+        val q = FloatMatrix(shape)
+        val r = FloatMatrix(shape)
+
+        for (j in 0 until shape[1]) {
+            val v = column(j)
+
+            for (i in 0 until j) {
+                r[i, j] = (q.column(i).mapIndexed { index, d -> d * column(j)[index] }.sum())
+
+                for (row in 0 until shape[0])
+                    v[row] -= r[i, j] * q[row, i]
+            }
+
+            r[j, j] = v.mapIndexed { _, d -> d * d }.sum().sqrt()
+            for (row in 0 until shape[0])
+                q[row, j] = v[row] / r[j, j]
+        }
+
+        return Pair(q, r)
     }
 
     override fun determinant(): Float = ref().diag().reduce { acc, d -> acc * d }
