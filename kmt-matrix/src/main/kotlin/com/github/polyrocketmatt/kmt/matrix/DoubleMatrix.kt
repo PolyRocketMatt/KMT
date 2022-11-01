@@ -199,6 +199,8 @@ open class DoubleMatrix(
         return matrix
     }
 
+    override operator fun plus(value: Matrix<Double>): DoubleMatrix = plus(value as DoubleMatrix)
+
     /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
@@ -211,6 +213,8 @@ open class DoubleMatrix(
         data.forEachIndexed { i, value -> matrix[i] = value - other[i] }
         return matrix
     }
+
+    override operator fun minus(value: Matrix<Double>): DoubleMatrix = minus(value as DoubleMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -225,6 +229,8 @@ open class DoubleMatrix(
         return matrix
     }
 
+    override operator fun times(value: Matrix<Double>): DoubleMatrix = times(value as DoubleMatrix)
+
     /**
      * Element-wise division of this matrix and the given matrix.
      *
@@ -238,6 +244,8 @@ open class DoubleMatrix(
         return matrix
     }
 
+    override operator fun div(value: Matrix<Double>): DoubleMatrix = div(value as DoubleMatrix)
+
     /**
      * Element-wise addition of this matrix and the given matrix.
      *
@@ -248,6 +256,8 @@ open class DoubleMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
+
+    override operator fun plusAssign(value: Matrix<Double>) = plusAssign(value as DoubleMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -260,6 +270,8 @@ open class DoubleMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
 
+    override operator fun minusAssign(value: Matrix<Double>) = plusAssign(value as DoubleMatrix)
+
     /**
      * Element-wise multiplication of this matrix and the given matrix.
      *
@@ -271,6 +283,8 @@ open class DoubleMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
+    override operator fun timesAssign(value: Matrix<Double>) = plusAssign(value as DoubleMatrix)
+
     /**
      * Element-wise division of this matrix and the given matrix.
      *
@@ -281,6 +295,8 @@ open class DoubleMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
+
+    override operator fun divAssign(value: Matrix<Double>) = plusAssign(value as DoubleMatrix)
 
     /**
      * Scalar addition of this matrix and the given value.
@@ -353,6 +369,8 @@ open class DoubleMatrix(
      * @param value The value to divide with this matrix
      */
     override fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+
+    override fun unaryMinus(): DoubleMatrix = times(-1.0)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have

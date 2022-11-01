@@ -28,13 +28,25 @@ interface Matrix<T> {
     operator fun set(i: Int, value: T)
     operator fun set(row: Int, col: Int, value: T)
 
+    operator fun plus(value: Matrix<T>): Matrix<T>
+    operator fun minus(value: Matrix<T>): Matrix<T>
+    operator fun times(value: Matrix<T>): Matrix<T>
+    operator fun div(value: Matrix<T>): Matrix<T>
+
     operator fun plus(value: T): Matrix<T>
     operator fun minus(value: T): Matrix<T>
     operator fun times(value: T): Matrix<T>
     operator fun div(value: T): Matrix<T>
 
+    operator fun plusAssign(value: Matrix<T>)
+    operator fun minusAssign(value: Matrix<T>)
+    operator fun timesAssign(value: Matrix<T>)
+    operator fun divAssign(value: Matrix<T>)
+
     operator fun plusAssign(value: T)
     operator fun minusAssign(value: T)
     operator fun timesAssign(value: T)
     operator fun divAssign(value: T)
+
+    operator fun unaryMinus(): Matrix<T>
 }
