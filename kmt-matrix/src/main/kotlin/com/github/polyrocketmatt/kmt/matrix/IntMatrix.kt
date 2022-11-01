@@ -170,6 +170,14 @@ open class IntMatrix(
     }
 
     /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun plus(other: Matrix<Int>): IntMatrix = plus(other as IntMatrix)
+
+    /**
      * Element-wise subtraction of this matrix and the given matrix.
      *
      * @param other The matrix to subtract from this matrix
@@ -181,6 +189,14 @@ open class IntMatrix(
         data.forEachIndexed { i, value -> matrix[i] = value - other[i] }
         return matrix
     }
+
+    /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun minus(other: Matrix<Int>): IntMatrix = minus(other as IntMatrix)
 
     /**
      * Element-wise multiplication of this matrix and the given matrix.
@@ -196,6 +212,14 @@ open class IntMatrix(
     }
 
     /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply with this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun times(other: Matrix<Int>): IntMatrix = times(other as IntMatrix)
+
+    /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide this matrix with
@@ -209,6 +233,14 @@ open class IntMatrix(
     }
 
     /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide this matrix with
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun div(other: Matrix<Int>): IntMatrix = div(other as IntMatrix)
+
+    /**
      * Element-wise addition of this matrix and the given matrix.
      *
      * @param other The matrix to add to this matrix
@@ -218,6 +250,14 @@ open class IntMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
+
+    /**
+     * Element-wise addition of this matrix and the given matrix.
+     *
+     * @param other The matrix to add to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun plusAssign(other: Matrix<Int>) = plusAssign(other as IntMatrix)
 
     /**
      * Element-wise subtraction of this matrix and the given matrix.
@@ -231,6 +271,14 @@ open class IntMatrix(
     }
 
     /**
+     * Element-wise subtraction of this matrix and the given matrix.
+     *
+     * @param other The matrix to subtract from this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun minusAssign(other: Matrix<Int>) = minusAssign(other as IntMatrix)
+
+    /**
      * Element-wise multiplication of this matrix and the given matrix.
      *
      * @param other The matrix to multiply to this matrix
@@ -242,6 +290,14 @@ open class IntMatrix(
     }
 
     /**
+     * Element-wise multiplication of this matrix and the given matrix.
+     *
+     * @param other The matrix to multiply to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun timesAssign(other: Matrix<Int>) = timesAssign(other as IntMatrix)
+
+    /**
      * Element-wise division of this matrix and the given matrix.
      *
      * @param other The matrix to divide to this matrix
@@ -251,6 +307,14 @@ open class IntMatrix(
         isCompliantMatrix(other)
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
+
+    /**
+     * Element-wise division of this matrix and the given matrix.
+     *
+     * @param other The matrix to divide to this matrix
+     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
+     */
+    override fun divAssign(other: Matrix<Int>) = divAssign(other as IntMatrix)
 
     /**
      * Scalar addition of this matrix and the given value.
@@ -323,6 +387,13 @@ open class IntMatrix(
      * @param value The value to divide with this matrix
      */
     override fun divAssign(value: Int) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+
+    /**
+     * Invert the elements of this matrix.
+     *
+     * @return The inverted matrix
+     */
+    override fun unaryMinus(): Matrix<Int> = times(-1)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have
