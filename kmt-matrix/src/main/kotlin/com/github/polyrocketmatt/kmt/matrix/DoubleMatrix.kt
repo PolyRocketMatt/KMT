@@ -720,11 +720,33 @@ open class DoubleMatrix(
         TODO("Not yet implemented")
     }
 
+    /**
+     * Convert the matrix to a floating-point matrix.
+     *
+     * @return The matrix as a floating-point matrix.
+     */
     open fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
+
+    /**
+     * Convert the matrix to an integer matrix.
+     *
+     * @return The matrix as an integer matrix.
+     */
     open fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
+
+    /**
+     * Convert the matrix to a short matrix.
+     *
+     * @return The matrix as a short matrix.
+     */
     open fun toShortMatrix(): ShortMatrix = ShortMatrix(shape, data.map { it.toInt().toShort() }.toShortArray())
 
-    fun decimals(n: Int) { data.forEachIndexed { index, d -> data[index] = d.decimals(n) } }
+    /**
+     * Round all elements of the matrix to the amount of decimals specified.
+     *
+     * @param decimals The amount of decimals to round to.
+     */
+    fun decimals(decimals: Int) { data.forEachIndexed { index, d -> data[index] = d.decimals(decimals) } }
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
 

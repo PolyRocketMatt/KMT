@@ -442,8 +442,25 @@ open class ShortMatrix(
         TODO("Not yet implemented")
     }
 
+    /**
+     * Convert the matrix to a double matrix.
+     *
+     * @return The matrix as a double matrix.
+     */
     fun toDoubleMatrix(): DoubleMatrix = DoubleMatrix(shape, data.map { it.toDouble() }.toDoubleArray())
+
+    /**
+     * Convert the matrix to a floating-point matrix.
+     *
+     * @return The matrix as a floating-point matrix.
+     */
     fun toFloatMatrix(): FloatMatrix = FloatMatrix(shape, data.map { it.toFloat() }.toFloatArray())
+
+    /**
+     * Convert the matrix to an integer matrix.
+     *
+     * @return The matrix as an integer matrix.
+     */
     fun toIntMatrix(): IntMatrix = IntMatrix(shape, data.map { it.toInt() }.toIntArray())
 
     internal fun shapeToString(): String = shape.joinToString("x") { "$it" }
