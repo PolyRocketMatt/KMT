@@ -124,6 +124,11 @@ open class DoubleMatrix(
         matrix.forEachIndexed { i, value -> data[i] = value }
     }
 
+    /**
+     * Get the rows of the matrix.
+     *
+     * @return The rows as an array of arrays.
+     */
     open fun rows(): Array<DoubleArray> {
         val rows = Array(shape[0]) { DoubleArray(shape[1]) }
         for (j in 0 until shape[1])
@@ -132,6 +137,11 @@ open class DoubleMatrix(
         return rows
     }
 
+    /**
+     * Get the columns of the matrix.
+     *
+     * @return The columns as an array of arrays.
+     */
     open fun columns(): Array<DoubleArray> {
         val columns = Array(shape[1]) { DoubleArray(shape[0]) }
         for (i in 0 until shape[0])
@@ -140,49 +150,78 @@ open class DoubleMatrix(
         return columns
     }
 
-    open fun row(idx: Int): DoubleArray {
-        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
+    /**
+     * Get the row at the given index of the matrix.
+     *
+     * @param index The index of the row
+     * @return The row as an array
+     * @throws IllegalArgumentException If the index is out of bounds
+     */
+    open fun row(index: Int): DoubleArray {
+        complies("Index $index is out of bounds for ${shape[0]} rows") { index in 0 until shape[0] }
 
         val row = DoubleArray(shape[1])
         for (j in 0 until shape[1])
-            row[j] = this[idx, j]
+            row[j] = this[index, j]
         return row
     }
 
-    open fun rowAsMatrix(idx: Int): DoubleMatrix {
-        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
+    /**
+     * Get the row at the given index of the matrix.
+     *
+     * @param index The index of the row
+     * @return The row as a matrix
+     * @throws IllegalArgumentException If the index is out of bounds
+     */
+    open fun rowAsMatrix(index: Int): DoubleMatrix {
+        complies("Index $index is out of bounds for ${shape[0]} rows") { index in 0 until shape[0] }
 
         val row = DoubleMatrix(intArrayOf(1, shape[1]))
         for (j in 0 until shape[1])
-            row[0, j] = this[idx, j]
+            row[0, j] = this[index, j]
         return row
     }
 
-
-    open fun column(idx: Int): DoubleArray {
-        complies("Index $idx is out of bounds for ${shape[1]} columns") { idx in 0 until shape[1] }
+    /**
+     * Get the column at the given index of the matrix.
+     *
+     * @param index The index of the column at
+     * @return The column at as an array
+     * @throws IllegalArgumentException If the index is out of bounds
+     */
+    open fun column(index: Int): DoubleArray {
+        complies("Index $index is out of bounds for ${shape[1]} columns") { index in 0 until shape[1] }
 
         val column = DoubleArray(shape[0])
         for (i in 0 until shape[0])
-            column[i] = this[i, idx]
+            column[i] = this[i, index]
         return column
     }
 
-    open fun columnAsMatrix(idx: Int): DoubleMatrix {
-        complies("Index $idx is out of bounds for ${shape[0]} rows") { idx in 0 until shape[0] }
+    /**
+     * Get the column at the given index of the matrix.
+     *
+     * @param index The index of the column at
+     * @return The column at as a matrix
+     * @throws IllegalArgumentException If the index is out of bounds
+     */
+    open fun columnAsMatrix(index: Int): DoubleMatrix {
+        complies("Index $index is out of bounds for ${shape[0]} rows") { index in 0 until shape[0] }
 
         val column = DoubleMatrix(intArrayOf(shape[0], 1))
         for (i in 0 until shape[0])
-            column[i, 0] = this[i, idx]
+            column[i, 0] = this[i, index]
         return column
     }
 
     override fun shape(): IntArray = shape
 
     override operator fun get(i: Int): Double = data[i]
+
     override operator fun get(row: Int, col: Int): Double = data[row * shape[1] + col]
 
     override operator fun set(i: Int, value: Double) { data[i] = value.decimals(12) }
+
     override operator fun set(row: Int, col: Int, value: Double) { data[row * shape[1] + col] = value.decimals(12) }
 
     /**
@@ -199,13 +238,6 @@ open class DoubleMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise addition of this matrix and the given matrix.
-     *
-     * @param other The matrix to add to this matrix
-     * @return The sum of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override operator fun plus(other: Matrix<Double>): DoubleMatrix = plus(other as DoubleMatrix)
 
     /**
@@ -222,13 +254,6 @@ open class DoubleMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise subtraction of this matrix and the given matrix.
-     *
-     * @param other The matrix to subtract from this matrix
-     * @return The difference of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override operator fun minus(other: Matrix<Double>): DoubleMatrix = minus(other as DoubleMatrix)
 
     /**
@@ -245,13 +270,6 @@ open class DoubleMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise multiplication of this matrix and the given matrix.
-     *
-     * @param other The matrix to multiply with this matrix
-     * @return The product of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override operator fun times(other: Matrix<Double>): DoubleMatrix = times(other as DoubleMatrix)
 
     /**
@@ -268,13 +286,6 @@ open class DoubleMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise division of this matrix and the given matrix.
-     *
-     * @param other The matrix to divide this matrix with
-     * @return The quotient of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override operator fun div(other: Matrix<Double>): DoubleMatrix = div(other as DoubleMatrix)
 
     /**
@@ -288,12 +299,6 @@ open class DoubleMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
 
-    /**
-     * Element-wise addition of this matrix and the given matrix.
-     *
-     * @param other The matrix to add to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override operator fun plusAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
     /**
@@ -307,12 +312,6 @@ open class DoubleMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
 
-    /**
-     * Element-wise subtraction of this matrix and the given matrix.
-     *
-     * @param other The matrix to subtract from this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override operator fun minusAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
     /**
@@ -326,12 +325,6 @@ open class DoubleMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
-    /**
-     * Element-wise multiplication of this matrix and the given matrix.
-     *
-     * @param other The matrix to multiply to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override operator fun timesAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
     /**
@@ -345,96 +338,41 @@ open class DoubleMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
-    /**
-     * Element-wise division of this matrix and the given matrix.
-     *
-     * @param other The matrix to divide to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override operator fun divAssign(other: Matrix<Double>) = plusAssign(other as DoubleMatrix)
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     * @return The sum of this matrix and the given value
-     */
-    override fun plus(value: Double): DoubleMatrix {
+    override operator fun plus(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] + term }
         return matrix
     }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     * @return The difference of this matrix and the given value
-     */
-    override fun minus(value: Double): DoubleMatrix {
+    override operator fun minus(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] - term }
         return matrix
     }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     * @return The product of this matrix and the given value
-     */
-    override fun times(value: Double): DoubleMatrix {
+    override operator fun times(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] * factor }
         return matrix
     }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     * @return The quotient of this matrix and the given value
-     */
-    override fun div(value: Double): DoubleMatrix {
+    override operator fun div(value: Double): DoubleMatrix {
         val matrix = DoubleMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] / factor }
         return matrix
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
-    override fun plusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
+    override operator fun plusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
-    override fun minusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
+    override operator fun minusAssign(value: Double) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
-    override fun timesAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
+    override operator fun timesAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
-    override fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
+    override operator fun divAssign(value: Double) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
 
-    /**
-     * Invert the elements of this matrix.
-     *
-     * @return The inverted matrix
-     */
-    override fun unaryMinus(): DoubleMatrix = times(-1.0)
+    override operator fun unaryMinus(): DoubleMatrix = times(-1.0)
 
     /**
      * Multiply this matrix with the given matrix. The matrices must have

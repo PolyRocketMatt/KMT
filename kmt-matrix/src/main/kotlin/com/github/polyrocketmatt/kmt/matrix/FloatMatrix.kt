@@ -160,9 +160,11 @@ open class FloatMatrix(
     override fun shape(): IntArray = shape
 
     override operator fun get(i: Int): Float = data[i]
+
     override operator fun get(row: Int, col: Int): Float = data[row * shape[1] + col]
 
     override operator fun set(i: Int, value: Float) { data[i] = value }
+
     override operator fun set(row: Int, col: Int, value: Float) { data[row * shape[1] + col] = value }
 
     /**
@@ -179,13 +181,6 @@ open class FloatMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise addition of this matrix and the given matrix.
-     *
-     * @param other The matrix to add to this matrix
-     * @return The sum of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun plus(other: Matrix<Float>): FloatMatrix = plus(other as FloatMatrix)
 
     /**
@@ -202,13 +197,6 @@ open class FloatMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise subtraction of this matrix and the given matrix.
-     *
-     * @param other The matrix to subtract from this matrix
-     * @return The difference of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun minus(other: Matrix<Float>): FloatMatrix = minus(other as FloatMatrix)
 
     /**
@@ -225,13 +213,6 @@ open class FloatMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise multiplication of this matrix and the given matrix.
-     *
-     * @param other The matrix to multiply with this matrix
-     * @return The product of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun times(other: Matrix<Float>): FloatMatrix = times(other as FloatMatrix)
 
     /**
@@ -248,13 +229,6 @@ open class FloatMatrix(
         return matrix
     }
 
-    /**
-     * Element-wise division of this matrix and the given matrix.
-     *
-     * @param other The matrix to divide this matrix with
-     * @return The quotient of this matrix and the given matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun div(other: Matrix<Float>): FloatMatrix = div(other as FloatMatrix)
 
     /**
@@ -268,12 +242,6 @@ open class FloatMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] + term }
     }
 
-    /**
-     * Element-wise addition of this matrix and the given matrix.
-     *
-     * @param other The matrix to add to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun plusAssign(other: Matrix<Float>) = plusAssign(other as FloatMatrix)
 
     /**
@@ -287,12 +255,6 @@ open class FloatMatrix(
         data.forEachIndexed { i, term -> data[i] = data[i] - term }
     }
 
-    /**
-     * Element-wise subtraction of this matrix and the given matrix.
-     *
-     * @param other The matrix to subtract from this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun minusAssign(other: Matrix<Float>) = minusAssign(other as FloatMatrix)
 
     /**
@@ -306,12 +268,6 @@ open class FloatMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
     }
 
-    /**
-     * Element-wise multiplication of this matrix and the given matrix.
-     *
-     * @param other The matrix to multiply to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun timesAssign(other: Matrix<Float>) = timesAssign(other as FloatMatrix)
 
     /**
@@ -325,95 +281,40 @@ open class FloatMatrix(
         data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
     }
 
-    /**
-     * Element-wise division of this matrix and the given matrix.
-     *
-     * @param other The matrix to divide to this matrix
-     * @throws IllegalArgumentException If the given matrix is not of the same shape as this matrix
-     */
     override fun divAssign(other: Matrix<Float>) = divAssign(other as FloatMatrix)
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     * @return The sum of this matrix and the given value
-     */
     override fun plus(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] + term }
         return matrix
     }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     * @return The difference of this matrix and the given value
-     */
     override fun minus(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, term -> matrix[i] = data[i] - term }
         return matrix
     }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     * @return The product of this matrix and the given value
-     */
     override fun times(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] * factor }
         return matrix
     }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     * @return The quotient of this matrix and the given value
-     */
     override fun div(value: Float): FloatMatrix {
         val matrix = FloatMatrix(shape)
         data.forEachIndexed { i, factor -> matrix[i] = data[i] / factor }
         return matrix
     }
 
-    /**
-     * Scalar addition of this matrix and the given value.
-     *
-     * @param value The value to add to this matrix
-     */
     override fun plusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] + term }
 
-    /**
-     * Scalar subtraction of this matrix and the given value.
-     *
-     * @param value The value to subtract from this matrix
-     */
     override fun minusAssign(value: Float) = data.forEachIndexed { i, term -> data[i] = data[i] - term }
 
-    /**
-     * Scalar multiplication of this matrix and the given value.
-     *
-     * @param value The value to multiply to this matrix
-     */
     override fun timesAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] * factor }
 
-    /**
-     * Scalar division of this matrix and the given value.
-     *
-     * @param value The value to divide with this matrix
-     */
     override fun divAssign(value: Float) = data.forEachIndexed { i, factor -> data[i] = data[i] / factor }
-
-    /**
-     * Invert the elements of this matrix.
-     *
-     * @return The inverted matrix
-     */
+    
     override fun unaryMinus(): Matrix<Float> = times(-1f)
 
     /**
